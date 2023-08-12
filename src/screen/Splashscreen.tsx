@@ -39,7 +39,11 @@ class SplashScreens extends React.Component<
   render() {
     return (
       <>
-        <StatusBar barStyle={'light-content'} backgroundColor={'transparent'} />
+        <StatusBar
+          barStyle={'light-content'}
+          translucent // to get background transparent in android
+          backgroundColor={'transparent'}
+        />
         <View style={styles.container}>
           <ImageBackground source={gradientPng} style={styles.image}>
             <LogoSvg />
