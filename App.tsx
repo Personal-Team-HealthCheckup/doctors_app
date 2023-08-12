@@ -1,6 +1,5 @@
 import React from 'react';
-import {SafeAreaView, Text} from 'react-native';
-import EntypoIcon from 'react-native-vector-icons/Entypo';
+import SplashScreens from './src/screen/Splashscreen';
 interface AppProps {}
 
 interface AppState {}
@@ -11,12 +10,7 @@ class App extends React.Component<AppProps, AppState> {
     this.state = {};
   }
   render() {
-    return (
-      <SafeAreaView>
-        <Text>App</Text>
-        <EntypoIcon name="500px" size={23} color={'red'} />
-      </SafeAreaView>
-    );
+    return <SplashScreens />;
   }
 }
 
