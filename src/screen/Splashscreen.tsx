@@ -1,6 +1,26 @@
 import React from 'react';
-import {SafeAreaView, StatusBar, StyleSheet, Text, View} from 'react-native';
-
+import {
+  ImageBackground,
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
+import {
+  responsiveHeight,
+  responsiveWidth,
+  responsiveFontSize,
+} from 'react-native-responsive-dimensions';
+import {COLORS} from '../global/colors';
+import {
+  BinanceLogoSvg,
+  Gradient,
+  HexagonSvg,
+  LogoSvg,
+  gradientPng,
+} from '../assets';
+import {Image} from 'react-native';
 interface SplashScreensProps {}
 
 interface SplashScreensState {}
@@ -18,12 +38,17 @@ class SplashScreens extends React.Component<
   }
   render() {
     return (
-      <SafeAreaView>
-        <StatusBar translucent />
+      <>
+        <StatusBar barStyle={'light-content'} backgroundColor={'transparent'} />
         <View style={styles.container}>
-          <Text>Splashscrern</Text>
+          <ImageBackground source={gradientPng} style={styles.image}>
+            <LogoSvg />
+            <HexagonSvg />
+            <Text style={styles.text}>Powered By</Text>
+            <BinanceLogoSvg />
+          </ImageBackground>
         </View>
-      </SafeAreaView>
+      </>
     );
   }
 }
@@ -31,5 +56,15 @@ class SplashScreens extends React.Component<
 export default SplashScreens;
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    width: responsiveWidth(100),
+    height: responsiveHeight(100),
+    backgroundColor: COLORS.black,
+  },
+  image: {
+    flex: 1,
+  },
+  text: {
+    color: COLORS.white,
+  },
 });
