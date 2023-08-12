@@ -1,6 +1,6 @@
 import React from 'react';
-import {Text} from 'react-native';
-
+import {SafeAreaView, Text} from 'react-native';
+import EntypoIcon from 'react-native-vector-icons/Entypo';
 interface AppProps {}
 
 interface AppState {}
@@ -12,9 +12,10 @@ class App extends React.Component<AppProps, AppState> {
   }
   render() {
     return (
-      <>
+      <SafeAreaView>
         <Text>App</Text>
-      </>
+        <EntypoIcon name="500px" size={23} color={'red'} />
+      </SafeAreaView>
     );
   }
 }
