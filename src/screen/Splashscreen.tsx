@@ -36,10 +36,21 @@ class SplashScreens extends React.Component<
         <CustomStatusBar />
         <CustomMainView style={styles.container}>
           <ImageBackground source={gradientPng} style={styles.image}>
-            <LogoSvg style={styles.svg} />
-            <HexagonSvg style={styles.svg2} />
+            <LogoSvg
+              width={responsiveWidth(100)}
+              height={responsiveHeight(15)}
+              style={styles.svg}
+            />
+            <HexagonSvg
+              width={responsiveWidth(80)}
+              height={responsiveHeight(30)}
+              style={styles.svg2}
+            />
             <Text style={styles.text}>Powered By</Text>
-            <BinanceLogoSvg />
+            <BinanceLogoSvg
+              width={responsiveWidth(100)}
+              height={responsiveHeight(10)}
+            />
           </ImageBackground>
         </CustomMainView>
       </>
