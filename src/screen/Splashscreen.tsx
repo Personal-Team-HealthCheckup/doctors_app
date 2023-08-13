@@ -1,5 +1,5 @@
 import React from 'react';
-import {ImageBackground, StatusBar, StyleSheet, Text, View} from 'react-native';
+import {ImageBackground, StyleSheet, Text} from 'react-native';
 import {
   responsiveHeight,
   responsiveWidth,
@@ -13,6 +13,8 @@ import {
   gradientPng,
 } from '../assets';
 import {moderateScale} from '../helper/Scale';
+import CustomStatusBar from '../Components/CustomStatusBar';
+import CustomMainView from '../Components/CustomMainView';
 interface SplashScreensProps {}
 
 interface SplashScreensState {}
@@ -31,19 +33,15 @@ class SplashScreens extends React.Component<
   render() {
     return (
       <>
-        <StatusBar
-          barStyle={'light-content'}
-          translucent // to get background transparent in android
-          backgroundColor={'transparent'}
-        />
-        <View style={styles.container}>
+        <CustomStatusBar />
+        <CustomMainView style={styles.container}>
           <ImageBackground source={gradientPng} style={styles.image}>
             <LogoSvg style={styles.svg} />
             <HexagonSvg style={styles.svg2} />
             <Text style={styles.text}>Powered By</Text>
             <BinanceLogoSvg />
           </ImageBackground>
-        </View>
+        </CustomMainView>
       </>
     );
   }
@@ -52,11 +50,6 @@ class SplashScreens extends React.Component<
 export default SplashScreens;
 
 const styles = StyleSheet.create({
-  container: {
-    width: responsiveWidth(100),
-    height: responsiveHeight(100),
-    backgroundColor: COLORS.black,
-  },
   image: {
     flex: 1,
     alignItems: 'center',
@@ -73,4 +66,5 @@ const styles = StyleSheet.create({
   svg2: {
     marginBottom: responsiveHeight(7),
   },
+  container: {},
 });
