@@ -1,5 +1,5 @@
 import React from 'react';
-import {ImageBackground, StyleSheet, Text} from 'react-native';
+import {ImageBackground, StyleSheet, Text, View} from 'react-native';
 import CustomStatusBar from '../../Components/CustomStatusBar';
 import {FONTS, LogoSvg, StarSvg, gradientSignupPng} from '../../assets';
 import CustomMainView from '../../Components/CustomMainView';
@@ -8,7 +8,8 @@ import {
   responsiveHeight,
   responsiveScreenWidth,
 } from 'react-native-responsive-dimensions';
-import {moderateScale} from '../../helper/Scale';
+import {moderateScale, verticalScale} from '../../helper/Scale';
+import CustomButton from '../../Components/CustomButton';
 
 interface SignupProps {}
 
@@ -33,6 +34,10 @@ class Signup extends React.Component<SignupProps, SignupState> {
               blockchain based Virtual Health Assistant that will provide
               immediate medical assistance to the patients 24/7.
             </Text>
+            <View style={styles.googleView}>
+              <CustomButton style={styles.buttonView} title="Google" />
+              <CustomButton style={styles.buttonView} title="Facebook" />
+            </View>
           </ImageBackground>
         </CustomMainView>
       </>
@@ -77,5 +82,16 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(14),
     color: COLORS.white2gray,
     textAlign: 'center',
+  },
+  googleView: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: responsiveHeight(2),
+    width: '100%',
+  },
+  buttonView: {
+    width: '48.5%',
+    height: verticalScale(54),
   },
 });
