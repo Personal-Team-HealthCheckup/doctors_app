@@ -1,26 +1,18 @@
 import React from 'react';
-import {
-  ImageBackground,
-  SafeAreaView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import {ImageBackground, StatusBar, StyleSheet, Text, View} from 'react-native';
 import {
   responsiveHeight,
   responsiveWidth,
-  responsiveFontSize,
 } from 'react-native-responsive-dimensions';
 import {COLORS} from '../global/colors';
 import {
   BinanceLogoSvg,
-  Gradient,
+  FONTS,
   HexagonSvg,
   LogoSvg,
   gradientPng,
 } from '../assets';
-import {Image} from 'react-native';
+import {moderateScale} from '../helper/Scale';
 interface SplashScreensProps {}
 
 interface SplashScreensState {}
@@ -46,8 +38,8 @@ class SplashScreens extends React.Component<
         />
         <View style={styles.container}>
           <ImageBackground source={gradientPng} style={styles.image}>
-            <LogoSvg />
-            <HexagonSvg />
+            <LogoSvg style={styles.svg} />
+            <HexagonSvg style={styles.svg2} />
             <Text style={styles.text}>Powered By</Text>
             <BinanceLogoSvg />
           </ImageBackground>
@@ -67,8 +59,18 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: responsiveHeight(10),
   },
   text: {
     color: COLORS.white,
+    fontFamily: FONTS.poppins.semiBold,
+    textTransform: 'capitalize',
+    fontSize: moderateScale(15.13),
+  },
+  svg: {marginBottom: 0, width: responsiveWidth(100)},
+  svg2: {
+    marginBottom: responsiveHeight(7),
   },
 });
