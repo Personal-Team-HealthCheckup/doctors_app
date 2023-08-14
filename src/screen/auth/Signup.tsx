@@ -29,8 +29,13 @@ import CustomButton from '../../Components/CustomButton';
 import CustomTextInput from '../../Components/CustomTextInput';
 import CustomIcons from 'react-native-vector-icons/FontAwesome5';
 import CustomGButton from '../../Components/CustomGButton';
+import {AUTH} from '../../Constants/Navigator';
 
-interface SignupProps {}
+interface SignupProps {
+  navigation?: {
+    navigate: (args: string) => void;
+  };
+}
 
 interface SignupState {
   isChecked: boolean;
@@ -46,7 +51,9 @@ class Signup extends React.Component<SignupProps, SignupState> {
   toggleCheck = () => {
     this.setState(prev => ({isChecked: !prev.isChecked}));
   };
-  navigateToLogin = () => {};
+  navigateToLogin = () => {
+    this.props.navigation?.navigate(AUTH.SIGNIN);
+  };
   render() {
     return (
       <>

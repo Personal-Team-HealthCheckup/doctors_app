@@ -26,8 +26,13 @@ import {
 } from '../../assets/assets';
 import {COLORS} from '../../global/colors';
 import {moderateScale, verticalScale} from '../../helper/Scale';
+import {AUTH} from '../../Constants/Navigator';
 
-interface SigninProps {}
+interface SigninProps {
+  navigation?: {
+    navigate: (args: string) => void;
+  };
+}
 
 interface SigninState {}
 
@@ -36,7 +41,9 @@ class Signin extends React.Component<SigninProps, SigninState> {
     super(props);
     this.state = {};
   }
-  navigateToSignup = () => {};
+  navigateToSignup = () => {
+    this.props.navigation?.navigate(AUTH.SIGNUP);
+  };
   render() {
     return (
       <>
