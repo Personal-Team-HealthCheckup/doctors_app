@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.rubik.light,
     fontSize: moderateScale(16),
     color: COLORS.white,
-    height: responsiveScreenHeight(8),
+    height: responsiveScreenHeight(7),
   },
   errMessage: {
     position: 'absolute',
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   },
   view: {
     position: 'relative',
-    height: responsiveScreenHeight(10.5),
+    height: responsiveScreenHeight(9.5),
     marginBottom: responsiveScreenHeight(0.5),
   },
 });

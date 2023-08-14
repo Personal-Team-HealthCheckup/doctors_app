@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonView1: {
-    marginTop: responsiveHeight(4),
+    marginTop: responsiveHeight(7),
   },
   lastView: {
     flexDirection: 'row',
