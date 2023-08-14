@@ -1,5 +1,13 @@
 import React from 'react';
-import {ImageBackground, Platform, StyleSheet, Text, View} from 'react-native';
+import {
+  ImageBackground,
+  Platform,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import CustomStatusBar from '../../Components/CustomStatusBar';
 import {
   FONTS,
@@ -9,29 +17,40 @@ import {
   StarSvg,
   gradientSignupPng,
 } from '../../assets/assets';
-import CustomMainView from '../../Components/CustomMainView';
 import {COLORS} from '../../global/colors';
 import {
   responsiveHeight,
   responsiveScreenWidth,
+  responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import {moderateScale, verticalScale} from '../../helper/Scale';
 import CustomButton from '../../Components/CustomButton';
 import CustomTextInput from '../../Components/CustomTextInput';
+import CustomIcons from 'react-native-vector-icons/FontAwesome5';
+import CustomGButton from '../../Components/CustomGButton';
 
 interface SignupProps {}
 
-interface SignupState {}
+interface SignupState {
+  isChecked: boolean;
+}
 class Signup extends React.Component<SignupProps, SignupState> {
   constructor(props: SignupProps) {
     super(props);
-    this.state = {};
+    this.state = {
+      isChecked: false,
+    };
   }
+
+  toggleCheck = () => {
+    this.setState(prev => ({isChecked: !prev.isChecked}));
+  };
+  navigateToLogin = () => {};
   render() {
     return (
       <>
         <CustomStatusBar />
-        <CustomMainView style={styles.main}>
+        <ScrollView bounces={false} style={styles.main}>
           <ImageBackground source={gradientSignupPng} style={styles.image}>
             <StarSvg style={styles.imagesvg} />
             <StarSvg style={styles.imagesvg2} />
@@ -64,21 +83,29 @@ class Signup extends React.Component<SignupProps, SignupState> {
               />
             </View>
             <View style={styles.inputView}>
-              <CustomTextInput
-                placeholder="Name"
-                errMessage="something went wrong."
-              />
-              <CustomTextInput
-                placeholder="Name"
-                // errMessage="something went wrong"
-              />
-              <CustomTextInput
-                placeholder="Name"
-                // errMessage="something went wrong"
-              />
+              <CustomTextInput placeholder="Name" />
+              <CustomTextInput placeholder="Email" />
+              <CustomTextInput placeholder="Password" />
+              <Pressable style={styles.buttonCheck} onPress={this.toggleCheck}>
+                <CustomIcons
+                  name={this.state.isChecked ? 'check-circle' : 'circle'}
+                  size={20}
+                  color={this.state.isChecked ? COLORS.green : COLORS.greyBlack}
+                />
+                <Text style={styles.textIAgree}>
+                  I agree with the Terms of Service & Privacy Policy
+                </Text>
+              </Pressable>
+            </View>
+            <CustomGButton tittle="Sign up" style={styles.buttonView1} />
+            <View style={styles.lastView}>
+              <Text style={styles.textIhave}>Have an account?</Text>
+              <Text style={styles.textIhave} onPress={this.navigateToLogin}>
+                Log in
+              </Text>
             </View>
           </ImageBackground>
-        </CustomMainView>
+        </ScrollView>
       </>
     );
   }
@@ -100,7 +127,11 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(26),
     textTransform: 'capitalize',
   },
-  main: {},
+  main: {
+    width: responsiveWidth(100),
+    height: responsiveHeight(100),
+    backgroundColor: COLORS.black,
+  },
   imagesvg: {
     position: 'absolute',
     top: responsiveHeight(7),
@@ -135,5 +166,31 @@ const styles = StyleSheet.create({
   },
   inputView: {
     marginTop: responsiveHeight(5),
+  },
+  circle: {},
+  textIAgree: {
+    fontFamily: FONTS.rubik.regular,
+    fontSize: moderateScale(12),
+    color: COLORS.white2gray,
+    marginLeft: responsiveScreenWidth(2),
+  },
+  buttonCheck: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  buttonView1: {
+    marginTop: responsiveHeight(4),
+  },
+  lastView: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    color: COLORS.white2gray,
+  },
+  textIhave: {
+    fontFamily: FONTS.rubik.regular,
+    fontSize: moderateScale(14),
+    color: COLORS.green,
+    marginVertical: responsiveHeight(2),
   },
 });
