@@ -1,7 +1,14 @@
 import React from 'react';
-import {ImageBackground, StyleSheet, Text, View} from 'react-native';
+import {ImageBackground, Platform, StyleSheet, Text, View} from 'react-native';
 import CustomStatusBar from '../../Components/CustomStatusBar';
-import {FONTS, LogoSvg, StarSvg, gradientSignupPng} from '../../assets';
+import {
+  FONTS,
+  FacebookSvg,
+  GoogleSvg,
+  LogoSvg,
+  StarSvg,
+  gradientSignupPng,
+} from '../../assets/assets';
 import CustomMainView from '../../Components/CustomMainView';
 import {COLORS} from '../../global/colors';
 import {
@@ -10,6 +17,7 @@ import {
 } from 'react-native-responsive-dimensions';
 import {moderateScale, verticalScale} from '../../helper/Scale';
 import CustomButton from '../../Components/CustomButton';
+import CustomTextInput from '../../Components/CustomTextInput';
 
 interface SignupProps {}
 
@@ -28,15 +36,46 @@ class Signup extends React.Component<SignupProps, SignupState> {
             <StarSvg style={styles.imagesvg} />
             <StarSvg style={styles.imagesvg2} />
             <Text style={styles.textSignup}>Sign up</Text>
-            <LogoSvg width={responsiveScreenWidth(70)} style={styles.svg} />
+            <LogoSvg
+              width={responsiveScreenWidth(70)}
+              height={
+                Platform.OS === 'ios'
+                  ? responsiveHeight(15)
+                  : responsiveHeight(13)
+              }
+              style={styles.svg}
+              resizeMode="cover"
+            />
             <Text style={styles.subText}>
               VHA is an innovated, automated system and the very first
               blockchain based Virtual Health Assistant that will provide
               immediate medical assistance to the patients 24/7.
             </Text>
             <View style={styles.googleView}>
-              <CustomButton style={styles.buttonView} title="Google" />
-              <CustomButton style={styles.buttonView} title="Facebook" />
+              <CustomButton
+                Icon={<GoogleSvg />}
+                style={styles.buttonView}
+                title="Google"
+              />
+              <CustomButton
+                Icon={<FacebookSvg />}
+                style={styles.buttonView}
+                title="Facebook"
+              />
+            </View>
+            <View style={styles.inputView}>
+              <CustomTextInput
+                placeholder="Name"
+                errMessage="something went wrong."
+              />
+              <CustomTextInput
+                placeholder="Name"
+                // errMessage="something went wrong"
+              />
+              <CustomTextInput
+                placeholder="Name"
+                // errMessage="something went wrong"
+              />
             </View>
           </ImageBackground>
         </CustomMainView>
@@ -93,5 +132,8 @@ const styles = StyleSheet.create({
   buttonView: {
     width: '48.5%',
     height: verticalScale(54),
+  },
+  inputView: {
+    marginTop: responsiveHeight(5),
   },
 });

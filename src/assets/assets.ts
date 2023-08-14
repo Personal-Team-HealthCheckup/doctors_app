@@ -7,6 +7,8 @@ import HexagonSvg from './images/hexagon.svg';
 import BinanceLogoSvg from './images/binanceLogo.svg';
 import gradientSignupPng from './images/gradientSignup.png';
 import StarSvg from './images/Star.svg';
+import GoogleSvg from './images/google.svg';
+import FacebookSvg from './images/facebook.svg';
 export {
   Gradient,
   gradientPng,
@@ -15,6 +17,8 @@ export {
   BinanceLogoSvg,
   gradientSignupPng,
   StarSvg,
+  GoogleSvg,
+  FacebookSvg,
 };
 
 export const FONTS = {

@@ -12,14 +12,17 @@ import {
 } from 'react-native-responsive-dimensions';
 import {moderateScale, verticalScale} from '../helper/Scale';
 import {COLORS} from '../global/colors';
+import {FONTS} from '../assets/assets';
 interface ButtonProps {
   title: string;
   onPress?: () => void;
   style?: StyleProp<ViewStyle>;
+  Icon?: any;
 }
-const CustomButton: React.FC<ButtonProps> = ({title, onPress, style}) => {
+const CustomButton: React.FC<ButtonProps> = ({title, onPress, style, Icon}) => {
   return (
     <TouchableOpacity style={[styles.buttonView, style]} onPress={onPress}>
+      {Icon && Icon}
       <Text style={styles.buttonText}>{title}</Text>
     </TouchableOpacity>
   );
@@ -36,8 +39,12 @@ const styles = StyleSheet.create({
     borderRadius: moderateScale(12.39),
     justifyContent: 'center',
     paddingHorizontal: responsiveScreenWidth(10),
+    alignItems: 'center',
   },
   buttonText: {
     color: COLORS.white2gray,
+    fontFamily: FONTS.rubik.light,
+    fontSize: moderateScale(16),
+    marginLeft: responsiveScreenWidth(5),
   },
 });

@@ -11,7 +11,7 @@ import {
   HexagonSvg,
   LogoSvg,
   gradientPng,
-} from '../assets';
+} from '../assets/assets';
 import {moderateScale} from '../helper/Scale';
 import CustomStatusBar from '../Components/CustomStatusBar';
 import CustomMainView from '../Components/CustomMainView';
