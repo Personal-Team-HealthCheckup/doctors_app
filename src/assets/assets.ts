@@ -9,6 +9,7 @@ import gradientSignupPng from './images/gradientSignup.png';
 import StarSvg from './images/Star.svg';
 import GoogleSvg from './images/google.svg';
 import FacebookSvg from './images/facebook.svg';
+import StarBlueSvg from './images/StarBlue.svg';
 export {
   Gradient,
   gradientPng,
@@ -19,6 +20,7 @@ export {
   StarSvg,
   GoogleSvg,
   FacebookSvg,
+  StarBlueSvg,
 };
 
 export const FONTS = {

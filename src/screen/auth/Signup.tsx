@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   ImageBackground,
+  KeyboardAvoidingView,
   Platform,
   Pressable,
   ScrollView,
@@ -50,62 +51,72 @@ class Signup extends React.Component<SignupProps, SignupState> {
     return (
       <>
         <CustomStatusBar />
-        <ScrollView bounces={false} style={styles.main}>
-          <ImageBackground source={gradientSignupPng} style={styles.image}>
-            <StarSvg style={styles.imagesvg} />
-            <StarSvg style={styles.imagesvg2} />
-            <Text style={styles.textSignup}>Sign up</Text>
-            <LogoSvg
-              width={responsiveScreenWidth(70)}
-              height={
-                Platform.OS === 'ios'
-                  ? responsiveHeight(15)
-                  : responsiveHeight(13)
-              }
-              style={styles.svg}
-              resizeMode="cover"
-            />
-            <Text style={styles.subText}>
-              VHA is an innovated, automated system and the very first
-              blockchain based Virtual Health Assistant that will provide
-              immediate medical assistance to the patients 24/7.
-            </Text>
-            <View style={styles.googleView}>
-              <CustomButton
-                Icon={<GoogleSvg />}
-                style={styles.buttonView}
-                title="Google"
+
+        <KeyboardAvoidingView
+          enabled
+          style={styles.main}
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+          <ScrollView style={styles.main}>
+            <ImageBackground source={gradientSignupPng} style={styles.image}>
+              <StarSvg style={styles.imagesvg} />
+              <StarSvg style={styles.imagesvg2} />
+              <Text style={styles.textSignup}>Sign up</Text>
+              <LogoSvg
+                width={responsiveScreenWidth(70)}
+                height={
+                  Platform.OS === 'ios'
+                    ? responsiveHeight(15)
+                    : responsiveHeight(13)
+                }
+                style={styles.svg}
+                resizeMode="cover"
               />
-              <CustomButton
-                Icon={<FacebookSvg />}
-                style={styles.buttonView}
-                title="Facebook"
-              />
-            </View>
-            <View style={styles.inputView}>
-              <CustomTextInput placeholder="Name" />
-              <CustomTextInput placeholder="Email" />
-              <CustomTextInput placeholder="Password" />
-              <Pressable style={styles.buttonCheck} onPress={this.toggleCheck}>
-                <CustomIcons
-                  name={this.state.isChecked ? 'check-circle' : 'circle'}
-                  size={20}
-                  color={this.state.isChecked ? COLORS.green : COLORS.greyBlack}
-                />
-                <Text style={styles.textIAgree}>
-                  I agree with the Terms of Service & Privacy Policy
-                </Text>
-              </Pressable>
-            </View>
-            <CustomGButton tittle="Sign up" style={styles.buttonView1} />
-            <View style={styles.lastView}>
-              <Text style={styles.textIhave}>Have an account?</Text>
-              <Text style={styles.textIhave} onPress={this.navigateToLogin}>
-                Log in
+              <Text style={styles.subText}>
+                VHA is an innovated, automated system and the very first
+                blockchain based Virtual Health Assistant that will provide
+                immediate medical assistance to the patients 24/7.
               </Text>
-            </View>
-          </ImageBackground>
-        </ScrollView>
+              <View style={styles.googleView}>
+                <CustomButton
+                  Icon={<GoogleSvg />}
+                  style={styles.buttonView}
+                  title="Google"
+                />
+                <CustomButton
+                  Icon={<FacebookSvg />}
+                  style={styles.buttonView}
+                  title="Facebook"
+                />
+              </View>
+              <View style={styles.inputView}>
+                <CustomTextInput placeholder="Name" />
+                <CustomTextInput placeholder="Email" />
+                <CustomTextInput placeholder="Password" />
+                <Pressable
+                  style={styles.buttonCheck}
+                  onPress={this.toggleCheck}>
+                  <CustomIcons
+                    name={this.state.isChecked ? 'check-circle' : 'circle'}
+                    size={20}
+                    color={
+                      this.state.isChecked ? COLORS.green : COLORS.greyBlack
+                    }
+                  />
+                  <Text style={styles.textIAgree}>
+                    I agree with the Terms of Service & Privacy Policy
+                  </Text>
+                </Pressable>
+              </View>
+              <CustomGButton tittle="Sign up" style={styles.buttonView1} />
+              <View style={styles.lastView}>
+                <Text style={styles.textIhave}>Have an account?</Text>
+                <Text style={styles.textIhave} onPress={this.navigateToLogin}>
+                  Log in
+                </Text>
+              </View>
+            </ImageBackground>
+          </ScrollView>
+        </KeyboardAvoidingView>
       </>
     );
   }

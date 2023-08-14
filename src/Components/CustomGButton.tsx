@@ -42,7 +42,7 @@ export default CustomGButton;
 const styles = StyleSheet.create({
   linearGradient: {
     borderRadius: moderateScale(8),
-    width: responsiveScreenWidth(90),
+    width: responsiveScreenWidth(75),
     height: responsiveScreenHeight(7),
   },
   buttonText: {
