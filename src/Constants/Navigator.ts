@@ -1,4 +1,9 @@
 export const AUTH = {
   SIGNUP: 'SIGNUP',
   SIGNIN: 'SIGNIN',
+  ONBOARDING: 'ONBOARDING',
+};
+
+export const LANDING = {
+  SPLASHSCREEN: 'SPLASHSCREEN',
 };

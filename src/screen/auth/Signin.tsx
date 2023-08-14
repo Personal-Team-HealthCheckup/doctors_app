@@ -44,6 +44,9 @@ class Signin extends React.Component<SigninProps, SigninState> {
   navigateToSignup = () => {
     this.props.navigation?.navigate(AUTH.SIGNUP);
   };
+  handleLogin = () => {
+    this.props.navigation?.navigate(AUTH.ONBOARDING);
+  };
   render() {
     return (
       <>
@@ -80,7 +83,11 @@ class Signin extends React.Component<SigninProps, SigninState> {
               <CustomTextInput placeholder="Email" />
               <CustomTextInput placeholder="Password" />
             </View>
-            <CustomGButton tittle="Login" style={styles.buttonView1} />
+            <CustomGButton
+              tittle="Login"
+              style={styles.buttonView1}
+              onPress={this.handleLogin}
+            />
             <Text style={styles.textIhave}>Forgor password</Text>
             <View style={styles.lastView}>
               <Text style={styles.textIhave}>Don’t have an account?</Text>

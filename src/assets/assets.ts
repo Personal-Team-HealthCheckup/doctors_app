@@ -10,6 +10,13 @@ import StarSvg from './images/Star.svg';
 import GoogleSvg from './images/google.svg';
 import FacebookSvg from './images/facebook.svg';
 import StarBlueSvg from './images/StarBlue.svg';
+// onboarding
+import bgOn1Png from './images/bgOn1.png';
+import bgOn2Png from './images/bgOn2.png';
+import OnBoarding1Svg from './images/OnBoarding1.svg';
+import OnBoarding2Svg from './images/OnBoarding2.svg';
+import OnBoarding3Svg from './images/OnBoarding3.svg';
+
 export {
   Gradient,
   gradientPng,
@@ -21,6 +28,11 @@ export {
   GoogleSvg,
   FacebookSvg,
   StarBlueSvg,
+  bgOn1Png,
+  bgOn2Png,
+  OnBoarding1Svg,
+  OnBoarding2Svg,
+  OnBoarding3Svg,
 };
 
 export const FONTS = {
