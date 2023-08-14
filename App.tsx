@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import Signin from './src/screen/auth/Signin';
+import HomeStack from './src/navigation/HomeStack';
 interface AppProps {}
 
 interface AppState {}
@@ -11,7 +11,7 @@ class App extends React.Component<AppProps, AppState> {
     this.state = {};
   }
   render() {
-    return <Signin />;
+    return <HomeStack />;
   }
 }
 
