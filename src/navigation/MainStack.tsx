@@ -6,18 +6,20 @@ import SplashScreens from '../screen/Splashscreen';
 import {AUTH, HOME, LANDING} from '../Constants/Navigator';
 import OnBoarding from '../screen/auth/OnBoarding';
 import DoctorNearYou from '../screen/home/DoctorNearYou';
+import HomeScreen from '../screen/home/HomeScreen';
 
 const Stack = createNativeStackNavigator();
 const MainStack = () => {
   return (
     <Stack.Navigator
       screenOptions={{headerShown: false}}
-      initialRouteName={HOME.DOCTORNEARYOU}>
+      initialRouteName={HOME.HOME}>
       <Stack.Screen name={LANDING.SPLASHSCREEN} component={SplashScreens} />
       <Stack.Screen name={AUTH.SIGNUP} component={Signup} />
       <Stack.Screen name={AUTH.SIGNIN} component={Signin} />
       <Stack.Screen name={AUTH.ONBOARDING} component={OnBoarding} />
       <Stack.Screen name={HOME.DOCTORNEARYOU} component={DoctorNearYou} />
+      <Stack.Screen name={HOME.HOME} component={HomeScreen} />
     </Stack.Navigator>
   );
 };

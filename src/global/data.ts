@@ -1,11 +1,19 @@
 import {
+  BodySvg,
+  DentalSvg,
   Doctor1Svg,
   DrStrainSvg,
+  EyeSvg,
+  HeartSvg,
   OnBoarding1Svg,
   OnBoarding2Svg,
   OnBoarding3Svg,
+  gradient1Png,
+  gradient2Png,
+  gradient3Png,
+  gradient4Png,
 } from '../assets/assets';
-import {DoctorData} from './types';
+import {CommonDeseaseData, DoctorData} from './types';
 
 // onBoarding data source
 export const OnboardingData = [
@@ -66,5 +74,33 @@ export const doctorData: DoctorData[] = [
     name: 'Dr. Pediatrician',
     isAvailable: false,
     imageUrl: OnBoarding2Svg,
+  },
+];
+
+// common desease data
+export const commonDeseaseData: CommonDeseaseData[] = [
+  {
+    id: 1,
+    backgroudImage: gradient1Png,
+    image: DentalSvg,
+    title: 'Dental',
+  },
+  {
+    id: 2,
+    backgroudImage: gradient2Png,
+    image: HeartSvg,
+    title: 'Heart',
+  },
+  {
+    id: 3,
+    backgroudImage: gradient3Png,
+    image: EyeSvg,
+    title: 'Eye',
+  },
+  {
+    id: 4,
+    backgroudImage: gradient4Png,
+    image: BodySvg,
+    title: 'Body',
   },
 ];

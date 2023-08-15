@@ -8,5 +8,7 @@ export const LANDING = {
   SPLASHSCREEN: 'SPLASHSCREEN',
 };
 export const HOME = {
+  DASHBOARD: 'DASHBOARD',
+  HOME: 'HOME',
   DOCTORNEARYOU: 'DOCTORNEARYOU',
 };

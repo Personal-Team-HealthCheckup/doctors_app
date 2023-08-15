@@ -18,10 +18,21 @@ import OnBoarding2Svg from './images/OnBoarding2.svg';
 import OnBoarding3Svg from './images/OnBoarding3.svg';
 import Doctor1Svg from './images/doctor1.svg';
 import DrStrainSvg from './images/DrStarin.svg';
-
-// nearby
 import GradientnearBy from './images/GradientnearBy.png';
 import MapSvg from './images/Map.svg';
+import HomeScreenPng from './images/homeScreen.png';
+import LightSvg from './images/Light.svg';
+import NotificationBellSvg from './images/NotificationBell.svg';
+import SearchSvg from './images/Search.svg';
+import SvgRightArrowSvg from './images/SvgRightArrow.svg';
+import gradient1Png from './images/Gradient1.png';
+import gradient2Png from './images/gradient2.png';
+import gradient3Png from './images/gradient3.png';
+import gradient4Png from './images/gradient3.png';
+import DentalSvg from './images/Dental.svg';
+import HeartSvg from './images/Heart.svg';
+import EyeSvg from './images/Eyes.svg';
+import BodySvg from './images/Body.svg';
 
 export {
   Gradient,
@@ -43,6 +54,19 @@ export {
   DrStrainSvg,
   GradientnearBy,
   MapSvg,
+  HomeScreenPng,
+  LightSvg,
+  SearchSvg,
+  NotificationBellSvg,
+  SvgRightArrowSvg,
+  gradient1Png,
+  gradient2Png,
+  gradient3Png,
+  gradient4Png,
+  DentalSvg,
+  EyeSvg,
+  BodySvg,
+  HeartSvg,
 };
 
 export const FONTS = {

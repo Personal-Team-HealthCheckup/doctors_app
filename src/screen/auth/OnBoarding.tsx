@@ -17,8 +17,13 @@ import CustomGButton from '../../Components/CustomGButton';
 import {COLORS} from '../../global/colors';
 import {moderateScale} from '../../helper/Scale';
 import {OnboardingData as data} from '../../global/data';
+import {HOME} from '../../Constants/Navigator';
 
-interface OnBoardingProps {}
+interface OnBoardingProps {
+  navigation?: {
+    navigate: (args: string) => void;
+  };
+}
 
 interface OnBoardingState {
   index: number;
@@ -37,6 +42,7 @@ class OnBoarding extends React.Component<OnBoardingProps, OnBoardingState> {
     if (data.length - 1 > this.state.index) {
       this.setState({index: this.state.index + 1});
     } else {
+      this.props.navigation?.navigate(HOME.DOCTORNEARYOU);
     }
   };
   render() {
