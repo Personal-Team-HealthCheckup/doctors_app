@@ -8,10 +8,11 @@ import {
 } from 'react-native-responsive-dimensions';
 import {COLORS} from '../../global/colors';
 import {moderateScale} from '../../helper/Scale';
-import {FONTS, GradientnearBy, MapSvg} from '../../assets/assets';
+import {FONTS, GradientnearBy} from '../../assets/assets';
 import CustomGButton from '../../Components/CustomGButton';
 import {doctorData} from '../../global/data';
 import {DoctorData} from '../../global/types';
+import MapView, {Marker} from 'react-native-maps';
 interface DoctorNearYouProps {}
 
 interface DoctorNearYouState {}
@@ -60,12 +61,34 @@ class DoctorNearYou extends React.Component<
         <CustomStatusBar />
         <CustomMainView style={styles.main}>
           <View style={styles.view1}>
-            {/*  need  to implement google map*/}
-            <MapSvg
-              width={responsiveScreenWidth(100)}
-              height={responsiveScreenHeight(50)}
-              resizeMode="cover"
-            />
+            <MapView
+              style={styles.view1}
+              initialRegion={{
+                latitude: 37.78825,
+                longitude: -122.4324,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421,
+              }}
+              initialCamera={{
+                center: {
+                  latitude: 0,
+                  longitude: 0,
+                },
+                heading: 3,
+                pitch: 3,
+                zoom: 2,
+              }}
+              zoomControlEnabled
+              zoomEnabled>
+              <Marker
+                coordinate={{
+                  latitude: 37.78825,
+                  longitude: -122.4324,
+                }}
+                title={'JavaTpoint'}
+                description={'Java Training Institute'}
+              />
+            </MapView>
           </View>
           <View style={styles.view2}>
             <ImageBackground
