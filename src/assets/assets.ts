@@ -16,6 +16,12 @@ import bgOn2Png from './images/bgOn2.png';
 import OnBoarding1Svg from './images/OnBoarding1.svg';
 import OnBoarding2Svg from './images/OnBoarding2.svg';
 import OnBoarding3Svg from './images/OnBoarding3.svg';
+import Doctor1Svg from './images/doctor1.svg';
+import DrStrainSvg from './images/DrStarin.svg';
+
+// nearby
+import GradientnearBy from './images/GradientnearBy.png';
+import MapSvg from './images/Map.svg';
 
 export {
   Gradient,
@@ -33,6 +39,10 @@ export {
   OnBoarding1Svg,
   OnBoarding2Svg,
   OnBoarding3Svg,
+  Doctor1Svg,
+  DrStrainSvg,
+  GradientnearBy,
+  MapSvg,
 };
 
 export const FONTS = {

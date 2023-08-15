@@ -1,6 +1,6 @@
 export const COLORS = {
   black: '#000',
-  white: '#fff',
+  white: '#FFF',
   white2gray: '#E2E5EA',
   black2gray: '#222338',
   red: '#EF271B',
@@ -8,4 +8,6 @@ export const COLORS = {
   green: '#0EBE7F',
   greeen1: '#46AA72',
   greeen2: '#2DA0A4',
+  lightGreen: '#75CFF0',
+  lightWhite: 'rgba(255, 255, 255, 0.04)',
 };

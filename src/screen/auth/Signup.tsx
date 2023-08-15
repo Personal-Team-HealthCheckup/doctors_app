@@ -63,7 +63,7 @@ class Signup extends React.Component<SignupProps, SignupState> {
           enabled
           style={styles.main}
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-          <ScrollView style={styles.main}>
+          <ScrollView bounces={false} style={styles.main}>
             <ImageBackground source={gradientSignupPng} style={styles.image}>
               <StarSvg style={styles.imagesvg} />
               <StarSvg style={styles.imagesvg2} />

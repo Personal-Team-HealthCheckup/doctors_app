@@ -3,19 +3,21 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Signup from '../screen/auth/Signup';
 import Signin from '../screen/auth/Signin';
 import SplashScreens from '../screen/Splashscreen';
-import {AUTH, LANDING} from '../Constants/Navigator';
+import {AUTH, HOME, LANDING} from '../Constants/Navigator';
 import OnBoarding from '../screen/auth/OnBoarding';
+import DoctorNearYou from '../screen/home/DoctorNearYou';
 
 const Stack = createNativeStackNavigator();
 const MainStack = () => {
   return (
     <Stack.Navigator
       screenOptions={{headerShown: false}}
-      initialRouteName={LANDING.SPLASHSCREEN}>
+      initialRouteName={HOME.DOCTORNEARYOU}>
       <Stack.Screen name={LANDING.SPLASHSCREEN} component={SplashScreens} />
       <Stack.Screen name={AUTH.SIGNUP} component={Signup} />
       <Stack.Screen name={AUTH.SIGNIN} component={Signin} />
       <Stack.Screen name={AUTH.ONBOARDING} component={OnBoarding} />
+      <Stack.Screen name={HOME.DOCTORNEARYOU} component={DoctorNearYou} />
     </Stack.Navigator>
   );
 };

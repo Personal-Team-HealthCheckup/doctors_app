@@ -7,3 +7,6 @@ export const AUTH = {
 export const LANDING = {
   SPLASHSCREEN: 'SPLASHSCREEN',
 };
+export const HOME = {
+  DOCTORNEARYOU: 'DOCTORNEARYOU',
+};

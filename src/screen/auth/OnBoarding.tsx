@@ -16,7 +16,7 @@ import {
 import CustomGButton from '../../Components/CustomGButton';
 import {COLORS} from '../../global/colors';
 import {moderateScale} from '../../helper/Scale';
-import {data} from '../../global/data';
+import {OnboardingData as data} from '../../global/data';
 
 interface OnBoardingProps {}
 
