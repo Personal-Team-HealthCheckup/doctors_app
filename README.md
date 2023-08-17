@@ -1,1 +1,1 @@
-## figma link [https://www.figma.com/file/4MMyMk4ynINHRtw5GSVkZv/Doctor-App?mode=dev]
+## figma link ["https://www.figma.com/file/4MMyMk4ynINHRtw5GSVkZv/Doctor-App?mode=dev"]
