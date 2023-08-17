@@ -14,7 +14,7 @@ interface ButtonProps {
   title: string;
   onPress?: () => void;
   style?: StyleProp<ViewStyle>;
-  Icon?: any;
+  Icon?: React.JSX.Element;
 }
 const CustomButton: React.FC<ButtonProps> = ({title, onPress, style, Icon}) => {
   return (
