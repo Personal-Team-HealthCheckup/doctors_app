@@ -19,5 +19,6 @@ const styles = StyleSheet.create({
     width: responsiveWidth(100),
     height: responsiveHeight(100),
     backgroundColor: COLORS.black,
+    flex: 1,
   },
 });

@@ -6,11 +6,8 @@ import {
   ViewStyle,
 } from 'react-native';
 import React from 'react';
-import {
-  responsiveHeight,
-  responsiveScreenWidth,
-} from 'react-native-responsive-dimensions';
-import {moderateScale, verticalScale} from '../helper/Scale';
+import {responsiveScreenWidth} from 'react-native-responsive-dimensions';
+import {horizontalScale, moderateScale, verticalScale} from '../helper/Scale';
 import {COLORS} from '../global/colors';
 import {FONTS} from '../assets/assets';
 interface ButtonProps {
@@ -34,11 +31,11 @@ const styles = StyleSheet.create({
     width: responsiveScreenWidth(100),
     height: verticalScale(54),
     flexDirection: 'row',
-    paddingVertical: responsiveHeight(2),
+    paddingVertical: verticalScale(1),
     backgroundColor: COLORS.black2gray,
     borderRadius: moderateScale(12.39),
     justifyContent: 'center',
-    paddingHorizontal: responsiveScreenWidth(10),
+    paddingHorizontal: horizontalScale(10),
     alignItems: 'center',
   },
   buttonText: {

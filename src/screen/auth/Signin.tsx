@@ -1,17 +1,11 @@
 import React from 'react';
 import CustomStatusBar from '../../Components/CustomStatusBar';
-import {
-  ScrollView,
-  ImageBackground,
-  Text,
-  View,
-  StyleSheet,
-} from 'react-native';
+import {ImageBackground, Text, View, StyleSheet} from 'react-native';
 import {
   responsiveScreenWidth,
   responsiveHeight,
-  responsiveWidth,
   responsiveScreenHeight,
+  responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import CustomButton from '../../Components/CustomButton';
 import CustomGButton from '../../Components/CustomGButton';
@@ -27,6 +21,7 @@ import {
 import {COLORS} from '../../global/colors';
 import {moderateScale, verticalScale} from '../../helper/Scale';
 import {AUTH} from '../../Constants/Navigator';
+import CustomMainView from '../../Components/CustomMainView';
 
 interface SigninProps {
   navigation?: {
@@ -51,7 +46,7 @@ class Signin extends React.Component<SigninProps, SigninState> {
     return (
       <>
         <CustomStatusBar />
-        <ScrollView bounces={false} style={styles.main}>
+        <CustomMainView>
           <ImageBackground source={gradientSignupPng} style={styles.image}>
             <StarBlueSvg style={styles.imagesvg} />
             <StarBlueSvg style={styles.imagesvg2} />
@@ -96,7 +91,7 @@ class Signin extends React.Component<SigninProps, SigninState> {
               </Text>
             </View>
           </ImageBackground>
-        </ScrollView>
+        </CustomMainView>
       </>
     );
   }
@@ -110,8 +105,7 @@ const styles = StyleSheet.create({
     paddingTop: responsiveHeight(2),
     position: 'relative',
     paddingHorizontal: responsiveScreenWidth(5),
-    width: responsiveWidth(100),
-    height: responsiveHeight(100),
+    flex: 1,
   },
   textSignup: {
     color: COLORS.white,
@@ -120,10 +114,10 @@ const styles = StyleSheet.create({
     textTransform: 'capitalize',
   },
   main: {
+    flex: 1,
+    backgroundColor: COLORS.black,
     width: responsiveWidth(100),
     height: responsiveHeight(100),
-    flexGrow: 1,
-    backgroundColor: COLORS.black,
   },
   imagesvg: {
     position: 'absolute',

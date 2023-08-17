@@ -63,7 +63,10 @@ class Signup extends React.Component<SignupProps, SignupState> {
           enabled
           style={styles.main}
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-          <ScrollView bounces={false} style={styles.main}>
+          <ScrollView
+            bounces={false}
+            style={styles.main}
+            showsVerticalScrollIndicator={false}>
             <ImageBackground source={gradientSignupPng} style={styles.image}>
               <StarSvg style={styles.imagesvg} />
               <StarSvg style={styles.imagesvg2} />
@@ -149,6 +152,7 @@ const styles = StyleSheet.create({
     width: responsiveWidth(100),
     height: responsiveHeight(100),
     backgroundColor: COLORS.black,
+    flex: 1,
   },
   imagesvg: {
     position: 'absolute',

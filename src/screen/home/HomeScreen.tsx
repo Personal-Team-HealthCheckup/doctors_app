@@ -7,7 +7,6 @@ import {
   ImageSourcePropType,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
 } from 'react-native';
 import {COLORS} from '../../global/colors';
@@ -16,18 +15,12 @@ import {
   responsiveScreenHeight,
   responsiveScreenWidth,
 } from 'react-native-responsive-dimensions';
-import {
-  FONTS,
-  HomeScreenPng,
-  LightSvg,
-  NotificationBellSvg,
-  OnBoarding1Svg,
-  SearchSvg,
-  SvgRightArrowSvg,
-} from '../../assets/assets';
+import {FONTS, HomeScreenPng, OnBoarding1Svg} from '../../assets/assets';
 import {moderateScale} from '../../helper/Scale';
 import {commonDeseaseData} from '../../global/data';
 import {CommonDeseaseData} from '../../global/types';
+import CustomHeading from '../../Components/CustomHeading';
+import Header from '../../Components/Header';
 
 interface HomeScreenProps {}
 
@@ -58,11 +51,17 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
   _renderCommnDesease = ({item}: {item: CommonDeseaseData}) => {
     const Svg = item.image;
     return (
-      <ImageBackground source={item.backgroudImage as ImageSourcePropType}>
+      <ImageBackground
+        source={item.backgroudImage as ImageSourcePropType}
+        style={styles.backImage}>
         <Svg />
-        <Text>{item.title}</Text>
+        <Text style={styles.textTitle}>{item.title}</Text>
       </ImageBackground>
     );
+  };
+
+  _renderAppointments = () => {
+    return <></>;
   };
   render() {
     return (
@@ -87,54 +86,25 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
                 />
               </LinearGradient>
             )}
-            <View style={styles.mainView}>
-              <View style={styles.leftView}>
-                <OnBoarding1Svg
-                  width={responsiveScreenWidth(18)}
-                  height={responsiveScreenWidth(18)}
-                  style={styles.image}
-                />
-              </View>
-              <View style={styles.iconView}>
-                <View style={styles.icon}>
-                  <LightSvg
-                    width={'100%'}
-                    height={'100%'}
-                    style={styles.image}
-                  />
-                </View>
-                <View style={styles.icon}>
-                  <SearchSvg
-                    width={'100%'}
-                    height={'70%'}
-                    style={styles.image}
-                  />
-                </View>
-                <View style={styles.icon}>
-                  <NotificationBellSvg
-                    width={'100%'}
-                    height={'100%'}
-                    style={styles.image}
-                  />
-                  <View style={styles.badge}>
-                    <Text style={styles.badgeText}>1</Text>
-                  </View>
-                </View>
-              </View>
-            </View>
+            <Header />
             <View style={styles.viewStyle}>
-              <View style={styles.mainTextView}>
-                <Text style={styles.mainText}>Common Diseases</Text>
-                <TouchableOpacity style={styles.btn}>
-                  <Text style={styles.buttonSeeText}>See all</Text>
-                  <SvgRightArrowSvg />
-                </TouchableOpacity>
-              </View>
+              <CustomHeading title="Common Diseases" />
               <FlatList
                 horizontal
                 data={commonDeseaseData}
                 renderItem={this._renderCommnDesease}
                 keyExtractor={item => item.id.toString()}
+                contentContainerStyle={styles.contentContainerStyle}
+              />
+            </View>
+            <View style={styles.viewStyle}>
+              <CustomHeading title="Your Appointments" />
+              <FlatList
+                horizontal
+                data={commonDeseaseData}
+                renderItem={this._renderAppointments}
+                keyExtractor={item => item.id.toString()}
+                contentContainerStyle={styles.contentContainerStyle}
               />
             </View>
           </ImageBackground>
@@ -183,66 +153,26 @@ const styles = StyleSheet.create({
   viewText: {
     flex: 1,
   },
-  mainView: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: responsiveScreenWidth(4),
-    width: responsiveScreenWidth(100),
-    height: responsiveScreenHeight(16),
-  },
-  leftView: {
-    flex: 1,
-  },
-  iconView: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  icon: {
-    marginLeft: responsiveScreenWidth(4),
-    position: 'relative',
-    width: responsiveScreenWidth(10),
-    height: responsiveScreenWidth(10),
-  },
-  badge: {
-    width: responsiveScreenWidth(5),
-    height: responsiveScreenWidth(5),
-    position: 'absolute',
-    backgroundColor: 'red',
-    right: responsiveScreenWidth(-2),
-    top: responsiveScreenHeight(-2),
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: responsiveScreenWidth(2.5),
-  },
-  badgeText: {
-    fontFamily: FONTS.rubik.medium,
-    fontSize: moderateScale(10),
-    color: COLORS.white,
-  },
+
   viewStyle: {},
-  mainTextView: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+
+  backImage: {
+    width: responsiveScreenWidth(22),
+    height: responsiveScreenHeight(12),
     alignItems: 'center',
-    paddingHorizontal: responsiveScreenWidth(4),
-    paddingVertical: responsiveScreenHeight(2),
+    justifyContent: 'flex-end',
+    borderRadius: moderateScale(12),
+    marginLeft: responsiveScreenWidth(2),
+    resizeMode: 'cover',
   },
-  btn: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+  contentContainerStyle: {
+    paddingHorizontal: responsiveScreenWidth(2),
   },
-  mainText: {
-    flex: 1,
-    fontFamily: FONTS.rubik.medium,
-    fontSize: moderateScale(18),
+  textTitle: {
     color: COLORS.white,
-  },
-  buttonSeeText: {
-    color: COLORS.white2gray,
-    fontFamily: FONTS.rubik.light,
-    fontSize: moderateScale(12),
+    fontFamily: FONTS.rubik.medium,
+    fontSize: moderateScale(14),
+    marginTop: responsiveScreenHeight(2),
+    marginBottom: responsiveScreenHeight(1),
   },
 });
