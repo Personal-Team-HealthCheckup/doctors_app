@@ -18,5 +18,5 @@ Any additional information goes here
 
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/shubham-sarode-09456a214/)
 
-[![Figma](./src/assets/images/figma.jpg)](https://www.figma.com/file/4MMyMk4ynINHRtw5GSVkZv/Doctor-App?node-id=340%3A7913&mode=dev)
+[![Figma](./src/assets/images/figma.jpg/width=100&&height=100)](https://www.figma.com/file/4MMyMk4ynINHRtw5GSVkZv/Doctor-App?node-id=340%3A7913&mode=dev)
 

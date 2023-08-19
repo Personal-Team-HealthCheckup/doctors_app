@@ -12,8 +12,13 @@ import {
   gradient2Png,
   gradient3Png,
   gradient4Png,
+  imageProfile1,
+  imageProfile2,
+  imageProfile3,
+  imageProfile4,
+  imageProfile5,
 } from '../assets/assets';
-import {CommonDeseaseData, DoctorData} from './types';
+import {CommonDeseaseData, DoctorData, YourAppointmentsData} from './types';
 
 // onBoarding data source
 export const OnboardingData = [
@@ -102,5 +107,63 @@ export const commonDeseaseData: CommonDeseaseData[] = [
     backgroudImage: gradient4Png,
     image: BodySvg,
     title: 'Body',
+  },
+];
+
+export const yourAppointmentsData: YourAppointmentsData[] = [
+  {
+    id: 1,
+    rating: 4.8,
+    degree: 'B.D.S|M.B.B.S',
+    name: 'Dr. John Smith',
+    experience: 7,
+    views: 275,
+    available: '10AM tomorrow',
+    image: imageProfile1,
+    isFaveritiated: false,
+  },
+  {
+    id: 2,
+    available: '12AM tomorrow',
+    degree: 'B.D.S|M.B.S',
+    experience: 9,
+    image: imageProfile2,
+    name: 'Dr. Watamaniuk',
+    rating: 4.5,
+    views: 3475,
+    isFaveritiated: true,
+  },
+  {
+    id: 3,
+    available: '11AM tomorrow',
+    degree: 'B.D.S|M.B.S',
+    experience: 10,
+    image: imageProfile3,
+    name: 'Dr. Julie Will',
+    rating: 4.5,
+    views: 4475,
+    isFaveritiated: true,
+  },
+  {
+    id: 4,
+    available: '1PM tomorrow',
+    degree: 'B.D.S|M.B.S',
+    experience: 2,
+    image: imageProfile4,
+    name: 'Dr. Crownover',
+    rating: 4.1,
+    views: 1475,
+    isFaveritiated: false,
+  },
+  {
+    id: 5,
+    available: '4PM tomorrow',
+    degree: 'B.D.S|M.B.S',
+    experience: 5,
+    image: imageProfile5,
+    name: 'Dr. Balestra',
+    rating: 4.3,
+    views: 475,
+    isFaveritiated: false,
   },
 ];

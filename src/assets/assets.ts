@@ -34,6 +34,13 @@ import HeartSvg from './images/Heart.svg';
 import EyeSvg from './images/Eyes.svg';
 import BodySvg from './images/Body.svg';
 
+// png images
+import imageProfile1 from './images/imageProfile1.jpeg';
+import imageProfile2 from './images/imageProfile2.jpeg';
+import imageProfile3 from './images/imageProfile3.jpeg';
+import imageProfile4 from './images/imageProfile3.jpeg';
+import imageProfile5 from './images/imageProfile5.jpeg';
+
 export {
   Gradient,
   gradientPng,
@@ -67,6 +74,11 @@ export {
   EyeSvg,
   BodySvg,
   HeartSvg,
+  imageProfile1,
+  imageProfile2,
+  imageProfile3,
+  imageProfile4,
+  imageProfile5,
 };
 
 export const FONTS = {

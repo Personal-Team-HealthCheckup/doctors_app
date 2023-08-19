@@ -11,3 +11,14 @@ export interface CommonDeseaseData {
   image: any;
   title: string;
 }
+export interface YourAppointmentsData {
+  id: number;
+  rating: number;
+  degree: string;
+  name: string;
+  experience: number;
+  views: number;
+  image: string;
+  available: string;
+  isFaveritiated: boolean;
+}

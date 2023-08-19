@@ -10,4 +10,6 @@ export const COLORS = {
   greeen2: '#2DA0A4',
   lightGreen: '#75CFF0',
   lightWhite: 'rgba(255, 255, 255, 0.04)',
+  lightBlack2: '#677294',
+  red1: '#FF0000',
 };

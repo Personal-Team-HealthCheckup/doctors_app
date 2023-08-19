@@ -42,7 +42,7 @@ class OnBoarding extends React.Component<OnBoardingProps, OnBoardingState> {
     if (data.length - 1 > this.state.index) {
       this.setState({index: this.state.index + 1});
     } else {
-      this.props.navigation?.navigate(HOME.DOCTORNEARYOU);
+      this.props.navigation?.navigate(HOME.DASHBOARD);
     }
   };
   render() {
