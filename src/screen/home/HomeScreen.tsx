@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import CustomStatusBar from '../../Components/CustomStatusBar';
+import CustomStatusBar from '../../Components/common/CustomStatusBar';
 import {
   FlatList,
   Image,
@@ -24,10 +24,12 @@ import {FONTS, HomeScreenPng, OnBoarding1Svg} from '../../assets/assets';
 import {moderateScale} from '../../helper/Scale';
 import {commonDeseaseData, yourAppointmentsData} from '../../global/data';
 import {CommonDeseaseData, YourAppointmentsData} from '../../global/types';
-import CustomHeading from '../../Components/CustomHeading';
-import Header from '../../Components/Header';
-import CustomGButton from '../../Components/CustomGButton';
+import CustomHeading from '../../Components/common/CustomHeading';
+import Header from '../../Components/common/Header';
+import CustomGButton from '../../Components/common/CustomGButton';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+import {Rating} from 'react-native-ratings';
+
 interface HomeScreenProps {}
 
 interface HomeScreenState {
@@ -78,6 +80,10 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
     );
   };
 
+  ratingCompleted = (ratingsCount: number) => {
+    console.log('----ratingsCount', ratingsCount);
+  };
+
   _renderAppointments = ({
     item,
     index,
@@ -86,6 +92,8 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
     index: number;
   }) => {
     const degree = item.degree.split('|').join(',');
+    const ratingSplit = item.rating.toString().split('.');
+    const rating = Number(ratingSplit[0]);
     return (
       <View
         style={[
@@ -117,6 +125,29 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
             <Text style={styles.subTextExpe}>
               {item.experience} Years experience
             </Text>
+            <Rating
+              ratingBackgroundColor={COLORS.white2gray}
+              type="custom"
+              style={{backgroundColor: COLORS.transparent}}
+              ratingColor={COLORS.yellow}
+              imageSize={30}
+              readonly
+              startingValue={rating}
+            />
+            {/* <View style={styles.starView}>
+              {ratingArray.map(rating => {
+                return (
+                  <ImageBackground
+                    key={rating}
+                    style={styles.star}
+                    source={starImage}>
+                    {Array(rating).map(ele => (
+                      <View key={ele} style={styles.activeStar} />
+                    ))}
+                  </ImageBackground>
+                );
+              })}
+            </View> */}
           </View>
         </View>
         <View style={styles.view1}>
@@ -344,5 +375,23 @@ const styles = StyleSheet.create({
     top: 0,
     right: 0,
     zIndex: 1000,
+  },
+  starView: {
+    marginTop: responsiveHeight(1),
+    flexDirection: 'row',
+    alignItems: 'center',
+    position: 'relative',
+  },
+  star: {
+    width: responsiveWidth(5),
+    height: responsiveWidth(5),
+    zIndex: 0,
+  },
+  activeStar: {
+    position: 'absolute',
+    backgroundColor: 'yellow',
+    width: responsiveWidth(5),
+    height: responsiveWidth(5),
+    zIndex: 1,
   },
 });

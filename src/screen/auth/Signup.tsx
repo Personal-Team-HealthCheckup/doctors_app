@@ -25,7 +25,7 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import {moderateScale, verticalScale} from '../../helper/Scale';
-import CustomButton from '../../Components/CustomButton';
+import CustomButton from '../../Components/common/CustomButton';
 import CustomTextInput from '../../Components/CustomTextInput';
 import CustomIcons from 'react-native-vector-icons/FontAwesome5';
 import CustomGButton from '../../Components/CustomGButton';

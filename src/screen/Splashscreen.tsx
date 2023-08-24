@@ -13,8 +13,8 @@ import {
   gradientPng,
 } from '../assets/assets';
 import {moderateScale} from '../helper/Scale';
-import CustomStatusBar from '../Components/CustomStatusBar';
-import CustomMainView from '../Components/CustomMainView';
+import CustomStatusBar from '../Components/common/CustomStatusBar';
+import CustomMainView from '../Components/common/CustomMainView';
 import {AUTH} from '../Constants/Navigator';
 interface SplashScreensProps {
   navigation?: {

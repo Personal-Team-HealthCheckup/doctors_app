@@ -12,4 +12,6 @@ export const COLORS = {
   lightWhite: 'rgba(255, 255, 255, 0.04)',
   lightBlack2: '#677294',
   red1: '#FF0000',
+  transparent: 'transparent',
+  yellow: '#F6D060',
 };

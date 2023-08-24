@@ -40,6 +40,7 @@ import imageProfile2 from './images/imageProfile2.jpeg';
 import imageProfile3 from './images/imageProfile3.jpeg';
 import imageProfile4 from './images/imageProfile3.jpeg';
 import imageProfile5 from './images/imageProfile5.jpeg';
+import starImage from './images/start.png';
 
 export {
   Gradient,
@@ -79,6 +80,7 @@ export {
   imageProfile3,
   imageProfile4,
   imageProfile5,
+  starImage,
 };
 
 export const FONTS = {

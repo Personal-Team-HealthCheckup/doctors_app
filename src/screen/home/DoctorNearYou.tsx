@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, Text, ImageBackground, FlatList} from 'react-native';
-import CustomStatusBar from '../../Components/CustomStatusBar';
-import CustomMainView from '../../Components/CustomMainView';
+import CustomStatusBar from '../../Components/common/CustomStatusBar';
+import CustomMainView from '../../Components/common/CustomMainView';
 import {
   responsiveScreenHeight,
   responsiveScreenWidth,
@@ -9,7 +9,7 @@ import {
 import {COLORS} from '../../global/colors';
 import {moderateScale} from '../../helper/Scale';
 import {FONTS, GradientnearBy} from '../../assets/assets';
-import CustomGButton from '../../Components/CustomGButton';
+import CustomGButton from '../../Components/common/CustomGButton';
 import {doctorData} from '../../global/data';
 import {DoctorData} from '../../global/types';
 import MapView, {Marker} from 'react-native-maps';

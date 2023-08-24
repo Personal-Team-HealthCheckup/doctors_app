@@ -7,7 +7,7 @@ import {
   responsiveScreenHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import CustomButton from '../../Components/CustomButton';
+import CustomButton from '../../Components/common/CustomButton';
 import CustomGButton from '../../Components/CustomGButton';
 import CustomTextInput from '../../Components/CustomTextInput';
 import {
