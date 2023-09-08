@@ -1,24 +1,29 @@
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import React from 'react';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
+import {COLORS} from '../../global/colors';
+import {
+  responsiveHeight,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
 const CustomFooter: React.FC<BottomTabBarProps> = ({
   descriptors,
   insets,
   navigation,
   state,
 }) => {
-  console.log('-----props', descriptors, insets, navigation, state);
+  console.log('-----props', descriptors.options);
   return (
-    <View style={{flexDirection: 'row'}}>
+    <View style={styles.container}>
       {state.routes.map((route, index) => {
         const {options} = descriptors[route.key];
-        const label: string =
+        const label =
           options.tabBarLabel !== undefined
-            ? options.tabBarLabel
+            ? String(options.tabBarLabel)
             : options.title !== undefined
             ? options.title
             : route.name;
-
+        console.log('-----props', options.tabBarIcon);
         const isFocused = state.index === index;
 
         const onPress = () => {
@@ -49,8 +54,11 @@ const CustomFooter: React.FC<BottomTabBarProps> = ({
             testID={options.tabBarTestID}
             onPress={onPress}
             onLongPress={onLongPress}
-            style={{flex: 1}}>
-            <Text style={{color: isFocused ? '#673ab7' : '#222'}}>{label}</Text>
+            style={styles.button}>
+            {/* <Text style={[styles.label, isFocused && styles.activeLabel]}>
+              {label}
+            </Text> */}
+            {options?.tabBarIcon()}
           </TouchableOpacity>
         );
       })}
@@ -59,3 +67,23 @@ const CustomFooter: React.FC<BottomTabBarProps> = ({
 };
 
 export default CustomFooter;
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    backgroundColor: COLORS.gereyBack,
+    height: responsiveHeight(8),
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    width: responsiveWidth(100),
+    borderColor: 'red',
+    borderWidth: 1,
+  },
+  label: {
+    color: '#222',
+  },
+  activeLabel: {
+    color: '#673ab7',
+  },
+  button: {flex: 1},
+});

@@ -12,9 +12,9 @@ import {
   responsiveScreenHeight,
   responsiveScreenWidth,
 } from 'react-native-responsive-dimensions';
-import {COLORS} from '../global/colors';
-import {moderateScale} from '../helper/Scale';
-import {FONTS} from '../assets/assets';
+import {COLORS} from '../../global/colors';
+import {moderateScale} from '../../helper/Scale';
+import {FONTS} from '../../assets/assets';
 interface CustomGButtonProps {
   style?: StyleProp<ViewStyle>;
   tittle: string;

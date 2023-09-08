@@ -114,7 +114,7 @@ export default DoctorNearYou;
 const styles = StyleSheet.create({
   view1: {
     width: responsiveScreenWidth(100),
-    height: responsiveScreenHeight(50),
+    height: responsiveScreenHeight(45),
   },
   main: {
     backgroundColor: COLORS.white,
@@ -125,6 +125,9 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: moderateScale(12.685),
     borderTopRightRadius: moderateScale(12.685),
     backgroundColor: COLORS.black,
+    position: 'absolute',
+    alignSelf: 'flex-end',
+    bottom: 0,
   },
   imageBackground: {
     flex: 1,

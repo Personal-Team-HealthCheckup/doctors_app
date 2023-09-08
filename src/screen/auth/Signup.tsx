@@ -9,7 +9,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import CustomStatusBar from '../../Components/CustomStatusBar';
+import CustomStatusBar from '../../Components/common/CustomStatusBar';
 import {
   FONTS,
   FacebookSvg,
@@ -26,9 +26,9 @@ import {
 } from 'react-native-responsive-dimensions';
 import {moderateScale, verticalScale} from '../../helper/Scale';
 import CustomButton from '../../Components/common/CustomButton';
-import CustomTextInput from '../../Components/CustomTextInput';
+import CustomTextInput from '../../Components/common/CustomTextInput';
 import CustomIcons from 'react-native-vector-icons/FontAwesome5';
-import CustomGButton from '../../Components/CustomGButton';
+import CustomGButton from '../../Components/common/CustomGButton';
 import {AUTH} from '../../Constants/Navigator';
 
 interface SignupProps {

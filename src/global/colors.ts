@@ -1,4 +1,5 @@
 export const COLORS = {
+  gereyBack: '#0D0D0D',
   black: '#000',
   white: '#FFF',
   white2gray: '#E2E5EA',
@@ -14,4 +15,6 @@ export const COLORS = {
   red1: '#FF0000',
   transparent: 'transparent',
   yellow: '#F6D060',
+  blueish: '#00FFFF',
+  grey: '#393939',
 };

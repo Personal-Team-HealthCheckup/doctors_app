@@ -19,14 +19,12 @@ const initialState: ProductsReducer = {
   loading: false,
 };
 
-export const getProducts = createAsyncThunk(
-  'getProducts',
-  async (
-    // _,
-    // {getState, rejectWithValue, fulfillWithValue},
-  ) => {
-    const {response, error} = await networkCall(endpoints.GET_PRODUCTS, "GET");
-    return response
+export const getProducts = createAsyncThunk('getProducts', async () =>
+  // _,
+  // {getState, rejectWithValue, fulfillWithValue},
+  {
+    const {response, error} = await networkCall(endpoints.GET_PRODUCTS, 'GET');
+    return response;
     // if (response) {
     //   return fulfillWithValue(response.data);
     // } else {
@@ -44,7 +42,7 @@ export const ProductSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(getProducts.fulfilled, (state, action) => {
-      state.products = action.payload
+      state.products = action.payload;
       state.loading = false;
     });
     builder.addCase(getProducts.rejected, (state, action) => {

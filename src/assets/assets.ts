@@ -42,9 +42,21 @@ import imageProfile4 from './images/imageProfile3.jpeg';
 import imageProfile5 from './images/imageProfile5.jpeg';
 import starImage from './images/start.png';
 
+// bottom tab icon images
+import homeIcon from './images/homeIcon.png';
+import MapIcon from './images/MapIcon.png';
+import cartIcon from './images/cartIcon.png';
+import offerIcon from './images/offerIcon.png';
+import profileIcon from './images/profileIcon.png';
+
 export {
+  homeIcon,
+  MapIcon,
+  cartIcon,
+  offerIcon,
   Gradient,
   gradientPng,
+  profileIcon,
   LogoSvg,
   HexagonSvg,
   BinanceLogoSvg,

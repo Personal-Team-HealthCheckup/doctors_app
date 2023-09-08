@@ -7,13 +7,13 @@ import {
   Text,
 } from 'react-native';
 import React from 'react';
-import {COLORS} from '../global/colors';
+import {COLORS} from '../../global/colors';
 import {
   responsiveScreenHeight,
   responsiveScreenWidth,
 } from 'react-native-responsive-dimensions';
-import {moderateScale} from '../helper/Scale';
-import {FONTS} from '../assets/assets';
+import {moderateScale} from '../../helper/Scale';
+import {FONTS} from '../../assets/assets';
 interface TextInputProps {
   style?: StyleProp<TextStyle>;
   placeholder?: string;

@@ -4,7 +4,7 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import {COLORS} from '../global/colors';
+import {COLORS} from '../../global/colors';
 
 const CustomMainView: React.FC<{
   children: React.ReactNode;

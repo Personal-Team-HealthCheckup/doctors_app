@@ -1,5 +1,5 @@
 import React from 'react';
-import CustomStatusBar from '../../Components/CustomStatusBar';
+import CustomStatusBar from '../../Components/common/CustomStatusBar';
 import {
   ImageBackground,
   ScrollView,
@@ -7,13 +7,13 @@ import {
   Text,
   View,
 } from 'react-native';
-import CustomMainView from '../../Components/CustomMainView';
+import CustomMainView from '../../Components/common/CustomMainView';
 import {FONTS, bgOn1Png, bgOn2Png} from '../../assets/assets';
 import {
   responsiveHeight,
   responsiveScreenWidth,
 } from 'react-native-responsive-dimensions';
-import CustomGButton from '../../Components/CustomGButton';
+import CustomGButton from '../../Components/common/CustomGButton';
 import {COLORS} from '../../global/colors';
 import {moderateScale} from '../../helper/Scale';
 import {OnboardingData as data} from '../../global/data';

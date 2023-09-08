@@ -1,5 +1,5 @@
 import React from 'react';
-import CustomStatusBar from '../../Components/CustomStatusBar';
+import CustomStatusBar from '../../Components/common/CustomStatusBar';
 import {ImageBackground, Text, View, StyleSheet} from 'react-native';
 import {
   responsiveScreenWidth,
@@ -8,8 +8,8 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import CustomButton from '../../Components/common/CustomButton';
-import CustomGButton from '../../Components/CustomGButton';
-import CustomTextInput from '../../Components/CustomTextInput';
+import CustomGButton from '../../Components/common/CustomGButton';
+import CustomTextInput from '../../Components/common/CustomTextInput';
 import {
   gradientSignupPng,
   LogoSvg,
@@ -21,7 +21,7 @@ import {
 import {COLORS} from '../../global/colors';
 import {moderateScale, verticalScale} from '../../helper/Scale';
 import {AUTH} from '../../Constants/Navigator';
-import CustomMainView from '../../Components/CustomMainView';
+import CustomMainView from '../../Components/common/CustomMainView';
 
 interface SigninProps {
   navigation?: {
