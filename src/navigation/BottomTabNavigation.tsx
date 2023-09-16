@@ -23,10 +23,10 @@ import {
   offerIcon,
   profileIcon,
 } from '../assets/assets';
-import RadialGradient from 'react-native-radial-gradient';
 import ProfilePage from '../screen/home/ProfilePage';
 import TokenOffer from '../screen/home/TokenOffer';
 import CartPage from '../screen/home/Cartpage';
+import LinearGradient from 'react-native-linear-gradient';
 const BottomTab = createBottomTabNavigator();
 
 const BottomTabStackNavigator = () => {
@@ -44,12 +44,15 @@ const BottomTabStackNavigator = () => {
     return (
       <>
         {focused && (
-          <RadialGradient
+          <LinearGradient
+            colors={[
+              'rgba(0, 133, 133, 0.00)',
+              '#0FF',
+              'rgba(0, 133, 133, 0.00)',
+            ]}
             style={styles.gradient}
-            colors={['#0FF', 'rgba(0, 133, 133, 0.00)']}
-            stops={[0, 1]}
-            center={[0.5, 0.5]}
-            radius={0.3125}
+            start={{x: 1, y: 1}}
+            end={{x: 0.1, y: 1}}
           />
         )}
         <Image
@@ -159,11 +162,9 @@ const styles = StyleSheet.create({
   gradient: {
     flex: 1,
     width: '90%',
-    height: responsiveHeight(1),
+    height: responsiveHeight(0.5),
     position: 'absolute',
     alignSelf: 'center',
-    top: -responsiveHeight(0.5),
-    backgroundColor: 'red',
-    backgroundImage: 'linear-gradient(rgba(0, 255, 255, 0), #00FF00)', // Replace with your gradient colors
+    top: responsiveHeight(-0.2),
   },
 });
