@@ -5,7 +5,7 @@ import Signin from '../screen/auth/Signin';
 import SplashScreens from '../screen/Splashscreen';
 import {AUTH, HOME, LANDING} from '../Constants/Navigator';
 import OnBoarding from '../screen/auth/OnBoarding';
-import BottomTabStackNavigator from './BottomTabNavigation';
+import DrawerTabNavigation from './DrawerTabNavigation';
 
 const Stack = createNativeStackNavigator();
 const MainStack = () => {
@@ -17,7 +17,7 @@ const MainStack = () => {
       <Stack.Screen name={AUTH.SIGNUP} component={Signup} />
       <Stack.Screen name={AUTH.SIGNIN} component={Signin} />
       <Stack.Screen name={AUTH.ONBOARDING} component={OnBoarding} />
-      <Stack.Screen name={HOME.DASHBOARD} component={BottomTabStackNavigator} />
+      <Stack.Screen name={HOME.DASHBOARD} component={DrawerTabNavigation} />
     </Stack.Navigator>
   );
 };

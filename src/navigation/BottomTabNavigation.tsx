@@ -3,7 +3,14 @@ import React, {useCallback} from 'react';
 import HomeScreen from '../screen/home/HomeScreen';
 import {HOME} from '../Constants/Navigator';
 import DoctorNearYou from '../screen/home/DoctorNearYou';
-import {Image, ImageSourcePropType, StyleSheet} from 'react-native';
+import {
+  Image,
+  ImageSourcePropType,
+  ImageStyle,
+  StyleProp,
+  StyleSheet,
+  View,
+} from 'react-native';
 import {COLORS} from '../global/colors';
 import {
   responsiveHeight,
@@ -16,6 +23,7 @@ import {
   offerIcon,
   profileIcon,
 } from '../assets/assets';
+import RadialGradient from 'react-native-radial-gradient';
 import ProfilePage from '../screen/home/ProfilePage';
 import TokenOffer from '../screen/home/TokenOffer';
 import CartPage from '../screen/home/Cartpage';
@@ -25,18 +33,31 @@ const BottomTabStackNavigator = () => {
   const callback = ({
     color,
     image = homeIcon,
+    focused,
   }: {
     color?: string;
     size?: number;
-    IconType?: any;
+    IconType?: StyleProp<ImageStyle>;
     image?: string;
+    focused?: boolean;
   }) => {
     return (
-      <Image
-        source={image as ImageSourcePropType}
-        tintColor={color}
-        style={styles.icon}
-      />
+      <>
+        {focused && (
+          <RadialGradient
+            style={styles.gradient}
+            colors={['#0FF', 'rgba(0, 133, 133, 0.00)']}
+            stops={[0, 1]}
+            center={[0.5, 0.5]}
+            radius={0.3125}
+          />
+        )}
+        <Image
+          source={image as ImageSourcePropType}
+          tintColor={color}
+          style={styles.icon}
+        />
+      </>
     );
   };
   const BottomTabIcon = useCallback(callback, []);
@@ -65,11 +86,12 @@ const BottomTabStackNavigator = () => {
         component={TokenOffer}
         options={{
           tabBarLabel: HOME.OFFERPAGE,
-          tabBarIcon: ({color, size}) =>
+          tabBarIcon: ({color, size, focused}) =>
             BottomTabIcon({
               color,
               size,
               image: offerIcon,
+              focused,
             }),
         }}
       />
@@ -78,11 +100,12 @@ const BottomTabStackNavigator = () => {
         component={DoctorNearYou}
         options={{
           tabBarLabel: HOME.DOCTORNEARYOU,
-          tabBarIcon: ({color, size}) =>
+          tabBarIcon: ({color, size, focused}) =>
             BottomTabIcon({
               color,
               size,
               image: MapIcon,
+              focused,
             }),
         }}
       />
@@ -92,11 +115,12 @@ const BottomTabStackNavigator = () => {
         component={CartPage}
         options={{
           tabBarLabel: HOME.CARTPAGE,
-          tabBarIcon: ({color, size}) =>
+          tabBarIcon: ({color, size, focused}) =>
             BottomTabIcon({
               color,
               size,
               image: cartIcon,
+              focused,
             }),
         }}
       />
@@ -105,11 +129,12 @@ const BottomTabStackNavigator = () => {
         component={ProfilePage}
         options={{
           tabBarLabel: HOME.PROFILEPAGE,
-          tabBarIcon: ({color, size}) =>
+          tabBarIcon: ({color, size, focused}) =>
             BottomTabIcon({
               color,
               size,
               image: profileIcon,
+              focused,
             }),
         }}
       />
@@ -130,5 +155,15 @@ const styles = StyleSheet.create({
     width: responsiveWidth(7),
     height: responsiveWidth(7),
     resizeMode: 'contain',
+  },
+  gradient: {
+    flex: 1,
+    width: '90%',
+    height: responsiveHeight(1),
+    position: 'absolute',
+    alignSelf: 'center',
+    top: -responsiveHeight(0.5),
+    backgroundColor: 'red',
+    backgroundImage: 'linear-gradient(rgba(0, 255, 255, 0), #00FF00)', // Replace with your gradient colors
   },
 });
