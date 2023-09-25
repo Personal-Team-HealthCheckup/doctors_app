@@ -4,6 +4,7 @@ import {
   TouchableOpacity,
   StyleProp,
   ViewStyle,
+  TextStyle,
 } from 'react-native';
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
@@ -11,18 +12,20 @@ import {
   responsiveScreenHeight,
   responsiveScreenWidth,
 } from 'react-native-responsive-dimensions';
-import {COLORS} from '../global/colors';
-import {moderateScale} from '../helper/Scale';
-import {FONTS} from '../assets/assets';
+import {COLORS} from '../../global/colors';
+import {moderateScale} from '../../helper/Scale';
+import {FONTS} from '../../assets/assets';
 interface CustomGButtonProps {
   style?: StyleProp<ViewStyle>;
   tittle: string;
   onPress?: () => void;
+  textStyle?: StyleProp<TextStyle>;
 }
 const CustomGButton: React.FC<CustomGButtonProps> = ({
   style,
   tittle,
   onPress,
+  textStyle,
 }) => {
   return (
     <LinearGradient
@@ -31,7 +34,7 @@ const CustomGButton: React.FC<CustomGButtonProps> = ({
       end={{x: 1, y: 1}}
       style={[styles.linearGradient, style]}>
       <TouchableOpacity style={styles.buttonView} onPress={onPress}>
-        <Text style={styles.buttonText}>{tittle}</Text>
+        <Text style={[styles.buttonText, textStyle]}>{tittle}</Text>
       </TouchableOpacity>
     </LinearGradient>
   );

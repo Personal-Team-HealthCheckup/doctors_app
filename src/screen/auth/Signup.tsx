@@ -9,7 +9,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import CustomStatusBar from '../../Components/CustomStatusBar';
+import CustomStatusBar from '../../Components/common/CustomStatusBar';
 import {
   FONTS,
   FacebookSvg,
@@ -25,12 +25,17 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import {moderateScale, verticalScale} from '../../helper/Scale';
-import CustomButton from '../../Components/CustomButton';
-import CustomTextInput from '../../Components/CustomTextInput';
+import CustomButton from '../../Components/common/CustomButton';
+import CustomTextInput from '../../Components/common/CustomTextInput';
 import CustomIcons from 'react-native-vector-icons/FontAwesome5';
-import CustomGButton from '../../Components/CustomGButton';
+import CustomGButton from '../../Components/common/CustomGButton';
+import {AUTH} from '../../Constants/Navigator';
 
-interface SignupProps {}
+interface SignupProps {
+  navigation?: {
+    navigate: (args: string) => void;
+  };
+}
 
 interface SignupState {
   isChecked: boolean;
@@ -46,7 +51,9 @@ class Signup extends React.Component<SignupProps, SignupState> {
   toggleCheck = () => {
     this.setState(prev => ({isChecked: !prev.isChecked}));
   };
-  navigateToLogin = () => {};
+  navigateToLogin = () => {
+    this.props.navigation?.navigate(AUTH.SIGNIN);
+  };
   render() {
     return (
       <>
@@ -56,7 +63,10 @@ class Signup extends React.Component<SignupProps, SignupState> {
           enabled
           style={styles.main}
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-          <ScrollView style={styles.main}>
+          <ScrollView
+            bounces={false}
+            style={styles.main}
+            showsVerticalScrollIndicator={false}>
             <ImageBackground source={gradientSignupPng} style={styles.image}>
               <StarSvg style={styles.imagesvg} />
               <StarSvg style={styles.imagesvg2} />
@@ -142,6 +152,7 @@ const styles = StyleSheet.create({
     width: responsiveWidth(100),
     height: responsiveHeight(100),
     backgroundColor: COLORS.black,
+    flex: 1,
   },
   imagesvg: {
     position: 'absolute',

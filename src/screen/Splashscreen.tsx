@@ -13,11 +13,18 @@ import {
   gradientPng,
 } from '../assets/assets';
 import {moderateScale} from '../helper/Scale';
-import CustomStatusBar from '../Components/CustomStatusBar';
-import CustomMainView from '../Components/CustomMainView';
-interface SplashScreensProps {}
+import CustomStatusBar from '../Components/common/CustomStatusBar';
+import CustomMainView from '../Components/common/CustomMainView';
+import {AUTH} from '../Constants/Navigator';
+interface SplashScreensProps {
+  navigation?: {
+    replace: (args: string) => void;
+  };
+}
 
-interface SplashScreensState {}
+interface SplashScreensState {
+  time: number;
+}
 
 interface SplashScreensSS {}
 
@@ -26,9 +33,23 @@ class SplashScreens extends React.Component<
   SplashScreensState,
   SplashScreensSS
 > {
+  timer: number = 0;
   constructor(props: SplashScreensProps) {
     super(props);
-    this.state = {};
+    this.state = {
+      time: 2000,
+    };
+  }
+
+  componentDidMount(): void {
+    this.timer = Number(
+      setTimeout(() => {
+        this.props.navigation?.replace(AUTH.SIGNIN);
+      }, 2000),
+    );
+  }
+  componentWillUnmount(): void {
+    clearTimeout(this.timer);
   }
   render() {
     return (

@@ -4,7 +4,7 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import {COLORS} from '../global/colors';
+import {COLORS} from '../../global/colors';
 
 const CustomMainView: React.FC<{
   children: React.ReactNode;
@@ -19,5 +19,6 @@ const styles = StyleSheet.create({
     width: responsiveWidth(100),
     height: responsiveHeight(100),
     backgroundColor: COLORS.black,
+    flex: 1,
   },
 });

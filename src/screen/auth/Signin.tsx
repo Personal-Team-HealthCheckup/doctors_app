@@ -1,21 +1,15 @@
 import React from 'react';
-import CustomStatusBar from '../../Components/CustomStatusBar';
-import {
-  ScrollView,
-  ImageBackground,
-  Text,
-  View,
-  StyleSheet,
-} from 'react-native';
+import CustomStatusBar from '../../Components/common/CustomStatusBar';
+import {ImageBackground, Text, View, StyleSheet} from 'react-native';
 import {
   responsiveScreenWidth,
   responsiveHeight,
-  responsiveWidth,
   responsiveScreenHeight,
+  responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import CustomButton from '../../Components/CustomButton';
-import CustomGButton from '../../Components/CustomGButton';
-import CustomTextInput from '../../Components/CustomTextInput';
+import CustomButton from '../../Components/common/CustomButton';
+import CustomGButton from '../../Components/common/CustomGButton';
+import CustomTextInput from '../../Components/common/CustomTextInput';
 import {
   gradientSignupPng,
   LogoSvg,
@@ -26,8 +20,14 @@ import {
 } from '../../assets/assets';
 import {COLORS} from '../../global/colors';
 import {moderateScale, verticalScale} from '../../helper/Scale';
+import {AUTH} from '../../Constants/Navigator';
+import CustomMainView from '../../Components/common/CustomMainView';
 
-interface SigninProps {}
+interface SigninProps {
+  navigation?: {
+    navigate: (args: string) => void;
+  };
+}
 
 interface SigninState {}
 
@@ -36,12 +36,17 @@ class Signin extends React.Component<SigninProps, SigninState> {
     super(props);
     this.state = {};
   }
-  navigateToSignup = () => {};
+  navigateToSignup = () => {
+    this.props.navigation?.navigate(AUTH.SIGNUP);
+  };
+  handleLogin = () => {
+    this.props.navigation?.navigate(AUTH.ONBOARDING);
+  };
   render() {
     return (
       <>
         <CustomStatusBar />
-        <ScrollView bounces={false} style={styles.main}>
+        <CustomMainView>
           <ImageBackground source={gradientSignupPng} style={styles.image}>
             <StarBlueSvg style={styles.imagesvg} />
             <StarBlueSvg style={styles.imagesvg2} />
@@ -73,7 +78,11 @@ class Signin extends React.Component<SigninProps, SigninState> {
               <CustomTextInput placeholder="Email" />
               <CustomTextInput placeholder="Password" />
             </View>
-            <CustomGButton tittle="Login" style={styles.buttonView1} />
+            <CustomGButton
+              tittle="Login"
+              style={styles.buttonView1}
+              onPress={this.handleLogin}
+            />
             <Text style={styles.textIhave}>Forgor password</Text>
             <View style={styles.lastView}>
               <Text style={styles.textIhave}>Don’t have an account?</Text>
@@ -82,7 +91,7 @@ class Signin extends React.Component<SigninProps, SigninState> {
               </Text>
             </View>
           </ImageBackground>
-        </ScrollView>
+        </CustomMainView>
       </>
     );
   }
@@ -96,8 +105,7 @@ const styles = StyleSheet.create({
     paddingTop: responsiveHeight(2),
     position: 'relative',
     paddingHorizontal: responsiveScreenWidth(5),
-    width: responsiveWidth(100),
-    height: responsiveHeight(100),
+    flex: 1,
   },
   textSignup: {
     color: COLORS.white,
@@ -106,10 +114,10 @@ const styles = StyleSheet.create({
     textTransform: 'capitalize',
   },
   main: {
+    flex: 1,
+    backgroundColor: COLORS.black,
     width: responsiveWidth(100),
     height: responsiveHeight(100),
-    flexGrow: 1,
-    backgroundColor: COLORS.black,
   },
   imagesvg: {
     position: 'absolute',
