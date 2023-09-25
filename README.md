@@ -7,7 +7,9 @@ created using [React Native](https://reactnative.dev/)
 
 ## Appendix
 
-Any additional information goes here
+- The doctor app is a practice application developed in react-native
+- Get the random design from internet and developed in RN
+
 
 ## Demo
 - Not present yet
