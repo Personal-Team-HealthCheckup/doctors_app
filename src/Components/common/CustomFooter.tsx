@@ -1,4 +1,4 @@
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, TouchableOpacity, StyleSheet} from 'react-native';
 import React from 'react';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
 import {COLORS} from '../../global/colors';
@@ -8,22 +8,13 @@ import {
 } from 'react-native-responsive-dimensions';
 const CustomFooter: React.FC<BottomTabBarProps> = ({
   descriptors,
-  insets,
   navigation,
   state,
 }) => {
-  console.log('-----props', descriptors.options);
   return (
     <View style={styles.container}>
       {state.routes.map((route, index) => {
         const {options} = descriptors[route.key];
-        const label =
-          options.tabBarLabel !== undefined
-            ? String(options.tabBarLabel)
-            : options.title !== undefined
-            ? options.title
-            : route.name;
-        console.log('-----props', options.tabBarIcon);
         const isFocused = state.index === index;
 
         const onPress = () => {

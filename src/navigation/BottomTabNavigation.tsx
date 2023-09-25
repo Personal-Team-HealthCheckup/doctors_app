@@ -9,7 +9,6 @@ import {
   ImageStyle,
   StyleProp,
   StyleSheet,
-  View,
 } from 'react-native';
 import {COLORS} from '../global/colors';
 import {

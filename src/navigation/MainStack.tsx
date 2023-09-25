@@ -10,9 +10,7 @@ import DrawerTabNavigation from './DrawerTabNavigation';
 const Stack = createNativeStackNavigator();
 const MainStack = () => {
   return (
-    <Stack.Navigator
-      screenOptions={{headerShown: false}}
-      initialRouteName={HOME.DASHBOARD}>
+    <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name={LANDING.SPLASHSCREEN} component={SplashScreens} />
       <Stack.Screen name={AUTH.SIGNUP} component={Signup} />
       <Stack.Screen name={AUTH.SIGNIN} component={Signin} />

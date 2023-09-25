@@ -17,7 +17,6 @@ const resolve = async (promise: () => void) => {
     const response = await promise();
     resolved.response = response;
   } catch (e) {
-    console.log(e);
     resolved.error = 'Something went wrong...';
   }
 

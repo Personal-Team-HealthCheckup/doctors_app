@@ -80,9 +80,7 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
     );
   };
 
-  ratingCompleted = (ratingsCount: number) => {
-    console.log('----ratingsCount', ratingsCount);
-  };
+  ratingCompleted = (ratingsCount: number) => {};
 
   _renderAppointments = ({
     item,
@@ -134,20 +132,6 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
               readonly
               startingValue={rating}
             />
-            {/* <View style={styles.starView}>
-              {ratingArray.map(rating => {
-                return (
-                  <ImageBackground
-                    key={rating}
-                    style={styles.star}
-                    source={starImage}>
-                    {Array(rating).map(ele => (
-                      <View key={ele} style={styles.activeStar} />
-                    ))}
-                  </ImageBackground>
-                );
-              })}
-            </View> */}
           </View>
         </View>
         <View style={styles.view1}>

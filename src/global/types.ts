@@ -8,7 +8,7 @@ export interface DoctorData {
 export interface CommonDeseaseData {
   id: number;
   backgroudImage: string;
-  image: any;
+  image: string;
   title: string;
 }
 export interface YourAppointmentsData {
