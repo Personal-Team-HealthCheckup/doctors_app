@@ -3,8 +3,6 @@
 created using [React Native](https://reactnative.dev/)
 
 
-
-
 ## Appendix
 
 - The doctor app is a practice application developed in react-native
@@ -22,3 +20,5 @@ created using [React Native](https://reactnative.dev/)
 
 [![Figma](./src/assets/images/figma.jpg/width=100&&height=100)](https://www.figma.com/file/i3dcOI6RDLRLAKSseVuaTo/Doctor-Booking-Mobile-App-(Community)-(Copy)-(Copy)?node-id=1910%3A7898&mode=dev)
 
+
+[Install APP on your phone](https://drive.google.com/drive/folders/1XcXQ_GUbzN3lzEghGUXZ86m-wnadaOS6?usp=drive_link)
