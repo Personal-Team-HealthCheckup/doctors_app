@@ -12,7 +12,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {COLORS} from '../../global/colors';
+import {COLORS, FONTS} from '../../global/theme';
 import LinearGradient from 'react-native-linear-gradient';
 import {
   responsiveHeight,
@@ -20,7 +20,7 @@ import {
   responsiveScreenWidth,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import {FONTS, HomeScreenPng, OnBoarding1Svg} from '../../assets/assets';
+import {HomeScreenPng, OnBoarding1Svg} from '../../assets/assets';
 import {moderateScale} from '../../helper/Scale';
 import {commonDeseaseData, yourAppointmentsData} from '../../global/data';
 import {CommonDeseaseData, YourAppointmentsData} from '../../global/types';

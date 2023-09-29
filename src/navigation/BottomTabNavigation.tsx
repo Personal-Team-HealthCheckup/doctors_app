@@ -10,7 +10,7 @@ import {
   StyleProp,
   StyleSheet,
 } from 'react-native';
-import {COLORS} from '../global/colors';
+import {COLORS} from '../global/theme';
 import {
   responsiveHeight,
   responsiveWidth,

@@ -4,8 +4,8 @@ import {
   responsiveScreenWidth,
   responsiveScreenHeight,
 } from 'react-native-responsive-dimensions';
-import {SvgRightArrowSvg, FONTS} from '../../assets/assets';
-import {COLORS} from '../../global/colors';
+import {SvgRightArrowSvg} from '../../assets/assets';
+import {COLORS, FONTS} from '../../global/theme';
 import {moderateScale} from '../../helper/Scale';
 interface CustomHeadingProps {
   title: string;

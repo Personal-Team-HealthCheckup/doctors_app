@@ -8,13 +8,13 @@ import {
   View,
 } from 'react-native';
 import CustomMainView from '../../Components/common/CustomMainView';
-import {FONTS, bgOn1Png, bgOn2Png} from '../../assets/assets';
+import {bgOn1Png, bgOn2Png} from '../../assets/assets';
 import {
   responsiveHeight,
   responsiveScreenWidth,
 } from 'react-native-responsive-dimensions';
 import CustomGButton from '../../Components/common/CustomGButton';
-import {COLORS} from '../../global/colors';
+import {COLORS, FONTS} from '../../global/theme';
 import {moderateScale} from '../../helper/Scale';
 import {OnboardingData as data} from '../../global/data';
 import {HOME} from '../../Constants/Navigator';

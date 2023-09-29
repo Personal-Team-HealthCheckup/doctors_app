@@ -9,9 +9,8 @@ import {
   LightSvg,
   SearchSvg,
   NotificationBellSvg,
-  FONTS,
 } from '../../assets/assets';
-import {COLORS} from '../../global/colors';
+import {COLORS, FONTS} from '../../global/theme';
 import {moderateScale} from '../../helper/Scale';
 
 const Header = () => {

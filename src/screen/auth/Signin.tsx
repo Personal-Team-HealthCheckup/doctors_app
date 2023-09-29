@@ -15,10 +15,9 @@ import {
   LogoSvg,
   GoogleSvg,
   FacebookSvg,
-  FONTS,
   StarBlueSvg,
 } from '../../assets/assets';
-import {COLORS} from '../../global/colors';
+import {COLORS, FONTS} from '../../global/theme';
 import {moderateScale, verticalScale} from '../../helper/Scale';
 import {AUTH} from '../../Constants/Navigator';
 import CustomMainView from '../../Components/common/CustomMainView';

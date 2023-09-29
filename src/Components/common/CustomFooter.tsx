@@ -1,7 +1,7 @@
 import {View, TouchableOpacity, StyleSheet} from 'react-native';
 import React from 'react';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
-import {COLORS} from '../../global/colors';
+import {COLORS} from '../../global/theme';
 import {
   responsiveHeight,
   responsiveWidth,
