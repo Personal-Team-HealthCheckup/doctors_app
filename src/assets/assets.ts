@@ -21,6 +21,7 @@ import DrStrainSvg from './images/DrStarin.svg';
 import GradientnearBy from './images/GradientnearBy.png';
 import MapSvg from './images/Map.svg';
 import HomeScreenPng from './images/homeScreen.png';
+import HomeScreenPng2 from './images/bgHome2.png';
 import LightSvg from './images/Light.svg';
 import NotificationBellSvg from './images/NotificationBell.svg';
 import SearchSvg from './images/Search.svg';
@@ -75,6 +76,7 @@ export {
   GradientnearBy,
   MapSvg,
   HomeScreenPng,
+  HomeScreenPng2,
   LightSvg,
   SearchSvg,
   NotificationBellSvg,

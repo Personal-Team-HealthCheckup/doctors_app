@@ -80,7 +80,7 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
     );
   };
 
-  ratingCompleted = (ratingsCount: number) => {};
+  ratingCompleted = () => {};
 
   _renderAppointments = ({
     item,
@@ -160,7 +160,7 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
     return (
       <>
         <CustomStatusBar />
-        <ScrollView contentContainerStyle={styles.container}>
+        <ScrollView bounces={false} contentContainerStyle={styles.container}>
           <ImageBackground source={HomeScreenPng} style={styles.imageView}>
             {this.state.isLinearGradient && (
               <LinearGradient

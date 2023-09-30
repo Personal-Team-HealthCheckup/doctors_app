@@ -17,6 +17,9 @@ export const COLORS = {
   yellow: '#F6D060',
   blueish: '#00FFFF',
   grey: '#393939',
+  lightYellow: '#CAFF59',
+  lightCyan: '#59FFEB',
+  light: '#677294CC',
 };
 
 export const FONTS = {
