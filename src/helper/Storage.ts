@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {salt} from '../helper/config';
+import {salt} from './config';
 
 const getItem = async (key: string) => {
   try {

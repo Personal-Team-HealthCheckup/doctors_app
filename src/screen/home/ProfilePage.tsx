@@ -2,17 +2,21 @@ import React from 'react';
 import {
   Image,
   ImageBackground,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
   ScrollView,
   StyleSheet,
   Text,
+  TouchableWithoutFeedback,
   View,
 } from 'react-native';
 import CustomStatusBar from '../../Components/common/CustomStatusBar';
-import CustomMainView from '../../Components/common/CustomMainView';
 import {
   responsiveFontSize,
   responsiveHeight,
   responsiveScreenWidth,
+  responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import {
   HomeScreenPng2 as HomeScreenPng,
@@ -24,6 +28,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import VectorIcon from 'react-native-vector-icons/FontAwesome5';
 import CustomTextInput from '../../Components/common/CustomTextInput';
 import CustomGButton from '../../Components/common/CustomGButton';
+import { closeKeyBoard } from '../../helper/utilities';
 interface ProfilePageProps {}
 
 interface ProfilePageState {}
@@ -33,44 +38,54 @@ class ProfilePage extends React.Component<ProfilePageProps, ProfilePageState> {
     super(props);
     this.state = {};
   }
+ 
   render() {
     return (
       <>
         <CustomStatusBar />
-        <CustomMainView>
-          <ImageBackground source={HomeScreenPng} style={styles.image}>
-            <Header heading="Profile" />
-            <View style={styles.mainView}>
-              <Text style={styles.title}>Set up your profile</Text>
-              <Text style={styles.subtitle}>
-                Update your profile to connect your doctor with better
-                impression.
-              </Text>
+          <ScrollView
+            bounces={false}
+            style={styles.container}
+            >
+              <TouchableWithoutFeedback onPress={()=> closeKeyBoard()}>
+<KeyboardAvoidingView  behavior={Platform.OS === 'ios' ? 'padding' : 'height'} >
 
-              <LinearGradient
-                colors={[COLORS.lightCyan, COLORS.lightYellow]}
-                start={{x: 0.0, y: 0.5}}
-                end={{x: 1.0, y: 0.5}}
-                style={styles.imageView}>
-                <View style={styles.cameraView}>
-                  <VectorIcon name="camera" color={COLORS.white} size={20} />
-                </View>
-                <Image source={imageProfile1} style={styles.image1} />
-              </LinearGradient>
 
-              <View style={styles.mainView1}>
-                <Text style={[styles.title, styles.titper]}>
-                  Personal information
+            <ImageBackground source={HomeScreenPng} style={styles.image}>
+              <Header heading="Profile" />
+              <View style={styles.mainView}>
+                <Text style={styles.title}>Set up your profile</Text>
+                <Text style={styles.subtitle}>
+                  Update your profile to connect your doctor with better
+                  impression.
                 </Text>
-                <CustomTextInput placeholder="Sara Doe" />
-                <CustomTextInput placeholder="+8801800000000" />
-                <CustomTextInput placeholder="DD MM YYYY" />
-                <CustomTextInput placeholder="Add Details" />
-                <CustomGButton tittle="continue" />
+
+                <LinearGradient
+                  colors={[COLORS.lightCyan, COLORS.lightYellow]}
+                  start={{x: 0.0, y: 0.5}}
+                  end={{x: 1.0, y: 0.5}}
+                  style={styles.imageView}>
+                  <View style={styles.cameraView}>
+                    <VectorIcon name="camera" color={COLORS.white} size={20} />
+                  </View>
+                  <Image source={imageProfile1} style={styles.image1} />
+                </LinearGradient>
+
+                <View style={styles.mainView1}>
+                  <Text style={[styles.title, styles.titper]}>
+                    Personal information
+                  </Text>
+                  <CustomTextInput placeholder="Sara Doe" />
+                  <CustomTextInput placeholder="+8801800000000" />
+                  <CustomTextInput placeholder="DD MM YYYY" />
+                  <CustomTextInput placeholder="Add Details" />
+                  <CustomGButton tittle="continue" />
+                </View>
               </View>
-            </View>
-          </ImageBackground>
-        </CustomMainView>
+            </ImageBackground>
+            </KeyboardAvoidingView>
+              </TouchableWithoutFeedback>
+          </ScrollView>
       </>
     );
   }
@@ -78,10 +93,16 @@ class ProfilePage extends React.Component<ProfilePageProps, ProfilePageState> {
 
 export default ProfilePage;
 const styles = StyleSheet.create({
+  container: {
+    width: responsiveWidth(100),
+    height: responsiveHeight(100),
+    backgroundColor: COLORS.black,
+    flex: 1,
+  },
   image: {
     alignItems: 'center',
     resizeMode: 'cover',
-    paddingTop: responsiveHeight(3),
+    paddingVertical: responsiveHeight(3),
     position: 'relative',
     paddingHorizontal: responsiveScreenWidth(5),
     flex: 1,
@@ -134,6 +155,7 @@ const styles = StyleSheet.create({
   },
   mainView1: {
     // marginTop: responsiveHeight(3),
+    alignItems:"center"
   },
   titper: {
     fontSize: responsiveFontSize(2.4),
