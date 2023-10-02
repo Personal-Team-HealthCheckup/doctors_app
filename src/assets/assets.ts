@@ -50,6 +50,10 @@ import cartIcon from './images/cartIcon.png';
 import offerIcon from './images/offerIcon.png';
 import profileIcon from './images/profileIcon.png';
 
+// pharmacy images
+import pharmcy1 from "./images/pharmacy1.png"
+import pharmcy2 from "./images/pharmacy2.png"
+
 export {
   homeIcon,
   MapIcon,
@@ -95,4 +99,6 @@ export {
   imageProfile4,
   imageProfile5,
   starImage,
+  pharmcy1,
+  pharmcy2
 };

@@ -7,13 +7,18 @@ import {
 import {SvgRightArrowSvg} from '../../assets/assets';
 import {COLORS, FONTS} from '../../global/theme';
 import {moderateScale} from '../../helper/Scale';
+import VectorIcon from "react-native-vector-icons/MaterialCommunityIcons"
 interface CustomHeadingProps {
   title: string;
+  isIcon?: boolean;
 }
-const CustomHeading: React.FC<CustomHeadingProps> = ({title}) => {
+const CustomHeading: React.FC<CustomHeadingProps> = ({title,isIcon= false}) => {
   return (
     <View style={styles.mainTextView}>
-      <Text style={styles.mainText}>{title}</Text>
+      <View style={{flex :1, flexDirection:"row",gap:responsiveScreenWidth(1),}}>
+{isIcon && <VectorIcon name='shield-check' size={20} color={COLORS.green}  selectionColor={"red"} />
+      }<Text style={styles.mainText}>{title}</Text>
+      </View>
       <TouchableOpacity style={styles.btn}>
         <Text style={styles.buttonSeeText}>See all</Text>
         <SvgRightArrowSvg />

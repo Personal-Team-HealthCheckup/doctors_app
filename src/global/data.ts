@@ -17,8 +17,10 @@ import {
   imageProfile3,
   imageProfile4,
   imageProfile5,
+  pharmcy1,
+  pharmcy2,
 } from '../assets/assets';
-import {CommonDeseaseData, DoctorData, YourAppointmentsData} from './types';
+import {CommonDeseaseData, DoctorData, YourAppointmentsData, MedicalStoreData} from './types';
 
 // onBoarding data source
 export const OnboardingData = [
@@ -110,6 +112,7 @@ export const commonDeseaseData: CommonDeseaseData[] = [
   },
 ];
 
+// appointment static data
 export const yourAppointmentsData: YourAppointmentsData[] = [
   {
     id: 1,
@@ -165,5 +168,24 @@ export const yourAppointmentsData: YourAppointmentsData[] = [
     rating: 4.3,
     views: 475,
     isFaveritiated: false,
+  },
+];
+
+// medical store data
+
+export const medicalStoreData: MedicalStoreData[] = [
+  {
+    id: 1,
+    rating: 4.8,
+    name: 'Chemist Warehouse',
+    image: pharmcy1,
+    subTitle : 'Medical Store'
+  },
+  {
+    id: 2,
+    rating: 3.8,
+    name: 'CVS Pharmacy',
+    image: pharmcy2,
+    subTitle : 'Medical Store'
   },
 ];
