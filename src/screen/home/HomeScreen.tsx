@@ -7,7 +7,6 @@ import {
   ImageSourcePropType,
   NativeScrollEvent,
   NativeSyntheticEvent,
-  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
@@ -17,7 +16,6 @@ import {
 import {COLORS, FONTS} from '../../global/theme';
 import LinearGradient from 'react-native-linear-gradient';
 import {
-  responsiveFontSize,
   responsiveHeight,
   responsiveScreenHeight,
   responsiveScreenWidth,
@@ -39,7 +37,6 @@ import CustomHeading from '../../Components/common/CustomHeading';
 import Header from '../../Components/common/Header';
 import CustomGButton from '../../Components/common/CustomGButton';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
-import {Rating} from 'react-native-ratings';
 import CustomRating from '../../Components/CustomRating';
 import {handleScroll} from '../../helper/utilities';
 
@@ -109,8 +106,6 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
     index: number;
   }) => {
     const degree = item.degree.split('|').join(',');
-    const ratingSplit = item.rating.toString().split('.');
-    const rating = Number(ratingSplit[0]);
     return (
       <View
         style={[
@@ -142,14 +137,12 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
             <Text style={styles.subTextExpe}>
               {item.experience} Years experience
             </Text>
-            <Rating
-              ratingBackgroundColor={COLORS.white2gray}
-              type="custom"
-              style={{backgroundColor: COLORS.transparent}}
-              ratingColor={COLORS.yellow}
-              imageSize={30}
-              readonly
-              startingValue={rating}
+            <CustomRating
+              iconSize={20}
+              starViewStyle={[styles.viewStar,{justifyContent:"flex-start",gap:responsiveWidth(2)}]}
+              initialValue={item.rating}
+              isDisable
+              onChange={() => {}}
             />
           </View>
         </View>
@@ -180,8 +173,6 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
     item: MedicalStoreData;
     index: number;
   }) => {
-    const ratingSplit = item.rating.toString().split('.');
-    const rating = Number(ratingSplit[0]);
     const lastIndex = this.state.medicalPharmacy.length - 1 === index;
     return (
       <View style={[styles.medView, lastIndex && styles.medView1]}>

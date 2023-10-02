@@ -132,7 +132,7 @@ export const yourAppointmentsData: YourAppointmentsData[] = [
     experience: 9,
     image: imageProfile2,
     name: 'Dr. Watamaniuk',
-    rating: 4.5,
+    rating: 3.5,
     views: 3475,
     isFaveritiated: true,
   },
