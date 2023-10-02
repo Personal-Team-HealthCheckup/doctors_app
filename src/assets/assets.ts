@@ -21,6 +21,7 @@ import DrStrainSvg from './images/DrStarin.svg';
 import GradientnearBy from './images/GradientnearBy.png';
 import MapSvg from './images/Map.svg';
 import HomeScreenPng from './images/homeScreen.png';
+import HomeScreenPng2 from './images/bgHome2.png';
 import LightSvg from './images/Light.svg';
 import NotificationBellSvg from './images/NotificationBell.svg';
 import SearchSvg from './images/Search.svg';
@@ -49,6 +50,10 @@ import cartIcon from './images/cartIcon.png';
 import offerIcon from './images/offerIcon.png';
 import profileIcon from './images/profileIcon.png';
 
+// pharmacy images
+import pharmcy1 from "./images/pharmacy1.png"
+import pharmcy2 from "./images/pharmacy2.png"
+
 export {
   homeIcon,
   MapIcon,
@@ -75,6 +80,7 @@ export {
   GradientnearBy,
   MapSvg,
   HomeScreenPng,
+  HomeScreenPng2,
   LightSvg,
   SearchSvg,
   NotificationBellSvg,
@@ -93,21 +99,6 @@ export {
   imageProfile4,
   imageProfile5,
   starImage,
-};
-
-export const FONTS = {
-  poppins: {
-    regular: 'Poppins-Regular', // 400
-    semiBold: 'Poppins-SemiBold', // 600
-    bold: 'Poppins-Bold', // 700
-    medium: 'Poppins-Medium', //500
-    light: 'Poppins-Light', //300
-  },
-  rubik: {
-    light: 'Rubik-Light',
-    regular: 'Rubik-Regular',
-    medium: 'Rubik-Medium',
-    semiBold: 'Rubik-SemiBold',
-    bold: 'Rubik-Bold',
-  },
+  pharmcy1,
+  pharmcy2
 };

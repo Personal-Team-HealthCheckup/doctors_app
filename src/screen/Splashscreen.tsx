@@ -4,10 +4,9 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import {COLORS} from '../global/colors';
+import {COLORS, FONTS} from '../global/theme';
 import {
   BinanceLogoSvg,
-  FONTS,
   HexagonSvg,
   LogoSvg,
   gradientPng,

@@ -12,8 +12,7 @@ import {
   moderateScale,
   verticalScale,
 } from '../../helper/Scale';
-import {COLORS} from '../../global/colors';
-import {FONTS} from '../../assets/assets';
+import {COLORS, FONTS} from '../../global/theme';
 interface ButtonProps {
   title: string;
   onPress?: () => void;

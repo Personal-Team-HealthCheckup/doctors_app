@@ -11,14 +11,13 @@ import {
 } from 'react-native';
 import CustomStatusBar from '../../Components/common/CustomStatusBar';
 import {
-  FONTS,
   FacebookSvg,
   GoogleSvg,
   LogoSvg,
   StarSvg,
   gradientSignupPng,
 } from '../../assets/assets';
-import {COLORS} from '../../global/colors';
+import {COLORS, FONTS} from '../../global/theme';
 import {
   responsiveHeight,
   responsiveScreenWidth,

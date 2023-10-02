@@ -1,6 +1,6 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import {endpoints} from '../../helper/config';
-import networkCall from '../../utils/networkCall';
+import networkCall from '../../helper/networkCall';
 
 export interface ProductsReducer {
   products: {

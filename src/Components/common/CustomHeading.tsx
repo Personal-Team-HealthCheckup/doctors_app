@@ -4,16 +4,31 @@ import {
   responsiveScreenWidth,
   responsiveScreenHeight,
 } from 'react-native-responsive-dimensions';
-import {SvgRightArrowSvg, FONTS} from '../../assets/assets';
-import {COLORS} from '../../global/colors';
+import {SvgRightArrowSvg} from '../../assets/assets';
+import {COLORS, FONTS} from '../../global/theme';
 import {moderateScale} from '../../helper/Scale';
+import VectorIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 interface CustomHeadingProps {
   title: string;
+  isIcon?: boolean;
 }
-const CustomHeading: React.FC<CustomHeadingProps> = ({title}) => {
+const CustomHeading: React.FC<CustomHeadingProps> = ({
+  title,
+  isIcon = false,
+}) => {
   return (
     <View style={styles.mainTextView}>
-      <Text style={styles.mainText}>{title}</Text>
+      <View style={styles.iconView}>
+        {isIcon && (
+          <VectorIcon
+            name="shield-check"
+            size={20}
+            color={COLORS.green}
+            selectionColor={'red'}
+          />
+        )}
+        <Text style={styles.mainText}>{title}</Text>
+      </View>
       <TouchableOpacity style={styles.btn}>
         <Text style={styles.buttonSeeText}>See all</Text>
         <SvgRightArrowSvg />
@@ -46,5 +61,11 @@ const styles = StyleSheet.create({
     color: COLORS.white2gray,
     fontFamily: FONTS.rubik.light,
     fontSize: moderateScale(12),
+  },
+  iconView: {
+    flex: 1,
+    flexDirection: 'row',
+    gap: responsiveScreenWidth(1),
+    alignItems: 'center',
   },
 });

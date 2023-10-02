@@ -6,9 +6,19 @@ import SplashScreens from '../screen/Splashscreen';
 import {AUTH, HOME, LANDING} from '../Constants/Navigator';
 import OnBoarding from '../screen/auth/OnBoarding';
 import DrawerTabNavigation from './DrawerTabNavigation';
+// import { RootState } from '../redux/store';
 
 const Stack = createNativeStackNavigator();
-const MainStack = () => {
+// const MainNavigation = () => {
+//   return (
+//     <Stack.Navigator screenOptions={{headerShown: false}}>
+//       <Stack.Screen name={LANDING.SPLASHSCREEN} component={SplashScreens} />
+//       <Stack.Screen name={HOME.DASHBOARD} component={DrawerTabNavigation} />
+//     </Stack.Navigator>
+//   );
+// };
+
+const AuthNavigation = () => {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name={LANDING.SPLASHSCREEN} component={SplashScreens} />
@@ -20,4 +30,11 @@ const MainStack = () => {
   );
 };
 
-export default MainStack;
+export default AuthNavigation;
+
+// const AppNavigation = () => {
+//   const {token, userRole} = useSelector((state: RootState) => state.Auth);
+//   return token ? <MainNavigation userRole={userRole} /> : <AuthNavigation />;
+// };
+
+// export default AppNavigation;

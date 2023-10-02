@@ -1,4 +1,4 @@
-import {baseURL} from '../helper/config';
+import {baseURL} from './config';
 import {store} from '../redux/store';
 
 type IResponseType = 'json' | 'text' | 'blob';

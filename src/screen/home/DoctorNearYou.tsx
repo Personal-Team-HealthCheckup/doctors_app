@@ -6,9 +6,9 @@ import {
   responsiveScreenHeight,
   responsiveScreenWidth,
 } from 'react-native-responsive-dimensions';
-import {COLORS} from '../../global/colors';
+import {COLORS, FONTS} from '../../global/theme';
 import {moderateScale} from '../../helper/Scale';
-import {FONTS, GradientnearBy} from '../../assets/assets';
+import {GradientnearBy} from '../../assets/assets';
 import CustomGButton from '../../Components/common/CustomGButton';
 import {doctorData} from '../../global/data';
 import {DoctorData} from '../../global/types';

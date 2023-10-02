@@ -22,3 +22,11 @@ export interface YourAppointmentsData {
   available: string;
   isFaveritiated: boolean;
 }
+
+export interface MedicalStoreData{
+  id: number;
+  rating: number;
+  name: string;
+  image: string;
+  subTitle: string;
+}

@@ -1,13 +1,21 @@
 import React, {Component} from 'react';
-import {StatusBar} from 'react-native';
+import {ColorValue, StatusBar} from 'react-native';
 
-class CustomStatusBar extends Component {
+interface IProps{
+  backgroundColor?:ColorValue;
+  isScrollEnabled?:boolean
+}
+interface IState{
+
+}
+class CustomStatusBar extends Component<IProps,IState> {
   render() {
+    const { backgroundColor = "transparent",isScrollEnabled } = this.props
     return (
       <StatusBar
-        barStyle={'light-content'}
+        barStyle={isScrollEnabled ? "dark-content" : 'light-content'}
         translucent // to get background transparent in android
-        backgroundColor={'transparent'}
+        backgroundColor={backgroundColor}
         networkActivityIndicatorVisible
       />
     );

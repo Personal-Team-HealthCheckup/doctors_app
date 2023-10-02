@@ -17,4 +17,24 @@ export const COLORS = {
   yellow: '#F6D060',
   blueish: '#00FFFF',
   grey: '#393939',
+  lightYellow: '#CAFF59',
+  lightCyan: '#59FFEB',
+  light: '#677294CC',
+};
+
+export const FONTS = {
+  poppins: {
+    regular: 'Poppins-Regular', // 400
+    semiBold: 'Poppins-SemiBold', // 600
+    bold: 'Poppins-Bold', // 700
+    medium: 'Poppins-Medium', //500
+    light: 'Poppins-Light', //300
+  },
+  rubik: {
+    light: 'Rubik-Light',
+    regular: 'Rubik-Regular',
+    medium: 'Rubik-Medium',
+    semiBold: 'Rubik-SemiBold',
+    bold: 'Rubik-Bold',
+  },
 };
