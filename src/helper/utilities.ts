@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { Keyboard } from 'react-native';
+import {Keyboard, NativeScrollEvent, NativeSyntheticEvent} from 'react-native';
 
 export const formateDate = (date: string | Date) => {
   return moment(date).format('DD-MM-YYYY');
@@ -15,6 +15,17 @@ export const checkEmailValidation = (email: string) => {
   return true;
 };
 
-export const closeKeyBoard = ()=>{
-    Keyboard.dismiss()
+export const closeKeyBoard = () => {
+  Keyboard.dismiss();
+};
+
+export const handleScroll = (
+  event: NativeSyntheticEvent<NativeScrollEvent>,
+) => {
+  const {y} = event.nativeEvent.contentOffset;
+  if (y > 100) {
+    return true;
+  } else {
+    return false;
   }
+};

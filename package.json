@@ -6,7 +6,6 @@
     "prepare": "husky install",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "prettier": "./node_modules/.bin/prettier --write",
     "lint": "./node_modules/.bin/eslint --fix",
     "start": "react-native start",
     "test": "jest",
@@ -41,9 +40,7 @@
     "react-native-vector-icons": "^10.0.0",
     "react-native-video": "^5.2.1",
     "react-redux": "^8.1.2",
-    "redux": "^4.2.1",
-    "prettier": "^2.4.1",
-    "prettier-plugin-import-sort": "^0.0.7"
+    "redux": "^4.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

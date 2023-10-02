@@ -14,7 +14,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { COLORS, FONTS } from '../../global/theme';
+import {COLORS, FONTS} from '../../global/theme';
 import LinearGradient from 'react-native-linear-gradient';
 import {
   responsiveFontSize,
@@ -23,23 +23,32 @@ import {
   responsiveScreenWidth,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import { HomeScreenPng, OnBoarding1Svg } from '../../assets/assets';
-import { moderateScale } from '../../helper/Scale';
-import { commonDeseaseData, medicalStoreData, yourAppointmentsData } from '../../global/data';
-import { CommonDeseaseData, MedicalStoreData, YourAppointmentsData } from '../../global/types';
+import {HomeScreenPng, OnBoarding1Svg} from '../../assets/assets';
+import {moderateScale} from '../../helper/Scale';
+import {
+  commonDeseaseData,
+  medicalStoreData,
+  yourAppointmentsData,
+} from '../../global/data';
+import {
+  CommonDeseaseData,
+  MedicalStoreData,
+  YourAppointmentsData,
+} from '../../global/types';
 import CustomHeading from '../../Components/common/CustomHeading';
 import Header from '../../Components/common/Header';
 import CustomGButton from '../../Components/common/CustomGButton';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
-import { Rating } from 'react-native-ratings';
+import {Rating} from 'react-native-ratings';
 import CustomRating from '../../Components/CustomRating';
+import {handleScroll} from '../../helper/utilities';
 
-interface HomeScreenProps { }
+interface HomeScreenProps {}
 
 interface HomeScreenState {
   isLinearGradient: boolean;
   yourAppointmentsData: YourAppointmentsData[];
-  medicalPharmacy: MedicalStoreData[],
+  medicalPharmacy: MedicalStoreData[];
   isScrollEnabled: boolean;
 }
 const time = 2000;
@@ -51,15 +60,14 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
       isLinearGradient: true,
       yourAppointmentsData: yourAppointmentsData,
       medicalPharmacy: medicalStoreData,
-      isScrollEnabled: false
+      isScrollEnabled: false,
     };
   }
-
 
   componentDidMount(): void {
     this.timer = Number(
       setTimeout(() => {
-        this.setState({ isLinearGradient: false });
+        this.setState({isLinearGradient: false});
       }, time),
     );
   }
@@ -79,8 +87,7 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
     }));
   };
 
-
-  _renderCommnDesease = ({ item }: { item: CommonDeseaseData }) => {
+  _renderCommnDesease = ({item}: {item: CommonDeseaseData}) => {
     const Svg = item.image;
     return (
       <ImageBackground
@@ -92,7 +99,7 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
     );
   };
 
-  ratingCompleted = () => { };
+  ratingCompleted = () => {};
 
   _renderAppointments = ({
     item,
@@ -138,7 +145,7 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
             <Rating
               ratingBackgroundColor={COLORS.white2gray}
               type="custom"
-              style={{ backgroundColor: COLORS.transparent }}
+              style={{backgroundColor: COLORS.transparent}}
               ratingColor={COLORS.yellow}
               imageSize={30}
               readonly
@@ -166,46 +173,60 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
     );
   };
 
-
-  _renderMedicalStores = ({ item, index }: { item: MedicalStoreData, index: number }) => {
+  _renderMedicalStores = ({
+    item,
+    index,
+  }: {
+    item: MedicalStoreData;
+    index: number;
+  }) => {
     const ratingSplit = item.rating.toString().split('.');
     const rating = Number(ratingSplit[0]);
-    const lastIndex = this.state.medicalPharmacy.length - 1 === index
-    return <View style={[styles.medView, lastIndex && styles.medView1]}>
-      <Image source={item.image as ImageSourcePropType} style={styles.imageMedic} />
-      <Text style={styles.title}>{item.name}</Text>
-      <Text style={styles.subtitle}>{item.subTitle}</Text>
-      <CustomRating iconSize={20} starViewStyle={styles.viewStar} initialValue={item.rating} isDisable onChange={() => { }} />
-    </View>;
+    const lastIndex = this.state.medicalPharmacy.length - 1 === index;
+    return (
+      <View style={[styles.medView, lastIndex && styles.medView1]}>
+        <Image
+          source={item.image as ImageSourcePropType}
+          style={styles.imageMedic}
+        />
+        <Text style={styles.title}>{item.name}</Text>
+        <Text style={styles.subtitle}>{item.subTitle}</Text>
+        <CustomRating
+          iconSize={20}
+          starViewStyle={styles.viewStar}
+          initialValue={item.rating}
+          isDisable
+          onChange={() => {}}
+        />
+      </View>
+    );
   };
 
-  handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    const { y } = event.nativeEvent.contentOffset;
-    if (y > 100) {
-      this.setState({ isScrollEnabled: true })
-    } else {
-      this.setState({ isScrollEnabled: false })
-    }
-  }
+  handleScroll1 = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+    this.setState({isScrollEnabled: handleScroll(event)});
+  };
 
   render() {
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{flex: 1}}>
         <CustomStatusBar
           isScrollEnabled={this.state.isScrollEnabled}
-          backgroundColor={this.state.isScrollEnabled ? COLORS.white : COLORS.transparent}
+          backgroundColor={
+            this.state.isScrollEnabled ? COLORS.white : COLORS.transparent
+          }
         />
         <ScrollView
-        onScrollToTop={()=>this.setState({isScrollEnabled: false})}
-          onScroll={(event)=>this.handleScroll(event)}
-           scrollEventThrottle={16}
-          scrollEnabled bounces={!true} style={styles.container}>
+          onScroll={event => this.handleScroll1(event)}
+          scrollEventThrottle={16}
+          scrollEnabled
+          bounces={!true}
+          style={styles.container}>
           <ImageBackground source={HomeScreenPng} style={styles.imageView}>
             {this.state.isLinearGradient && (
               <LinearGradient
                 colors={[COLORS.greeen2, COLORS.greeen1]}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
+                start={{x: 0, y: 0}}
+                end={{x: 1, y: 1}}
                 style={[styles.linearGradient]}>
                 <View style={styles.viewText}>
                   <Text style={styles.profilename}>Hi Olivia Doe</Text>
@@ -443,37 +464,33 @@ const styles = StyleSheet.create({
     marginRight: responsiveHeight(2),
     zIndex: 10,
     borderRadius: responsiveHeight(2),
-    overflow: "hidden",
+    overflow: 'hidden',
     alignItems: 'center',
   },
   medView1: {
-    marginRight: responsiveHeight(0)
-
-
+    marginRight: responsiveHeight(0),
   },
   imageMedic: {
     width: responsiveWidth(58),
     height: responsiveHeight(30),
     resizeMode: 'cover',
     zIndex: 0,
-
   },
   subtitle: {
     fontFamily: FONTS.rubik.light,
     color: COLORS.white2gray,
     fontSize: moderateScale(12),
-    marginVertical: responsiveHeight(.5),
+    marginVertical: responsiveHeight(0.5),
   },
   title: {
     fontFamily: FONTS.rubik.medium,
     color: COLORS.white,
     fontSize: moderateScale(18),
-    marginVertical: responsiveHeight(.5),
-
+    marginVertical: responsiveHeight(0.5),
   },
   viewStar: {
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
     gap: responsiveWidth(1),
-    paddingBottom: responsiveScreenHeight(1.5)
-  }
+    paddingBottom: responsiveScreenHeight(1.5),
+  },
 });
