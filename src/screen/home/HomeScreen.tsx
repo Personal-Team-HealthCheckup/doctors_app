@@ -26,11 +26,13 @@ import {moderateScale} from '../../helper/Scale';
 import {
   commonDeseaseData,
   medicalStoreData,
+  qualifiedDoctorData,
   yourAppointmentsData,
 } from '../../global/data';
 import {
   CommonDeseaseData,
   MedicalStoreData,
+  QualifiedDoctorData,
   YourAppointmentsData,
 } from '../../global/types';
 import CustomHeading from '../../Components/common/CustomHeading';
@@ -46,6 +48,7 @@ interface HomeScreenState {
   isLinearGradient: boolean;
   yourAppointmentsData: YourAppointmentsData[];
   medicalPharmacy: MedicalStoreData[];
+  qualifiedDoctor: QualifiedDoctorData[];
   isScrollEnabled: boolean;
 }
 const time = 2000;
@@ -58,6 +61,7 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
       yourAppointmentsData: yourAppointmentsData,
       medicalPharmacy: medicalStoreData,
       isScrollEnabled: false,
+      qualifiedDoctor: qualifiedDoctorData,
     };
   }
 
@@ -95,8 +99,6 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
       </ImageBackground>
     );
   };
-
-  ratingCompleted = () => {};
 
   _renderAppointments = ({
     item,
@@ -139,7 +141,10 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
             </Text>
             <CustomRating
               iconSize={20}
-              starViewStyle={[styles.viewStar,{justifyContent:"flex-start",gap:responsiveWidth(2)}]}
+              starViewStyle={[
+                styles.viewStar,
+                {justifyContent: 'flex-start', gap: responsiveWidth(2)},
+              ]}
               initialValue={item.rating}
               isDisable
               onChange={() => {}}
@@ -193,6 +198,18 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
     );
   };
 
+  renderQualifiedDoctor = ({
+    item,
+  }: {
+    item: QualifiedDoctorData;
+    index: number;
+  }) => {
+    return (
+      <View>
+        <Text>{item.name}</Text>
+      </View>
+    );
+  };
   handleScroll1 = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     this.setState({isScrollEnabled: handleScroll(event)});
   };
@@ -263,14 +280,15 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
                 contentContainerStyle={styles.contentContainerStyle1}
               />
             </View>
+
             {/* Qualified Doctors */}
             <View style={styles.viewStyle}>
               <CustomHeading isIcon title="Qualified Doctor" />
               <FlatList
                 horizontal
                 showsHorizontalScrollIndicator={false}
-                data={this.state.medicalPharmacy}
-                renderItem={this._renderMedicalStores}
+                data={this.state.qualifiedDoctor}
+                renderItem={this.renderQualifiedDoctor}
                 keyExtractor={item => item.id.toString()}
                 contentContainerStyle={styles.contentContainerStyle1}
               />

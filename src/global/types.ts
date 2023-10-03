@@ -23,10 +23,22 @@ export interface YourAppointmentsData {
   isFaveritiated: boolean;
 }
 
-export interface MedicalStoreData{
+export interface MedicalStoreData {
   id: number;
   rating: number;
   name: string;
   image: string;
   subTitle: string;
+}
+export interface QualifiedDoctorData {
+  id: number;
+  rating: number;
+  degree: string;
+  name: string;
+  experience: number;
+  views: number;
+  available: string;
+  image: any;
+  isFaveritiated: boolean;
+  fees: number;
 }
