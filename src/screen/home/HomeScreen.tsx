@@ -112,12 +112,7 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
       <View
         style={[
           styles.appointmentMainView,
-          {
-            marginRight:
-              yourAppointmentsData.length - 1 === index
-                ? null
-                : responsiveScreenWidth(1),
-          },
+          yourAppointmentsData.length - 1 === index && styles.cont,
         ]}>
         <View style={styles.viewImg}>
           <TouchableOpacity
@@ -141,10 +136,7 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
             </Text>
             <CustomRating
               iconSize={20}
-              starViewStyle={[
-                styles.viewStar,
-                {justifyContent: 'flex-start', gap: responsiveWidth(2)},
-              ]}
+              starViewStyle={[styles.viewStar, styles.customRating]}
               initialValue={item.rating}
               isDisable
               onChange={() => {}}
@@ -216,7 +208,7 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
 
   render() {
     return (
-      <View style={{flex: 1}}>
+      <View style={styles.mainView}>
         <CustomStatusBar
           isScrollEnabled={this.state.isScrollEnabled}
           backgroundColor={
@@ -502,4 +494,9 @@ const styles = StyleSheet.create({
     gap: responsiveWidth(1),
     paddingBottom: responsiveScreenHeight(1.5),
   },
+  customRating: {justifyContent: 'flex-start', gap: responsiveWidth(2)},
+  cont: {
+    marginRight: responsiveScreenWidth(1),
+  },
+  mainView: {flex: 1},
 });

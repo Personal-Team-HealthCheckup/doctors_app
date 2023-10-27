@@ -9,7 +9,6 @@
     "lint": "./node_modules/.bin/eslint --fix",
     "start": "react-native start",
     "test": "jest",
-    "postinstall": "cd ios && rm -rf Pods Pdfile.lock ; pod install",
     "quality": "yarn lint && tsc --noEmit"
   },
   "dependencies": {
@@ -39,6 +38,11 @@
     "react-native-vector-icons": "^10.0.0",
     "react-native-video": "^5.2.1",
     "react-redux": "^8.1.2",
+    "react-native-controlled-mentions": "^2.2.5",
+    "@react-native-community/geolocation": "^3.1.0",
+    "react-native-image-crop-picker": "^0.40.0",
+    "react-native-mentions": "^1.1.4",
+    "react-native-parsed-text": "^0.0.22",
     "redux": "^4.2.1"
   },
   "devDependencies": {
