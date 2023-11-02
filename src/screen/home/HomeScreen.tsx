@@ -16,6 +16,7 @@ import {
 import {COLORS, FONTS} from '../../global/theme';
 import LinearGradient from 'react-native-linear-gradient';
 import {
+  responsiveFontSize,
   responsiveHeight,
   responsiveScreenHeight,
   responsiveScreenWidth,
@@ -112,7 +113,8 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
       <View
         style={[
           styles.appointmentMainView,
-          yourAppointmentsData.length - 1 === index && styles.cont,
+          index === yourAppointmentsData.length - 1 && styles.cont,
+          index === 0 && styles.cont1,
         ]}>
         <View style={styles.viewImg}>
           <TouchableOpacity
@@ -192,13 +194,45 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
 
   renderQualifiedDoctor = ({
     item,
+    index,
   }: {
     item: QualifiedDoctorData;
     index: number;
   }) => {
     return (
-      <View>
-        <Text>{item.name}</Text>
+      <View
+        style={[
+          styles.qualifierView,
+          index === this.state.qualifiedDoctor.length - 1 && styles.lastCss,
+        ]}>
+        <View style={[styles.flexCss, styles.ViewQualifier]}>
+          <TouchableOpacity
+            onPress={() => this.toggleFaverite(item.id)}
+            style={styles.likeView1}>
+            <FontAwesomeIcon
+              name={item.isFaveritiated ? 'heart' : 'heart-o'}
+              color={item.isFaveritiated ? COLORS.red1 : COLORS.lightBlack2}
+              size={18}
+            />
+          </TouchableOpacity>
+          <View style={[styles.flexCss, styles.viewRating]}>
+            <FontAwesomeIcon name="star" color={COLORS.yellow} size={18} />
+            <Text style={styles.ratingText}>{item.rating}</Text>
+          </View>
+        </View>
+        <View style={styles.imageView1}>
+          <Image source={item.image} style={styles.image1} />
+        </View>
+        <View style={styles.textView1}>
+          <Text style={[styles.textCommon, styles.text1]}>{item.name}</Text>
+          <View style={[styles.flexCss, styles.textView2]}>
+            <Text style={[styles.textCommon, styles.text1$]}>$</Text>
+            <Text style={[styles.textCommon, styles.text1sub]}>
+              {item.fees}
+            </Text>
+            <Text style={[styles.textCommon, styles.text1sub]}>/hours</Text>
+          </View>
+        </View>
       </View>
     );
   };
@@ -369,6 +403,7 @@ const styles = StyleSheet.create({
     paddingVertical: responsiveHeight(2),
     borderRadius: moderateScale(12.68),
     position: 'relative',
+    marginRight: responsiveWidth(1),
   },
   imageApp: {
     width: responsiveWidth(28),
@@ -498,5 +533,72 @@ const styles = StyleSheet.create({
   cont: {
     marginRight: responsiveScreenWidth(1),
   },
+  cont1: {
+    marginLeft: responsiveScreenWidth(3),
+  },
   mainView: {flex: 1},
+  qualifierView: {
+    backgroundColor: COLORS.black2gray,
+    borderRadius: moderateScale(12.68),
+    width: responsiveWidth(30),
+    marginRight: responsiveWidth(3),
+    padding: responsiveWidth(1.5),
+    paddingHorizontal: responsiveWidth(2),
+    paddingBottom: responsiveHeight(0.5),
+  },
+  lastCss: {
+    marginRight: 0,
+    paddingHorizontal: 0,
+  },
+  likeView1: {},
+  ViewQualifier: {
+    justifyContent: 'space-between',
+  },
+  viewRating: {
+    gap: responsiveWidth(1.4),
+  },
+  ratingImage: {
+    width: responsiveWidth(2),
+    height: responsiveHeight(2),
+    tintColor: COLORS.yellow,
+    resizeMode: 'contain',
+  },
+  ratingText: {
+    color: COLORS.white,
+    fontFamily: FONTS.rubik.medium,
+    fontSize: responsiveFontSize(1.5),
+  },
+  flexCss: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  imageView1: {
+    alignSelf: 'center',
+    marginVertical: responsiveHeight(1.3),
+  },
+  image1: {
+    width: responsiveWidth(20),
+    height: responsiveWidth(20),
+    borderRadius: responsiveScreenWidth(20) / 2,
+    resizeMode: 'cover',
+  },
+  textView1: {
+    alignItems: 'center',
+    margin: 0,
+  },
+  text1: {
+    fontSize: responsiveFontSize(2),
+  },
+  text1sub: {
+    fontSize: responsiveFontSize(1.5),
+  },
+  textCommon: {
+    fontFamily: FONTS.rubik.medium,
+    color: COLORS.white,
+  },
+  text1$: {
+    color: COLORS.green3,
+    fontSize: responsiveFontSize(1.5),
+  },
+  textView2: {},
 });

@@ -20,6 +20,7 @@ export const COLORS = {
   lightYellow: '#CAFF59',
   lightCyan: '#59FFEB',
   light: '#677294CC',
+  green3: '#0EBE7E',
 };
 
 export const FONTS = {

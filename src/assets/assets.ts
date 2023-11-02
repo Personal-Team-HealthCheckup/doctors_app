@@ -55,6 +55,9 @@ import profileIcon from './images/profileIcon.png';
 import pharmcy1 from './images/pharmacy1.png';
 import pharmcy2 from './images/pharmacy2.png';
 
+// loader images
+import LoaderImg from './images/loaderImage.png';
+
 export {
   homeIcon,
   MapIcon,
@@ -103,4 +106,5 @@ export {
   starImage,
   pharmcy1,
   pharmcy2,
+  LoaderImg,
 };
