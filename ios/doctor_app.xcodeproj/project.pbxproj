@@ -135,6 +135,7 @@
 		1F2AE75B31A94635A881F4A5 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = ../src/assets/fonts/FontAwesome5_Solid.ttf; sourceTree = "<group>"; };
 		25727D58F6E54366A8B79ED6 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = ../src/assets/fonts/MaterialCommunityIcons.ttf; sourceTree = "<group>"; };
 		355F8E4AE82F45A8ABF287DE /* Rubik-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Bold.ttf"; path = "../src/assets/fonts/Rubik-Bold.ttf"; sourceTree = "<group>"; };
+		37D43DDB2AF8FB3D00997530 /* doctor_app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = doctor_app.entitlements; path = doctor_app/doctor_app.entitlements; sourceTree = "<group>"; };
 		37E113ED2A94DCC400C15E70 /* doctor-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "doctor-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		37E113F22A94DCC400C15E70 /* doctor-app Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "doctor-app Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		37E113F72A94DCC400C15E70 /* doctor_appApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = doctor_appApp.swift; sourceTree = "<group>"; };
@@ -246,6 +247,7 @@
 		13B07FAE1A68108700A75B9A /* doctor_app */ = {
 			isa = PBXGroup;
 			children = (
+				37D43DDB2AF8FB3D00997530 /* doctor_app.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -959,6 +961,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = doctor_app/doctor_app.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = doctor_app/Info.plist;
@@ -986,6 +989,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = doctor_app/doctor_app.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = doctor_app/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
