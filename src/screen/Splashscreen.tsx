@@ -1,5 +1,5 @@
 import React from 'react';
-import {ImageBackground, StyleSheet, Text} from 'react-native';
+import {Image, ImageBackground, StyleSheet, Text, View} from 'react-native';
 import {
   responsiveHeight,
   responsiveWidth,
@@ -7,6 +7,7 @@ import {
 import {COLORS, FONTS} from '../global/theme';
 import {
   BinanceLogoSvg,
+  CheckImg,
   HexagonSvg,
   LogoSvg,
   gradientPng,
@@ -15,6 +16,7 @@ import {moderateScale} from '../helper/Scale';
 import CustomStatusBar from '../Components/common/CustomStatusBar';
 import CustomMainView from '../Components/common/CustomMainView';
 import {AUTH} from '../Constants/Navigator';
+import CustomLoader from '../Components/CustomLoader';
 interface SplashScreensProps {
   navigation?: {
     replace: (args: string) => void;
@@ -23,6 +25,7 @@ interface SplashScreensProps {
 
 interface SplashScreensState {
   time: number;
+  firstTime?: 'loading' | 'Check' | 'splashScreen';
 }
 
 interface SplashScreensSS {}
@@ -37,20 +40,42 @@ class SplashScreens extends React.Component<
     super(props);
     this.state = {
       time: 2000,
+      firstTime: 'splashScreen',
     };
   }
 
   componentDidMount(): void {
+    this.setState({firstTime: 'loading'});
+    this.timer = Number(
+      setTimeout(() => {
+        this.setState({firstTime: 'Check'});
+      }, 1000),
+    );
+    this.timer = Number(
+      setTimeout(() => {
+        this.setState({firstTime: 'splashScreen'});
+      }, 2000),
+    );
     this.timer = Number(
       setTimeout(() => {
         this.props.navigation?.replace(AUTH.SIGNIN);
-      }, 2000),
+      }, 3000),
     );
   }
   componentWillUnmount(): void {
     clearTimeout(this.timer);
   }
   render() {
+    switch (this.state.firstTime) {
+      case 'loading':
+        return <CustomLoader />;
+      case 'Check':
+        return (
+          <View style={styles.loadImg}>
+            <Image source={CheckImg} style={styles.image1} />
+          </View>
+        );
+    }
     return (
       <>
         <CustomStatusBar />
@@ -98,4 +123,15 @@ const styles = StyleSheet.create({
     marginBottom: responsiveHeight(7),
   },
   container: {},
+  loadImg: {
+    flex: 1,
+    backgroundColor: COLORS.black,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  image1: {
+    width: responsiveWidth(15),
+    height: responsiveHeight(15),
+    resizeMode: 'contain',
+  },
 });

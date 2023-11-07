@@ -7,6 +7,7 @@ import {AUTH, DASHBOARD, HOME, LANDING} from '../Constants/Navigator';
 import OnBoarding from '../screen/auth/OnBoarding';
 import DrawerTabNavigation from './DrawerTabNavigation';
 import SearchPage from '../screen/home/SearchPage';
+import SelectTimePage from '../screen/home/SelectTimePage';
 // import { RootState } from '../redux/store';
 
 const Stack = createNativeStackNavigator();
@@ -28,6 +29,7 @@ const AuthNavigation = () => {
       <Stack.Screen name={AUTH.ONBOARDING} component={OnBoarding} />
       <Stack.Screen name={HOME.DASHBOARD} component={DrawerTabNavigation} />
       <Stack.Screen name={DASHBOARD.SEARCPAGE} component={SearchPage} />
+      <Stack.Screen name={DASHBOARD.SELECTTIME} component={SelectTimePage} />
     </Stack.Navigator>
   );
 };

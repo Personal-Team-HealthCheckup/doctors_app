@@ -60,10 +60,12 @@ import LoaderImg from './images/loaderImage.png';
 
 import HeartImg from './images/heart.png';
 import HeartRedImg from './images/heart-red.png';
+import CheckImg from './images/check.png';
 export {
   homeIcon,
   MapIcon,
   cartIcon,
+  CheckImg,
   offerIcon,
   Gradient,
   gradientPng,

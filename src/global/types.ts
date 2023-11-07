@@ -42,3 +42,8 @@ export interface QualifiedDoctorData {
   isFaveritiated: boolean;
   fees: number;
 }
+
+export interface Navigation {
+  navigate?: (url: string) => void;
+  goBack?: () => void;
+}

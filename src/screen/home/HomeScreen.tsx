@@ -211,13 +211,14 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
             this.state.isScrollEnabled ? COLORS.white : COLORS.transparent
           }
         />
-        <ScrollView
-          onScroll={event => this.handleScroll1(event)}
-          scrollEventThrottle={16}
-          scrollEnabled
-          bounces={!true}
-          style={styles.container}>
-          <ImageBackground source={HomeScreenPng} style={styles.imageView}>
+        <ImageBackground source={HomeScreenPng} style={styles.imageView}>
+          <ScrollView
+            onScroll={event => this.handleScroll1(event)}
+            scrollEventThrottle={16}
+            scrollEnabled
+            bounces={false}
+            contentContainerStyle={styles.contentContainerStyleMain}
+            style={styles.container}>
             {this.state.isLinearGradient && (
               <LinearGradient
                 colors={[COLORS.greeen2, COLORS.greeen1]}
@@ -281,8 +282,8 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
                 contentContainerStyle={styles.contentContainerStyle1}
               />
             </View>
-          </ImageBackground>
-        </ScrollView>
+          </ScrollView>
+        </ImageBackground>
       </View>
     );
   }
@@ -294,8 +295,22 @@ const styles = StyleSheet.create({
   container: {
     width: responsiveWidth(100),
     height: responsiveHeight(100),
-    backgroundColor: COLORS.black,
+    paddingTop: responsiveScreenHeight(2),
+  },
+  mainView: {
     flex: 1,
+    width: responsiveWidth(100),
+    height: responsiveHeight(100),
+    backgroundColor: COLORS.black,
+  },
+  imageView: {
+    flex: 1,
+    width: responsiveWidth(100),
+    height: responsiveHeight(100),
+    resizeMode: 'cover',
+  },
+  contentContainerStyleMain: {
+    paddingBottom: responsiveHeight(4),
   },
   text: {
     color: COLORS.white,
@@ -311,10 +326,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     zIndex: 100,
-  },
-  imageView: {
-    flex: 1,
-    paddingVertical: responsiveScreenHeight(4),
   },
 
   profilename: {
@@ -498,7 +509,7 @@ const styles = StyleSheet.create({
   cont1: {
     marginLeft: responsiveScreenWidth(3),
   },
-  mainView: {flex: 1},
+
   qualifierView: {
     backgroundColor: COLORS.black2gray,
     borderRadius: moderateScale(12.68),

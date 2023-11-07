@@ -6,7 +6,7 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import {COLORS} from '../global/theme';
-class ImageCircleMotionAnimation extends Component<{}, {}> {
+class CustomLoader extends Component<{}, {}> {
   rotation: any;
   rotate: any;
   constructor(props: {}) {
@@ -55,4 +55,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-export default ImageCircleMotionAnimation;
+export default CustomLoader;

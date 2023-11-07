@@ -9,12 +9,11 @@ import {
 } from 'react-native-responsive-dimensions';
 import VectorIcon from 'react-native-vector-icons/Entypo';
 import {LightSvg} from '../../assets/assets';
+import {Navigation} from '../../global/types';
 interface CustomHeaderProps {
   heading?: string;
   isIcon?: boolean;
-  navigation?: {
-    goBack: () => void;
-  };
+  navigation?: Navigation;
 }
 
 interface CustomHeaderState {}
@@ -29,7 +28,7 @@ class CustomHeader extends React.Component<
   }
 
   handleGoBack = () => {
-    this.props.navigation?.goBack();
+    this.props.navigation?.goBack && this.props.navigation.goBack();
   };
 
   render() {

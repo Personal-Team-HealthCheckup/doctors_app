@@ -18,4 +18,5 @@ export const HOME = {
 };
 export const DASHBOARD = {
   SEARCPAGE: 'SEARCPAGE',
+  SELECTTIME: 'SELECTTIME',
 };
