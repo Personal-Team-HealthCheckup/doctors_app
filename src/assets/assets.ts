@@ -58,6 +58,8 @@ import pharmcy2 from './images/pharmacy2.png';
 // loader images
 import LoaderImg from './images/loaderImage.png';
 
+import HeartImg from './images/heart.png';
+import HeartRedImg from './images/heart-red.png';
 export {
   homeIcon,
   MapIcon,
@@ -107,4 +109,6 @@ export {
   pharmcy1,
   pharmcy2,
   LoaderImg,
+  HeartImg,
+  HeartRedImg,
 };

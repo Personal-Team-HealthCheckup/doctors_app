@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {COLORS, FONTS} from '../../global/theme';
 import {
   responsiveFontSize,
@@ -8,8 +8,13 @@ import {
   responsiveScreenWidth,
 } from 'react-native-responsive-dimensions';
 import VectorIcon from 'react-native-vector-icons/Entypo';
+import {LightSvg} from '../../assets/assets';
 interface CustomHeaderProps {
   heading?: string;
+  isIcon?: boolean;
+  navigation?: {
+    goBack: () => void;
+  };
 }
 
 interface CustomHeaderState {}
@@ -22,20 +27,32 @@ class CustomHeader extends React.Component<
     super(props);
     this.state = {};
   }
+
+  handleGoBack = () => {
+    this.props.navigation?.goBack();
+  };
+
   render() {
     const {heading} = this.props;
     return (
       <View style={styles.main}>
         <View style={styles.headingView}>
-          <View style={styles.iconView}>
+          <TouchableOpacity
+            onPress={() => this.handleGoBack()}
+            style={styles.iconView}>
             <VectorIcon
               name="chevron-left"
               size={20}
               color={COLORS.white2gray}
             />
-          </View>
+          </TouchableOpacity>
           <Text style={styles.headingText}>{heading ?? 'profile'}</Text>
         </View>
+        {this.props.isIcon && (
+          <View style={styles.icon}>
+            <LightSvg width={'100%'} height={'100%'} style={styles.image} />
+          </View>
+        )}
       </View>
     );
   }
@@ -70,4 +87,11 @@ const styles = StyleSheet.create({
     color: COLORS.white,
     textTransform: 'capitalize',
   },
+  icon: {
+    marginLeft: responsiveScreenWidth(4),
+    position: 'relative',
+    width: responsiveScreenWidth(10),
+    height: responsiveScreenWidth(10),
+  },
+  image: {},
 });

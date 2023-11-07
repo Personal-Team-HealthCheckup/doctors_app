@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {
   responsiveScreenHeight,
@@ -12,8 +12,11 @@ import {
 } from '../../assets/assets';
 import {COLORS, FONTS} from '../../global/theme';
 import {moderateScale} from '../../helper/Scale';
-
-const Header = () => {
+import {DASHBOARD} from '../../Constants/Navigator';
+interface Iprops {
+  navigateTo: (text: string) => void;
+}
+const Header: React.FC<Iprops> = props => {
   return (
     <View style={styles.mainView}>
       <View style={styles.leftView}>
@@ -27,9 +30,11 @@ const Header = () => {
         <View style={styles.icon}>
           <LightSvg width={'100%'} height={'100%'} style={styles.image} />
         </View>
-        <View style={styles.icon}>
+        <TouchableOpacity
+          style={styles.icon}
+          onPress={() => props.navigateTo(DASHBOARD.SEARCPAGE)}>
           <SearchSvg width={'100%'} height={'70%'} style={styles.image} />
-        </View>
+        </TouchableOpacity>
         <View style={styles.icon}>
           <NotificationBellSvg
             width={'100%'}

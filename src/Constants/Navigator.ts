@@ -16,3 +16,6 @@ export const HOME = {
   CARTPAGE: 'CARTPAGE',
   PROFILEPAGE: 'PROFILEPAGE',
 };
+export const DASHBOARD = {
+  SEARCPAGE: 'SEARCPAGE',
+};

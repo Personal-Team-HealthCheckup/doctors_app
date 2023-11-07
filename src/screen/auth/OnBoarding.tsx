@@ -37,12 +37,15 @@ class OnBoarding extends React.Component<OnBoardingProps, OnBoardingState> {
     };
   }
 
-  handleSkip = () => {};
+  handleSkip = () => {
+    this.props.navigation?.navigate(HOME.DASHBOARD);
+  };
+
   handleGetStarted = () => {
     if (data.length - 1 > this.state.index) {
       this.setState({index: this.state.index + 1});
     } else {
-      this.props.navigation?.navigate(HOME.DASHBOARD);
+      this.handleSkip();
     }
   };
   render() {
@@ -119,6 +122,7 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.rubik.regular,
     fontSize: moderateScale(14),
     textTransform: 'capitalize',
+    height: responsiveHeight(5),
   },
   button: {
     marginTop: responsiveHeight(4),

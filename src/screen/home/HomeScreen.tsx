@@ -38,12 +38,16 @@ import {
 } from '../../global/types';
 import CustomHeading from '../../Components/common/CustomHeading';
 import Header from '../../Components/common/Header';
-import CustomGButton from '../../Components/common/CustomGButton';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import CustomRating from '../../Components/CustomRating';
 import {handleScroll} from '../../helper/utilities';
+import CustomAppointmentCard from '../../Components/common/CustomAppointmentCard';
 
-interface HomeScreenProps {}
+interface HomeScreenProps {
+  navigation: {
+    navigate: (text: string) => void;
+  };
+}
 
 interface HomeScreenState {
   isLinearGradient: boolean;
@@ -100,7 +104,6 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
       </ImageBackground>
     );
   };
-
   _renderAppointments = ({
     item,
     index,
@@ -108,63 +111,20 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
     item: YourAppointmentsData;
     index: number;
   }) => {
-    const degree = item.degree.split('|').join(',');
     return (
       <View
         style={[
-          styles.appointmentMainView,
           index === yourAppointmentsData.length - 1 && styles.cont,
           index === 0 && styles.cont1,
         ]}>
-        <View style={styles.viewImg}>
-          <TouchableOpacity
-            onPress={() => this.toggleFaverite(item.id)}
-            style={styles.likeView}>
-            <FontAwesomeIcon
-              name={item.isFaveritiated ? 'heart' : 'heart-o'}
-              color={item.isFaveritiated ? COLORS.red1 : COLORS.lightBlack2}
-              size={20}
-            />
-          </TouchableOpacity>
-          <Image
-            source={item.image as ImageSourcePropType}
-            style={styles.imageApp}
-          />
-          <View style={styles.textView}>
-            <Text style={styles.textTitle1}>{item.name}</Text>
-            <Text style={styles.subTextTitle1}>{degree}</Text>
-            <Text style={styles.subTextExpe}>
-              {item.experience} Years experience
-            </Text>
-            <CustomRating
-              iconSize={20}
-              starViewStyle={[styles.viewStar, styles.customRating]}
-              initialValue={item.rating}
-              isDisable
-              onChange={() => {}}
-            />
-          </View>
-        </View>
-        <View style={styles.view1}>
-          <View style={styles.view2}>
-            <Text style={styles.textNext}>Next Available</Text>
-            <View style={styles.view3}>
-              <Text style={[styles.textdate]}>10:00</Text>
-              <Text style={[styles.textdate, styles.text2]}> AM tomorrow</Text>
-            </View>
-          </View>
-          <View>
-            <CustomGButton
-              tittle="Reschedule"
-              style={styles.button}
-              textStyle={styles.buttonText}
-            />
-          </View>
-        </View>
+        <CustomAppointmentCard
+          index={index}
+          item={item}
+          yourAppointmentsData={this.state.yourAppointmentsData}
+        />
       </View>
     );
   };
-
   _renderMedicalStores = ({
     item,
     index,
@@ -239,7 +199,9 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
   handleScroll1 = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     this.setState({isScrollEnabled: handleScroll(event)});
   };
-
+  handleNavigation = (text: string) => {
+    this.props.navigation.navigate(text);
+  };
   render() {
     return (
       <View style={styles.mainView}>
@@ -273,7 +235,7 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
                 />
               </LinearGradient>
             )}
-            <Header />
+            <Header navigateTo={this.handleNavigation} />
             <View style={styles.viewStyle}>
               <CustomHeading title="Common Diseases" />
               <FlatList
