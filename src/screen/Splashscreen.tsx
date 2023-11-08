@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, ImageBackground, StyleSheet, Text, View} from 'react-native';
+import {Animated, ImageBackground, StyleSheet, Text, View} from 'react-native';
 import {
   responsiveHeight,
   responsiveWidth,
@@ -72,7 +72,7 @@ class SplashScreens extends React.Component<
       case 'Check':
         return (
           <View style={styles.loadImg}>
-            <Image source={CheckImg} style={styles.image1} />
+            <Animated.Image source={CheckImg} style={[styles.image1]} />
           </View>
         );
     }

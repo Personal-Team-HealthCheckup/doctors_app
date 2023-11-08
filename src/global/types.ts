@@ -47,3 +47,10 @@ export interface Navigation {
   navigate?: (url: string) => void;
   goBack?: () => void;
 }
+
+export interface SlotsDateTimes {
+  id: number;
+  date: string;
+  slotsAvailable: number;
+  isSelected: boolean;
+}

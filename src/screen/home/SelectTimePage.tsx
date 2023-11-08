@@ -9,11 +9,12 @@ import {
   Text,
   Image,
   TouchableOpacity,
+  FlatList,
 } from 'react-native';
 import CustomStatusBar from '../../Components/common/CustomStatusBar';
 import CustomHeader from '../../Components/common/CustomHeader';
 import {gradientPng, imageProfile3} from '../../assets/assets';
-import {Navigation} from '../../global/types';
+import {Navigation, SlotsDateTimes} from '../../global/types';
 import {handleScroll} from '../../helper/utilities';
 import {COLORS, FONTS} from '../../global/theme';
 import {
@@ -24,12 +25,18 @@ import {
 import {moderateScale} from '../../helper/Scale';
 import CustomRating from '../../Components/CustomRating';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+import {slotsDateTimes} from '../../global/data';
+import LinearGradient from 'react-native-linear-gradient';
+import CustomGButton from '../../Components/common/CustomGButton';
+import CustomButton from '../../Components/common/CustomButton';
 interface SelectTimePageProps {
   navigation?: Navigation;
 }
 
 interface SelectTimePageState {
   isScrollEnabled: boolean;
+  slotItem?: SlotsDateTimes;
+  slotsDateTimes: SlotsDateTimes[];
 }
 
 class SelectTimePage extends React.Component<
@@ -40,10 +47,64 @@ class SelectTimePage extends React.Component<
     super(props);
     this.state = {
       isScrollEnabled: false,
+      slotsDateTimes: slotsDateTimes,
     };
   }
   handleScroll1 = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     this.setState({isScrollEnabled: handleScroll(event)});
+  };
+  Card = (item: SlotsDateTimes) => (
+    <TouchableOpacity
+      onPress={() => this.selectTheSlot(item)}
+      style={styles.slotView}>
+      <Text style={styles.heading1}>{item.date}</Text>
+      <Text style={styles.subHeading1}>
+        {item.slotsAvailable > 0 ? item.slotsAvailable : 'No'} slots available
+      </Text>
+    </TouchableOpacity>
+  );
+  _renderSlots = ({item}: {item: SlotsDateTimes}) => {
+    const {Card} = this;
+
+    return (
+      <>
+        {item.isSelected ? (
+          <LinearGradient
+            colors={[COLORS.greeen2, COLORS.greeen1]}
+            start={{x: 0, y: 0}}
+            end={{x: 1, y: 1}}
+            style={[styles.slotView, styles.gradient]}>
+            <Card {...item} />
+          </LinearGradient>
+        ) : (
+          <Card {...item} />
+        )}
+      </>
+    );
+  };
+  componentDidMount(): void {
+    const slotItem = this.state.slotsDateTimes.find(slot => slot.isSelected);
+    this.setState({slotItem: slotItem});
+  }
+  selectTheSlot = (item: SlotsDateTimes) => {
+    this.setState(
+      {
+        slotsDateTimes: this.state.slotsDateTimes.map(slot => {
+          if (item.id === slot.id) {
+            slot.isSelected = true;
+          } else {
+            slot.isSelected = false;
+          }
+          return slot;
+        }),
+      },
+      () => {
+        const slotItem = this.state.slotsDateTimes.find(
+          slot => slot.isSelected,
+        );
+        this.setState({slotItem: slotItem});
+      },
+    );
   };
   render() {
     return (
@@ -93,6 +154,45 @@ class SelectTimePage extends React.Component<
                     size={20}
                   />
                 </TouchableOpacity>
+              </View>
+              <View style={styles.fltView}>
+                <FlatList
+                  horizontal
+                  showsHorizontalScrollIndicator={false}
+                  data={this.state.slotsDateTimes}
+                  contentContainerStyle={styles.contentContainerStyle}
+                  style={styles.styleFlat}
+                  renderItem={this._renderSlots}
+                  keyExtractor={item => item.id.toString()}
+                />
+              </View>
+              <View style={styles.noSlotView}>
+                {this.state.slotItem && (
+                  <TouchableOpacity activeOpacity={1} style={styles.slotView}>
+                    <Text style={styles.heading1}>
+                      {this.state.slotItem.date}
+                    </Text>
+                    <Text style={[styles.subHeading1, styles.subHe]}>
+                      {this.state.slotItem.slotsAvailable > 0
+                        ? this.state.slotItem.slotsAvailable
+                        : 'No'}{' '}
+                      slots available
+                    </Text>
+                  </TouchableOpacity>
+                )}
+              </View>
+              <View style={styles.buttonView}>
+                <CustomGButton
+                  tittle={`Next availability on ${this.state.slotItem?.date}`}
+                  style={styles.button}
+                  textStyle={styles.text}
+                />
+                <Text style={[styles.subHe, styles.text1]}>OR</Text>
+                <CustomButton
+                  title="Contact Clinic"
+                  style={[styles.button, styles.button1]}
+                  textStyle={[styles.text, styles.textGreen]}
+                />
               </View>
             </View>
           </ImageBackground>
@@ -171,5 +271,73 @@ const styles = StyleSheet.create({
   textView: {},
   likeButton: {
     alignItems: 'flex-start',
+  },
+  slotView: {
+    borderColor: 'rgba(103, 114, 148, 0.10);',
+    borderWidth: responsiveWidth(0.5),
+    width: responsiveWidth(40),
+    padding: responsiveWidth(2),
+    paddingHorizontal: responsiveWidth(0),
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: responsiveHeight(8),
+    borderRadius: responsiveWidth(2),
+  },
+  gradient: {
+    borderWidth: responsiveWidth(0),
+    borderColor: 'transparent',
+  },
+  heading1: {
+    fontFamily: FONTS.rubik.medium,
+    fontSize: moderateScale(16),
+    color: COLORS.white,
+  },
+  subHeading1: {
+    fontSize: moderateScale(10),
+    color: COLORS.white2gray,
+    fontFamily: FONTS.rubik.light,
+  },
+  contentContainerStyle: {
+    gap: responsiveWidth(1),
+    paddingBottom: 0,
+  },
+  subHe: {
+    fontSize: moderateScale(14),
+    fontFamily: FONTS.rubik.regular,
+    marginTop: responsiveHeight(2),
+  },
+  styleFlat: {},
+  fltView: {
+    height: responsiveHeight(10),
+    marginVertical: responsiveHeight(2),
+  },
+  noSlotView: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttonView: {
+    alignItems: 'center',
+    marginVertical: responsiveHeight(2),
+  },
+  button: {
+    paddingHorizontal: 'auto',
+    width: responsiveWidth(90),
+  },
+  button1: {
+    borderRadius: responsiveWidth(2),
+    borderColor: 'rgba(14, 190, 127, 0.50)',
+    borderWidth: responsiveWidth(0.5),
+    backgroundColor: COLORS.black,
+  },
+  text: {
+    fontFamily: FONTS.rubik.medium,
+    fontSize: moderateScale(18),
+  },
+  textGreen: {
+    color: COLORS.green,
+  },
+  text1: {
+    color: COLORS.white2gray,
+    marginBottom: responsiveHeight(2),
   },
 });

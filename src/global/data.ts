@@ -27,6 +27,7 @@ import {
   YourAppointmentsData,
   MedicalStoreData,
   QualifiedDoctorData,
+  SlotsDateTimes,
 } from './types';
 
 // onBoarding data source
@@ -258,5 +259,26 @@ export const qualifiedDoctorData: QualifiedDoctorData[] = [
     views: 475,
     isFaveritiated: false,
     fees: 27.0,
+  },
+];
+
+export const slotsDateTimes: SlotsDateTimes[] = [
+  {
+    id: 1,
+    date: 'Today, 23 Feb',
+    slotsAvailable: 0,
+    isSelected: false,
+  },
+  {
+    id: 2,
+    date: 'Tomorrow, 24 Feb',
+    slotsAvailable: 9,
+    isSelected: true,
+  },
+  {
+    id: 3,
+    date: 'Thu, 25 Feb',
+    slotsAvailable: 8,
+    isSelected: false,
   },
 ];
