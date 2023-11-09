@@ -5,6 +5,7 @@ import MainStack from './src/navigation/MainStack';
 import {Provider} from 'react-redux';
 import {store} from './src/redux/store';
 import {Linking} from 'react-native';
+import ReactNativeBiometrics from 'react-native-biometrics';
 interface AppProps {}
 
 interface AppState {}
@@ -55,17 +56,26 @@ export const linking: LinkingOptions<ReactNavigation.RootParamList> = {
   },
 };
 class App extends React.Component<AppProps, AppState> {
+  rnBiometrics = new ReactNativeBiometrics();
   constructor(props: AppProps) {
     super(props);
     this.state = {};
   }
-  async componentDidMount() {
-    Linking.addEventListener('url', event => {
-      console.log(event, '-----event');
-    });
 
-    const response = await Linking.getInitialURL();
-    console.log(response, '-----response');
+  handledata = async () => {
+    try {
+      const resultObject = await this.rnBiometrics.simplePrompt({
+        promptMessage: 'Confirm fingerprint',
+      });
+      console.log('finger print verified', resultObject);
+    } catch (error) {
+      console.log('biometrics failed', error);
+    }
+  };
+  async componentDidMount() {
+    this.handledata();
+    // Linking.addEventListener('url', event => {});
+    // const response = await Linking.getInitialURL();
   }
   render() {
     return (

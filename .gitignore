@@ -65,6 +65,6 @@ yarn-error.log
 # testing
 /coverage
 package-lock.json
-yarn.lock
+*.lock
 .env
 .env.local
