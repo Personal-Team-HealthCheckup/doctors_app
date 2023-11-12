@@ -54,3 +54,16 @@ export interface SlotsDateTimes {
   slotsAvailable: number;
   isSelected: boolean;
 }
+
+export interface SlotsAvailable {
+  date: string;
+  slots: string[];
+}
+export interface Slots {
+  slots: string;
+  isSelected: boolean;
+}
+export interface SlotsAvailableChangeData {
+  slots: (Slots | string)[];
+  date: string;
+}

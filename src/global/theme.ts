@@ -8,6 +8,7 @@ export const COLORS = {
   greyBlack: 'rgba(103, 114, 148, 0.50)',
   green: '#0EBE7F',
   greeen1: '#46AA72',
+  greygreeen: 'rgba(14, 190, 127, 0.08)',
   greeen2: '#2DA0A4',
   lightGreen: '#75CFF0',
   lightWhite: 'rgba(255, 255, 255, 0.04)',

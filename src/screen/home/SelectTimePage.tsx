@@ -14,7 +14,12 @@ import {
 import CustomStatusBar from '../../Components/common/CustomStatusBar';
 import CustomHeader from '../../Components/common/CustomHeader';
 import {gradientPng, imageProfile3} from '../../assets/assets';
-import {Navigation, SlotsDateTimes} from '../../global/types';
+import {
+  Navigation,
+  Slots,
+  SlotsAvailableChangeData,
+  SlotsDateTimes,
+} from '../../global/types';
 import {handleScroll} from '../../helper/utilities';
 import {COLORS, FONTS} from '../../global/theme';
 import {
@@ -25,7 +30,7 @@ import {
 import {moderateScale} from '../../helper/Scale';
 import CustomRating from '../../Components/CustomRating';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
-import {slotsDateTimes} from '../../global/data';
+import {slotsAvailable, slotsDateTimes} from '../../global/data';
 import LinearGradient from 'react-native-linear-gradient';
 import CustomGButton from '../../Components/common/CustomGButton';
 import CustomButton from '../../Components/common/CustomButton';
@@ -37,6 +42,8 @@ interface SelectTimePageState {
   isScrollEnabled: boolean;
   slotItem?: SlotsDateTimes;
   slotsDateTimes: SlotsDateTimes[];
+  isNextAvailabilityClicked: boolean;
+  slotsAvailable: SlotsAvailableChangeData[];
 }
 
 class SelectTimePage extends React.Component<
@@ -48,11 +55,15 @@ class SelectTimePage extends React.Component<
     this.state = {
       isScrollEnabled: false,
       slotsDateTimes: slotsDateTimes,
+      isNextAvailabilityClicked: true,
+      slotsAvailable: slotsAvailable,
     };
   }
+
   handleScroll1 = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     this.setState({isScrollEnabled: handleScroll(event)});
   };
+
   Card = (item: SlotsDateTimes) => (
     <TouchableOpacity
       onPress={() => this.selectTheSlot(item)}
@@ -63,6 +74,7 @@ class SelectTimePage extends React.Component<
       </Text>
     </TouchableOpacity>
   );
+
   _renderSlots = ({item}: {item: SlotsDateTimes}) => {
     const {Card} = this;
 
@@ -82,8 +94,25 @@ class SelectTimePage extends React.Component<
       </>
     );
   };
+
+  isNextAvailabilityClicked = () => {
+    this.setState(prev => ({
+      isNextAvailabilityClicked: !prev.isNextAvailabilityClicked,
+    }));
+  };
   componentDidMount(): void {
     const slotItem = this.state.slotsDateTimes.find(slot => slot.isSelected);
+    const slotsAvailable1 = this.state.slotsAvailable.map(slot => {
+      const x = slot.slots.map(item => {
+        return {
+          slots: item,
+          isSelected: false,
+        };
+      }) as unknown as string[];
+
+      return {...slot, slots: x};
+    });
+    this.setState({slotsAvailable: slotsAvailable1});
     this.setState({slotItem: slotItem});
   }
   selectTheSlot = (item: SlotsDateTimes) => {
@@ -106,6 +135,73 @@ class SelectTimePage extends React.Component<
       },
     );
   };
+
+  toggleSlotTimeAvail = (slots: string) => {
+    const slotsAvailable1 = this.state.slotsAvailable.map(slot => {
+      const x = slot.slots.map(item => {
+        const items = item as Slots;
+        if (items.slots === slots) {
+          items.isSelected = true;
+        } else {
+          items.isSelected = false;
+        }
+        return items;
+      }) as unknown as string[];
+
+      return {...slot, slots: x};
+    });
+    this.setState({slotsAvailable: slotsAvailable1});
+  };
+
+  _renderTime = ({item}: {item: Slots | string}) => {
+    const {isSelected, slots} = item as Slots;
+    return (
+      <>
+        {isSelected ? (
+          <LinearGradient
+            colors={[COLORS.greeen2, COLORS.greeen1]}
+            start={{x: 0, y: 0}}
+            end={{x: 1, y: 1}}
+            style={[styles.buttonSlot, styles.gradient1]}>
+            <TouchableOpacity
+              onPress={() => this.toggleSlotTimeAvail(slots)}
+              style={styles.buttonSlot}>
+              <Text
+                style={[
+                  styles.heading1,
+                  styles.headingText,
+                  isSelected && styles.headingSelectText,
+                ]}>
+                {slots}
+              </Text>
+            </TouchableOpacity>
+          </LinearGradient>
+        ) : (
+          <TouchableOpacity
+            onPress={() => this.toggleSlotTimeAvail(slots)}
+            style={styles.buttonSlot}>
+            <Text style={[styles.heading1, styles.headingText]}>{slots}</Text>
+          </TouchableOpacity>
+        )}
+      </>
+    );
+  };
+  _renderSlotsTime = ({item}: {item: SlotsAvailableChangeData}) => {
+    return (
+      <View style={styles.slotAvailableView}>
+        <Text style={styles.heading1}>{item.date}</Text>
+        <View>
+          <FlatList
+            bounces={false}
+            style={styles.flatSlotList}
+            data={item.slots}
+            renderItem={this._renderTime}
+            keyExtractor={(_, index) => index.toString()}
+          />
+        </View>
+      </View>
+    );
+  };
   render() {
     return (
       <View style={styles.mainView}>
@@ -117,7 +213,7 @@ class SelectTimePage extends React.Component<
         />
 
         <ScrollView
-          scrollEnabled={false}
+          scrollEnabled={true}
           onScroll={event => this.handleScroll1(event)}
           scrollEventThrottle={16}
           bounces={false}
@@ -181,19 +277,44 @@ class SelectTimePage extends React.Component<
                   </TouchableOpacity>
                 )}
               </View>
-              <View style={styles.buttonView}>
-                <CustomGButton
-                  tittle={`Next availability on ${this.state.slotItem?.date}`}
-                  style={styles.button}
-                  textStyle={styles.text}
-                />
-                <Text style={[styles.subHe, styles.text1]}>OR</Text>
-                <CustomButton
-                  title="Contact Clinic"
-                  style={[styles.button, styles.button1]}
-                  textStyle={[styles.text, styles.textGreen]}
-                />
-              </View>
+              {this.state.isNextAvailabilityClicked ? (
+                <View style={{}}>
+                  <FlatList
+                    bounces={false}
+                    data={this.state.slotsAvailable}
+                    renderItem={this._renderSlotsTime}
+                    keyExtractor={item => item.date}
+                    style={{}}
+                  />
+                  <View style={{}}>
+                    <CustomGButton
+                      tittle="Edit"
+                      style={styles.buttonSlots}
+                      textStyle={styles.text}
+                    />
+                    <CustomGButton
+                      tittle="Book Now"
+                      style={styles.buttonSlots}
+                      textStyle={styles.text}
+                    />
+                  </View>
+                </View>
+              ) : (
+                <View style={styles.buttonView}>
+                  <CustomGButton
+                    tittle={`Next availability on ${this.state.slotItem?.date}`}
+                    style={styles.button}
+                    textStyle={styles.text}
+                    onPress={this.isNextAvailabilityClicked}
+                  />
+                  <Text style={[styles.subHe, styles.text1]}>OR</Text>
+                  <CustomButton
+                    title="Contact Clinic"
+                    style={[styles.button, styles.button1]}
+                    textStyle={[styles.text, styles.textGreen]}
+                  />
+                </View>
+              )}
             </View>
           </ImageBackground>
         </ScrollView>
@@ -339,5 +460,40 @@ const styles = StyleSheet.create({
   text1: {
     color: COLORS.white2gray,
     marginBottom: responsiveHeight(2),
+  },
+  headingText: {
+    color: COLORS.green,
+    fontSize: moderateScale(13),
+  },
+  headingSelectText: {
+    color: COLORS.white,
+  },
+  buttonSlot: {
+    backgroundColor: COLORS.greygreeen,
+    width: responsiveWidth(20),
+    borderRadius: responsiveWidth(2),
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: responsiveWidth(1.5),
+    paddingVertical: responsiveHeight(2),
+  },
+  gradient1: {
+    padding: responsiveWidth(0),
+    paddingVertical: responsiveHeight(0),
+    borderRadius: responsiveWidth(2.5),
+  },
+  flatSlotList: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    gap: responsiveWidth(3),
+    marginTop: responsiveHeight(2),
+  },
+  slotAvailableView: {
+    marginTop: responsiveHeight(2),
+  },
+  buttonSlots: {
+    width: responsiveWidth(40),
   },
 });

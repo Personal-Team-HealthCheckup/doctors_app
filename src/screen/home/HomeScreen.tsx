@@ -42,6 +42,7 @@ import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import CustomRating from '../../Components/CustomRating';
 import {handleScroll} from '../../helper/utilities';
 import CustomAppointmentCard from '../../Components/common/CustomAppointmentCard';
+import {DASHBOARD} from '../../Constants/Navigator';
 
 interface HomeScreenProps {
   navigation: {
@@ -93,6 +94,9 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
     }));
   };
 
+  navigateToAppointments = () => {
+    this.props.navigation.navigate(DASHBOARD.SELECTTIME);
+  };
   _renderCommnDesease = ({item}: {item: CommonDeseaseData}) => {
     const Svg = item.image;
     return (
@@ -120,6 +124,7 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
         <CustomAppointmentCard
           index={index}
           item={item}
+          navigateTo={() => this.navigateToAppointments()}
           yourAppointmentsData={this.state.yourAppointmentsData}
         />
       </View>

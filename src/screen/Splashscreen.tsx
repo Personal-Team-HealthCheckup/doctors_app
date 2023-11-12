@@ -15,7 +15,7 @@ import {
 import {moderateScale} from '../helper/Scale';
 import CustomStatusBar from '../Components/common/CustomStatusBar';
 import CustomMainView from '../Components/common/CustomMainView';
-import {AUTH} from '../Constants/Navigator';
+import {MAINSTACK} from '../Constants/Navigator';
 import CustomLoader from '../Components/CustomLoader';
 interface SplashScreensProps {
   navigation?: {
@@ -58,7 +58,7 @@ class SplashScreens extends React.Component<
     );
     this.timer = Number(
       setTimeout(() => {
-        this.props.navigation?.replace(AUTH.SIGNIN);
+        this.props.navigation?.replace(MAINSTACK.AUTHNAVIGATION);
       }, 3000),
     );
   }

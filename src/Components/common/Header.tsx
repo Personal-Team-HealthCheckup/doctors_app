@@ -32,7 +32,7 @@ const Header: React.FC<Iprops> = props => {
         </View>
         <TouchableOpacity
           style={styles.icon}
-          onPress={() => props.navigateTo(DASHBOARD.SEARCPAGE)}>
+          onPress={() => props.navigateTo(DASHBOARD.SEARCHPAGE)}>
           <SearchSvg width={'100%'} height={'70%'} style={styles.image} />
         </TouchableOpacity>
         <View style={styles.icon}>

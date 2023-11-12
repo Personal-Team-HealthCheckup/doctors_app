@@ -17,11 +17,12 @@ import CustomGButton from '../../Components/common/CustomGButton';
 import {COLORS, FONTS} from '../../global/theme';
 import {moderateScale} from '../../helper/Scale';
 import {OnboardingData as data} from '../../global/data';
-import {HOME} from '../../Constants/Navigator';
+import {MAINSTACK} from '../../Constants/Navigator';
 
 interface OnBoardingProps {
   navigation?: {
     navigate: (args: string) => void;
+    replace: (args: string) => void;
   };
 }
 
@@ -38,7 +39,7 @@ class OnBoarding extends React.Component<OnBoardingProps, OnBoardingState> {
   }
 
   handleSkip = () => {
-    this.props.navigation?.navigate(HOME.DASHBOARD);
+    this.props.navigation?.replace(MAINSTACK.HOMENAVIGATION);
   };
 
   handleGetStarted = () => {
