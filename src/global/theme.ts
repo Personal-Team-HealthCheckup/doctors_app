@@ -22,6 +22,7 @@ export const COLORS = {
   lightCyan: '#59FFEB',
   light: '#677294CC',
   green3: '#0EBE7E',
+  gradientWhite: '#858EA9',
 };
 
 export const FONTS = {

@@ -212,13 +212,14 @@ class SelectTimePage extends React.Component<
           }
         />
 
-        <ScrollView
-          scrollEnabled={true}
-          onScroll={event => this.handleScroll1(event)}
-          scrollEventThrottle={16}
-          bounces={false}
-          style={styles.container}>
-          <ImageBackground source={gradientPng} style={styles.imageView}>
+        <ImageBackground source={gradientPng} style={styles.imageView}>
+          <ScrollView
+            scrollEnabled={true}
+            onScroll={event => this.handleScroll1(event)}
+            scrollEventThrottle={16}
+            bounces={false}
+            contentContainerStyle={styles.buttonContainerStyle}
+            style={styles.container}>
             <CustomHeader
               navigation={this.props.navigation}
               heading="Select Time"
@@ -284,11 +285,11 @@ class SelectTimePage extends React.Component<
                     data={this.state.slotsAvailable}
                     renderItem={this._renderSlotsTime}
                     keyExtractor={item => item.date}
-                    style={{}}
                   />
-                  <View style={{}}>
+                  <View style={styles.buttonViewSlot}>
                     <CustomGButton
                       tittle="Edit"
+                      isGray={true}
                       style={styles.buttonSlots}
                       textStyle={styles.text}
                     />
@@ -316,8 +317,8 @@ class SelectTimePage extends React.Component<
                 </View>
               )}
             </View>
-          </ImageBackground>
-        </ScrollView>
+          </ScrollView>
+        </ImageBackground>
       </View>
     );
   }
@@ -325,21 +326,27 @@ class SelectTimePage extends React.Component<
 
 export default SelectTimePage;
 const styles = StyleSheet.create({
-  mainView: {flex: 1},
-  container: {
+  mainView: {
+    flex: 1,
     width: responsiveWidth(100),
     height: responsiveHeight(100),
     backgroundColor: COLORS.black,
+  },
+  buttonContainerStyle: {paddingBottom: responsiveHeight(10)},
+  container: {
+    width: responsiveWidth(100),
+    height: responsiveHeight(100),
     flex: 1,
+    paddingHorizontal: responsiveScreenWidth(5),
+    paddingVertical: responsiveHeight(3),
   },
   imageView: {
     width: responsiveWidth(100),
     height: responsiveHeight(100),
     alignItems: 'center',
     resizeMode: 'cover',
-    paddingVertical: responsiveHeight(3),
+
     position: 'relative',
-    paddingHorizontal: responsiveScreenWidth(5),
     flex: 1,
   },
   textInput: {marginTop: responsiveHeight(4)},
@@ -495,5 +502,11 @@ const styles = StyleSheet.create({
   },
   buttonSlots: {
     width: responsiveWidth(40),
+  },
+  buttonViewSlot: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: responsiveHeight(4),
   },
 });
