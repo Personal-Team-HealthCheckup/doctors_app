@@ -46,6 +46,9 @@ export interface QualifiedDoctorData {
 export interface Navigation {
   navigate?: (url: string) => void;
   goBack?: () => void;
+  toggleDrawer?: () => void;
+  openDrawer?: () => void;
+  closeDrawer?: () => void;
 }
 
 export interface SlotsDateTimes {

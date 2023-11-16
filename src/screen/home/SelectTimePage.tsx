@@ -55,7 +55,7 @@ class SelectTimePage extends React.Component<
     this.state = {
       isScrollEnabled: false,
       slotsDateTimes: slotsDateTimes,
-      isNextAvailabilityClicked: true,
+      isNextAvailabilityClicked: false,
       slotsAvailable: slotsAvailable,
     };
   }

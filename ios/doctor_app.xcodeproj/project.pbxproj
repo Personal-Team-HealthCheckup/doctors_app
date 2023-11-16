@@ -31,7 +31,6 @@
 		73D5ECD24B954220A14DD55C /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D733AAC11998421FA8FA6F61 /* Rubik-Regular.ttf */; };
 		7699B88040F8A987B510C191 /* libPods-doctor_app-doctor_appTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-doctor_app-doctor_appTests.a */; };
 		7BBDEFA6DD5E45729A2508FD /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ABAEA83B372547A2A0F99886 /* AntDesign.ttf */; };
-		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		8D34CAC314974921B49A5F21 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 550C97AF20FD4104BF7739EC /* FontAwesome5_Regular.ttf */; };
 		91F537B21ABD4CFC8AF285EF /* Rubik-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 591CFFBA2949435088AB72BA /* Rubik-ExtraBold.ttf */; };
 		99422A97D12B4AE187215B2F /* FontAwesome6_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DDE714384D2344A698FBF056 /* FontAwesome6_Solid.ttf */; };
@@ -164,7 +163,6 @@
 		72CAB0367BC34F3FA26C6E54 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Regular.ttf"; path = "../src/assets/fonts/Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		7A44B3214B5B4C6CAD33A1E7 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = ../src/assets/fonts/Entypo.ttf; sourceTree = "<group>"; };
 		7E753EDBA3A542A49A54A2A2 /* Poppins-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Black.ttf"; path = "../src/assets/fonts/Poppins-Black.ttf"; sourceTree = "<group>"; };
-		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = doctor_app/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		888C0174C79F440F97C6CC6A /* Rubik-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Light.ttf"; path = "../src/assets/fonts/Rubik-Light.ttf"; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-doctor_app-doctor_appTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-doctor_app-doctor_appTests.release.xcconfig"; path = "Target Support Files/Pods-doctor_app-doctor_appTests/Pods-doctor_app-doctor_appTests.release.xcconfig"; sourceTree = "<group>"; };
 		8C33BF47DF9F483FA185BEAA /* Poppins-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Medium.ttf"; path = "../src/assets/fonts/Poppins-Medium.ttf"; sourceTree = "<group>"; };
@@ -252,7 +250,6 @@
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
-				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
 			name = doctor_app;
@@ -612,7 +609,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				7BBDEFA6DD5E45729A2508FD /* AntDesign.ttf in Resources */,
 				CD4130CC9EDD41C0B374F42F /* Entypo.ttf in Resources */,

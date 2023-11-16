@@ -15,21 +15,24 @@ import {moderateScale} from '../../helper/Scale';
 import {DASHBOARD} from '../../Constants/Navigator';
 interface Iprops {
   navigateTo: (text: string) => void;
+  toggleDrawer?: () => void;
 }
 const Header: React.FC<Iprops> = props => {
   return (
     <View style={styles.mainView}>
-      <View style={styles.leftView}>
+      <TouchableOpacity
+        onPress={() => props.toggleDrawer && props.toggleDrawer()}
+        style={styles.icon}>
         <OnBoarding1Svg
           width={responsiveScreenWidth(18)}
           height={responsiveScreenWidth(18)}
           style={styles.image}
         />
-      </View>
+      </TouchableOpacity>
       <View style={styles.iconView}>
-        <View style={styles.icon}>
+        <TouchableOpacity style={styles.icon} onPress={() => {}}>
           <LightSvg width={'100%'} height={'100%'} style={styles.image} />
-        </View>
+        </TouchableOpacity>
         <TouchableOpacity
           style={styles.icon}
           onPress={() => props.navigateTo(DASHBOARD.SEARCHPAGE)}>

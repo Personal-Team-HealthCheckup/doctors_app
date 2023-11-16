@@ -33,6 +33,7 @@ import {
 import {
   CommonDeseaseData,
   MedicalStoreData,
+  Navigation,
   QualifiedDoctorData,
   YourAppointmentsData,
 } from '../../global/types';
@@ -45,9 +46,7 @@ import CustomAppointmentCard from '../../Components/common/CustomAppointmentCard
 import {DASHBOARD} from '../../Constants/Navigator';
 
 interface HomeScreenProps {
-  navigation: {
-    navigate: (text: string) => void;
-  };
+  navigation?: Navigation;
 }
 
 interface HomeScreenState {
@@ -95,7 +94,8 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
   };
 
   navigateToAppointments = () => {
-    this.props.navigation.navigate(DASHBOARD.SELECTTIME);
+    this.props.navigation?.navigate &&
+      this.props.navigation?.navigate(DASHBOARD.SELECTTIME);
   };
   _renderCommnDesease = ({item}: {item: CommonDeseaseData}) => {
     const Svg = item.image;
@@ -205,7 +205,10 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
     this.setState({isScrollEnabled: handleScroll(event)});
   };
   handleNavigation = (text: string) => {
-    this.props.navigation.navigate(text);
+    this.props.navigation?.navigate && this.props.navigation.navigate(text);
+  };
+  toggleDrawer = () => {
+    this.props.navigation?.openDrawer && this.props.navigation?.openDrawer();
   };
   render() {
     return (
@@ -241,7 +244,10 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
                 />
               </LinearGradient>
             )}
-            <Header navigateTo={this.handleNavigation} />
+            <Header
+              navigateTo={this.handleNavigation}
+              toggleDrawer={this.toggleDrawer}
+            />
             <View style={styles.viewStyle}>
               <CustomHeading title="Common Diseases" />
               <FlatList
