@@ -44,15 +44,17 @@ const HomeNavigation = () => {
 
 const MainNavigation = () => {
   return (
-    <MainStack.Navigator screenOptions={{headerShown: false}}>
+    <MainStack.Navigator
+      screenOptions={{headerShown: false}}
+      initialRouteName={MAINSTACK.HOMENAVIGATION}>
       <MainStack.Screen name={LANDING.SPLASHSCREEN} component={SplashScreens} />
-      <MainStack.Screen
-        name={MAINSTACK.HOMENAVIGATION}
-        component={HomeNavigation}
-      />
       <MainStack.Screen
         name={MAINSTACK.AUTHNAVIGATION}
         component={AuthNavigation}
+      />
+      <MainStack.Screen
+        name={MAINSTACK.HOMENAVIGATION}
+        component={HomeNavigation}
       />
     </MainStack.Navigator>
   );

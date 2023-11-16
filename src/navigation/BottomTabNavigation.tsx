@@ -74,8 +74,7 @@ const BottomTabStackNavigator = () => {
         tabBarInactiveTintColor: COLORS.grey,
         tabBarIconStyle: styles.tabBarIconStyle,
         tabBarHideOnKeyboard: true,
-      }}
-      initialRouteName={HOME.DOCTORNEARYOU}>
+      }}>
       <BottomTab.Screen
         name={HOME.HOME}
         component={HomeScreen}
