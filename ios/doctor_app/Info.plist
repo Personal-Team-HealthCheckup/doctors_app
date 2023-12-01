@@ -37,6 +37,10 @@
 		</dict>
 		<key>NSLocationWhenInUseUsageDescription</key>
 		<string/>
+		<key>NSMicrophoneUsageDescription</key>
+		<string>We need access to your microphone to record audio.</string>
+		<key>NSCameraUsageDescription</key>
+		<string>We need access to your camera to capture video.</string>
 		<key>UIAppFonts</key>
 		<array>
 			<string>AntDesign.ttf</string>
