@@ -1,0 +1,37 @@
+stages:
+  - test
+  - build_android
+  - build_ios
+before_script:
+  - apt-get update -qy
+  - apt-get install -y curl
+  - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+  - export NVM_DIR="$HOME/.nvm"
+  - source "$NVM_DIR/nvm.sh"
+
+
+test:
+  stage: test
+  script:
+    - nvm install 18.19.0
+    - npm install --global yarn
+    - yarn --version
+    - yarn install
+    - cd android && ./gradlew dependencies && cd ..
+    - yarn test
+
+build_android:
+  stage: build_android
+  script:
+    - cd android && ./gradlew assembleRelease && cd ..
+  artifacts:
+    paths:
+      - android/app/build/outputs/
+
+build_ios:
+  stage: build_ios
+  script:
+    - yarn ios:build
+  artifacts:
+    paths:
+      - ios/build/
