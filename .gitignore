@@ -68,3 +68,5 @@ package-lock.json
 *.lock
 .env
 .env.local
+*.mp3
+*.rtf

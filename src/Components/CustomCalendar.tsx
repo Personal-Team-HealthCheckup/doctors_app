@@ -12,7 +12,8 @@ class CustomCalendar extends React.Component<
   CustomCalendarProps,
   CustomCalendarState
 > {
-  months = [
+  // Define constants for months, week days, and days in each month
+  private readonly months: string[] = [
     'January',
     'February',
     'March',
@@ -27,9 +28,19 @@ class CustomCalendar extends React.Component<
     'December',
   ];
 
-  weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  private readonly weekDays: string[] = [
+    'Sun',
+    'Mon',
+    'Tue',
+    'Wed',
+    'Thu',
+    'Fri',
+    'Sat',
+  ];
 
-  nDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  private readonly nDays: number[] = [
+    31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31,
+  ];
 
   constructor(props: CustomCalendarProps) {
     super(props);
@@ -38,9 +49,11 @@ class CustomCalendar extends React.Component<
     };
   }
 
+  // Handler for date press
   _onPress = (item: number) => {
     this.setState(prevState => {
       if (!isNaN(item) && item !== -1) {
+        // Clone the active date and set the new day
         const newDate = new Date(prevState.activeDate);
         newDate.setDate(item);
         return {activeDate: newDate};
@@ -49,16 +62,30 @@ class CustomCalendar extends React.Component<
     });
   };
 
+  // Handler for changing the month
   changeMonth = (n: number) => {
-    this.setState(() => {
-      this.state.activeDate.setMonth(this.state.activeDate.getMonth() + n);
-      return this.state;
+    this.setState(prevState => {
+      // Clone the active date and set the new month
+      const newDate = new Date(prevState.activeDate);
+      newDate.setMonth(newDate.getMonth() + n);
+      return {activeDate: newDate};
     });
   };
 
+  // Handler for changing the year
+  changeYear = (year: number) => {
+    this.setState(prevState => {
+      const newDate = new Date(prevState.activeDate);
+      newDate.setFullYear(year);
+      return {activeDate: newDate};
+    });
+  };
+
+  // Generate the matrix representing the calendar
   generateMatrix(): number[][] {
     const matrix: number[][] = [];
-    // Create header
+
+    // Create header with week days
     matrix[0] = [...(this.weekDays as unknown as number[])];
 
     const year = this.state.activeDate.getFullYear();
@@ -66,11 +93,12 @@ class CustomCalendar extends React.Component<
     const firstDay = new Date(year, month, 1).getDay();
 
     let maxDays = this.nDays[month];
-    if (month === 1) {
-      // February
-      if ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) {
-        maxDays += 1;
-      }
+    if (
+      month === 1 &&
+      ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0)
+    ) {
+      // February has 29 days in a leap year
+      maxDays += 1;
     }
 
     let counter = 1;
@@ -92,6 +120,7 @@ class CustomCalendar extends React.Component<
     return matrix;
   }
 
+  // Render the calendar
   render(): React.ReactNode {
     const matrix = this.generateMatrix();
     const rows: React.ReactNode[] = matrix.map((row, rowIndex) => {
@@ -123,21 +152,24 @@ class CustomCalendar extends React.Component<
 
     return (
       <View>
+        {/* Display the current month and year */}
         <Text style={styles.container}>
           {this.months[this.state.activeDate.getMonth()]} &nbsp;
           {this.state.activeDate.getFullYear()}
         </Text>
         {rows}
 
+        {/* Buttons to navigate to the previous and next months */}
         <Button title="Previous" onPress={() => this.changeMonth(-1)} />
 
-        <Button title="Next" onPress={() => this.changeMonth(+1)} />
+        <Button title="Next" onPress={() => this.changeMonth(1)} />
       </View>
     );
   }
 }
 
 export default CustomCalendar;
+
 const styles = StyleSheet.create({
   container: {
     fontWeight: 'bold',
