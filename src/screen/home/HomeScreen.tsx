@@ -13,7 +13,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {COLORS, FONTS} from '../../global/theme';
+import { COLORS, FONTS } from '../../global/theme';
 import LinearGradient from 'react-native-linear-gradient';
 import {
   responsiveFontSize,
@@ -22,8 +22,8 @@ import {
   responsiveScreenWidth,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import {HomeScreenPng, OnBoarding1Svg} from '../../assets/assets';
-import {moderateScale} from '../../helper/Scale';
+import { HomeScreenPng, OnBoarding1Svg } from '../../assets/assets';
+import { moderateScale } from '../../helper/Scale';
 import {
   commonDeseaseData,
   medicalStoreData,
@@ -41,9 +41,9 @@ import CustomHeading from '../../Components/common/CustomHeading';
 import Header from '../../Components/common/Header';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import CustomRating from '../../Components/CustomRating';
-import {handleScroll} from '../../helper/utilities';
+import { handleScroll } from '../../helper/utilities';
 import CustomAppointmentCard from '../../Components/common/CustomAppointmentCard';
-import {DASHBOARD} from '../../Constants/Navigator';
+import { DASHBOARD } from '../../Constants/Navigator';
 
 interface HomeScreenProps {
   navigation?: Navigation;
@@ -54,7 +54,6 @@ interface HomeScreenState {
   yourAppointmentsData: YourAppointmentsData[];
   medicalPharmacy: MedicalStoreData[];
   qualifiedDoctor: QualifiedDoctorData[];
-  isScrollEnabled: boolean;
 }
 const time = 2000;
 class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
@@ -65,7 +64,6 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
       isLinearGradient: true,
       yourAppointmentsData: yourAppointmentsData,
       medicalPharmacy: medicalStoreData,
-      isScrollEnabled: false,
       qualifiedDoctor: qualifiedDoctorData,
     };
   }
@@ -73,7 +71,7 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
   componentDidMount(): void {
     this.timer = Number(
       setTimeout(() => {
-        this.setState({isLinearGradient: false});
+        this.setState({ isLinearGradient: false });
       }, time),
     );
   }
@@ -97,7 +95,7 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
     this.props.navigation?.navigate &&
       this.props.navigation?.navigate(DASHBOARD.SELECTTIME);
   };
-  _renderCommnDesease = ({item}: {item: CommonDeseaseData}) => {
+  _renderCommnDesease = ({ item }: { item: CommonDeseaseData }) => {
     const Svg = item.image;
     return (
       <ImageBackground
@@ -151,7 +149,7 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
           starViewStyle={styles.viewStar}
           initialValue={item.rating}
           isDisable
-          onChange={() => {}}
+          onChange={() => { }}
         />
       </View>
     );
@@ -201,9 +199,7 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
       </View>
     );
   };
-  handleScroll1 = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    this.setState({isScrollEnabled: handleScroll(event)});
-  };
+
   handleNavigation = (text: string) => {
     this.props.navigation?.navigate && this.props.navigation.navigate(text);
   };
@@ -213,41 +209,36 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
   render() {
     return (
       <View style={styles.mainView}>
-        <CustomStatusBar
-          isScrollEnabled={this.state.isScrollEnabled}
-          backgroundColor={
-            this.state.isScrollEnabled ? COLORS.white : COLORS.transparent
-          }
-        />
+        <CustomStatusBar />
         <ImageBackground source={HomeScreenPng} style={styles.imageView}>
+          {this.state.isLinearGradient && (
+            <LinearGradient
+              colors={[COLORS.greeen2, COLORS.greeen1]}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              style={[styles.linearGradient]}>
+              <View style={styles.viewText}>
+                <Text style={styles.profilename}>Hi Olivia Doe</Text>
+                <Text style={styles.welText}>Welcome To VHA</Text>
+              </View>
+              <OnBoarding1Svg
+                width={responsiveScreenWidth(20)}
+                height={responsiveScreenWidth(20)}
+                style={styles.image}
+              />
+            </LinearGradient>
+          )}
+          <Header
+            navigateTo={this.handleNavigation}
+            toggleDrawer={this.toggleDrawer}
+          />
           <ScrollView
-            onScroll={event => this.handleScroll1(event)}
             scrollEventThrottle={16}
             scrollEnabled
             bounces={false}
             contentContainerStyle={styles.contentContainerStyleMain}
             style={styles.container}>
-            {this.state.isLinearGradient && (
-              <LinearGradient
-                colors={[COLORS.greeen2, COLORS.greeen1]}
-                start={{x: 0, y: 0}}
-                end={{x: 1, y: 1}}
-                style={[styles.linearGradient]}>
-                <View style={styles.viewText}>
-                  <Text style={styles.profilename}>Hi Olivia Doe</Text>
-                  <Text style={styles.welText}>Welcome To VHA</Text>
-                </View>
-                <OnBoarding1Svg
-                  width={responsiveScreenWidth(20)}
-                  height={responsiveScreenWidth(20)}
-                  style={styles.image}
-                />
-              </LinearGradient>
-            )}
-            <Header
-              navigateTo={this.handleNavigation}
-              toggleDrawer={this.toggleDrawer}
-            />
+
             <View style={styles.viewStyle}>
               <CustomHeading title="Common Diseases" />
               <FlatList
@@ -513,7 +504,7 @@ const styles = StyleSheet.create({
     gap: responsiveWidth(1),
     paddingBottom: responsiveScreenHeight(1.5),
   },
-  customRating: {justifyContent: 'flex-start', gap: responsiveWidth(2)},
+  customRating: { justifyContent: 'flex-start', gap: responsiveWidth(2) },
   cont: {
     marginRight: responsiveScreenWidth(1),
   },

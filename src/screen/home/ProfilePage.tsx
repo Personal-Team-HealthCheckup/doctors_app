@@ -24,13 +24,13 @@ import {
   imageProfile1,
 } from '../../assets/assets';
 import Header from '../../Components/common/CustomHeader';
-import {COLORS, FONTS} from '../../global/theme';
+import { COLORS, FONTS } from '../../global/theme';
 import LinearGradient from 'react-native-linear-gradient';
 import VectorIcon from 'react-native-vector-icons/FontAwesome5';
 import CustomTextInput from '../../Components/common/CustomTextInput';
 import CustomGButton from '../../Components/common/CustomGButton';
-import {closeKeyBoard, handleScroll} from '../../helper/utilities';
-interface ProfilePageProps {}
+import { closeKeyBoard, handleScroll } from '../../helper/utilities';
+interface ProfilePageProps { }
 
 interface ProfilePageState {
   isScrollEnabled: boolean;
@@ -45,12 +45,12 @@ class ProfilePage extends React.Component<ProfilePageProps, ProfilePageState> {
   }
 
   handleScroll1 = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    this.setState({isScrollEnabled: handleScroll(event)});
+    this.setState({ isScrollEnabled: handleScroll(event) });
   };
 
   render() {
     return (
-      <>
+      <View style={styles.mainContainer}>
         <CustomStatusBar
           isScrollEnabled={this.state.isScrollEnabled}
           backgroundColor={
@@ -76,8 +76,8 @@ class ProfilePage extends React.Component<ProfilePageProps, ProfilePageState> {
 
                   <LinearGradient
                     colors={[COLORS.lightCyan, COLORS.lightYellow]}
-                    start={{x: 0.0, y: 0.5}}
-                    end={{x: 1.0, y: 0.5}}
+                    start={{ x: 0.0, y: 0.5 }}
+                    end={{ x: 1.0, y: 0.5 }}
                     style={styles.imageView}>
                     <View style={styles.cameraView}>
                       <VectorIcon
@@ -104,13 +104,17 @@ class ProfilePage extends React.Component<ProfilePageProps, ProfilePageState> {
             </KeyboardAvoidingView>
           </TouchableWithoutFeedback>
         </ScrollView>
-      </>
+      </View>
     );
   }
 }
 
 export default ProfilePage;
 const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    backgroundColor: COLORS.black,
+  },
   container: {
     width: responsiveWidth(100),
     height: responsiveHeight(100),
