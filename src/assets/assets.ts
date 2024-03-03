@@ -61,6 +61,8 @@ import LoaderImg from './images/loaderImage.png';
 import HeartImg from './images/heart.png';
 import HeartRedImg from './images/heart-red.png';
 import CheckImg from './images/check.png';
+
+import bgTokenImg from './images/bgtoken.png';
 export {
   homeIcon,
   MapIcon,
@@ -113,4 +115,5 @@ export {
   LoaderImg,
   HeartImg,
   HeartRedImg,
+  bgTokenImg
 };

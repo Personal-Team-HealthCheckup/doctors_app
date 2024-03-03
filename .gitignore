@@ -70,3 +70,4 @@ package-lock.json
 .env.local
 *.mp3
 *.rtf
+*.zip

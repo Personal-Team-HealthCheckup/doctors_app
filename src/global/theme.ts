@@ -40,4 +40,13 @@ export const FONTS = {
     semiBold: 'Rubik-SemiBold',
     bold: 'Rubik-Bold',
   },
+  inter:{
+    'light[300]':"Inter-ExtraLight",
+    'regular[400]':"Inter-Regular",
+    'medium[500]':"Inter-Medium",
+    'semiBold[600]':"Inter-SemiBold",
+    'bold[700]':"Inter-Bold",
+    'extrBold[800]':"Inter-ExtraBold",
+    'black[900]':"Inter-Black",
+  }
 };

@@ -9,7 +9,7 @@ interface IProps {
 interface IState { }
 class CustomStatusBar extends Component<IProps, IState> {
   render() {
-    const { backgroundColor , isScrollEnabled } = this.props;
+    const { backgroundColor = "transparent", isScrollEnabled } = this.props;
     // if (Platform.OS === 'ios') {
     //   return <View style={[styles.statusBar, { backgroundColor: backgroundColor ?? COLORS.black }]}>
     //     <SafeAreaView>

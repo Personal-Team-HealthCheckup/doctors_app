@@ -51,22 +51,16 @@ class ProfilePage extends React.Component<ProfilePageProps, ProfilePageState> {
   render() {
     return (
       <View style={styles.mainContainer}>
-        <CustomStatusBar
-          isScrollEnabled={this.state.isScrollEnabled}
-          backgroundColor={
-            this.state.isScrollEnabled ? COLORS.white : COLORS.transparent
-          }
-        />
-        <ScrollView
-          onScroll={event => this.handleScroll1(event)}
-          scrollEventThrottle={16}
-          bounces={false}
-          style={styles.container}>
-          <TouchableWithoutFeedback onPress={() => closeKeyBoard()}>
-            <KeyboardAvoidingView
-              behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-              <ImageBackground source={HomeScreenPng} style={styles.image}>
-                <Header heading="Profile" />
+        <CustomStatusBar />
+        <ImageBackground source={HomeScreenPng} style={styles.image}>
+          <Header heading="Profile" />
+          <ScrollView
+            scrollEventThrottle={16}
+            bounces={false}
+            contentContainerStyle={{ paddingBottom: "10%" }}
+            style={styles.container}>
+            <TouchableWithoutFeedback style={{ flex: 1 }} onPress={() => closeKeyBoard()}>
+              <KeyboardAvoidingView keyboardVerticalOffset={12} behavior={Platform.OS === "ios" ? "padding" : undefined} style={{ flex: 1 }}>
                 <View style={styles.mainView}>
                   <Text style={styles.title}>Set up your profile</Text>
                   <Text style={styles.subtitle}>
@@ -100,10 +94,10 @@ class ProfilePage extends React.Component<ProfilePageProps, ProfilePageState> {
                     <CustomGButton tittle="continue" />
                   </View>
                 </View>
-              </ImageBackground>
-            </KeyboardAvoidingView>
-          </TouchableWithoutFeedback>
-        </ScrollView>
+              </KeyboardAvoidingView>
+            </TouchableWithoutFeedback>
+          </ScrollView>
+        </ImageBackground>
       </View>
     );
   }
@@ -113,21 +107,20 @@ export default ProfilePage;
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: COLORS.black,
-  },
-  container: {
     width: responsiveWidth(100),
     height: responsiveHeight(100),
     backgroundColor: COLORS.black,
+  },
+  container: {
     flex: 1,
   },
   image: {
-    alignItems: 'center',
+    flex: 1,
+    width: responsiveWidth(100),
+    height: responsiveHeight(100),
     resizeMode: 'cover',
     paddingVertical: responsiveHeight(3),
-    position: 'relative',
     paddingHorizontal: responsiveScreenWidth(5),
-    flex: 1,
   },
   mainView: {
     flex: 1,

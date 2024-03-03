@@ -1,7 +1,7 @@
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import React, {useCallback} from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import React, { useCallback } from 'react';
 import HomeScreen from '../screen/home/HomeScreen';
-import {HOME} from '../Constants/Navigator';
+import { HOME } from '../Constants/Navigator';
 import DoctorNearYou from '../screen/home/DoctorNearYou';
 import {
   Image,
@@ -9,8 +9,9 @@ import {
   ImageStyle,
   StyleProp,
   StyleSheet,
+  View,
 } from 'react-native';
-import {COLORS} from '../global/theme';
+import { COLORS } from '../global/theme';
 import {
   responsiveHeight,
   responsiveWidth,
@@ -50,8 +51,8 @@ const BottomTabStackNavigator = () => {
               'rgba(0, 133, 133, 0.00)',
             ]}
             style={styles.gradient}
-            start={{x: 1, y: 1}}
-            end={{x: 0.1, y: 1}}
+            start={{ x: 1, y: 1 }}
+            end={{ x: 0.1, y: 1 }}
           />
         )}
         <Image
@@ -88,7 +89,7 @@ const BottomTabStackNavigator = () => {
         component={TokenOffer}
         options={{
           tabBarLabel: HOME.OFFERPAGE,
-          tabBarIcon: ({color, size, focused}) =>
+          tabBarIcon: ({ color, size, focused }) =>
             BottomTabIcon({
               color,
               size,
@@ -102,7 +103,7 @@ const BottomTabStackNavigator = () => {
         component={DoctorNearYou}
         options={{
           tabBarLabel: HOME.DOCTORNEARYOU,
-          tabBarIcon: ({color, size, focused}) =>
+          tabBarIcon: ({ color, size, focused }) =>
             BottomTabIcon({
               color,
               size,
@@ -117,7 +118,7 @@ const BottomTabStackNavigator = () => {
         component={CartPage}
         options={{
           tabBarLabel: HOME.CARTPAGE,
-          tabBarIcon: ({color, size, focused}) =>
+          tabBarIcon: ({ color, size, focused }) =>
             BottomTabIcon({
               color,
               size,
@@ -131,7 +132,7 @@ const BottomTabStackNavigator = () => {
         component={ProfilePage}
         options={{
           tabBarLabel: HOME.PROFILEPAGE,
-          tabBarIcon: ({color, size, focused}) =>
+          tabBarIcon: ({ color, size, focused }) =>
             BottomTabIcon({
               color,
               size,
