@@ -17,11 +17,12 @@ import CustomGButton from '../../Components/common/CustomGButton';
 import {COLORS, FONTS} from '../../global/theme';
 import {moderateScale} from '../../helper/Scale';
 import {OnboardingData as data} from '../../global/data';
-import {HOME} from '../../Constants/Navigator';
+import {MAINSTACK} from '../../Constants/Navigator';
 
 interface OnBoardingProps {
   navigation?: {
     navigate: (args: string) => void;
+    replace: (args: string) => void;
   };
 }
 
@@ -37,12 +38,15 @@ class OnBoarding extends React.Component<OnBoardingProps, OnBoardingState> {
     };
   }
 
-  handleSkip = () => {};
+  handleSkip = () => {
+    this.props.navigation?.replace(MAINSTACK.HOMENAVIGATION);
+  };
+
   handleGetStarted = () => {
     if (data.length - 1 > this.state.index) {
       this.setState({index: this.state.index + 1});
     } else {
-      this.props.navigation?.navigate(HOME.DASHBOARD);
+      this.handleSkip();
     }
   };
   render() {
@@ -119,6 +123,7 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.rubik.regular,
     fontSize: moderateScale(14),
     textTransform: 'capitalize',
+    height: responsiveHeight(5),
   },
   button: {
     marginTop: responsiveHeight(4),

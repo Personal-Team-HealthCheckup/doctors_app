@@ -7,14 +7,13 @@ import {
   ImageSourcePropType,
   NativeScrollEvent,
   NativeSyntheticEvent,
-  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
-import {COLORS, FONTS} from '../../global/theme';
+import { COLORS, FONTS } from '../../global/theme';
 import LinearGradient from 'react-native-linear-gradient';
 import {
   responsiveFontSize,
@@ -23,33 +22,38 @@ import {
   responsiveScreenWidth,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import {HomeScreenPng, OnBoarding1Svg} from '../../assets/assets';
-import {moderateScale} from '../../helper/Scale';
+import { HomeScreenPng, OnBoarding1Svg } from '../../assets/assets';
+import { moderateScale } from '../../helper/Scale';
 import {
   commonDeseaseData,
   medicalStoreData,
+  qualifiedDoctorData,
   yourAppointmentsData,
 } from '../../global/data';
 import {
   CommonDeseaseData,
   MedicalStoreData,
+  Navigation,
+  QualifiedDoctorData,
   YourAppointmentsData,
 } from '../../global/types';
 import CustomHeading from '../../Components/common/CustomHeading';
 import Header from '../../Components/common/Header';
-import CustomGButton from '../../Components/common/CustomGButton';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
-import {Rating} from 'react-native-ratings';
 import CustomRating from '../../Components/CustomRating';
-import {handleScroll} from '../../helper/utilities';
+import { handleScroll } from '../../helper/utilities';
+import CustomAppointmentCard from '../../Components/common/CustomAppointmentCard';
+import { DASHBOARD } from '../../Constants/Navigator';
 
-interface HomeScreenProps {}
+interface HomeScreenProps {
+  navigation?: Navigation;
+}
 
 interface HomeScreenState {
   isLinearGradient: boolean;
   yourAppointmentsData: YourAppointmentsData[];
   medicalPharmacy: MedicalStoreData[];
-  isScrollEnabled: boolean;
+  qualifiedDoctor: QualifiedDoctorData[];
 }
 const time = 2000;
 class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
@@ -60,14 +64,14 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
       isLinearGradient: true,
       yourAppointmentsData: yourAppointmentsData,
       medicalPharmacy: medicalStoreData,
-      isScrollEnabled: false,
+      qualifiedDoctor: qualifiedDoctorData,
     };
   }
 
   componentDidMount(): void {
     this.timer = Number(
       setTimeout(() => {
-        this.setState({isLinearGradient: false});
+        this.setState({ isLinearGradient: false });
       }, time),
     );
   }
@@ -87,7 +91,11 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
     }));
   };
 
-  _renderCommnDesease = ({item}: {item: CommonDeseaseData}) => {
+  navigateToAppointments = () => {
+    this.props.navigation?.navigate &&
+      this.props.navigation?.navigate(DASHBOARD.SELECTTIME);
+  };
+  _renderCommnDesease = ({ item }: { item: CommonDeseaseData }) => {
     const Svg = item.image;
     return (
       <ImageBackground
@@ -98,9 +106,6 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
       </ImageBackground>
     );
   };
-
-  ratingCompleted = () => {};
-
   _renderAppointments = ({
     item,
     index,
@@ -108,71 +113,21 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
     item: YourAppointmentsData;
     index: number;
   }) => {
-    const degree = item.degree.split('|').join(',');
-    const ratingSplit = item.rating.toString().split('.');
-    const rating = Number(ratingSplit[0]);
     return (
       <View
         style={[
-          styles.appointmentMainView,
-          {
-            marginRight:
-              yourAppointmentsData.length - 1 === index
-                ? null
-                : responsiveScreenWidth(1),
-          },
+          index === yourAppointmentsData.length - 1 && styles.cont,
+          index === 0 && styles.cont1,
         ]}>
-        <View style={styles.viewImg}>
-          <TouchableOpacity
-            onPress={() => this.toggleFaverite(item.id)}
-            style={styles.likeView}>
-            <FontAwesomeIcon
-              name={item.isFaveritiated ? 'heart' : 'heart-o'}
-              color={item.isFaveritiated ? COLORS.red1 : COLORS.lightBlack2}
-              size={20}
-            />
-          </TouchableOpacity>
-          <Image
-            source={item.image as ImageSourcePropType}
-            style={styles.imageApp}
-          />
-          <View style={styles.textView}>
-            <Text style={styles.textTitle1}>{item.name}</Text>
-            <Text style={styles.subTextTitle1}>{degree}</Text>
-            <Text style={styles.subTextExpe}>
-              {item.experience} Years experience
-            </Text>
-            <Rating
-              ratingBackgroundColor={COLORS.white2gray}
-              type="custom"
-              style={{backgroundColor: COLORS.transparent}}
-              ratingColor={COLORS.yellow}
-              imageSize={30}
-              readonly
-              startingValue={rating}
-            />
-          </View>
-        </View>
-        <View style={styles.view1}>
-          <View style={styles.view2}>
-            <Text style={styles.textNext}>Next Available</Text>
-            <View style={styles.view3}>
-              <Text style={[styles.textdate]}>10:00</Text>
-              <Text style={[styles.textdate, styles.text2]}> AM tomorrow</Text>
-            </View>
-          </View>
-          <View>
-            <CustomGButton
-              tittle="Reschedule"
-              style={styles.button}
-              textStyle={styles.buttonText}
-            />
-          </View>
-        </View>
+        <CustomAppointmentCard
+          index={index}
+          item={item}
+          navigateTo={() => this.navigateToAppointments()}
+          yourAppointmentsData={this.state.yourAppointmentsData}
+        />
       </View>
     );
   };
-
   _renderMedicalStores = ({
     item,
     index,
@@ -180,8 +135,6 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
     item: MedicalStoreData;
     index: number;
   }) => {
-    const ratingSplit = item.rating.toString().split('.');
-    const rating = Number(ratingSplit[0]);
     const lastIndex = this.state.medicalPharmacy.length - 1 === index;
     return (
       <View style={[styles.medView, lastIndex && styles.medView1]}>
@@ -196,50 +149,96 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
           starViewStyle={styles.viewStar}
           initialValue={item.rating}
           isDisable
-          onChange={() => {}}
+          onChange={() => { }}
         />
       </View>
     );
   };
 
-  handleScroll1 = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    this.setState({isScrollEnabled: handleScroll(event)});
+  renderQualifiedDoctor = ({
+    item,
+    index,
+  }: {
+    item: QualifiedDoctorData;
+    index: number;
+  }) => {
+    return (
+      <View
+        style={[
+          styles.qualifierView,
+          index === this.state.qualifiedDoctor.length - 1 && styles.lastCss,
+        ]}>
+        <View style={[styles.flexCss, styles.ViewQualifier]}>
+          <TouchableOpacity
+            onPress={() => this.toggleFaverite(item.id)}
+            style={styles.likeView1}>
+            <FontAwesomeIcon
+              name={item.isFaveritiated ? 'heart' : 'heart-o'}
+              color={item.isFaveritiated ? COLORS.red1 : COLORS.lightBlack2}
+              size={18}
+            />
+          </TouchableOpacity>
+          <View style={[styles.flexCss, styles.viewRating]}>
+            <FontAwesomeIcon name="star" color={COLORS.yellow} size={18} />
+            <Text style={styles.ratingText}>{item.rating}</Text>
+          </View>
+        </View>
+        <View style={styles.imageView1}>
+          <Image source={item.image} style={styles.image1} />
+        </View>
+        <View style={styles.textView1}>
+          <Text style={[styles.textCommon, styles.text1]}>{item.name}</Text>
+          <View style={[styles.flexCss, styles.textView2]}>
+            <Text style={[styles.textCommon, styles.text1$]}>$</Text>
+            <Text style={[styles.textCommon, styles.text1sub]}>
+              {item.fees}
+            </Text>
+            <Text style={[styles.textCommon, styles.text1sub]}>/hours</Text>
+          </View>
+        </View>
+      </View>
+    );
   };
 
+  handleNavigation = (text: string) => {
+    this.props.navigation?.navigate && this.props.navigation.navigate(text);
+  };
+  toggleDrawer = () => {
+    this.props.navigation?.openDrawer && this.props.navigation?.openDrawer();
+  };
   render() {
     return (
-      <View style={{flex: 1}}>
-        <CustomStatusBar
-          isScrollEnabled={this.state.isScrollEnabled}
-          backgroundColor={
-            this.state.isScrollEnabled ? COLORS.white : COLORS.transparent
-          }
-        />
-        <ScrollView
-          onScroll={event => this.handleScroll1(event)}
-          scrollEventThrottle={16}
-          scrollEnabled
-          bounces={!true}
-          style={styles.container}>
-          <ImageBackground source={HomeScreenPng} style={styles.imageView}>
-            {this.state.isLinearGradient && (
-              <LinearGradient
-                colors={[COLORS.greeen2, COLORS.greeen1]}
-                start={{x: 0, y: 0}}
-                end={{x: 1, y: 1}}
-                style={[styles.linearGradient]}>
-                <View style={styles.viewText}>
-                  <Text style={styles.profilename}>Hi Olivia Doe</Text>
-                  <Text style={styles.welText}>Welcome To VHA</Text>
-                </View>
-                <OnBoarding1Svg
-                  width={responsiveScreenWidth(20)}
-                  height={responsiveScreenWidth(20)}
-                  style={styles.image}
-                />
-              </LinearGradient>
-            )}
-            <Header />
+      <View style={styles.mainView}>
+        <CustomStatusBar />
+        <ImageBackground source={HomeScreenPng} style={styles.imageView}>
+          {this.state.isLinearGradient && (
+            <LinearGradient
+              colors={[COLORS.greeen2, COLORS.greeen1]}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              style={[styles.linearGradient]}>
+              <View style={styles.viewText}>
+                <Text style={styles.profilename}>Hi Olivia Doe</Text>
+                <Text style={styles.welText}>Welcome To VHA</Text>
+              </View>
+              <OnBoarding1Svg
+                width={responsiveScreenWidth(20)}
+                height={responsiveScreenWidth(20)}
+                style={styles.image}
+              />
+            </LinearGradient>
+          )}
+          <Header
+            navigateTo={this.handleNavigation}
+            toggleDrawer={this.toggleDrawer}
+          />
+          <ScrollView
+            scrollEventThrottle={16}
+            scrollEnabled
+            bounces={false}
+            contentContainerStyle={styles.contentContainerStyleMain}
+            style={styles.container}>
+
             <View style={styles.viewStyle}>
               <CustomHeading title="Common Diseases" />
               <FlatList
@@ -272,20 +271,21 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
                 contentContainerStyle={styles.contentContainerStyle1}
               />
             </View>
+
             {/* Qualified Doctors */}
             <View style={styles.viewStyle}>
               <CustomHeading isIcon title="Qualified Doctor" />
               <FlatList
                 horizontal
                 showsHorizontalScrollIndicator={false}
-                data={this.state.medicalPharmacy}
-                renderItem={this._renderMedicalStores}
+                data={this.state.qualifiedDoctor}
+                renderItem={this.renderQualifiedDoctor}
                 keyExtractor={item => item.id.toString()}
                 contentContainerStyle={styles.contentContainerStyle1}
               />
             </View>
-          </ImageBackground>
-        </ScrollView>
+          </ScrollView>
+        </ImageBackground>
       </View>
     );
   }
@@ -297,8 +297,22 @@ const styles = StyleSheet.create({
   container: {
     width: responsiveWidth(100),
     height: responsiveHeight(100),
-    backgroundColor: COLORS.black,
+    paddingTop: responsiveScreenHeight(2),
+  },
+  mainView: {
     flex: 1,
+    width: responsiveWidth(100),
+    height: responsiveHeight(100),
+    backgroundColor: COLORS.black,
+  },
+  imageView: {
+    flex: 1,
+    width: responsiveWidth(100),
+    height: responsiveHeight(100),
+    resizeMode: 'cover',
+  },
+  contentContainerStyleMain: {
+    paddingBottom: responsiveHeight(4),
   },
   text: {
     color: COLORS.white,
@@ -314,10 +328,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     zIndex: 100,
-  },
-  imageView: {
-    flex: 1,
-    paddingVertical: responsiveScreenHeight(4),
   },
 
   profilename: {
@@ -368,6 +378,7 @@ const styles = StyleSheet.create({
     paddingVertical: responsiveHeight(2),
     borderRadius: moderateScale(12.68),
     position: 'relative',
+    marginRight: responsiveWidth(1),
   },
   imageApp: {
     width: responsiveWidth(28),
@@ -493,4 +504,76 @@ const styles = StyleSheet.create({
     gap: responsiveWidth(1),
     paddingBottom: responsiveScreenHeight(1.5),
   },
+  customRating: { justifyContent: 'flex-start', gap: responsiveWidth(2) },
+  cont: {
+    marginRight: responsiveScreenWidth(1),
+  },
+  cont1: {
+    marginLeft: responsiveScreenWidth(3),
+  },
+
+  qualifierView: {
+    backgroundColor: COLORS.black2gray,
+    borderRadius: moderateScale(12.68),
+    width: responsiveWidth(30),
+    marginRight: responsiveWidth(3),
+    padding: responsiveWidth(1.5),
+    paddingHorizontal: responsiveWidth(2),
+    paddingBottom: responsiveHeight(0.5),
+  },
+  lastCss: {
+    marginRight: 0,
+    paddingHorizontal: 0,
+  },
+  likeView1: {},
+  ViewQualifier: {
+    justifyContent: 'space-between',
+  },
+  viewRating: {
+    gap: responsiveWidth(1.4),
+  },
+  ratingImage: {
+    width: responsiveWidth(2),
+    height: responsiveHeight(2),
+    tintColor: COLORS.yellow,
+    resizeMode: 'contain',
+  },
+  ratingText: {
+    color: COLORS.white,
+    fontFamily: FONTS.rubik.medium,
+    fontSize: responsiveFontSize(1.5),
+  },
+  flexCss: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  imageView1: {
+    alignSelf: 'center',
+    marginVertical: responsiveHeight(1.3),
+  },
+  image1: {
+    width: responsiveWidth(20),
+    height: responsiveWidth(20),
+    borderRadius: responsiveScreenWidth(20) / 2,
+    resizeMode: 'cover',
+  },
+  textView1: {
+    alignItems: 'center',
+    margin: 0,
+  },
+  text1: {
+    fontSize: responsiveFontSize(2),
+  },
+  text1sub: {
+    fontSize: responsiveFontSize(1.5),
+  },
+  textCommon: {
+    fontFamily: FONTS.rubik.medium,
+    color: COLORS.white,
+  },
+  text1$: {
+    color: COLORS.green3,
+    fontSize: responsiveFontSize(1.5),
+  },
+  textView2: {},
 });

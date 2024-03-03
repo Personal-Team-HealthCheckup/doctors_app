@@ -39,8 +39,9 @@ import BodySvg from './images/Body.svg';
 import imageProfile1 from './images/imageProfile1.jpeg';
 import imageProfile2 from './images/imageProfile2.jpeg';
 import imageProfile3 from './images/imageProfile3.jpeg';
-import imageProfile4 from './images/imageProfile3.jpeg';
+import imageProfile4 from './images/imageProfile4.jpeg';
 import imageProfile5 from './images/imageProfile5.jpeg';
+import imageProfile6 from './images/imageProfile6.jpeg';
 import starImage from './images/start.png';
 
 // bottom tab icon images
@@ -51,13 +52,22 @@ import offerIcon from './images/offerIcon.png';
 import profileIcon from './images/profileIcon.png';
 
 // pharmacy images
-import pharmcy1 from "./images/pharmacy1.png"
-import pharmcy2 from "./images/pharmacy2.png"
+import pharmcy1 from './images/pharmacy1.png';
+import pharmcy2 from './images/pharmacy2.png';
 
+// loader images
+import LoaderImg from './images/loaderImage.png';
+
+import HeartImg from './images/heart.png';
+import HeartRedImg from './images/heart-red.png';
+import CheckImg from './images/check.png';
+
+import bgTokenImg from './images/bgtoken.png';
 export {
   homeIcon,
   MapIcon,
   cartIcon,
+  CheckImg,
   offerIcon,
   Gradient,
   gradientPng,
@@ -98,7 +108,12 @@ export {
   imageProfile3,
   imageProfile4,
   imageProfile5,
+  imageProfile6,
   starImage,
   pharmcy1,
-  pharmcy2
+  pharmcy2,
+  LoaderImg,
+  HeartImg,
+  HeartRedImg,
+  bgTokenImg
 };

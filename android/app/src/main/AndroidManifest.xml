@@ -3,6 +3,8 @@
   <uses-permission android:name="android.permission.INTERNET" />
   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
   <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+  <uses-permission android:name="android.permission.CAMERA" />
+  <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
   <application
     android:name=".MainApplication"
     android:label="@string/app_name"
@@ -21,6 +23,23 @@
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
+      <!-- Accepts URIs that begin with "https://www.doctor.com/dotorapp -->
+      <intent-filter  android:autoVerify="true" android:label="@string/app_name">
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="https"
+              android:host="www.doctor.com"
+              android:pathPrefix="/dotorapp" />
+    </intent-filter>
+    <intent-filter android:autoVerify="true" android:label="@string/app_name">
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <!-- Accepts URIs that begin with "app://dotorapp -->
+        <data android:scheme="app"
+              android:host="dotorapp" />
+    </intent-filter>
     </activity>
     <meta-data
       android:name="com.google.android.geo.API_KEY"

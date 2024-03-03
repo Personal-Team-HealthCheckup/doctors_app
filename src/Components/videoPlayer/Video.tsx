@@ -1,11 +1,13 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import Video, {LoadError, OnLoadData, OnProgressData} from 'react-native-video';
-import {View, Text, Alert, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Platform} from 'react-native';
 import MediaControls, {PLAYER_STATES} from 'react-native-media-controls';
+import {check, request, PERMISSIONS, RESULTS} from 'react-native-permissions';
 interface VideoComponentProps {}
 
-const Url = 'https://youtu.be/se9DDAwwGQY?feature=shared';
+const Url =
+  'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
 interface VideoComponentState {
   isPlay: boolean;
   isFullScreen: boolean;
@@ -19,7 +21,7 @@ class VideoComponent extends React.Component<
   VideoComponentProps,
   VideoComponentState
 > {
-  videoRef: any;
+  videoRef: React.RefObject<Video> | undefined;
   constructor(props: VideoComponentProps) {
     super(props);
     this.state = {
@@ -31,6 +33,7 @@ class VideoComponent extends React.Component<
       playerState: PLAYER_STATES.PLAYING,
       screenType: 'contain',
     };
+    this.videoRef = React.createRef();
   }
   handlePlayPuaseVideo = () => {
     this.setState({isPlay: !this.state.isPlay});
@@ -48,12 +51,77 @@ class VideoComponent extends React.Component<
       screenType: this.state.screenType === 'contain' ? 'cover' : 'contain',
     });
   };
-  componentDidMount(): void {}
+
+  requestMicrophonePermission = async () => {
+    if (Platform.OS === 'android') {
+      const result = await request(PERMISSIONS.ANDROID.RECORD_AUDIO);
+      if (result === RESULTS.GRANTED) {
+        // Microphone access granted, handle accordingly
+      } else {
+        // Microphone access denied, inform the user
+      }
+    } else {
+      const result = await request(PERMISSIONS.IOS.MICROPHONE);
+      if (result === RESULTS.GRANTED) {
+        // Microphone access granted, handle accordingly
+      } else {
+        // Microphone access denied, inform the user
+      }
+    }
+  };
+
+  requestCameraPermission = async () => {
+    if (Platform.OS === 'android') {
+      const result = await request(PERMISSIONS.ANDROID.CAMERA);
+      if (result === RESULTS.GRANTED) {
+        // Camera access granted, handle accordingly
+      } else {
+        // Camera access denied, inform the user
+      }
+    } else {
+      const result = await request(PERMISSIONS.IOS.CAMERA);
+      if (result === RESULTS.GRANTED) {
+        // Camera access granted, handle accordingly
+      } else {
+        // Camera access denied, inform the user
+      }
+    }
+  };
+
+  checkMicrophonePermission = async () => {
+    if (Platform.OS === 'android') {
+      const result = await check(PERMISSIONS.ANDROID.RECORD_AUDIO);
+      console.log('---result', result);
+      // Handle the result accordingly
+    } else {
+      const result = await check(PERMISSIONS.IOS.MICROPHONE);
+      console.log('---result', result);
+      // Handle the result accordingly
+    }
+  };
+
+  checkCameraPermission = async () => {
+    if (Platform.OS === 'android') {
+      const result = await check(PERMISSIONS.ANDROID.CAMERA);
+      console.log('---result', result);
+      // Handle the result accordingly
+    } else {
+      const result = await check(PERMISSIONS.IOS.CAMERA);
+      console.log('---result', result);
+
+      // Handle the result accordingly
+    }
+  };
+
+  componentDidMount(): void {
+    this.requestMicrophonePermission();
+    this.requestCameraPermission();
+  }
   handleDuration = (data: OnLoadData) => {
     this.setState({duration: data.duration, isLoading: false});
   };
   handleError = (error: LoadError) => {
-    Alert.alert('Error', JSON.stringify(error));
+    console.error('------error', error);
   };
 
   handleReplay = () => {
@@ -80,7 +148,7 @@ class VideoComponent extends React.Component<
       <>
         <View style={styles.main}>
           <Video
-            ref={ref => (this.videoRef = ref)}
+            ref={this.videoRef}
             source={{
               uri: Url,
             }}

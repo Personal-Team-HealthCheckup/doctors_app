@@ -2,6 +2,7 @@ import {
   StyleProp,
   StyleSheet,
   Text,
+  TextStyle,
   TouchableOpacity,
   ViewStyle,
 } from 'react-native';
@@ -18,12 +19,19 @@ interface ButtonProps {
   onPress?: () => void;
   style?: StyleProp<ViewStyle>;
   Icon?: React.JSX.Element;
+  textStyle?: StyleProp<TextStyle>;
 }
-const CustomButton: React.FC<ButtonProps> = ({title, onPress, style, Icon}) => {
+const CustomButton: React.FC<ButtonProps> = ({
+  title,
+  onPress,
+  style,
+  Icon,
+  textStyle,
+}) => {
   return (
     <TouchableOpacity style={[styles.buttonView, style]} onPress={onPress}>
       {Icon && Icon}
-      <Text style={styles.buttonText}>{title}</Text>
+      <Text style={[styles.buttonText, textStyle]}>{title}</Text>
     </TouchableOpacity>
   );
 };

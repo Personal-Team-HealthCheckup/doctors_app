@@ -17,10 +17,19 @@ import {
   imageProfile3,
   imageProfile4,
   imageProfile5,
+  imageProfile6,
   pharmcy1,
   pharmcy2,
 } from '../assets/assets';
-import {CommonDeseaseData, DoctorData, YourAppointmentsData, MedicalStoreData} from './types';
+import {
+  CommonDeseaseData,
+  DoctorData,
+  YourAppointmentsData,
+  MedicalStoreData,
+  QualifiedDoctorData,
+  SlotsDateTimes,
+  SlotsAvailable,
+} from './types';
 
 // onBoarding data source
 export const OnboardingData = [
@@ -132,7 +141,7 @@ export const yourAppointmentsData: YourAppointmentsData[] = [
     experience: 9,
     image: imageProfile2,
     name: 'Dr. Watamaniuk',
-    rating: 4.5,
+    rating: 3.5,
     views: 3475,
     isFaveritiated: true,
   },
@@ -179,13 +188,117 @@ export const medicalStoreData: MedicalStoreData[] = [
     rating: 4.8,
     name: 'Chemist Warehouse',
     image: pharmcy1,
-    subTitle : 'Medical Store'
+    subTitle: 'Medical Store',
   },
   {
     id: 2,
     rating: 3.8,
     name: 'CVS Pharmacy',
     image: pharmcy2,
-    subTitle : 'Medical Store'
+    subTitle: 'Medical Store',
+  },
+];
+
+// qualified doctor data static data
+export const qualifiedDoctorData: QualifiedDoctorData[] = [
+  {
+    id: 1,
+    rating: 3.7,
+    degree: 'B.D.S|M.B.B.S',
+    name: 'Dr. Crick',
+    experience: 7,
+    views: 275,
+    available: '10AM tomorrow',
+    image: imageProfile4,
+    isFaveritiated: false,
+    fees: 25.0,
+  },
+  {
+    id: 2,
+    available: '12AM tomorrow',
+    degree: 'B.D.S|M.B.S',
+    experience: 9,
+    image: imageProfile6,
+    name: 'Dr. Strain',
+    rating: 3.0,
+    views: 3475,
+    isFaveritiated: true,
+    fees: 22.0,
+  },
+  {
+    id: 3,
+    available: '11AM tomorrow',
+    degree: 'B.D.S|M.B.S',
+    experience: 10,
+    image: imageProfile5,
+    name: 'Dr. Lachinet',
+    rating: 2.9,
+    views: 4475,
+    isFaveritiated: false,
+    fees: 29.0,
+  },
+  {
+    id: 4,
+    available: '1PM tomorrow',
+    degree: 'B.D.S|M.B.S',
+    experience: 10,
+    image: imageProfile1,
+    name: 'Dr. Crownover',
+    rating: 4.3,
+    views: 1475,
+    isFaveritiated: true,
+    fees: 20.0,
+  },
+  {
+    id: 5,
+    available: '4PM tomorrow',
+    degree: 'B.D.S|M.B.S',
+    experience: 5,
+    image: imageProfile2,
+    name: 'Dr. Balestra',
+    rating: 3.3,
+    views: 475,
+    isFaveritiated: false,
+    fees: 27.0,
+  },
+];
+
+export const slotsDateTimes: SlotsDateTimes[] = [
+  {
+    id: 1,
+    date: 'Today, 23 Feb',
+    slotsAvailable: 0,
+    isSelected: false,
+  },
+  {
+    id: 2,
+    date: 'Tomorrow, 24 Feb',
+    slotsAvailable: 9,
+    isSelected: true,
+  },
+  {
+    id: 3,
+    date: 'Thu, 25 Feb',
+    slotsAvailable: 8,
+    isSelected: false,
+  },
+];
+
+export const slotsAvailable: SlotsAvailable[] = [
+  {
+    date: 'Afternoon 7 slots',
+    slots: [
+      '1:00 PM',
+      '1:30 PM',
+      '2:00 PM',
+      '2:30 PM',
+      '3:00 PM',
+      '3:30 PM',
+      '4:00 PM',
+    ],
+  },
+  {
+    date: 'Evening 5 slots',
+    slots: ['5:00 PM', '5:30 PM', '6:00 PM', '6:30 PM', '7:00 PM'],
   },
 ];

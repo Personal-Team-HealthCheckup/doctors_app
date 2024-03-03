@@ -8,6 +8,7 @@ export const COLORS = {
   greyBlack: 'rgba(103, 114, 148, 0.50)',
   green: '#0EBE7F',
   greeen1: '#46AA72',
+  greygreeen: 'rgba(14, 190, 127, 0.08)',
   greeen2: '#2DA0A4',
   lightGreen: '#75CFF0',
   lightWhite: 'rgba(255, 255, 255, 0.04)',
@@ -20,6 +21,8 @@ export const COLORS = {
   lightYellow: '#CAFF59',
   lightCyan: '#59FFEB',
   light: '#677294CC',
+  green3: '#0EBE7E',
+  gradientWhite: '#858EA9',
 };
 
 export const FONTS = {
@@ -37,4 +40,13 @@ export const FONTS = {
     semiBold: 'Rubik-SemiBold',
     bold: 'Rubik-Bold',
   },
+  inter:{
+    'light[300]':"Inter-ExtraLight",
+    'regular[400]':"Inter-Regular",
+    'medium[500]':"Inter-Medium",
+    'semiBold[600]':"Inter-SemiBold",
+    'bold[700]':"Inter-Bold",
+    'extrBold[800]':"Inter-ExtraBold",
+    'black[900]':"Inter-Black",
+  }
 };

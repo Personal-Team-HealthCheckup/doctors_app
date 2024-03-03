@@ -2,7 +2,6 @@ import React from 'react';
 import {
   Image,
   ImageBackground,
-  Keyboard,
   KeyboardAvoidingView,
   NativeScrollEvent,
   NativeSyntheticEvent,
@@ -25,13 +24,13 @@ import {
   imageProfile1,
 } from '../../assets/assets';
 import Header from '../../Components/common/CustomHeader';
-import {COLORS, FONTS} from '../../global/theme';
+import { COLORS, FONTS } from '../../global/theme';
 import LinearGradient from 'react-native-linear-gradient';
 import VectorIcon from 'react-native-vector-icons/FontAwesome5';
 import CustomTextInput from '../../Components/common/CustomTextInput';
 import CustomGButton from '../../Components/common/CustomGButton';
-import {closeKeyBoard, handleScroll} from '../../helper/utilities';
-interface ProfilePageProps {}
+import { closeKeyBoard, handleScroll } from '../../helper/utilities';
+interface ProfilePageProps { }
 
 interface ProfilePageState {
   isScrollEnabled: boolean;
@@ -46,28 +45,22 @@ class ProfilePage extends React.Component<ProfilePageProps, ProfilePageState> {
   }
 
   handleScroll1 = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    this.setState({isScrollEnabled: handleScroll(event)});
+    this.setState({ isScrollEnabled: handleScroll(event) });
   };
 
   render() {
     return (
-      <>
-        <CustomStatusBar
-          isScrollEnabled={this.state.isScrollEnabled}
-          backgroundColor={
-            this.state.isScrollEnabled ? COLORS.white : COLORS.transparent
-          }
-        />
-        <ScrollView
-          onScroll={event => this.handleScroll1(event)}
-          scrollEventThrottle={16}
-          bounces={false}
-          style={styles.container}>
-          <TouchableWithoutFeedback onPress={() => closeKeyBoard()}>
-            <KeyboardAvoidingView
-              behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-              <ImageBackground source={HomeScreenPng} style={styles.image}>
-                <Header heading="Profile" />
+      <View style={styles.mainContainer}>
+        <CustomStatusBar />
+        <ImageBackground source={HomeScreenPng} style={styles.image}>
+          <Header heading="Profile" />
+          <ScrollView
+            scrollEventThrottle={16}
+            bounces={false}
+            contentContainerStyle={{ paddingBottom: "10%" }}
+            style={styles.container}>
+            <TouchableWithoutFeedback style={{ flex: 1 }} onPress={() => closeKeyBoard()}>
+              <KeyboardAvoidingView keyboardVerticalOffset={12} behavior={Platform.OS === "ios" ? "padding" : undefined} style={{ flex: 1 }}>
                 <View style={styles.mainView}>
                   <Text style={styles.title}>Set up your profile</Text>
                   <Text style={styles.subtitle}>
@@ -77,8 +70,8 @@ class ProfilePage extends React.Component<ProfilePageProps, ProfilePageState> {
 
                   <LinearGradient
                     colors={[COLORS.lightCyan, COLORS.lightYellow]}
-                    start={{x: 0.0, y: 0.5}}
-                    end={{x: 1.0, y: 0.5}}
+                    start={{ x: 0.0, y: 0.5 }}
+                    end={{ x: 1.0, y: 0.5 }}
                     style={styles.imageView}>
                     <View style={styles.cameraView}>
                       <VectorIcon
@@ -101,30 +94,33 @@ class ProfilePage extends React.Component<ProfilePageProps, ProfilePageState> {
                     <CustomGButton tittle="continue" />
                   </View>
                 </View>
-              </ImageBackground>
-            </KeyboardAvoidingView>
-          </TouchableWithoutFeedback>
-        </ScrollView>
-      </>
+              </KeyboardAvoidingView>
+            </TouchableWithoutFeedback>
+          </ScrollView>
+        </ImageBackground>
+      </View>
     );
   }
 }
 
 export default ProfilePage;
 const styles = StyleSheet.create({
-  container: {
+  mainContainer: {
+    flex: 1,
     width: responsiveWidth(100),
     height: responsiveHeight(100),
     backgroundColor: COLORS.black,
+  },
+  container: {
     flex: 1,
   },
   image: {
-    alignItems: 'center',
+    flex: 1,
+    width: responsiveWidth(100),
+    height: responsiveHeight(100),
     resizeMode: 'cover',
     paddingVertical: responsiveHeight(3),
-    position: 'relative',
     paddingHorizontal: responsiveScreenWidth(5),
-    flex: 1,
   },
   mainView: {
     flex: 1,

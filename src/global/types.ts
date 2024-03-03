@@ -23,10 +23,50 @@ export interface YourAppointmentsData {
   isFaveritiated: boolean;
 }
 
-export interface MedicalStoreData{
+export interface MedicalStoreData {
   id: number;
   rating: number;
   name: string;
   image: string;
   subTitle: string;
+}
+export interface QualifiedDoctorData {
+  id: number;
+  rating: number;
+  degree: string;
+  name: string;
+  experience: number;
+  views: number;
+  available: string;
+  image: any;
+  isFaveritiated: boolean;
+  fees: number;
+}
+
+export interface Navigation {
+  navigate?: (url: string) => void;
+  goBack?: () => void;
+  toggleDrawer?: () => void;
+  openDrawer?: () => void;
+  closeDrawer?: () => void;
+}
+
+export interface SlotsDateTimes {
+  id: number;
+  date: string;
+  slotsAvailable: number;
+  isSelected: boolean;
+}
+
+export interface SlotsAvailable {
+  date: string;
+  slots: string[];
+}
+export interface Slots {
+  slots: string;
+  isSelected: boolean;
+}
+export interface SlotsAvailableChangeData {
+  slots: (Slots | string)[];
+  date: string;
 }

@@ -23,7 +23,7 @@ export const handleScroll = (
   event: NativeSyntheticEvent<NativeScrollEvent>,
 ) => {
   const {y} = event.nativeEvent.contentOffset;
-  if (y > 100) {
+  if (y > 10) {
     return true;
   } else {
     return false;
