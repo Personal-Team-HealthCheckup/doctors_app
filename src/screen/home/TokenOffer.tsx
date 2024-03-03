@@ -1,12 +1,12 @@
 import React from 'react';
 import { ImageBackground, ScrollView, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import CustomStatusBar from '../../Components/common/CustomStatusBar';
-import { HomeScreenPng, bgTokenImg } from '../../assets/assets';
+import { bgTokenImg } from '../../assets/assets';
 import CustomHeader from '../../Components/common/CustomHeader';
 import { responsiveFontSize, responsiveHeight, responsiveScreenWidth, responsiveWidth } from 'react-native-responsive-dimensions';
 import { COLORS, FONTS } from '../../global/theme';
-import LinearGradient from 'react-native-linear-gradient';
 import GradientText from '../../Components/CommonGradientText';
+import CustomGButton from '../../Components/common/CustomGButton';
 
 interface TokenOfferProps { }
 
@@ -32,11 +32,27 @@ class TokenOffer extends React.Component<TokenOfferProps, TokenOfferState> {
               <Text style={styles.subtitle}>
                 Introducing easy payment gateway
               </Text>
-              <GradientText colors={['#46AA72', '#2DA0A4']} style={styles.title}>
+              <GradientText colors={[COLORS.greeen1, COLORS.greeen2]} style={styles.title}>
                 VHA Token
               </GradientText>
-              <Text style={styles.heading}>Zero fee with VHA Token
-              </Text>
+              <View style={{ marginVertical: responsiveHeight(3) }} >
+                <View style={{ flexDirection: 'row', alignItems: "center", columnGap: responsiveWidth(2), rowGap: responsiveWidth(.1), marginBottom: responsiveHeight(1.5), flexWrap: 'wrap' }}>
+                  <Text style={styles.heading}>Zero fee with
+                  </Text>
+                  <GradientText
+                    colors={[COLORS.greeen1, COLORS.greeen2]} style={styles.heading}>
+                    VHA
+                  </GradientText>
+                  <GradientText colors={[COLORS.greeen1, COLORS.greeen2]} style={styles.heading}>
+                    Token
+                  </GradientText>
+                </View>
+
+                <Text style={styles.subtitle1}>VHA will charge 10% commission for all the appointments made through VHA, 5% will be distributed to token holders and other 5% will go to the development</Text>
+              </View>
+            </View>
+            <View style={{ alignItems: 'center',flex:1,justifyContent:"flex-end" }}>
+              <CustomGButton tittle="Connect Wallet" />
             </View>
           </ScrollView>
         </ImageBackground>
@@ -72,15 +88,22 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: FONTS.poppins.semiBold,
-    fontSize: responsiveFontSize(2.5),
+    fontSize: responsiveFontSize(3),
   },
   subtitle: {
     fontFamily: FONTS.poppins.medium,
-    fontSize: responsiveFontSize(2),
+    fontSize: responsiveFontSize(2.35),
     color: COLORS.white,
     marginTop: responsiveHeight(1),
   },
-  heading:{
-    // fontFamily: FONTS.,
+  heading: {
+    fontFamily: FONTS.inter['semiBold[600]'],
+    color: COLORS.white,
+    fontSize: responsiveFontSize(4.2),
+  },
+  subtitle1: {
+    fontFamily: FONTS.inter['regular[400]'],
+    color: COLORS.white,
+    fontSize: responsiveFontSize(2),
   }
 });
