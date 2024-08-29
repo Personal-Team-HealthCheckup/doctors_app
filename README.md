@@ -22,7 +22,3 @@ created using [React Native](https://reactnative.dev/)
 
 <a href="https://drive.google.com/drive/folders/1XcXQ_GUbzN3lzEghGUXZ86m-wnadaOS6?usp=drive_link">Install APP on your phone</a>
 
-
-<style>
-
-</style>
