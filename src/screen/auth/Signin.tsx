@@ -19,7 +19,7 @@ import {
 } from '../../assets/assets';
 import {COLORS, FONTS} from '../../global/theme';
 import {moderateScale, verticalScale} from '../../helper/Scale';
-import {AUTH} from '../../Constants/Navigator';
+import {AUTH, MAINSTACK} from '../../Constants/Navigator';
 import CustomMainView from '../../Components/common/CustomMainView';
 
 interface SigninProps {
@@ -39,7 +39,7 @@ class Signin extends React.Component<SigninProps, SigninState> {
     this.props.navigation?.navigate(AUTH.SIGNUP);
   };
   handleLogin = () => {
-    this.props.navigation?.navigate(AUTH.ONBOARDING);
+    this.props.navigation?.navigate(MAINSTACK.HOMENAVIGATION);
   };
   render() {
     return (

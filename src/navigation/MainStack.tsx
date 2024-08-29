@@ -21,7 +21,8 @@ const HomeStack = createNativeStackNavigator();
 
 const AuthNavigation = () => {
   return (
-    <AuthStack.Navigator screenOptions={{headerShown: false}}>
+    <AuthStack.Navigator screenOptions={{headerShown: false}}
+      initialRouteName={AUTH.ONBOARDING}>
       <AuthStack.Screen name={AUTH.SIGNUP} component={Signup} />
       <AuthStack.Screen name={AUTH.SIGNIN} component={Signin} />
       <AuthStack.Screen name={AUTH.ONBOARDING} component={OnBoarding} />
