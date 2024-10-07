@@ -47,7 +47,7 @@ const MainNavigation = () => {
   return (
     <MainStack.Navigator
       screenOptions={{headerShown: false}}
-      initialRouteName={MAINSTACK.HOMENAVIGATION}>
+      initialRouteName={LANDING.SPLASHSCREEN}>
       <MainStack.Screen name={LANDING.SPLASHSCREEN} component={SplashScreens} />
       <MainStack.Screen
         name={MAINSTACK.AUTHNAVIGATION}

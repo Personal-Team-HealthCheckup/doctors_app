@@ -6,6 +6,7 @@ export const MAINSTACK = {
 export const AUTH = {
   SIGNUP: 'SIGNUP',
   SIGNIN: 'SIGNIN',
+  FORGOTPASSWORD: 'FORGOTPASSWORD',
   ONBOARDING: 'ONBOARDING',
 };
 

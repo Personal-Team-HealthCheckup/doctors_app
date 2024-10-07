@@ -1,5 +1,9 @@
 import moment from 'moment';
-import {Keyboard, NativeScrollEvent, NativeSyntheticEvent} from 'react-native';
+import { Keyboard, NativeScrollEvent, NativeSyntheticEvent } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import CryptoJS from 'crypto-js';
+
+const secretKey = 'secret-strong-key'; // Use a strong key
 
 export const formateDate = (date: string | Date) => {
   return moment(date).format('DD-MM-YYYY');
@@ -8,11 +12,7 @@ export const formateDate = (date: string | Date) => {
 export const checkEmailValidation = (email: string) => {
   const regEx =
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  const validEmail = regEx.test(String(email).toLowerCase().trim());
-  if (!validEmail) {
-    return false;
-  }
-  return true;
+  return regEx.test(String(email).toLowerCase().trim());
 };
 
 export const closeKeyBoard = () => {
@@ -22,10 +22,35 @@ export const closeKeyBoard = () => {
 export const handleScroll = (
   event: NativeSyntheticEvent<NativeScrollEvent>,
 ) => {
-  const {y} = event.nativeEvent.contentOffset;
-  if (y > 10) {
-    return true;
-  } else {
-    return false;
-  }
+  const { y } = event.nativeEvent.contentOffset;
+  return y > 10;
 };
+
+export async function setStorageData(key: string, data: any) {
+  if (key && data) {
+    const encryptedData = CryptoJS.AES.encrypt(JSON.stringify(data), secretKey).toString();
+    await AsyncStorage.setItem(key, encryptedData);
+  }
+}
+
+export async function getStorageData(key: string, parseToJson: boolean = false) {
+  if (key) {
+    const encryptedData = await AsyncStorage.getItem(key) || null;
+    if (encryptedData) {
+      const bytes = CryptoJS.AES.decrypt(encryptedData, secretKey);
+      const decryptedData = bytes.toString(CryptoJS.enc.Utf8);
+      if (parseToJson && decryptedData) {
+        return JSON.parse(decryptedData);
+      } else {
+        return decryptedData;
+      }
+    }
+  }
+  return null;
+}
+
+export async function removeStorageData(key: string) {
+  if (key) {
+    await AsyncStorage.removeItem(key);
+  }
+}
