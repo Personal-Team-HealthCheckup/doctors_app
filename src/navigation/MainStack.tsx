@@ -14,6 +14,7 @@ import OnBoarding from '../screen/auth/OnBoarding';
 import DrawerTabNavigation from './DrawerTabNavigation';
 import SearchPage from '../screen/home/SearchPage';
 import SelectTimePage from '../screen/home/SelectTimePage';
+import Video from '../Components/videoPlayer/Video';
 
 const MainStack = createNativeStackNavigator();
 const AuthStack = createNativeStackNavigator();
@@ -56,6 +57,10 @@ const MainNavigation = () => {
       <MainStack.Screen
         name={MAINSTACK.HOMENAVIGATION}
         component={HomeNavigation}
+      />
+       <MainStack.Screen
+        name={MAINSTACK.DUMMYStack}
+        component={Video}
       />
     </MainStack.Navigator>
   );

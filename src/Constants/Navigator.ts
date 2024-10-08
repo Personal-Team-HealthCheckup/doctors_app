@@ -1,6 +1,7 @@
 export const MAINSTACK = {
   HOMENAVIGATION: 'HOMENAVIGATION',
   AUTHNAVIGATION: 'AUTHNAVIGATION',
+  DUMMYStack: 'DUMMYStack',
 };
 
 export const AUTH = {
