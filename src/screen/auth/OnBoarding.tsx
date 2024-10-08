@@ -17,7 +17,7 @@ import CustomGButton from '../../Components/common/CustomGButton';
 import {COLORS, FONTS} from '../../global/theme';
 import {moderateScale} from '../../helper/Scale';
 import {OnboardingData as data} from '../../global/data';
-import {MAINSTACK} from '../../Constants/Navigator';
+import {AUTH} from '../../Constants/Navigator';
 
 interface OnBoardingProps {
   navigation?: {
@@ -39,7 +39,7 @@ class OnBoarding extends React.Component<OnBoardingProps, OnBoardingState> {
   }
 
   handleSkip = () => {
-    this.props.navigation?.replace(MAINSTACK.HOMENAVIGATION);
+    this.props.navigation?.replace(AUTH.SIGNIN);
   };
 
   handleGetStarted = () => {
@@ -69,7 +69,7 @@ class OnBoarding extends React.Component<OnBoardingProps, OnBoardingState> {
                 <Text style={styles.textSubTitle}>{description}</Text>
 
                 <CustomGButton
-                  tittle="Get Started"
+                  tittle={(data.length - 1 > this.state.index )?  "Next":"Get Started"}
                   style={styles.button}
                   onPress={this.handleGetStarted}
                 />

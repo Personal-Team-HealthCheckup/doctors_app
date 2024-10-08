@@ -14,6 +14,7 @@ import OnBoarding from '../screen/auth/OnBoarding';
 import DrawerTabNavigation from './DrawerTabNavigation';
 import SearchPage from '../screen/home/SearchPage';
 import SelectTimePage from '../screen/home/SelectTimePage';
+import Video from '../Components/videoPlayer/Video';
 
 const MainStack = createNativeStackNavigator();
 const AuthStack = createNativeStackNavigator();
@@ -21,7 +22,8 @@ const HomeStack = createNativeStackNavigator();
 
 const AuthNavigation = () => {
   return (
-    <AuthStack.Navigator screenOptions={{headerShown: false}}>
+    <AuthStack.Navigator screenOptions={{headerShown: false}}
+      initialRouteName={AUTH.ONBOARDING}>
       <AuthStack.Screen name={AUTH.SIGNUP} component={Signup} />
       <AuthStack.Screen name={AUTH.SIGNIN} component={Signin} />
       <AuthStack.Screen name={AUTH.ONBOARDING} component={OnBoarding} />
@@ -46,7 +48,7 @@ const MainNavigation = () => {
   return (
     <MainStack.Navigator
       screenOptions={{headerShown: false}}
-      initialRouteName={MAINSTACK.HOMENAVIGATION}>
+      initialRouteName={LANDING.SPLASHSCREEN}>
       <MainStack.Screen name={LANDING.SPLASHSCREEN} component={SplashScreens} />
       <MainStack.Screen
         name={MAINSTACK.AUTHNAVIGATION}
@@ -55,6 +57,10 @@ const MainNavigation = () => {
       <MainStack.Screen
         name={MAINSTACK.HOMENAVIGATION}
         component={HomeNavigation}
+      />
+       <MainStack.Screen
+        name={MAINSTACK.DUMMYStack}
+        component={Video}
       />
     </MainStack.Navigator>
   );

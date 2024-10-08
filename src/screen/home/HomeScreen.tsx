@@ -1,19 +1,15 @@
 import React from 'react';
-import CustomStatusBar from '../../Components/common/CustomStatusBar';
 import {
   FlatList,
   Image,
   ImageBackground,
   ImageSourcePropType,
-  NativeScrollEvent,
-  NativeSyntheticEvent,
   ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
-import { COLORS, FONTS } from '../../global/theme';
 import LinearGradient from 'react-native-linear-gradient';
 import {
   responsiveFontSize,
@@ -22,6 +18,9 @@ import {
   responsiveScreenWidth,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+import { COLORS, FONTS } from '../../global/theme';
+import CustomStatusBar from '../../Components/common/CustomStatusBar';
 import { HomeScreenPng, OnBoarding1Svg } from '../../assets/assets';
 import { moderateScale } from '../../helper/Scale';
 import {
@@ -39,9 +38,7 @@ import {
 } from '../../global/types';
 import CustomHeading from '../../Components/common/CustomHeading';
 import Header from '../../Components/common/Header';
-import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import CustomRating from '../../Components/CustomRating';
-import { handleScroll } from '../../helper/utilities';
 import CustomAppointmentCard from '../../Components/common/CustomAppointmentCard';
 import { DASHBOARD } from '../../Constants/Navigator';
 
@@ -82,7 +79,7 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
 
   toggleFaverite = (appID: number) => {
     this.setState(preState => ({
-      yourAppointmentsData: preState.yourAppointmentsData.map(element => {
+      qualifiedDoctor: preState.qualifiedDoctor.map(element => {
         if (element.id === appID) {
           element.isFaveritiated = !element.isFaveritiated;
         }
@@ -187,7 +184,7 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
           <Image source={item.image} style={styles.image1} />
         </View>
         <View style={styles.textView1}>
-          <Text style={[styles.textCommon, styles.text1]}>{item.name}</Text>
+          <Text numberOfLines={1} style={[styles.textCommon, styles.text1]}>{item.name}</Text>
           <View style={[styles.flexCss, styles.textView2]}>
             <Text style={[styles.textCommon, styles.text1$]}>$</Text>
             <Text style={[styles.textCommon, styles.text1sub]}>

@@ -1,7 +1,8 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import Video, {LoadError, OnLoadData, OnProgressData} from 'react-native-video';
-import {View, Text, StyleSheet, Platform} from 'react-native';
+import {View, Text, StyleSheet, Platform, NativeModules} from 'react-native';
+const {ForegroundServiceModule} = NativeModules;
 import MediaControls, {PLAYER_STATES} from 'react-native-media-controls';
 import {check, request, PERMISSIONS, RESULTS} from 'react-native-permissions';
 interface VideoComponentProps {}
@@ -113,7 +114,12 @@ class VideoComponent extends React.Component<
     }
   };
 
+  componentWillUnmount(): void {
+    ForegroundServiceModule.stopService()
+  }
   componentDidMount(): void {
+    console.log('---result', ForegroundServiceModule);
+    ForegroundServiceModule.startService()
     this.requestMicrophonePermission();
     this.requestCameraPermission();
   }
@@ -163,6 +169,7 @@ class VideoComponent extends React.Component<
             onEnd={this.handeEnd}
             onProgress={this.onProgress}
             repeat
+            
           />
           <MediaControls
             duration={this.state.duration}

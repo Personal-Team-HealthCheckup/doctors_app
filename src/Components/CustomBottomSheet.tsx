@@ -11,13 +11,11 @@ import {
   PanResponderInstance,
   PanResponder,
   Alert,
-  Button,
-  Text,
 } from 'react-native';
 import {
   responsiveFontSize,
-  responsiveHeight,
 } from 'react-native-responsive-dimensions';
+import { COLORS } from '../global/theme';
 
 interface BottomSheetProps {
   height: number;
@@ -32,7 +30,7 @@ interface BottomSheetProps {
   onClose?: () => void;
   radius?: number;
   testID?: string;
-  children?: React.ReactNode;
+  children: React.ReactNode;
 }
 
 interface BottomSheetState {
@@ -46,7 +44,6 @@ class BottomSheet extends React.PureComponent<
   BottomSheetState
 > {
   panResponder?: PanResponderInstance;
-  bottomSheetRef: BottomSheet | null = null;
   constructor(props: BottomSheetProps) {
     super(props);
     this.state = {
@@ -54,6 +51,7 @@ class BottomSheet extends React.PureComponent<
       animatedHeight: new Animated.Value(0),
       pan: new Animated.ValueXY(),
     };
+    this.createPanResponder();
   }
 
   setModalVisible(visible: boolean) {
@@ -155,13 +153,12 @@ class BottomSheet extends React.PureComponent<
     };
     const styleAnimated = {
       height: animatedHeight,
-      borderTopRightRadius: radius || 10,
-      borderTopLeftRadius: radius || 10,
-      backgroundColor: sheetBackgroundColor || '#F3F3F3',
+      borderTopRightRadius: radius || 30,
+      borderTopLeftRadius: radius || 30,
+      backgroundColor: sheetBackgroundColor || COLORS.black2gray,
     };
 
     return (
-      <>
         <Modal
           transparent
           visible={modalVisible}
@@ -170,7 +167,7 @@ class BottomSheet extends React.PureComponent<
             <View
               style={[
                 styles.wrapper,
-                {backgroundColor: backgroundColor || '#25252599'},
+                {backgroundColor: backgroundColor || COLORS.black2gray},
               ]}>
               <TouchableOpacity
                 style={styles.background}
@@ -188,22 +185,6 @@ class BottomSheet extends React.PureComponent<
             </View>
           </KeyboardAvoidingView>
         </Modal>
-        <Button
-          title="button"
-          onPress={() => {
-            this.bottomSheetRef?.show();
-          }}
-        />
-        <BottomSheet
-          ref={ref => (this.bottomSheetRef = ref)}
-          backgroundColor="rgba(0, 0, 0, 0.50)"
-          radius={responsiveFontSize(1)}
-          height={responsiveHeight(30)}>
-          <View style={styles.buttonView}>
-            <Text style={styles.text}>BottomSheet</Text>
-          </View>
-        </BottomSheet>
-      </>
     );
   }
 }
@@ -228,7 +209,6 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     borderTopRightRadius: 10,
     borderTopLeftRadius: 10,
+    backgroundColor:COLORS.black2gray
   },
-  buttonView: {flex: 1, alignContent: 'center', justifyContent: 'center'},
-  text: {textAlign: 'center'},
 });
