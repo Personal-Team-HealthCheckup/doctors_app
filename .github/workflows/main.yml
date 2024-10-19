@@ -40,14 +40,7 @@ jobs:
           echo "ANDROID_HOME=$HOME/Android/Sdk" >> $GITHUB_ENV
           echo "PATH=$PATH:$HOME/Android/Sdk/platform-tools" >> $GITHUB_ENV
 
-      - name: Accept Android SDK Licenses
-        run: |
-          yes | sdkmanager --licenses
-          sdkmanager --update
 
-      - name: Install Android Build Tools
-        run: |
-          sdkmanager "platform-tools" "platforms;android-30" "build-tools;30.0.3"
 
       - name: Run Tests
         run: yarn test --coverage
@@ -55,7 +48,6 @@ jobs:
       - name: Build Android Project
         run: |
           cd android
-          ./gradlew assembleRelease  # Build Android APK
+          java --version
+          ./gradlew assembleRelease # and deploy apk on vercelt may be or upload on drive make the link provide the link of that
 
-      - name: Build Web Project
-        run: yarn run build
