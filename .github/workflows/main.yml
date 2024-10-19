@@ -42,7 +42,10 @@ jobs:
 
       - name: Run Tests
         run: yarn test --coverage
-
+      - name: Run Tests
+        run: |
+          node -v
+          java --version
       - name: Build Android Project
         run: |
           cd android
