@@ -40,8 +40,6 @@ jobs:
           echo "ANDROID_HOME=$HOME/Android/Sdk" >> $GITHUB_ENV
           echo "PATH=$PATH:$HOME/Android/Sdk/platform-tools" >> $GITHUB_ENV
 
-
-
       - name: Run Tests
         run: yarn test --coverage
 
@@ -49,5 +47,18 @@ jobs:
         run: |
           cd android
           java --version
-          ./gradlew assembleRelease # and deploy apk on vercelt may be or upload on drive make the link provide the link of that
+          ./gradlew assembleRelease
 
+      # Upload APK to Google Drive using rclone or any other storage
+      - name: Install rclone
+        run: |
+          sudo apt-get install -y rclone
+          rclone config create mydrive drive
+
+      - name: Upload APK to Google Drive
+        run: |
+          rclone copy ./android/app/build/outputs/apk/release/app-release.apk mydrive:/your-google-drive-folder
+
+      - name: Provide APK Download Link
+        run: |
+          echo "APK uploaded successfully. Get your APK from: https://drive.google.com/drive/folders/<your-folder-id>"
