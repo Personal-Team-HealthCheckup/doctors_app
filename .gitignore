@@ -33,6 +33,7 @@ local.properties
 .cxx/
 *.keystore
 !debug.keystore
+!my-upload-key.keystore
 
 # node.js
 #
@@ -71,3 +72,4 @@ package-lock.json
 *.mp3
 *.rtf
 *.zip
+client_secret_775849987008-8sbg72g1r89uqvt2oeqr8qu7rj9igjto.apps.googleusercontent.com.json

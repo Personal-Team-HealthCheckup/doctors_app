@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         node-version: [20.x]
-        java-version: [11.x]
+        java-version: [17.x]
 
     steps:
       - name: Checkout Code
@@ -35,7 +35,7 @@ jobs:
       - name: Set up Android SDK
         run: |
           sudo apt-get update
-          sudo apt-get install -y openjdk-11-jdk
+          sudo apt-get install -y openjdk-17-jdk
           sudo apt-get install -y android-sdk
           echo "ANDROID_HOME=$HOME/Android/Sdk" >> $GITHUB_ENV
           echo "PATH=$PATH:$HOME/Android/Sdk/platform-tools" >> $GITHUB_ENV
@@ -49,7 +49,6 @@ jobs:
           java --version
           ./gradlew assembleRelease
 
-      # Upload APK to Google Drive using rclone or any other storage
       - name: Install rclone
         run: |
           sudo apt-get install -y rclone
@@ -62,3 +61,5 @@ jobs:
       - name: Provide APK Download Link
         run: |
           echo "APK uploaded successfully. Get your APK from: https://drive.google.com/drive/folders/<your-folder-id>"
+
+          # For configuring Google Drive access, see https://rclone.org/drive/#making-your-own-client-id
