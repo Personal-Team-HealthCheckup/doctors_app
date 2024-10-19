@@ -62,11 +62,11 @@ class App extends React.Component<AppProps, AppState> {
   };
 
   async componentDidMount() {
-    if(await this.handleBiometrics()){
-// login
-    }else{
-// navigate to login page
-    };
+//     if(await this.handleBiometrics()){
+// // login
+//     }else{
+// // navigate to login page
+//     };
     const initialUrl = await Linking.getInitialURL();
     if (initialUrl) {
       console.log('Initial URL:', initialUrl);

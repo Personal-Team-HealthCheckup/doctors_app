@@ -1,0 +1,61 @@
+name: CI/CD pipeline
+
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+        java-version: [11.x]
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Set up Java ${{ matrix.java-version }}
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ matrix.java-version }}
+          distribution: 'adopt'
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install Dependencies
+        run: yarn
+
+      - name: Set up Android SDK
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y openjdk-11-jdk
+          sudo apt-get install -y android-sdk
+          echo "ANDROID_HOME=$HOME/Android/Sdk" >> $GITHUB_ENV
+          echo "PATH=$PATH:$HOME/Android/Sdk/platform-tools" >> $GITHUB_ENV
+
+      - name: Accept Android SDK Licenses
+        run: |
+          yes | sdkmanager --licenses
+          sdkmanager --update
+
+      - name: Install Android Build Tools
+        run: |
+          sdkmanager "platform-tools" "platforms;android-30" "build-tools;30.0.3"
+
+      - name: Run Tests
+        run: yarn test --coverage
+
+      - name: Build Android Project
+        run: |
+          cd android
+          ./gradlew assembleRelease  # Build Android APK
+
+      - name: Build Web Project
+        run: yarn run build

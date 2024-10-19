@@ -58,7 +58,11 @@ class SplashScreens extends React.Component<
     );
     this.timer = Number(
       setTimeout(() => {
-        this.props.navigation?.replace(MAINSTACK.AUTHNAVIGATION);
+        // if(token){
+        //   this.props.navigation?.replace(MAINSTACK.HOMENAVIGATION);
+        // }else{
+          this.props.navigation?.replace(MAINSTACK.AUTHNAVIGATION);
+        // }
       }, 3000),
     );
   }
