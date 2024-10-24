@@ -63,11 +63,12 @@ jobs:
         run: |
           mkdir -p ~/.config/rclone
           echo "${{ secrets.RCLONE_CONFIG }}" > ~/.config/rclone/rclone.conf
+          rclone config reconnect mydrive:
 
-      - name: Upload APK to Google Drive
-        run: |
-          rclone copy ./android/app/build/outputs/apk/release/app-release.apk mydrive:/your-google-drive-folder
-
-      - name: Provide APK Download Link
-        run: |
-          echo "APK uploaded successfully. Get your APK from: https://drive.google.com/drive/folders/<your-folder-id>"
+          - name: Upload APK to Google Drive
+          run: |
+            rclone copy ./android/app/build/outputs/apk/release/app-release.apk mydrive:/1XcXQ_GUbzN3lzEghGUXZ86m-wnadaOS6
+            
+          - name: Provide APK Download Link
+            run: |
+              echo "APK uploaded successfully. Get your APK from: https://drive.google.com/drive/folders/1XcXQ_GUbzN3lzEghGUXZ86m-wnadaOS6"
