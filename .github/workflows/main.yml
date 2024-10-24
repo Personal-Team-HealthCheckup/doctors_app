@@ -51,13 +51,13 @@ jobs:
       - name: Build Android Project
         run: |
           cd android
-          java --version
           ./gradlew clean
           ./gradlew assembleRelease -Dorg.gradle.jvmargs="-Xmx4096m"
 
       - name: Install rclone
         run: |
           sudo apt-get install -y rclone
+          ls
 
       - name: Inject rclone Config
         run: |
