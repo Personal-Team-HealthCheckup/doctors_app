@@ -50,7 +50,8 @@ jobs:
         run: |
           cd android
           java --version
-          ./gradlew assembleRelease
+          ./gradlew clean
+          ./gradlew assembleRelease -Dorg.gradle.jvmargs="-Xmx4096m"
 
       - name: Install rclone
         run: |
