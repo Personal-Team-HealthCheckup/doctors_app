@@ -42,10 +42,12 @@ jobs:
 
       - name: Run Tests
         run: yarn test --coverage
-      - name: Run Tests
+
+      - name: Verify Node.js and Java Versions
         run: |
           node -v
           java --version
+
       - name: Build Android Project
         run: |
           cd android
@@ -56,7 +58,11 @@ jobs:
       - name: Install rclone
         run: |
           sudo apt-get install -y rclone
-          rclone config create mydrive drive
+
+      - name: Inject rclone Config
+        run: |
+          mkdir -p ~/.config/rclone
+          echo "${{ secrets.RCLONE_CONFIG }}" > ~/.config/rclone/rclone.conf
 
       - name: Upload APK to Google Drive
         run: |
@@ -65,5 +71,3 @@ jobs:
       - name: Provide APK Download Link
         run: |
           echo "APK uploaded successfully. Get your APK from: https://drive.google.com/drive/folders/<your-folder-id>"
-
-          # For configuring Google Drive access, see https://rclone.org/drive/#making-your-own-client-id
