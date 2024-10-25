@@ -61,8 +61,10 @@ jobs:
 
       - name: Inject rclone Config
         run: |
+          rclone version
           mkdir -p ~/.config/rclone
           echo "${{ secrets.RCLONE_CONFIG }}" > ~/.config/rclone/rclone.conf
+          ls ~/.config/rclone
           rclone config reconnect mydrive:
 
           - name: Upload APK to Google Drive
