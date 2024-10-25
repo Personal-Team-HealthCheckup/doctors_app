@@ -62,7 +62,6 @@ jobs:
           mkdir -p ~/.config/rclone
           echo "${{ secrets.RCLONE_CONFIG }}" > ~/.config/rclone/rclone.conf
           rclone version
-          # Skip reconnection prompt by specifying --config flag directly
           rclone config reconnect mydrive: --config ~/.config/rclone/rclone.conf
 
       - name: Upload APK to Google Drive
