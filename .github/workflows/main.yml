@@ -55,22 +55,20 @@ jobs:
           ./gradlew assembleRelease -Dorg.gradle.jvmargs="-Xmx4096m"
 
       - name: Install rclone
-        run: |
-          sudo apt-get install -y rclone
-          ls
+        run: sudo apt-get install -y rclone
 
       - name: Inject rclone Config
         run: |
-          rclone version
           mkdir -p ~/.config/rclone
           echo "${{ secrets.RCLONE_CONFIG }}" > ~/.config/rclone/rclone.conf
-          ls ~/.config/rclone
-          rclone config reconnect mydrive:
+          rclone version
+          # Skip reconnection prompt by specifying --config flag directly
+          rclone config reconnect mydrive: --config ~/.config/rclone/rclone.conf
 
-          - name: Upload APK to Google Drive
-          run: |
-            rclone copy ./android/app/build/outputs/apk/release/app-release.apk mydrive:/1XcXQ_GUbzN3lzEghGUXZ86m-wnadaOS6
-            
-          - name: Provide APK Download Link
-            run: |
-              echo "APK uploaded successfully. Get your APK from: https://drive.google.com/drive/folders/1XcXQ_GUbzN3lzEghGUXZ86m-wnadaOS6"
+      - name: Upload APK to Google Drive
+        run: |
+          rclone copy ./android/app/build/outputs/apk/release/app-release.apk mydrive:/1XcXQ_GUbzN3lzEghGUXZ86m-wnadaOS6 --config ~/.config/rclone/rclone.conf
+
+      - name: Provide APK Download Link
+        run: |
+          echo "APK uploaded successfully. Get your APK from: https://drive.google.com/drive/folders/1XcXQ_GUbzN3lzEghGUXZ86m-wnadaOS6"
