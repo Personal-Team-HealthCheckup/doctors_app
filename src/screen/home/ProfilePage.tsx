@@ -30,7 +30,10 @@ import VectorIcon from 'react-native-vector-icons/FontAwesome5';
 import CustomTextInput from '../../Components/common/CustomTextInput';
 import CustomGButton from '../../Components/common/CustomGButton';
 import { closeKeyBoard, handleScroll } from '../../helper/utilities';
-interface ProfilePageProps { }
+import { Navigation } from '../../global/types';
+interface ProfilePageProps { 
+  navigation?: Navigation
+}
 
 interface ProfilePageState {
   isScrollEnabled: boolean;
@@ -53,7 +56,7 @@ class ProfilePage extends React.Component<ProfilePageProps, ProfilePageState> {
       <View style={styles.mainContainer}>
         <CustomStatusBar />
         <ImageBackground source={HomeScreenPng} style={styles.image}>
-          <Header heading="Profile" />
+          <Header heading="Profile" navigation={this.props.navigation} />
           <ScrollView
             scrollEventThrottle={16}
             bounces={false}

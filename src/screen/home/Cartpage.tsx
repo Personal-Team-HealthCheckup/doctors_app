@@ -5,8 +5,11 @@ import CustomStatusBar from '../../Components/common/CustomStatusBar';
 import CustomHeader from '../../Components/common/CustomHeader';
 import { responsiveHeight, responsiveScreenWidth } from 'react-native-responsive-dimensions';
 import { COLORS } from '../../global/theme';
+import { Navigation } from '../../global/types';
 
-interface CartPageProps { }
+interface CartPageProps {
+  navigation?:Navigation;
+ }
 
 interface CartPageState { }
 
@@ -20,7 +23,7 @@ class CartPage extends React.Component<CartPageProps, CartPageState> {
       <ImageBackground source={HomeScreenPng} style={styles.image}>
         <CustomStatusBar
         />
-        <CustomHeader heading='Cart' isIcon />
+        <CustomHeader heading='Cart' isIcon navigation={this.props.navigation} />
 
       </ImageBackground>
     )

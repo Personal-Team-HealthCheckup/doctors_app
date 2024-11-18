@@ -26,7 +26,7 @@ interface CustomAppointmentCardProps {
   item: YourAppointmentsData;
   index: number;
   yourAppointmentsData: YourAppointmentsData[];
-  navigateTo: () => void;
+  navigateTo?: () => void;
 }
 
 interface CustomAppointmentCardState {
@@ -126,7 +126,7 @@ class CustomAppointmentCard extends React.Component<
               tittle="Reschedule"
               style={styles.button}
               textStyle={styles.buttonText}
-              onPress={() => this.props.navigateTo()}
+              onPress={() => this.props?.navigateTo && this.props?.navigateTo()}
             />
           </View>
         </View>

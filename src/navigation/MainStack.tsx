@@ -14,7 +14,10 @@ import OnBoarding from '../screen/auth/OnBoarding';
 import DrawerTabNavigation from './DrawerTabNavigation';
 import SearchPage from '../screen/home/SearchPage';
 import SelectTimePage from '../screen/home/SelectTimePage';
-import Video from '../Components/videoPlayer/Video';
+// import Video from '../Components/videoPlayer/Video';
+// import { useSelector } from 'react-redux';
+// import { RootState } from '../redux/store';
+import JoinChannelVideo from '../Components/videoPlayer/JoinChannelVideo';
 
 const MainStack = createNativeStackNavigator();
 const AuthStack = createNativeStackNavigator();
@@ -60,7 +63,7 @@ const MainNavigation = () => {
       />
        <MainStack.Screen
         name={MAINSTACK.DUMMYStack}
-        component={Video}
+        component={JoinChannelVideo}
       />
     </MainStack.Navigator>
   );
