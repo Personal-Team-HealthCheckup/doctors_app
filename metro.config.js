@@ -1,8 +1,9 @@
+ 
 /**
- * Metro configuration for React Native with svg support
- * https://github.com/facebook/react-native
+ * Metro configuration
+ * https://reactnative.dev/docs/metro
  *
- * @format
+ * @type {import('metro-config').MetroConfig}
  */
 
 const {getDefaultConfig} = require('metro-config');

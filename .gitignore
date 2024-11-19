@@ -20,7 +20,7 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
-ios/.xcode.env.local
+**/.xcode.env.local
 
 # Android/IntelliJ
 #
@@ -57,7 +57,7 @@ yarn-error.log
 *.jsbundle
 
 # Ruby / CocoaPods
-/ios/Pods/
+**/Pods/
 /vendor/bundle/
 
 # Temporary files created by Metro to check the health of the file watcher
@@ -72,6 +72,16 @@ package-lock.json
 *.mp3
 *.rtf
 *.zip
+
+ 
+# Yarn
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
 client_secret_775849987008-8sbg72g1r89uqvt2oeqr8qu7rj9igjto.apps.googleusercontent.com.json
 client_secret_362512800632-7cuhd2ve3940qcvukf7rcm1gc6e9t89s.apps.googleusercontent.com.json
 client_secret_775849987008-8sbg72g1r89uqvt2oeqr8qu7rj9igjto.apps.googleusercontent.com (1).json
