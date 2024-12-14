@@ -1,39 +1,14 @@
-def node_require(script)
-# Resolve script with node to allow for hoisting
+# Resolve react_native_pods.rb with node to allow for hoisting
 require Pod::Executable.execute_command('node', ['-p',
-"require.resolve(
-  '#{script}',
-{paths: [process.argv[1]]},
-)", __dir__]).strip
-end
-
-node_require('react-native/scripts/react_native_pods.rb')
-node_require('react-native-permissions/scripts/setup.rb')
+  'require.resolve(
+    "react-native/scripts/react_native_pods.rb",
+    {paths: [process.argv[1]]},
+  )', __dir__]).strip
 
 platform :ios, min_ios_version_supported
 prepare_react_native_project!
 
-setup_permissions([
-  # 'AppTrackingTransparency',
-  # 'BluetoothPeripheral',
-  # 'Calendars',
-  'Camera',
-  # 'Contacts',
-  # 'FaceID',
-  'LocationAccuracy',
-  'LocationAlways',
-  'LocationWhenInUse',
-  # 'MediaLibrary',
-  'Microphone',
-  # 'Motion',
-  # 'Notifications',
-  # 'PhotoLibrary',
-  # 'PhotoLibraryAddOnly',
-  # 'Reminders',
-  # 'Siri',
-  # 'SpeechRecognition',
-  # 'StoreKit',
-])
+
 
 
 linkage = ENV['USE_FRAMEWORKS']
@@ -44,13 +19,10 @@ end
 
 target 'doctor_app' do
   config = use_native_modules!
+  
+ rn_maps_path = '../node_modules/react-native-maps'
+ pod 'react-native-google-maps', :path => rn_maps_path
 
-# React Native Maps dependencies
-# The following line is only needed if building on an Apple silicon Mac without rosetta.
-pod 'Google-Maps-iOS-Utils', :git => 'https://github.com/Simon-TechForm/google-maps-ios-utils.git', :branch => 'feat/support-apple-silicon'
-
-rn_maps_path = '../node_modules/react-native-maps'
-pod 'react-native-google-maps', :path => rn_maps_path
 
   use_react_native!(
     :path => config[:reactNativePath],
