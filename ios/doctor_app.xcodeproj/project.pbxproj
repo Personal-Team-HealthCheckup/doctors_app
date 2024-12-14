@@ -8,63 +8,57 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* doctor_appTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* doctor_appTests.m */; };
-		04C41EE433BF449BAD13F7E0 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1008CC66E2E64ED58D507609 /* Ionicons.ttf */; };
-		05532D80BBEA456C8D138802 /* Rubik-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 355F8E4AE82F45A8ABF287DE /* Rubik-Bold.ttf */; };
-		0C80B921A6F3F58F76C31292 /* libPods-doctor_app.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-doctor_app.a */; };
-		12A690F3A8FF44B29BC38059 /* Inter-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 41A01CEBF11D462A93ADB972 /* Inter-Light.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		18F2CB3BAB51475BBC76BD49 /* Poppins-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF63D2F65E694E63BE684418 /* Poppins-Thin.ttf */; };
-		1F11AB95D8A54926916F7633 /* Poppins-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DEFCB9C3E81E4958BA590BEB /* Poppins-ExtraLight.ttf */; };
-		202B8880342D49B1B03291FE /* FontAwesome6_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 55F57FD7079E4D3D85500C38 /* FontAwesome6_Regular.ttf */; };
-		2BD2976CD12B430A816C7F8C /* Inter-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CDCC5E45CBD04049AF452C54 /* Inter-ExtraBold.ttf */; };
-		37E113F32A94DCC400C15E70 /* doctor-app Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 37E113F22A94DCC400C15E70 /* doctor-app Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		37E113F82A94DCC400C15E70 /* doctor_appApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E113F72A94DCC400C15E70 /* doctor_appApp.swift */; };
-		37E113FA2A94DCC400C15E70 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E113F92A94DCC400C15E70 /* ContentView.swift */; };
-		37E113FC2A94DCC500C15E70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37E113FB2A94DCC500C15E70 /* Assets.xcassets */; };
-		37E113FF2A94DCC500C15E70 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37E113FE2A94DCC500C15E70 /* Preview Assets.xcassets */; };
-		37E114092A94DCC600C15E70 /* doctor_app_Watch_AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E114082A94DCC600C15E70 /* doctor_app_Watch_AppTests.swift */; };
-		37E114132A94DCC600C15E70 /* doctor_app_Watch_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E114122A94DCC600C15E70 /* doctor_app_Watch_AppUITests.swift */; };
-		37E114152A94DCC600C15E70 /* doctor_app_Watch_AppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E114142A94DCC600C15E70 /* doctor_app_Watch_AppUITestsLaunchTests.swift */; };
-		3A247B4C47FD4C24B3CAE2A3 /* Inter-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 249D7C149B5A4EA3B198EE22 /* Inter-Black.ttf */; };
-		46C5924AD01148C582B40BDC /* Rubik-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D7B0A089C8804982BC5E8057 /* Rubik-Medium.ttf */; };
-		59E1E24B6AF14A629637437B /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D964901174714EEF8C6E6E2C /* EvilIcons.ttf */; };
-		5D2653E0F23544CCB50D1F88 /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F2AE75B31A94635A881F4A5 /* FontAwesome5_Solid.ttf */; };
-		73D5ECD24B954220A14DD55C /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D733AAC11998421FA8FA6F61 /* Rubik-Regular.ttf */; };
-		7699B88040F8A987B510C191 /* libPods-doctor_app-doctor_appTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-doctor_app-doctor_appTests.a */; };
-		7BBDEFA6DD5E45729A2508FD /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ABAEA83B372547A2A0F99886 /* AntDesign.ttf */; };
-		81A1C17F54C9430E964C225B /* Inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C7B84E58EA84DDDA28F1F7F /* Inter-Bold.ttf */; };
-		8908FE619CE94F11A219425C /* Inter-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9758CAF020A843328953D903 /* Inter-ExtraLight.ttf */; };
-		8D34CAC314974921B49A5F21 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 550C97AF20FD4104BF7739EC /* FontAwesome5_Regular.ttf */; };
-		91F537B21ABD4CFC8AF285EF /* Rubik-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 591CFFBA2949435088AB72BA /* Rubik-ExtraBold.ttf */; };
-		99422A97D12B4AE187215B2F /* FontAwesome6_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DDE714384D2344A698FBF056 /* FontAwesome6_Solid.ttf */; };
-		9EDA59C9D8DE453A90414795 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 98C0144273284F7DB24DB782 /* FontAwesome.ttf */; };
-		A6EA0C6426E643D08F1E4139 /* Inter-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9361C472A2564A079AB9769A /* Inter-Thin.ttf */; };
-		AC5414063DB246FE826E6105 /* Rubik-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D65919DC40FA4329A949C7A8 /* Rubik-SemiBold.ttf */; };
-		B52F05C9A01C416FBF4B4F80 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 099D326B64CE46358CFF544E /* Feather.ttf */; };
-		B65462B64C394A4BBC4D5084 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 72CAB0367BC34F3FA26C6E54 /* Poppins-Regular.ttf */; };
-		B925FD86814E41BCB62CB207 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 25727D58F6E54366A8B79ED6 /* MaterialCommunityIcons.ttf */; };
-		BB6F0934A5D6421EB5E942D9 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6322627ADEB04DD6B9BD27F8 /* MaterialIcons.ttf */; };
-		BEB9E83FF01A423983D63830 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 95C1EC88EA58492681B76E65 /* Poppins-SemiBold.ttf */; };
-		C10826D3D86846049D9F3DFF /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 39E5C822169B44169AAF0F41 /* Poppins-Bold.ttf */; };
-		C21260AE528D4F49B20A51CA /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CFE92C2E7F004CC38D9190E9 /* Inter-Regular.ttf */; };
-		C3050A0B2CE14F1F8376DF62 /* Rubik-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C4EF61FEA094C85B32429FD /* Rubik-Black.ttf */; };
-		CD4130CC9EDD41C0B374F42F /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A44B3214B5B4C6CAD33A1E7 /* Entypo.ttf */; };
-		D4CD26E3FE9A4CE98A09058C /* Poppins-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 06CA50A6CE394D7DA56C9BA7 /* Poppins-ExtraBold.ttf */; };
-		D4E76BC1E7194A40BAB66494 /* Rubik-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 888C0174C79F440F97C6CC6A /* Rubik-Light.ttf */; };
-		D51D41A2908846DF8CC1CE98 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8C33BF47DF9F483FA185BEAA /* Poppins-Medium.ttf */; };
-		D62E9BD297E54BE28BBB1933 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F12AF1EA2E1A47849225CACC /* Octicons.ttf */; };
-		D9F933BF31274CC29786582B /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E74E191DE796405E88796EF7 /* Fontisto.ttf */; };
-		DE382977499E43D6AC2EF779 /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E0FB62923BB24232872E44F6 /* Inter-SemiBold.ttf */; };
-		E2AFB95256FD42259D783F06 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C6AB637C8AA4E7F88B1B0C9 /* SimpleLineIcons.ttf */; };
-		E52559170512441AA5965E53 /* Poppins-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7E753EDBA3A542A49A54A2A2 /* Poppins-Black.ttf */; };
-		EA5F0ED531B04F5388725E2B /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 48AF37A097CE465CB2B7B440 /* Poppins-Light.ttf */; };
-		F363382BE9CD4676A187C896 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ED9D819A0C424B169C17D349 /* Foundation.ttf */; };
-		F8A4E49C5C4C4AA7B2F1282F /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 40A08DABAD584F29B3EBD504 /* Zocial.ttf */; };
-		FB124A5A2D3C435E8BA7B8E4 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E0FCAB187E8D4504B2F966EC /* FontAwesome5_Brands.ttf */; };
-		FBEE0C10E53642B7AF358FFF /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A95916430954BD8B3A2F2A3 /* Inter-Medium.ttf */; };
-		FFD95D65157A464ABCC91433 /* FontAwesome6_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 92E7BED88AFD40F6820BAFCD /* FontAwesome6_Brands.ttf */; };
+		2EBC18DA165D4C4D0F6AFDD0 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
+		355CEC02690B274AACC72B95 /* libPods-doctor_app.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EAF568357007F79F19F309A /* libPods-doctor_app.a */; };
+		5A53FE8FD06DA4091E180B99 /* libPods-doctor_app-doctor_appTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A32CAB18FCD01B20DFF3522 /* libPods-doctor_app-doctor_appTests.a */; };
+		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		4749559B2C9B45F4AECD1EC6 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8D4972F37859425F83E6A87E /* AntDesign.ttf */; };
+		B0470059B19143A793D2C407 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 99D6E88A83464FEE8C0EF952 /* Entypo.ttf */; };
+		D61036C23C9340D89DA7D5D7 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EFCB35159D314FA79704E257 /* EvilIcons.ttf */; };
+		B897A1399B5C4AAA8093F33E /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 98AD93B9F1D74FA58AF58E4D /* Feather.ttf */; };
+		15A3C9AA9528477183996E7B /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AAD830DAED34BCEB00F8524 /* FontAwesome.ttf */; };
+		49D1D58DB64F497188C55051 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A13D5422A4784AFB89D5BA64 /* FontAwesome5_Brands.ttf */; };
+		E964E2B40DFB4744A209EEC2 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8227D6A3AE084282AA372B32 /* FontAwesome5_Regular.ttf */; };
+		CBEEC2FB1401498DA667FFFF /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01EB757F1C2D4526B4875E6C /* FontAwesome5_Solid.ttf */; };
+		DEC3139857124A5F89A3FDBD /* FontAwesome6_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA75E7F034744345B852EC8E /* FontAwesome6_Brands.ttf */; };
+		B05CFF53051841EDA5A69009 /* FontAwesome6_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7D5C093A916A47E8B40B67A8 /* FontAwesome6_Regular.ttf */; };
+		7226768FEBF04C3781A74B0C /* FontAwesome6_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 361D61387B5242149A9C59CB /* FontAwesome6_Solid.ttf */; };
+		A4989AD1151C4D0BB3137D58 /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E3EEA267317D4CF485EBFF72 /* Fontisto.ttf */; };
+		09AC0E5CFC5745D688784159 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 49443658884D4E5C82A53A8B /* Foundation.ttf */; };
+		16A15AE3736E40439528A018 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E496A45F60304E859112139A /* Ionicons.ttf */; };
+		43808B72DFE14425BCD63023 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B4B4B2639D7446E888DA5E29 /* MaterialCommunityIcons.ttf */; };
+		6E1E832924DC43E19AC0AD75 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D818363578AC4E56A7D5C6D8 /* MaterialIcons.ttf */; };
+		DBBC0CF7EA3B4AC8BFAF2DA3 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B902460A8FAE4EACB6BD0F16 /* Octicons.ttf */; };
+		5D244FEFCCD24DFDB8B1464C /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EA0C253ADA9E4711B7D45E32 /* SimpleLineIcons.ttf */; };
+		10B21E00A795431C90E254DA /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A863847A289F431E8927CAE4 /* Zocial.ttf */; };
+		9ADC1375F9FB4E1F8A6B6223 /* Inter-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF825EA7956043CF8F997A95 /* Inter-Black.ttf */; };
+		F92920FAED1D4B4CB3871837 /* Inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EC05D0E2395F4F2C800A11DE /* Inter-Bold.ttf */; };
+		AC4251D9C2184D49A8FB518B /* Inter-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0D88FBC1C7FF43A1B54CEE1A /* Inter-ExtraBold.ttf */; };
+		94CA5867F06D46C18263D7F1 /* Inter-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A0B900E18F8745B6AB926A82 /* Inter-ExtraLight.ttf */; };
+		500DF86F65764DD88C5F0CB8 /* Inter-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5455A12FA3F248569DD0FFCC /* Inter-Light.ttf */; };
+		E5EC79D8841740D9B6D30E85 /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F7B3E56ED2364CDC967754EF /* Inter-Medium.ttf */; };
+		DA2EB487F55A457FB909327B /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B6FDF2B80AE24DC3B7E93CB3 /* Inter-Regular.ttf */; };
+		B866DB4470BB40428D1C01DA /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E00B750E78FA4F698CC6F7CF /* Inter-SemiBold.ttf */; };
+		FFE8A06335AE4B69B8C49B95 /* Inter-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1CD0431EAFC34840813A1AD7 /* Inter-Thin.ttf */; };
+		0E37908389C44270B573EC00 /* Poppins-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A7C615E929034840AFE6D39A /* Poppins-Black.ttf */; };
+		8E9BAA0A73784FBC816D7BFE /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BCAD5EF7116D4E80904DF5E8 /* Poppins-Bold.ttf */; };
+		9296346FE8F345169EBB5BA2 /* Poppins-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A25ADE34B22F4B3DABD2AC18 /* Poppins-ExtraBold.ttf */; };
+		56515B5988F642C281972EF5 /* Poppins-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E917267299CA49EFB8A1E70D /* Poppins-ExtraLight.ttf */; };
+		AF0328E329FB406D93B6F739 /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 76BC0902220E4694993CDE37 /* Poppins-Light.ttf */; };
+		6D2D3E5155C44D6A8C90D832 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9867D6E787494F5686E8ECF6 /* Poppins-Medium.ttf */; };
+		D0AECB260665483E9F3F9D86 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17C42DE673CE46BD8737ED7B /* Poppins-Regular.ttf */; };
+		B2A1978399E3472EA9C2BF79 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 89C5CE092B8F4D9597232555 /* Poppins-SemiBold.ttf */; };
+		BEAD201CD74E4D19A71AA964 /* Poppins-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7E574042E05D4B10819D4349 /* Poppins-Thin.ttf */; };
+		154ED87011A34D339C9BBA14 /* Rubik-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DD1B316DE4EF458BB419069D /* Rubik-Black.ttf */; };
+		2BE9EBA22DFC4DF592457B63 /* Rubik-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2A6F615F96DB42B0A7966DB6 /* Rubik-Bold.ttf */; };
+		DAE46A73BE92436A80E82268 /* Rubik-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FF9F97B080F40F8BB858FC4 /* Rubik-ExtraBold.ttf */; };
+		762305C108734D74AB885C54 /* Rubik-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 60FA615171CA4F2B86C99B39 /* Rubik-Light.ttf */; };
+		138AA5433E8C48E583769DD5 /* Rubik-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 85D6EBD9E97D4173A1C49B0C /* Rubik-Medium.ttf */; };
+		94F8303847234325BA2CC6C6 /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B2766E97516C4CD1AF6E7D21 /* Rubik-Regular.ttf */; };
+		864871F97F164B249EA83F8F /* Rubik-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F0269A5F7A32409494A822FE /* Rubik-SemiBold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,131 +69,71 @@
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
 			remoteInfo = doctor_app;
 		};
-		37E113F42A94DCC400C15E70 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 37E113F12A94DCC400C15E70;
-			remoteInfo = "doctor-app Watch App";
-		};
-		37E114052A94DCC500C15E70 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 37E113F12A94DCC400C15E70;
-			remoteInfo = "doctor-app Watch App";
-		};
-		37E1140F2A94DCC600C15E70 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 37E113F12A94DCC400C15E70;
-			remoteInfo = "doctor-app Watch App";
-		};
-		37FCFAD32AB601520031068D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 37FCFACE2AB601520031068D /* SRSRadialGradient.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 134814201AA4EA6300B7C361;
-			remoteInfo = SRSRadialGradient;
-		};
-		37FCFAD52AB601520031068D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 37FCFACE2AB601520031068D /* SRSRadialGradient.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 47413E2820DBB5D000CCDA85;
-			remoteInfo = "SRSRadialGradien-tvOS";
-		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		37E114182A94DCC600C15E70 /* Embed Watch Content */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
-			dstSubfolderSpec = 16;
-			files = (
-				37E113F32A94DCC400C15E70 /* doctor-app Watch App.app in Embed Watch Content */,
-			);
-			name = "Embed Watch Content";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		00E356EE1AD99517003FC87E /* doctor_appTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = doctor_appTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* doctor_appTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = doctor_appTests.m; sourceTree = "<group>"; };
-		06CA50A6CE394D7DA56C9BA7 /* Poppins-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraBold.ttf"; path = "../src/assets/fonts/Poppins-ExtraBold.ttf"; sourceTree = "<group>"; };
-		099D326B64CE46358CFF544E /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = ../src/assets/fonts/Feather.ttf; sourceTree = "<group>"; };
-		1008CC66E2E64ED58D507609 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = ../src/assets/fonts/Ionicons.ttf; sourceTree = "<group>"; };
+		0ABA296A01FFB8EF1F0A6F8C /* Pods-doctor_app-doctor_appTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-doctor_app-doctor_appTests.release.xcconfig"; path = "Target Support Files/Pods-doctor_app-doctor_appTests/Pods-doctor_app-doctor_appTests.release.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* doctor_app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = doctor_app.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = doctor_app/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = doctor_app/AppDelegate.mm; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = doctor_app/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = doctor_app/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = doctor_app/main.m; sourceTree = "<group>"; };
-		19F6CBCC0A4E27FBF8BF4A61 /* libPods-doctor_app-doctor_appTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-doctor_app-doctor_appTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		1F2AE75B31A94635A881F4A5 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = ../src/assets/fonts/FontAwesome5_Solid.ttf; sourceTree = "<group>"; };
-		249D7C149B5A4EA3B198EE22 /* Inter-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Black.ttf"; path = "../src/assets/fonts/Inter-Black.ttf"; sourceTree = "<group>"; };
-		25727D58F6E54366A8B79ED6 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = ../src/assets/fonts/MaterialCommunityIcons.ttf; sourceTree = "<group>"; };
-		355F8E4AE82F45A8ABF287DE /* Rubik-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Bold.ttf"; path = "../src/assets/fonts/Rubik-Bold.ttf"; sourceTree = "<group>"; };
-		37D43DDB2AF8FB3D00997530 /* doctor_app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = doctor_app.entitlements; path = doctor_app/doctor_app.entitlements; sourceTree = "<group>"; };
-		37E113ED2A94DCC400C15E70 /* doctor-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "doctor-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		37E113F22A94DCC400C15E70 /* doctor-app Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "doctor-app Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		37E113F72A94DCC400C15E70 /* doctor_appApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = doctor_appApp.swift; sourceTree = "<group>"; };
-		37E113F92A94DCC400C15E70 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		37E113FB2A94DCC500C15E70 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		37E113FE2A94DCC500C15E70 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		37E114042A94DCC500C15E70 /* doctor-app Watch AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "doctor-app Watch AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		37E114082A94DCC600C15E70 /* doctor_app_Watch_AppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = doctor_app_Watch_AppTests.swift; sourceTree = "<group>"; };
-		37E1140E2A94DCC600C15E70 /* doctor-app Watch AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "doctor-app Watch AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		37E114122A94DCC600C15E70 /* doctor_app_Watch_AppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = doctor_app_Watch_AppUITests.swift; sourceTree = "<group>"; };
-		37E114142A94DCC600C15E70 /* doctor_app_Watch_AppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = doctor_app_Watch_AppUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		37FCFACE2AB601520031068D /* SRSRadialGradient.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SRSRadialGradient.xcodeproj; path = "../node_modules/react-native-radial-gradient/ios/SRSRadialGradient.xcodeproj"; sourceTree = "<group>"; };
-		39E5C822169B44169AAF0F41 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Bold.ttf"; path = "../src/assets/fonts/Poppins-Bold.ttf"; sourceTree = "<group>"; };
-		3B4392A12AC88292D35C810B /* Pods-doctor_app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-doctor_app.debug.xcconfig"; path = "Target Support Files/Pods-doctor_app/Pods-doctor_app.debug.xcconfig"; sourceTree = "<group>"; };
-		3C6AB637C8AA4E7F88B1B0C9 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = ../src/assets/fonts/SimpleLineIcons.ttf; sourceTree = "<group>"; };
-		40A08DABAD584F29B3EBD504 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = ../src/assets/fonts/Zocial.ttf; sourceTree = "<group>"; };
-		41A01CEBF11D462A93ADB972 /* Inter-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Light.ttf"; path = "../src/assets/fonts/Inter-Light.ttf"; sourceTree = "<group>"; };
-		48AF37A097CE465CB2B7B440 /* Poppins-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Light.ttf"; path = "../src/assets/fonts/Poppins-Light.ttf"; sourceTree = "<group>"; };
-		550C97AF20FD4104BF7739EC /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = ../src/assets/fonts/FontAwesome5_Regular.ttf; sourceTree = "<group>"; };
-		55F57FD7079E4D3D85500C38 /* FontAwesome6_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome6_Regular.ttf; path = ../src/assets/fonts/FontAwesome6_Regular.ttf; sourceTree = "<group>"; };
-		5709B34CF0A7D63546082F79 /* Pods-doctor_app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-doctor_app.release.xcconfig"; path = "Target Support Files/Pods-doctor_app/Pods-doctor_app.release.xcconfig"; sourceTree = "<group>"; };
-		591CFFBA2949435088AB72BA /* Rubik-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-ExtraBold.ttf"; path = "../src/assets/fonts/Rubik-ExtraBold.ttf"; sourceTree = "<group>"; };
-		5A95916430954BD8B3A2F2A3 /* Inter-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Medium.ttf"; path = "../src/assets/fonts/Inter-Medium.ttf"; sourceTree = "<group>"; };
-		5B7EB9410499542E8C5724F5 /* Pods-doctor_app-doctor_appTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-doctor_app-doctor_appTests.debug.xcconfig"; path = "Target Support Files/Pods-doctor_app-doctor_appTests/Pods-doctor_app-doctor_appTests.debug.xcconfig"; sourceTree = "<group>"; };
-		5DCACB8F33CDC322A6C60F78 /* libPods-doctor_app.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-doctor_app.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6322627ADEB04DD6B9BD27F8 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = ../src/assets/fonts/MaterialIcons.ttf; sourceTree = "<group>"; };
-		6C4EF61FEA094C85B32429FD /* Rubik-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Black.ttf"; path = "../src/assets/fonts/Rubik-Black.ttf"; sourceTree = "<group>"; };
-		6C7B84E58EA84DDDA28F1F7F /* Inter-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Bold.ttf"; path = "../src/assets/fonts/Inter-Bold.ttf"; sourceTree = "<group>"; };
-		72CAB0367BC34F3FA26C6E54 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Regular.ttf"; path = "../src/assets/fonts/Poppins-Regular.ttf"; sourceTree = "<group>"; };
-		7A44B3214B5B4C6CAD33A1E7 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = ../src/assets/fonts/Entypo.ttf; sourceTree = "<group>"; };
-		7E753EDBA3A542A49A54A2A2 /* Poppins-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Black.ttf"; path = "../src/assets/fonts/Poppins-Black.ttf"; sourceTree = "<group>"; };
-		888C0174C79F440F97C6CC6A /* Rubik-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Light.ttf"; path = "../src/assets/fonts/Rubik-Light.ttf"; sourceTree = "<group>"; };
-		89C6BE57DB24E9ADA2F236DE /* Pods-doctor_app-doctor_appTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-doctor_app-doctor_appTests.release.xcconfig"; path = "Target Support Files/Pods-doctor_app-doctor_appTests/Pods-doctor_app-doctor_appTests.release.xcconfig"; sourceTree = "<group>"; };
-		8C33BF47DF9F483FA185BEAA /* Poppins-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Medium.ttf"; path = "../src/assets/fonts/Poppins-Medium.ttf"; sourceTree = "<group>"; };
-		92E7BED88AFD40F6820BAFCD /* FontAwesome6_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome6_Brands.ttf; path = ../src/assets/fonts/FontAwesome6_Brands.ttf; sourceTree = "<group>"; };
-		9361C472A2564A079AB9769A /* Inter-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Thin.ttf"; path = "../src/assets/fonts/Inter-Thin.ttf"; sourceTree = "<group>"; };
-		95C1EC88EA58492681B76E65 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-SemiBold.ttf"; path = "../src/assets/fonts/Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
-		9758CAF020A843328953D903 /* Inter-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-ExtraLight.ttf"; path = "../src/assets/fonts/Inter-ExtraLight.ttf"; sourceTree = "<group>"; };
-		98C0144273284F7DB24DB782 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = ../src/assets/fonts/FontAwesome.ttf; sourceTree = "<group>"; };
-		ABAEA83B372547A2A0F99886 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = ../src/assets/fonts/AntDesign.ttf; sourceTree = "<group>"; };
-		CDCC5E45CBD04049AF452C54 /* Inter-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-ExtraBold.ttf"; path = "../src/assets/fonts/Inter-ExtraBold.ttf"; sourceTree = "<group>"; };
-		CFE92C2E7F004CC38D9190E9 /* Inter-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Regular.ttf"; path = "../src/assets/fonts/Inter-Regular.ttf"; sourceTree = "<group>"; };
-		D65919DC40FA4329A949C7A8 /* Rubik-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-SemiBold.ttf"; path = "../src/assets/fonts/Rubik-SemiBold.ttf"; sourceTree = "<group>"; };
-		D733AAC11998421FA8FA6F61 /* Rubik-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Regular.ttf"; path = "../src/assets/fonts/Rubik-Regular.ttf"; sourceTree = "<group>"; };
-		D7B0A089C8804982BC5E8057 /* Rubik-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Medium.ttf"; path = "../src/assets/fonts/Rubik-Medium.ttf"; sourceTree = "<group>"; };
-		D964901174714EEF8C6E6E2C /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = ../src/assets/fonts/EvilIcons.ttf; sourceTree = "<group>"; };
-		DDE714384D2344A698FBF056 /* FontAwesome6_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome6_Solid.ttf; path = ../src/assets/fonts/FontAwesome6_Solid.ttf; sourceTree = "<group>"; };
-		DEFCB9C3E81E4958BA590BEB /* Poppins-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraLight.ttf"; path = "../src/assets/fonts/Poppins-ExtraLight.ttf"; sourceTree = "<group>"; };
-		E0FB62923BB24232872E44F6 /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-SemiBold.ttf"; path = "../src/assets/fonts/Inter-SemiBold.ttf"; sourceTree = "<group>"; };
-		E0FCAB187E8D4504B2F966EC /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = ../src/assets/fonts/FontAwesome5_Brands.ttf; sourceTree = "<group>"; };
-		E74E191DE796405E88796EF7 /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = ../src/assets/fonts/Fontisto.ttf; sourceTree = "<group>"; };
+		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = doctor_app/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		2E726BE677D39E877F858DCF /* Pods-doctor_app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-doctor_app.release.xcconfig"; path = "Target Support Files/Pods-doctor_app/Pods-doctor_app.release.xcconfig"; sourceTree = "<group>"; };
+		6EAF568357007F79F19F309A /* libPods-doctor_app.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-doctor_app.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = doctor_app/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		9A32CAB18FCD01B20DFF3522 /* libPods-doctor_app-doctor_appTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-doctor_app-doctor_appTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B1EAF15EF9C0A76B83D4321C /* Pods-doctor_app-doctor_appTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-doctor_app-doctor_appTests.debug.xcconfig"; path = "Target Support Files/Pods-doctor_app-doctor_appTests/Pods-doctor_app-doctor_appTests.debug.xcconfig"; sourceTree = "<group>"; };
+		BC9EE6092384006207F493A7 /* Pods-doctor_app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-doctor_app.debug.xcconfig"; path = "Target Support Files/Pods-doctor_app/Pods-doctor_app.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		ED9D819A0C424B169C17D349 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = ../src/assets/fonts/Foundation.ttf; sourceTree = "<group>"; };
-		F12AF1EA2E1A47849225CACC /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = ../src/assets/fonts/Octicons.ttf; sourceTree = "<group>"; };
-		FF63D2F65E694E63BE684418 /* Poppins-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Thin.ttf"; path = "../src/assets/fonts/Poppins-Thin.ttf"; sourceTree = "<group>"; };
+		8D4972F37859425F83E6A87E /* AntDesign.ttf */ = {isa = PBXFileReference; name = "AntDesign.ttf"; path = "../src/assets/fonts/AntDesign.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		99D6E88A83464FEE8C0EF952 /* Entypo.ttf */ = {isa = PBXFileReference; name = "Entypo.ttf"; path = "../src/assets/fonts/Entypo.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		EFCB35159D314FA79704E257 /* EvilIcons.ttf */ = {isa = PBXFileReference; name = "EvilIcons.ttf"; path = "../src/assets/fonts/EvilIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		98AD93B9F1D74FA58AF58E4D /* Feather.ttf */ = {isa = PBXFileReference; name = "Feather.ttf"; path = "../src/assets/fonts/Feather.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6AAD830DAED34BCEB00F8524 /* FontAwesome.ttf */ = {isa = PBXFileReference; name = "FontAwesome.ttf"; path = "../src/assets/fonts/FontAwesome.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A13D5422A4784AFB89D5BA64 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; name = "FontAwesome5_Brands.ttf"; path = "../src/assets/fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		8227D6A3AE084282AA372B32 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; name = "FontAwesome5_Regular.ttf"; path = "../src/assets/fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		01EB757F1C2D4526B4875E6C /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; name = "FontAwesome5_Solid.ttf"; path = "../src/assets/fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		BA75E7F034744345B852EC8E /* FontAwesome6_Brands.ttf */ = {isa = PBXFileReference; name = "FontAwesome6_Brands.ttf"; path = "../src/assets/fonts/FontAwesome6_Brands.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		7D5C093A916A47E8B40B67A8 /* FontAwesome6_Regular.ttf */ = {isa = PBXFileReference; name = "FontAwesome6_Regular.ttf"; path = "../src/assets/fonts/FontAwesome6_Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		361D61387B5242149A9C59CB /* FontAwesome6_Solid.ttf */ = {isa = PBXFileReference; name = "FontAwesome6_Solid.ttf"; path = "../src/assets/fonts/FontAwesome6_Solid.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E3EEA267317D4CF485EBFF72 /* Fontisto.ttf */ = {isa = PBXFileReference; name = "Fontisto.ttf"; path = "../src/assets/fonts/Fontisto.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		49443658884D4E5C82A53A8B /* Foundation.ttf */ = {isa = PBXFileReference; name = "Foundation.ttf"; path = "../src/assets/fonts/Foundation.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E496A45F60304E859112139A /* Ionicons.ttf */ = {isa = PBXFileReference; name = "Ionicons.ttf"; path = "../src/assets/fonts/Ionicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B4B4B2639D7446E888DA5E29 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; name = "MaterialCommunityIcons.ttf"; path = "../src/assets/fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D818363578AC4E56A7D5C6D8 /* MaterialIcons.ttf */ = {isa = PBXFileReference; name = "MaterialIcons.ttf"; path = "../src/assets/fonts/MaterialIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B902460A8FAE4EACB6BD0F16 /* Octicons.ttf */ = {isa = PBXFileReference; name = "Octicons.ttf"; path = "../src/assets/fonts/Octicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		EA0C253ADA9E4711B7D45E32 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; name = "SimpleLineIcons.ttf"; path = "../src/assets/fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A863847A289F431E8927CAE4 /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../src/assets/fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FF825EA7956043CF8F997A95 /* Inter-Black.ttf */ = {isa = PBXFileReference; name = "Inter-Black.ttf"; path = "../src/assets/fonts/Inter-Black.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		EC05D0E2395F4F2C800A11DE /* Inter-Bold.ttf */ = {isa = PBXFileReference; name = "Inter-Bold.ttf"; path = "../src/assets/fonts/Inter-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		0D88FBC1C7FF43A1B54CEE1A /* Inter-ExtraBold.ttf */ = {isa = PBXFileReference; name = "Inter-ExtraBold.ttf"; path = "../src/assets/fonts/Inter-ExtraBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A0B900E18F8745B6AB926A82 /* Inter-ExtraLight.ttf */ = {isa = PBXFileReference; name = "Inter-ExtraLight.ttf"; path = "../src/assets/fonts/Inter-ExtraLight.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		5455A12FA3F248569DD0FFCC /* Inter-Light.ttf */ = {isa = PBXFileReference; name = "Inter-Light.ttf"; path = "../src/assets/fonts/Inter-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F7B3E56ED2364CDC967754EF /* Inter-Medium.ttf */ = {isa = PBXFileReference; name = "Inter-Medium.ttf"; path = "../src/assets/fonts/Inter-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B6FDF2B80AE24DC3B7E93CB3 /* Inter-Regular.ttf */ = {isa = PBXFileReference; name = "Inter-Regular.ttf"; path = "../src/assets/fonts/Inter-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E00B750E78FA4F698CC6F7CF /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; name = "Inter-SemiBold.ttf"; path = "../src/assets/fonts/Inter-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		1CD0431EAFC34840813A1AD7 /* Inter-Thin.ttf */ = {isa = PBXFileReference; name = "Inter-Thin.ttf"; path = "../src/assets/fonts/Inter-Thin.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A7C615E929034840AFE6D39A /* Poppins-Black.ttf */ = {isa = PBXFileReference; name = "Poppins-Black.ttf"; path = "../src/assets/fonts/Poppins-Black.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		BCAD5EF7116D4E80904DF5E8 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; name = "Poppins-Bold.ttf"; path = "../src/assets/fonts/Poppins-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A25ADE34B22F4B3DABD2AC18 /* Poppins-ExtraBold.ttf */ = {isa = PBXFileReference; name = "Poppins-ExtraBold.ttf"; path = "../src/assets/fonts/Poppins-ExtraBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E917267299CA49EFB8A1E70D /* Poppins-ExtraLight.ttf */ = {isa = PBXFileReference; name = "Poppins-ExtraLight.ttf"; path = "../src/assets/fonts/Poppins-ExtraLight.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		76BC0902220E4694993CDE37 /* Poppins-Light.ttf */ = {isa = PBXFileReference; name = "Poppins-Light.ttf"; path = "../src/assets/fonts/Poppins-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		9867D6E787494F5686E8ECF6 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; name = "Poppins-Medium.ttf"; path = "../src/assets/fonts/Poppins-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		17C42DE673CE46BD8737ED7B /* Poppins-Regular.ttf */ = {isa = PBXFileReference; name = "Poppins-Regular.ttf"; path = "../src/assets/fonts/Poppins-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		89C5CE092B8F4D9597232555 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; name = "Poppins-SemiBold.ttf"; path = "../src/assets/fonts/Poppins-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		7E574042E05D4B10819D4349 /* Poppins-Thin.ttf */ = {isa = PBXFileReference; name = "Poppins-Thin.ttf"; path = "../src/assets/fonts/Poppins-Thin.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		DD1B316DE4EF458BB419069D /* Rubik-Black.ttf */ = {isa = PBXFileReference; name = "Rubik-Black.ttf"; path = "../src/assets/fonts/Rubik-Black.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2A6F615F96DB42B0A7966DB6 /* Rubik-Bold.ttf */ = {isa = PBXFileReference; name = "Rubik-Bold.ttf"; path = "../src/assets/fonts/Rubik-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		1FF9F97B080F40F8BB858FC4 /* Rubik-ExtraBold.ttf */ = {isa = PBXFileReference; name = "Rubik-ExtraBold.ttf"; path = "../src/assets/fonts/Rubik-ExtraBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		60FA615171CA4F2B86C99B39 /* Rubik-Light.ttf */ = {isa = PBXFileReference; name = "Rubik-Light.ttf"; path = "../src/assets/fonts/Rubik-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		85D6EBD9E97D4173A1C49B0C /* Rubik-Medium.ttf */ = {isa = PBXFileReference; name = "Rubik-Medium.ttf"; path = "../src/assets/fonts/Rubik-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B2766E97516C4CD1AF6E7D21 /* Rubik-Regular.ttf */ = {isa = PBXFileReference; name = "Rubik-Regular.ttf"; path = "../src/assets/fonts/Rubik-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F0269A5F7A32409494A822FE /* Rubik-SemiBold.ttf */ = {isa = PBXFileReference; name = "Rubik-SemiBold.ttf"; path = "../src/assets/fonts/Rubik-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -207,7 +141,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7699B88040F8A987B510C191 /* libPods-doctor_app-doctor_appTests.a in Frameworks */,
+				5A53FE8FD06DA4091E180B99 /* libPods-doctor_app-doctor_appTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,28 +149,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C80B921A6F3F58F76C31292 /* libPods-doctor_app.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		37E113EF2A94DCC400C15E70 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		37E114012A94DCC500C15E70 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		37E1140B2A94DCC600C15E70 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				355CEC02690B274AACC72B95 /* libPods-doctor_app.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,12 +176,13 @@
 		13B07FAE1A68108700A75B9A /* doctor_app */ = {
 			isa = PBXGroup;
 			children = (
-				37D43DDB2AF8FB3D00997530 /* doctor_app.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
+				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */,
 			);
 			name = doctor_app;
 			sourceTree = "<group>";
@@ -277,112 +191,15 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				5DCACB8F33CDC322A6C60F78 /* libPods-doctor_app.a */,
-				19F6CBCC0A4E27FBF8BF4A61 /* libPods-doctor_app-doctor_appTests.a */,
+				6EAF568357007F79F19F309A /* libPods-doctor_app.a */,
+				9A32CAB18FCD01B20DFF3522 /* libPods-doctor_app-doctor_appTests.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		37E113F62A94DCC400C15E70 /* doctor-app Watch App */ = {
-			isa = PBXGroup;
-			children = (
-				37E113F72A94DCC400C15E70 /* doctor_appApp.swift */,
-				37E113F92A94DCC400C15E70 /* ContentView.swift */,
-				37E113FB2A94DCC500C15E70 /* Assets.xcassets */,
-				37E113FD2A94DCC500C15E70 /* Preview Content */,
-			);
-			path = "doctor-app Watch App";
-			sourceTree = "<group>";
-		};
-		37E113FD2A94DCC500C15E70 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				37E113FE2A94DCC500C15E70 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		37E114072A94DCC500C15E70 /* doctor-app Watch AppTests */ = {
-			isa = PBXGroup;
-			children = (
-				37E114082A94DCC600C15E70 /* doctor_app_Watch_AppTests.swift */,
-			);
-			path = "doctor-app Watch AppTests";
-			sourceTree = "<group>";
-		};
-		37E114112A94DCC600C15E70 /* doctor-app Watch AppUITests */ = {
-			isa = PBXGroup;
-			children = (
-				37E114122A94DCC600C15E70 /* doctor_app_Watch_AppUITests.swift */,
-				37E114142A94DCC600C15E70 /* doctor_app_Watch_AppUITestsLaunchTests.swift */,
-			);
-			path = "doctor-app Watch AppUITests";
-			sourceTree = "<group>";
-		};
-		37FCFACF2AB601520031068D /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				37FCFAD42AB601520031068D /* libSRSRadialGradient.a */,
-				37FCFAD62AB601520031068D /* libSRSRadialGradien-tvOS.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		52E9A04A460646338DBA33B6 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				ABAEA83B372547A2A0F99886 /* AntDesign.ttf */,
-				7A44B3214B5B4C6CAD33A1E7 /* Entypo.ttf */,
-				D964901174714EEF8C6E6E2C /* EvilIcons.ttf */,
-				099D326B64CE46358CFF544E /* Feather.ttf */,
-				98C0144273284F7DB24DB782 /* FontAwesome.ttf */,
-				E0FCAB187E8D4504B2F966EC /* FontAwesome5_Brands.ttf */,
-				550C97AF20FD4104BF7739EC /* FontAwesome5_Regular.ttf */,
-				1F2AE75B31A94635A881F4A5 /* FontAwesome5_Solid.ttf */,
-				92E7BED88AFD40F6820BAFCD /* FontAwesome6_Brands.ttf */,
-				55F57FD7079E4D3D85500C38 /* FontAwesome6_Regular.ttf */,
-				DDE714384D2344A698FBF056 /* FontAwesome6_Solid.ttf */,
-				E74E191DE796405E88796EF7 /* Fontisto.ttf */,
-				ED9D819A0C424B169C17D349 /* Foundation.ttf */,
-				1008CC66E2E64ED58D507609 /* Ionicons.ttf */,
-				25727D58F6E54366A8B79ED6 /* MaterialCommunityIcons.ttf */,
-				6322627ADEB04DD6B9BD27F8 /* MaterialIcons.ttf */,
-				F12AF1EA2E1A47849225CACC /* Octicons.ttf */,
-				3C6AB637C8AA4E7F88B1B0C9 /* SimpleLineIcons.ttf */,
-				40A08DABAD584F29B3EBD504 /* Zocial.ttf */,
-				7E753EDBA3A542A49A54A2A2 /* Poppins-Black.ttf */,
-				39E5C822169B44169AAF0F41 /* Poppins-Bold.ttf */,
-				06CA50A6CE394D7DA56C9BA7 /* Poppins-ExtraBold.ttf */,
-				DEFCB9C3E81E4958BA590BEB /* Poppins-ExtraLight.ttf */,
-				48AF37A097CE465CB2B7B440 /* Poppins-Light.ttf */,
-				8C33BF47DF9F483FA185BEAA /* Poppins-Medium.ttf */,
-				72CAB0367BC34F3FA26C6E54 /* Poppins-Regular.ttf */,
-				95C1EC88EA58492681B76E65 /* Poppins-SemiBold.ttf */,
-				FF63D2F65E694E63BE684418 /* Poppins-Thin.ttf */,
-				6C4EF61FEA094C85B32429FD /* Rubik-Black.ttf */,
-				355F8E4AE82F45A8ABF287DE /* Rubik-Bold.ttf */,
-				591CFFBA2949435088AB72BA /* Rubik-ExtraBold.ttf */,
-				888C0174C79F440F97C6CC6A /* Rubik-Light.ttf */,
-				D7B0A089C8804982BC5E8057 /* Rubik-Medium.ttf */,
-				D733AAC11998421FA8FA6F61 /* Rubik-Regular.ttf */,
-				D65919DC40FA4329A949C7A8 /* Rubik-SemiBold.ttf */,
-				249D7C149B5A4EA3B198EE22 /* Inter-Black.ttf */,
-				6C7B84E58EA84DDDA28F1F7F /* Inter-Bold.ttf */,
-				CDCC5E45CBD04049AF452C54 /* Inter-ExtraBold.ttf */,
-				9758CAF020A843328953D903 /* Inter-ExtraLight.ttf */,
-				41A01CEBF11D462A93ADB972 /* Inter-Light.ttf */,
-				5A95916430954BD8B3A2F2A3 /* Inter-Medium.ttf */,
-				CFE92C2E7F004CC38D9190E9 /* Inter-Regular.ttf */,
-				E0FB62923BB24232872E44F6 /* Inter-SemiBold.ttf */,
-				9361C472A2564A079AB9769A /* Inter-Thin.ttf */,
-			);
-			name = Resources;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				37FCFACE2AB601520031068D /* SRSRadialGradient.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -393,13 +210,10 @@
 				13B07FAE1A68108700A75B9A /* doctor_app */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* doctor_appTests */,
-				37E113F62A94DCC400C15E70 /* doctor-app Watch App */,
-				37E114072A94DCC500C15E70 /* doctor-app Watch AppTests */,
-				37E114112A94DCC600C15E70 /* doctor-app Watch AppUITests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
-				52E9A04A460646338DBA33B6 /* Resources */,
+				1F4BAEC552B34F57B2BC35FD /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -411,10 +225,6 @@
 			children = (
 				13B07F961A680F5B00A75B9A /* doctor_app.app */,
 				00E356EE1AD99517003FC87E /* doctor_appTests.xctest */,
-				37E113ED2A94DCC400C15E70 /* doctor-app.app */,
-				37E113F22A94DCC400C15E70 /* doctor-app Watch App.app */,
-				37E114042A94DCC500C15E70 /* doctor-app Watch AppTests.xctest */,
-				37E1140E2A94DCC600C15E70 /* doctor-app Watch AppUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -422,13 +232,65 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3B4392A12AC88292D35C810B /* Pods-doctor_app.debug.xcconfig */,
-				5709B34CF0A7D63546082F79 /* Pods-doctor_app.release.xcconfig */,
-				5B7EB9410499542E8C5724F5 /* Pods-doctor_app-doctor_appTests.debug.xcconfig */,
-				89C6BE57DB24E9ADA2F236DE /* Pods-doctor_app-doctor_appTests.release.xcconfig */,
+				BC9EE6092384006207F493A7 /* Pods-doctor_app.debug.xcconfig */,
+				2E726BE677D39E877F858DCF /* Pods-doctor_app.release.xcconfig */,
+				B1EAF15EF9C0A76B83D4321C /* Pods-doctor_app-doctor_appTests.debug.xcconfig */,
+				0ABA296A01FFB8EF1F0A6F8C /* Pods-doctor_app-doctor_appTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
+		};
+		1F4BAEC552B34F57B2BC35FD /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				8D4972F37859425F83E6A87E /* AntDesign.ttf */,
+				99D6E88A83464FEE8C0EF952 /* Entypo.ttf */,
+				EFCB35159D314FA79704E257 /* EvilIcons.ttf */,
+				98AD93B9F1D74FA58AF58E4D /* Feather.ttf */,
+				6AAD830DAED34BCEB00F8524 /* FontAwesome.ttf */,
+				A13D5422A4784AFB89D5BA64 /* FontAwesome5_Brands.ttf */,
+				8227D6A3AE084282AA372B32 /* FontAwesome5_Regular.ttf */,
+				01EB757F1C2D4526B4875E6C /* FontAwesome5_Solid.ttf */,
+				BA75E7F034744345B852EC8E /* FontAwesome6_Brands.ttf */,
+				7D5C093A916A47E8B40B67A8 /* FontAwesome6_Regular.ttf */,
+				361D61387B5242149A9C59CB /* FontAwesome6_Solid.ttf */,
+				E3EEA267317D4CF485EBFF72 /* Fontisto.ttf */,
+				49443658884D4E5C82A53A8B /* Foundation.ttf */,
+				E496A45F60304E859112139A /* Ionicons.ttf */,
+				B4B4B2639D7446E888DA5E29 /* MaterialCommunityIcons.ttf */,
+				D818363578AC4E56A7D5C6D8 /* MaterialIcons.ttf */,
+				B902460A8FAE4EACB6BD0F16 /* Octicons.ttf */,
+				EA0C253ADA9E4711B7D45E32 /* SimpleLineIcons.ttf */,
+				A863847A289F431E8927CAE4 /* Zocial.ttf */,
+				FF825EA7956043CF8F997A95 /* Inter-Black.ttf */,
+				EC05D0E2395F4F2C800A11DE /* Inter-Bold.ttf */,
+				0D88FBC1C7FF43A1B54CEE1A /* Inter-ExtraBold.ttf */,
+				A0B900E18F8745B6AB926A82 /* Inter-ExtraLight.ttf */,
+				5455A12FA3F248569DD0FFCC /* Inter-Light.ttf */,
+				F7B3E56ED2364CDC967754EF /* Inter-Medium.ttf */,
+				B6FDF2B80AE24DC3B7E93CB3 /* Inter-Regular.ttf */,
+				E00B750E78FA4F698CC6F7CF /* Inter-SemiBold.ttf */,
+				1CD0431EAFC34840813A1AD7 /* Inter-Thin.ttf */,
+				A7C615E929034840AFE6D39A /* Poppins-Black.ttf */,
+				BCAD5EF7116D4E80904DF5E8 /* Poppins-Bold.ttf */,
+				A25ADE34B22F4B3DABD2AC18 /* Poppins-ExtraBold.ttf */,
+				E917267299CA49EFB8A1E70D /* Poppins-ExtraLight.ttf */,
+				76BC0902220E4694993CDE37 /* Poppins-Light.ttf */,
+				9867D6E787494F5686E8ECF6 /* Poppins-Medium.ttf */,
+				17C42DE673CE46BD8737ED7B /* Poppins-Regular.ttf */,
+				89C5CE092B8F4D9597232555 /* Poppins-SemiBold.ttf */,
+				7E574042E05D4B10819D4349 /* Poppins-Thin.ttf */,
+				DD1B316DE4EF458BB419069D /* Rubik-Black.ttf */,
+				2A6F615F96DB42B0A7966DB6 /* Rubik-Bold.ttf */,
+				1FF9F97B080F40F8BB858FC4 /* Rubik-ExtraBold.ttf */,
+				60FA615171CA4F2B86C99B39 /* Rubik-Light.ttf */,
+				85D6EBD9E97D4173A1C49B0C /* Rubik-Medium.ttf */,
+				B2766E97516C4CD1AF6E7D21 /* Rubik-Regular.ttf */,
+				F0269A5F7A32409494A822FE /* Rubik-SemiBold.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -437,12 +299,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "doctor_appTests" */;
 			buildPhases = (
-				A55EABD7B0C7F3A422A6CC61 /* [CP] Check Pods Manifest.lock */,
+				8D610A8BD2AB3EE5A4C62503 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				C59DA0FBD6956966B86A3779 /* [CP] Embed Pods Frameworks */,
-				F6A41C54EA430FDDC6A6ED99 /* [CP] Copy Pods Resources */,
+				F8F139A20A8F397C4ACB8B0F /* [CP] Embed Pods Frameworks */,
+				99F17D6AF1CE28F21D546FA0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -458,14 +320,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "doctor_app" */;
 			buildPhases = (
-				C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */,
-				FD10A7F022414F080027D42C /* Start Packager */,
+				FB5E8A91E43379B0A489E92A /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */,
-				E235C05ADACE081382539298 /* [CP] Copy Pods Resources */,
+				A48AF6890AA37769940FD750 /* [CP] Embed Pods Frameworks */,
+				0691E7FD48A3D0FB67472081 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -476,83 +337,12 @@
 			productReference = 13B07F961A680F5B00A75B9A /* doctor_app.app */;
 			productType = "com.apple.product-type.application";
 		};
-		37E113EC2A94DCC400C15E70 /* doctor-app */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 37E114202A94DCC600C15E70 /* Build configuration list for PBXNativeTarget "doctor-app" */;
-			buildPhases = (
-				37E113EB2A94DCC400C15E70 /* Resources */,
-				37E114182A94DCC600C15E70 /* Embed Watch Content */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				37E113F52A94DCC400C15E70 /* PBXTargetDependency */,
-			);
-			name = "doctor-app";
-			productName = "doctor-app";
-			productReference = 37E113ED2A94DCC400C15E70 /* doctor-app.app */;
-			productType = "com.apple.product-type.application.watchapp2-container";
-		};
-		37E113F12A94DCC400C15E70 /* doctor-app Watch App */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 37E1141F2A94DCC600C15E70 /* Build configuration list for PBXNativeTarget "doctor-app Watch App" */;
-			buildPhases = (
-				37E113EE2A94DCC400C15E70 /* Sources */,
-				37E113EF2A94DCC400C15E70 /* Frameworks */,
-				37E113F02A94DCC400C15E70 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "doctor-app Watch App";
-			productName = "doctor-app Watch App";
-			productReference = 37E113F22A94DCC400C15E70 /* doctor-app Watch App.app */;
-			productType = "com.apple.product-type.application";
-		};
-		37E114032A94DCC500C15E70 /* doctor-app Watch AppTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 37E114212A94DCC600C15E70 /* Build configuration list for PBXNativeTarget "doctor-app Watch AppTests" */;
-			buildPhases = (
-				37E114002A94DCC500C15E70 /* Sources */,
-				37E114012A94DCC500C15E70 /* Frameworks */,
-				37E114022A94DCC500C15E70 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				37E114062A94DCC500C15E70 /* PBXTargetDependency */,
-			);
-			name = "doctor-app Watch AppTests";
-			productName = "doctor-app Watch AppTests";
-			productReference = 37E114042A94DCC500C15E70 /* doctor-app Watch AppTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		37E1140D2A94DCC600C15E70 /* doctor-app Watch AppUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 37E114222A94DCC600C15E70 /* Build configuration list for PBXNativeTarget "doctor-app Watch AppUITests" */;
-			buildPhases = (
-				37E1140A2A94DCC600C15E70 /* Sources */,
-				37E1140B2A94DCC600C15E70 /* Frameworks */,
-				37E1140C2A94DCC600C15E70 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				37E114102A94DCC600C15E70 /* PBXTargetDependency */,
-			);
-			name = "doctor-app Watch AppUITests";
-			productName = "doctor-app Watch AppUITests";
-			productReference = 37E1140E2A94DCC600C15E70 /* doctor-app Watch AppUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1210;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -561,20 +351,6 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						LastSwiftMigration = 1120;
-					};
-					37E113EC2A94DCC400C15E70 = {
-						CreatedOnToolsVersion = 14.2;
-					};
-					37E113F12A94DCC400C15E70 = {
-						CreatedOnToolsVersion = 14.2;
-					};
-					37E114032A94DCC500C15E70 = {
-						CreatedOnToolsVersion = 14.2;
-						TestTargetID = 37E113F12A94DCC400C15E70;
-					};
-					37E1140D2A94DCC600C15E70 = {
-						CreatedOnToolsVersion = 14.2;
-						TestTargetID = 37E113F12A94DCC400C15E70;
 					};
 				};
 			};
@@ -589,40 +365,13 @@
 			mainGroup = 83CBB9F61A601CBA00E9B192;
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 37FCFACF2AB601520031068D /* Products */;
-					ProjectRef = 37FCFACE2AB601520031068D /* SRSRadialGradient.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				13B07F861A680F5B00A75B9A /* doctor_app */,
 				00E356ED1AD99517003FC87E /* doctor_appTests */,
-				37E113EC2A94DCC400C15E70 /* doctor-app */,
-				37E113F12A94DCC400C15E70 /* doctor-app Watch App */,
-				37E114032A94DCC500C15E70 /* doctor-app Watch AppTests */,
-				37E1140D2A94DCC600C15E70 /* doctor-app Watch AppUITests */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		37FCFAD42AB601520031068D /* libSRSRadialGradient.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libSRSRadialGradient.a;
-			remoteRef = 37FCFAD32AB601520031068D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		37FCFAD62AB601520031068D /* libSRSRadialGradien-tvOS.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libSRSRadialGradien-tvOS.a";
-			remoteRef = 37FCFAD52AB601520031068D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		00E356EC1AD99517003FC87E /* Resources */ = {
@@ -636,81 +385,53 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				7BBDEFA6DD5E45729A2508FD /* AntDesign.ttf in Resources */,
-				CD4130CC9EDD41C0B374F42F /* Entypo.ttf in Resources */,
-				59E1E24B6AF14A629637437B /* EvilIcons.ttf in Resources */,
-				B52F05C9A01C416FBF4B4F80 /* Feather.ttf in Resources */,
-				9EDA59C9D8DE453A90414795 /* FontAwesome.ttf in Resources */,
-				FB124A5A2D3C435E8BA7B8E4 /* FontAwesome5_Brands.ttf in Resources */,
-				8D34CAC314974921B49A5F21 /* FontAwesome5_Regular.ttf in Resources */,
-				5D2653E0F23544CCB50D1F88 /* FontAwesome5_Solid.ttf in Resources */,
-				FFD95D65157A464ABCC91433 /* FontAwesome6_Brands.ttf in Resources */,
-				202B8880342D49B1B03291FE /* FontAwesome6_Regular.ttf in Resources */,
-				99422A97D12B4AE187215B2F /* FontAwesome6_Solid.ttf in Resources */,
-				D9F933BF31274CC29786582B /* Fontisto.ttf in Resources */,
-				F363382BE9CD4676A187C896 /* Foundation.ttf in Resources */,
-				04C41EE433BF449BAD13F7E0 /* Ionicons.ttf in Resources */,
-				B925FD86814E41BCB62CB207 /* MaterialCommunityIcons.ttf in Resources */,
-				BB6F0934A5D6421EB5E942D9 /* MaterialIcons.ttf in Resources */,
-				D62E9BD297E54BE28BBB1933 /* Octicons.ttf in Resources */,
-				E2AFB95256FD42259D783F06 /* SimpleLineIcons.ttf in Resources */,
-				F8A4E49C5C4C4AA7B2F1282F /* Zocial.ttf in Resources */,
-				E52559170512441AA5965E53 /* Poppins-Black.ttf in Resources */,
-				C10826D3D86846049D9F3DFF /* Poppins-Bold.ttf in Resources */,
-				D4CD26E3FE9A4CE98A09058C /* Poppins-ExtraBold.ttf in Resources */,
-				1F11AB95D8A54926916F7633 /* Poppins-ExtraLight.ttf in Resources */,
-				EA5F0ED531B04F5388725E2B /* Poppins-Light.ttf in Resources */,
-				D51D41A2908846DF8CC1CE98 /* Poppins-Medium.ttf in Resources */,
-				B65462B64C394A4BBC4D5084 /* Poppins-Regular.ttf in Resources */,
-				BEB9E83FF01A423983D63830 /* Poppins-SemiBold.ttf in Resources */,
-				18F2CB3BAB51475BBC76BD49 /* Poppins-Thin.ttf in Resources */,
-				C3050A0B2CE14F1F8376DF62 /* Rubik-Black.ttf in Resources */,
-				05532D80BBEA456C8D138802 /* Rubik-Bold.ttf in Resources */,
-				91F537B21ABD4CFC8AF285EF /* Rubik-ExtraBold.ttf in Resources */,
-				D4E76BC1E7194A40BAB66494 /* Rubik-Light.ttf in Resources */,
-				46C5924AD01148C582B40BDC /* Rubik-Medium.ttf in Resources */,
-				73D5ECD24B954220A14DD55C /* Rubik-Regular.ttf in Resources */,
-				AC5414063DB246FE826E6105 /* Rubik-SemiBold.ttf in Resources */,
-				3A247B4C47FD4C24B3CAE2A3 /* Inter-Black.ttf in Resources */,
-				81A1C17F54C9430E964C225B /* Inter-Bold.ttf in Resources */,
-				2BD2976CD12B430A816C7F8C /* Inter-ExtraBold.ttf in Resources */,
-				8908FE619CE94F11A219425C /* Inter-ExtraLight.ttf in Resources */,
-				12A690F3A8FF44B29BC38059 /* Inter-Light.ttf in Resources */,
-				FBEE0C10E53642B7AF358FFF /* Inter-Medium.ttf in Resources */,
-				C21260AE528D4F49B20A51CA /* Inter-Regular.ttf in Resources */,
-				DE382977499E43D6AC2EF779 /* Inter-SemiBold.ttf in Resources */,
-				A6EA0C6426E643D08F1E4139 /* Inter-Thin.ttf in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		37E113EB2A94DCC400C15E70 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		37E113F02A94DCC400C15E70 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				37E113FF2A94DCC500C15E70 /* Preview Assets.xcassets in Resources */,
-				37E113FC2A94DCC500C15E70 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		37E114022A94DCC500C15E70 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		37E1140C2A94DCC600C15E70 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				2EBC18DA165D4C4D0F6AFDD0 /* PrivacyInfo.xcprivacy in Resources */,
+				4749559B2C9B45F4AECD1EC6 /* AntDesign.ttf in Resources */,
+				B0470059B19143A793D2C407 /* Entypo.ttf in Resources */,
+				D61036C23C9340D89DA7D5D7 /* EvilIcons.ttf in Resources */,
+				B897A1399B5C4AAA8093F33E /* Feather.ttf in Resources */,
+				15A3C9AA9528477183996E7B /* FontAwesome.ttf in Resources */,
+				49D1D58DB64F497188C55051 /* FontAwesome5_Brands.ttf in Resources */,
+				E964E2B40DFB4744A209EEC2 /* FontAwesome5_Regular.ttf in Resources */,
+				CBEEC2FB1401498DA667FFFF /* FontAwesome5_Solid.ttf in Resources */,
+				DEC3139857124A5F89A3FDBD /* FontAwesome6_Brands.ttf in Resources */,
+				B05CFF53051841EDA5A69009 /* FontAwesome6_Regular.ttf in Resources */,
+				7226768FEBF04C3781A74B0C /* FontAwesome6_Solid.ttf in Resources */,
+				A4989AD1151C4D0BB3137D58 /* Fontisto.ttf in Resources */,
+				09AC0E5CFC5745D688784159 /* Foundation.ttf in Resources */,
+				16A15AE3736E40439528A018 /* Ionicons.ttf in Resources */,
+				43808B72DFE14425BCD63023 /* MaterialCommunityIcons.ttf in Resources */,
+				6E1E832924DC43E19AC0AD75 /* MaterialIcons.ttf in Resources */,
+				DBBC0CF7EA3B4AC8BFAF2DA3 /* Octicons.ttf in Resources */,
+				5D244FEFCCD24DFDB8B1464C /* SimpleLineIcons.ttf in Resources */,
+				10B21E00A795431C90E254DA /* Zocial.ttf in Resources */,
+				9ADC1375F9FB4E1F8A6B6223 /* Inter-Black.ttf in Resources */,
+				F92920FAED1D4B4CB3871837 /* Inter-Bold.ttf in Resources */,
+				AC4251D9C2184D49A8FB518B /* Inter-ExtraBold.ttf in Resources */,
+				94CA5867F06D46C18263D7F1 /* Inter-ExtraLight.ttf in Resources */,
+				500DF86F65764DD88C5F0CB8 /* Inter-Light.ttf in Resources */,
+				E5EC79D8841740D9B6D30E85 /* Inter-Medium.ttf in Resources */,
+				DA2EB487F55A457FB909327B /* Inter-Regular.ttf in Resources */,
+				B866DB4470BB40428D1C01DA /* Inter-SemiBold.ttf in Resources */,
+				FFE8A06335AE4B69B8C49B95 /* Inter-Thin.ttf in Resources */,
+				0E37908389C44270B573EC00 /* Poppins-Black.ttf in Resources */,
+				8E9BAA0A73784FBC816D7BFE /* Poppins-Bold.ttf in Resources */,
+				9296346FE8F345169EBB5BA2 /* Poppins-ExtraBold.ttf in Resources */,
+				56515B5988F642C281972EF5 /* Poppins-ExtraLight.ttf in Resources */,
+				AF0328E329FB406D93B6F739 /* Poppins-Light.ttf in Resources */,
+				6D2D3E5155C44D6A8C90D832 /* Poppins-Medium.ttf in Resources */,
+				D0AECB260665483E9F3F9D86 /* Poppins-Regular.ttf in Resources */,
+				B2A1978399E3472EA9C2BF79 /* Poppins-SemiBold.ttf in Resources */,
+				BEAD201CD74E4D19A71AA964 /* Poppins-Thin.ttf in Resources */,
+				154ED87011A34D339C9BBA14 /* Rubik-Black.ttf in Resources */,
+				2BE9EBA22DFC4DF592457B63 /* Rubik-Bold.ttf in Resources */,
+				DAE46A73BE92436A80E82268 /* Rubik-ExtraBold.ttf in Resources */,
+				762305C108734D74AB885C54 /* Rubik-Light.ttf in Resources */,
+				138AA5433E8C48E583769DD5 /* Rubik-Medium.ttf in Resources */,
+				94F8303847234325BA2CC6C6 /* Rubik-Regular.ttf in Resources */,
+				864871F97F164B249EA83F8F /* Rubik-SemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -731,26 +452,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"../node_modules/react-native/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"../node_modules/react-native/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
+			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"$REACT_NATIVE_PATH/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"$REACT_NATIVE_PATH/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
-		00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */ = {
+		0691E7FD48A3D0FB67472081 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-doctor_app/Pods-doctor_app-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-doctor_app/Pods-doctor_app-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-doctor_app/Pods-doctor_app-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-doctor_app/Pods-doctor_app-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-doctor_app/Pods-doctor_app-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-doctor_app/Pods-doctor_app-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A55EABD7B0C7F3A422A6CC61 /* [CP] Check Pods Manifest.lock */ = {
+		8D610A8BD2AB3EE5A4C62503 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -772,7 +493,58 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */ = {
+		99F17D6AF1CE28F21D546FA0 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-doctor_app-doctor_appTests/Pods-doctor_app-doctor_appTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-doctor_app-doctor_appTests/Pods-doctor_app-doctor_appTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-doctor_app-doctor_appTests/Pods-doctor_app-doctor_appTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A48AF6890AA37769940FD750 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-doctor_app/Pods-doctor_app-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-doctor_app/Pods-doctor_app-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-doctor_app/Pods-doctor_app-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F8F139A20A8F397C4ACB8B0F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-doctor_app-doctor_appTests/Pods-doctor_app-doctor_appTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-doctor_app-doctor_appTests/Pods-doctor_app-doctor_appTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-doctor_app-doctor_appTests/Pods-doctor_app-doctor_appTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FB5E8A91E43379B0A489E92A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -792,76 +564,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C59DA0FBD6956966B86A3779 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-doctor_app-doctor_appTests/Pods-doctor_app-doctor_appTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-doctor_app-doctor_appTests/Pods-doctor_app-doctor_appTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-doctor_app-doctor_appTests/Pods-doctor_app-doctor_appTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E235C05ADACE081382539298 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-doctor_app/Pods-doctor_app-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-doctor_app/Pods-doctor_app-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-doctor_app/Pods-doctor_app-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F6A41C54EA430FDDC6A6ED99 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-doctor_app-doctor_appTests/Pods-doctor_app-doctor_appTests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-doctor_app-doctor_appTests/Pods-doctor_app-doctor_appTests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-doctor_app-doctor_appTests/Pods-doctor_app-doctor_appTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FD10A7F022414F080027D42C /* Start Packager */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Start Packager";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "export RCT_METRO_PORT=\"${RCT_METRO_PORT:=8081}\"\necho \"export RCT_METRO_PORT=${RCT_METRO_PORT}\" > \"${SRCROOT}/../node_modules/react-native/scripts/.packager.env\"\nif [ -z \"${RCT_NO_LAUNCH_PACKAGER+xxx}\" ] ; then\n  if nc -w 5 -z localhost ${RCT_METRO_PORT} ; then\n    if ! curl -s \"http://localhost:${RCT_METRO_PORT}/status\" | grep -q \"packager-status:running\" ; then\n      echo \"Port ${RCT_METRO_PORT} already in use, packager is either not running or not running correctly\"\n      exit 2\n    fi\n  else\n    open \"$SRCROOT/../node_modules/react-native/scripts/launchPackager.command\" || echo \"Can't start packager automatically\"\n  fi\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -884,32 +586,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		37E113EE2A94DCC400C15E70 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				37E113FA2A94DCC400C15E70 /* ContentView.swift in Sources */,
-				37E113F82A94DCC400C15E70 /* doctor_appApp.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		37E114002A94DCC500C15E70 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				37E114092A94DCC600C15E70 /* doctor_app_Watch_AppTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		37E1140A2A94DCC600C15E70 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				37E114132A94DCC600C15E70 /* doctor_app_Watch_AppUITests.swift in Sources */,
-				37E114152A94DCC600C15E70 /* doctor_app_Watch_AppUITestsLaunchTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -918,27 +594,12 @@
 			target = 13B07F861A680F5B00A75B9A /* doctor_app */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
-		37E113F52A94DCC400C15E70 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 37E113F12A94DCC400C15E70 /* doctor-app Watch App */;
-			targetProxy = 37E113F42A94DCC400C15E70 /* PBXContainerItemProxy */;
-		};
-		37E114062A94DCC500C15E70 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 37E113F12A94DCC400C15E70 /* doctor-app Watch App */;
-			targetProxy = 37E114052A94DCC500C15E70 /* PBXContainerItemProxy */;
-		};
-		37E114102A94DCC600C15E70 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 37E113F12A94DCC400C15E70 /* doctor-app Watch App */;
-			targetProxy = 37E1140F2A94DCC600C15E70 /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-doctor_app-doctor_appTests.debug.xcconfig */;
+			baseConfigurationReference = B1EAF15EF9C0A76B83D4321C /* Pods-doctor_app-doctor_appTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -946,7 +607,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = doctor_appTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -965,12 +626,12 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 89C6BE57DB24E9ADA2F236DE /* Pods-doctor_app-doctor_appTests.release.xcconfig */;
+			baseConfigurationReference = 0ABA296A01FFB8EF1F0A6F8C /* Pods-doctor_app-doctor_appTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = doctor_appTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -989,14 +650,14 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-doctor_app.debug.xcconfig */;
+			baseConfigurationReference = BC9EE6092384006207F493A7 /* Pods-doctor_app.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = doctor_app/doctor_app.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = doctor_app/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1017,13 +678,13 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-doctor_app.release.xcconfig */;
+			baseConfigurationReference = 2E726BE677D39E877F858DCF /* Pods-doctor_app.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = doctor_app/doctor_app.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = doctor_app/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1041,272 +702,12 @@
 			};
 			name = Release;
 		};
-		37E114162A94DCC600C15E70 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_KEY_CFBundleDisplayName = "doctor-app";
-				MARKETING_VERSION = 1.0;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.doctor-app";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		37E114172A94DCC600C15E70 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_KEY_CFBundleDisplayName = "doctor-app";
-				MARKETING_VERSION = 1.0;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.doctor-app";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
-		37E114192A94DCC600C15E70 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_ASSET_PATHS = "\"doctor-app Watch App/Preview Content\"";
-				ENABLE_PREVIEWS = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "doctor-app";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKWatchOnly = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.doctor-app.watchkitapp";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 9.1;
-			};
-			name = Debug;
-		};
-		37E1141A2A94DCC600C15E70 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_ASSET_PATHS = "\"doctor-app Watch App/Preview Content\"";
-				ENABLE_PREVIEWS = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "doctor-app";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKWatchOnly = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.doctor-app.watchkitapp";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 9.1;
-			};
-			name = Release;
-		};
-		37E1141B2A94DCC600C15E70 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.doctor-app-Watch-AppTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/doctor-app Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/doctor-app Watch App";
-				WATCHOS_DEPLOYMENT_TARGET = 9.1;
-			};
-			name = Debug;
-		};
-		37E1141C2A94DCC600C15E70 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.doctor-app-Watch-AppTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/doctor-app Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/doctor-app Watch App";
-				WATCHOS_DEPLOYMENT_TARGET = 9.1;
-			};
-			name = Release;
-		};
-		37E1141D2A94DCC600C15E70 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.doctor-app-Watch-AppUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				TEST_TARGET_NAME = "doctor-app Watch App";
-				WATCHOS_DEPLOYMENT_TARGET = 9.1;
-			};
-			name = Debug;
-		};
-		37E1141E2A94DCC600C15E70 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.doctor-app-Watch-AppUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				TEST_TARGET_NAME = "doctor-app Watch App";
-				WATCHOS_DEPLOYMENT_TARGET = 9.1;
-			};
-			name = Release;
-		};
 		83CBBA201A601CBA00E9B192 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -1334,7 +735,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1350,7 +751,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",
@@ -1362,15 +763,22 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_CFLAGS = "$(inherited)";
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-DFOLLY_NO_CONFIG",
 					"-DFOLLY_MOBILE=1",
 					"-DFOLLY_USE_LIBCPP=1",
+					"-DFOLLY_CFG_NO_COROUTINES=1",
+					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
 				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
+				USE_HERMES = true;
 			};
 			name = Debug;
 		};
@@ -1379,7 +787,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -1407,7 +815,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1416,7 +824,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",
@@ -1427,15 +835,21 @@
 					"\"$(inherited)\"",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_CFLAGS = "$(inherited)";
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-DFOLLY_NO_CONFIG",
 					"-DFOLLY_MOBILE=1",
 					"-DFOLLY_USE_LIBCPP=1",
+					"-DFOLLY_CFG_NO_COROUTINES=1",
+					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
 				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
+				USE_HERMES = true;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1457,42 +871,6 @@
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
 				13B07F951A680F5B00A75B9A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		37E1141F2A94DCC600C15E70 /* Build configuration list for PBXNativeTarget "doctor-app Watch App" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				37E114192A94DCC600C15E70 /* Debug */,
-				37E1141A2A94DCC600C15E70 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		37E114202A94DCC600C15E70 /* Build configuration list for PBXNativeTarget "doctor-app" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				37E114162A94DCC600C15E70 /* Debug */,
-				37E114172A94DCC600C15E70 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		37E114212A94DCC600C15E70 /* Build configuration list for PBXNativeTarget "doctor-app Watch AppTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				37E1141B2A94DCC600C15E70 /* Debug */,
-				37E1141C2A94DCC600C15E70 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		37E114222A94DCC600C15E70 /* Build configuration list for PBXNativeTarget "doctor-app Watch AppUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				37E1141D2A94DCC600C15E70 /* Debug */,
-				37E1141E2A94DCC600C15E70 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
