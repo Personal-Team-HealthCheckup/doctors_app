@@ -57,6 +57,7 @@ jobs:
           ./gradlew assembleRelease -Dorg.gradle.jvmargs="-Xmx4096m"
 
       - name: Upload APK to GitHub Release
+        if: github.ref == 'refs/heads/master'
         uses: ncipollo/release-action@v1
         with:
           artifacts: android/app/build/outputs/apk/release/app-release.apk
@@ -66,4 +67,5 @@ jobs:
           prerelease: false
 
       - name: Provide APK Download Link
+        if: github.ref == 'refs/heads/master'
         run: echo "APK uploaded successfully. Check the latest release for the download link."
