@@ -30,7 +30,9 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install Dependencies
-        run: yarn
+        run: |
+          yarn -v
+          yarn
 
       - name: Set up Android SDK
         run: |
@@ -48,27 +50,52 @@ jobs:
           node -v
           java --version
 
+  android-release:
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Set up Java ${{ matrix.java-version }}
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ matrix.java-version }}
+          distribution: 'adopt'
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install Dependencies
+        run: |
+          yarn -v
+          yarn
+
+      - name: Set up Android SDK
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y openjdk-17-jdk
+          sudo apt-get install -y android-sdk
+          echo "ANDROID_HOME=$HOME/Android/Sdk" >> $GITHUB_ENV
+          echo "PATH=$PATH:$HOME/Android/Sdk/platform-tools" >> $GITHUB_ENV
+
       - name: Build Android Project
         run: |
           cd android
           ./gradlew clean
           ./gradlew assembleRelease -Dorg.gradle.jvmargs="-Xmx4096m"
 
-      - name: Install rclone
-        run: sudo apt-get install -y rclone
-
-      - name: Inject rclone Config and Service Account
-        run: |
-          mkdir -p ~/.config/rclone
-          echo "${{ secrets.RCLONE_CONFIG }}" > ~/.config/rclone/rclone.conf
-          echo "${{ secrets.RCLONE_SERVICE_ACCOUNT }}" > ~/.config/rclone/service_account.json
-
-      - name: Upload APK to Google Drive
-        run: |
-          rclone copy ./android/app/build/outputs/apk/release/app-release.apk mydrive:/1XcXQ_GUbzN3lzEghGUXZ86m-wnadaOS6 \
-            --config ~/.config/rclone/rclone.conf \
-            --drive-service-account-file ~/.config/rclone/service_account.json
+      - name: Upload APK to GitHub Release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: android/app/build/outputs/apk/release/app-release.apk
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          tag: "v${{ github.run_number }}"
+          name: "Release ${{ github.run_number }}"
+          prerelease: false
 
       - name: Provide APK Download Link
-        run: |
-          echo "APK uploaded successfully. Get your APK from: https://drive.google.com/drive/folders/1XcXQ_GUbzN3lzEghGUXZ86m-wnadaOS6"
+        run: echo "APK uploaded successfully. Check the latest release for the download link."
