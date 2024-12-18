@@ -50,38 +50,6 @@ jobs:
           node -v
           java --version
 
-  android-release:
-    if: github.ref == 'refs/heads/master'
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
-
-      - name: Set up Java ${{ matrix.java-version }}
-        uses: actions/setup-java@v3
-        with:
-          java-version: ${{ matrix.java-version }}
-          distribution: 'adopt'
-
-      - name: Set up Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-
-      - name: Install Dependencies
-        run: |
-          yarn -v
-          yarn
-
-      - name: Set up Android SDK
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y openjdk-17-jdk
-          sudo apt-get install -y android-sdk
-          echo "ANDROID_HOME=$HOME/Android/Sdk" >> $GITHUB_ENV
-          echo "PATH=$PATH:$HOME/Android/Sdk/platform-tools" >> $GITHUB_ENV
-
       - name: Build Android Project
         run: |
           cd android
@@ -89,6 +57,7 @@ jobs:
           ./gradlew assembleRelease -Dorg.gradle.jvmargs="-Xmx4096m"
 
       - name: Upload APK to GitHub Release
+        if: github.ref == 'refs/heads/master'
         uses: ncipollo/release-action@v1
         with:
           artifacts: android/app/build/outputs/apk/release/app-release.apk
@@ -98,4 +67,5 @@ jobs:
           prerelease: false
 
       - name: Provide APK Download Link
+        if: github.ref == 'refs/heads/master'
         run: echo "APK uploaded successfully. Check the latest release for the download link."
