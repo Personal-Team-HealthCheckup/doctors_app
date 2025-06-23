@@ -23,6 +23,8 @@ export const COLORS = {
   light: '#677294CC',
   green3: '#0EBE7E',
   gradientWhite: '#858EA9',
+  tokenGreen : '#0F7986',
+  tokenGreen2 :'#076673'
 };
 
 export const FONTS = {
@@ -39,6 +41,13 @@ export const FONTS = {
     medium: 'Rubik-Medium',
     semiBold: 'Rubik-SemiBold',
     bold: 'Rubik-Bold',
+  },
+   spaceGrotesk: {
+    light: 'SpaceGrotesk-Light',
+    regular: 'SpaceGrotesk-Regular',
+    medium: 'SpaceGrotesk-Medium',
+    semiBold: 'SpaceGrotesk-Bold',
+    bold: 'SpaceGrotesk-Bold',
   },
   inter:{
     'light[300]':"Inter-ExtraLight",
