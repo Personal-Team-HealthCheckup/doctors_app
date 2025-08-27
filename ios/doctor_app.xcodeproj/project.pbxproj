@@ -59,6 +59,11 @@
 		E964E2B40DFB4744A209EEC2 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8227D6A3AE084282AA372B32 /* FontAwesome5_Regular.ttf */; };
 		F92920FAED1D4B4CB3871837 /* Inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EC05D0E2395F4F2C800A11DE /* Inter-Bold.ttf */; };
 		FFE8A06335AE4B69B8C49B95 /* Inter-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1CD0431EAFC34840813A1AD7 /* Inter-Thin.ttf */; };
+		6A7F6AA0EA184828BBE6E123 /* SpaceGrotesk-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8607D0BE955D437EA86EE25D /* SpaceGrotesk-Bold.ttf */; };
+		C2EE60D83A1446609D91F21C /* SpaceGrotesk-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 381209A95E8246EEBEFB6BDC /* SpaceGrotesk-Light.ttf */; };
+		ED3E90DC50B547808C789B37 /* SpaceGrotesk-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 35B4A345DFC547C8A2E41880 /* SpaceGrotesk-Medium.ttf */; };
+		737D4F970EE741EBB7090231 /* SpaceGrotesk-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C8895542D38648CCBA5EEB33 /* SpaceGrotesk-Regular.ttf */; };
+		A06C5A3AB6F645C084170B00 /* SpaceGrotesk-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F6E93D016F104F59BC8ADF3A /* SpaceGrotesk-SemiBold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -134,6 +139,11 @@
 		F0269A5F7A32409494A822FE /* Rubik-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-SemiBold.ttf"; path = "../src/assets/fonts/Rubik-SemiBold.ttf"; sourceTree = "<group>"; };
 		F7B3E56ED2364CDC967754EF /* Inter-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Medium.ttf"; path = "../src/assets/fonts/Inter-Medium.ttf"; sourceTree = "<group>"; };
 		FF825EA7956043CF8F997A95 /* Inter-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Black.ttf"; path = "../src/assets/fonts/Inter-Black.ttf"; sourceTree = "<group>"; };
+		8607D0BE955D437EA86EE25D /* SpaceGrotesk-Bold.ttf */ = {isa = PBXFileReference; name = "SpaceGrotesk-Bold.ttf"; path = "../src/assets/fonts/SpaceGrotesk-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		381209A95E8246EEBEFB6BDC /* SpaceGrotesk-Light.ttf */ = {isa = PBXFileReference; name = "SpaceGrotesk-Light.ttf"; path = "../src/assets/fonts/SpaceGrotesk-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		35B4A345DFC547C8A2E41880 /* SpaceGrotesk-Medium.ttf */ = {isa = PBXFileReference; name = "SpaceGrotesk-Medium.ttf"; path = "../src/assets/fonts/SpaceGrotesk-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C8895542D38648CCBA5EEB33 /* SpaceGrotesk-Regular.ttf */ = {isa = PBXFileReference; name = "SpaceGrotesk-Regular.ttf"; path = "../src/assets/fonts/SpaceGrotesk-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F6E93D016F104F59BC8ADF3A /* SpaceGrotesk-SemiBold.ttf */ = {isa = PBXFileReference; name = "SpaceGrotesk-SemiBold.ttf"; path = "../src/assets/fonts/SpaceGrotesk-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,6 +244,11 @@
 				85D6EBD9E97D4173A1C49B0C /* Rubik-Medium.ttf */,
 				B2766E97516C4CD1AF6E7D21 /* Rubik-Regular.ttf */,
 				F0269A5F7A32409494A822FE /* Rubik-SemiBold.ttf */,
+				8607D0BE955D437EA86EE25D /* SpaceGrotesk-Bold.ttf */,
+				381209A95E8246EEBEFB6BDC /* SpaceGrotesk-Light.ttf */,
+				35B4A345DFC547C8A2E41880 /* SpaceGrotesk-Medium.ttf */,
+				C8895542D38648CCBA5EEB33 /* SpaceGrotesk-Regular.ttf */,
+				F6E93D016F104F59BC8ADF3A /* SpaceGrotesk-SemiBold.ttf */,
 			);
 			name = Resources;
 			path = "";
@@ -432,6 +447,11 @@
 				138AA5433E8C48E583769DD5 /* Rubik-Medium.ttf in Resources */,
 				94F8303847234325BA2CC6C6 /* Rubik-Regular.ttf in Resources */,
 				864871F97F164B249EA83F8F /* Rubik-SemiBold.ttf in Resources */,
+				6A7F6AA0EA184828BBE6E123 /* SpaceGrotesk-Bold.ttf in Resources */,
+				C2EE60D83A1446609D91F21C /* SpaceGrotesk-Light.ttf in Resources */,
+				ED3E90DC50B547808C789B37 /* SpaceGrotesk-Medium.ttf in Resources */,
+				737D4F970EE741EBB7090231 /* SpaceGrotesk-Regular.ttf in Resources */,
+				A06C5A3AB6F645C084170B00 /* SpaceGrotesk-SemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
