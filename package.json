@@ -37,7 +37,7 @@
     "react-native-gesture-handler": "^2.21.1",
     "react-native-image-crop-picker": "^0.40.0",
     "react-native-linear-gradient": "^2.8.3",
-    "react-native-maps": "^1.20.1",
+    "react-native-maps": "1.20.1",
     "react-native-media-controls": "^2.3.0",
     "react-native-mentions": "^1.1.4",
     "react-native-parsed-text": "^0.0.22",
