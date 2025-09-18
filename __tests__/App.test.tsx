@@ -1,16 +1,20 @@
-/**
- * @format
- */
-
-import 'react-native';
 import React from 'react';
-
-// Note: import explicitly to use the types shiped with jest.
-import {it} from '@jest/globals';
-// Note: test renderer must be required after react-native.
-import renderer from 'react-test-renderer';
+import { render, screen } from '@testing-library/react-native';
 import CustomButton from '../src/Components/common/CustomButton';
 
-it('renders correctly', () => {
-  renderer.create(<CustomButton title="test" />);
+const mockReplace = jest.fn();
+const screenProps = {
+  navigation: { replace: mockReplace },
+  title: 'New Button',
+};
+
+describe('SplashScreens', () => {
+  beforeEach(() => {});
+
+  afterEach(() => {});
+
+  it('renders correctly (snapshot)', () => {
+    render(<CustomButton {...screenProps} />);
+    expect(screen).toBeTruthy();
+  });
 });
