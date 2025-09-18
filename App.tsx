@@ -1,12 +1,16 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import {LinkingOptions, NavigationContainer} from '@react-navigation/native';
+import { LinkingOptions, NavigationContainer } from '@react-navigation/native';
 import MainStack from './src/navigation/MainStack';
-import {Provider} from 'react-redux';
-import {store} from './src/redux/store';
-import {Linking, Platform} from 'react-native';
+import { Provider } from 'react-redux';
+import { store } from './src/redux/store';
+import { Linking, Platform } from 'react-native';
 import ReactNativeBiometrics from 'react-native-biometrics';
-
+import { NewAppScreen } from '@react-native/new-app-screen';
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 interface AppProps {}
 
 interface AppState {}
@@ -22,7 +26,7 @@ export const linking: LinkingOptions<ReactNavigation.RootParamList> = {
   },
 
   subscribe(listener: (url: string) => void) {
-    const linkingSubscription = Linking.addEventListener('url', ({url}) => {
+    const linkingSubscription = Linking.addEventListener('url', ({ url }) => {
       listener(url);
     });
 
@@ -62,11 +66,11 @@ class App extends React.Component<AppProps, AppState> {
   };
 
   async componentDidMount() {
-//     if(await this.handleBiometrics()){
-// // login
-//     }else{
-// // navigate to login page
-//     };
+    //     if(await this.handleBiometrics()){
+    // // login
+    //     }else{
+    // // navigate to login page
+    //     };
     const initialUrl = await Linking.getInitialURL();
     if (initialUrl) {
       console.log('Initial URL:', initialUrl);
@@ -76,7 +80,8 @@ class App extends React.Component<AppProps, AppState> {
   // Check if app is installed
   isAppInstalled = async () => {
     try {
-      const scheme = Platform.OS === 'ios' ? `yourAppScheme://` : `package:${packageName}`;
+      const scheme =
+        Platform.OS === 'ios' ? `yourAppScheme://` : `package:${packageName}`;
       const isInstalled = await Linking.canOpenURL(scheme);
       return isInstalled;
     } catch (error) {
@@ -96,11 +101,13 @@ class App extends React.Component<AppProps, AppState> {
 
   render() {
     return (
-      <NavigationContainer linking={linking}>
-        <Provider store={store}>
-          <MainStack />
-        </Provider>
-      </NavigationContainer>
+      <SafeAreaProvider>
+        <NavigationContainer linking={linking}>
+          <Provider store={store}>
+            <MainStack />
+          </Provider>
+        </NavigationContainer>
+      </SafeAreaProvider>
     );
   }
 }
