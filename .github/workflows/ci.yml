@@ -3,7 +3,7 @@ name: CICD Code Base Pipeline
 on:
   push:
     branches:
-      - master
+      - '**'
 
 jobs:
   build:
@@ -38,3 +38,8 @@ jobs:
 
       - name: Run Tests with Coverage
         run: yarn test --coverage
+
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
