@@ -1,6 +1,6 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import {COLORS, FONTS} from '../../global/theme';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { COLORS, FONTS } from '../../global/theme';
 import {
   responsiveFontSize,
   responsiveHeight,
@@ -8,11 +8,15 @@ import {
   responsiveScreenWidth,
 } from 'react-native-responsive-dimensions';
 import VectorIcon from 'react-native-vector-icons/Entypo';
-import {LightSvg} from '../../assets/assets';
-import {Navigation} from '../../global/types';
+import { LightSvg, NotificationBellSvg, SearchSvg } from '../../assets/assets';
+import { Navigation } from '../../global/types';
+import { DASHBOARD } from '../../Constants/Navigator';
+import { moderateScale } from '../../helper/Scale';
 interface CustomHeaderProps {
   heading?: string;
   isIcon?: boolean;
+  isShowSearchIcon?: boolean;
+  isShowNotificationIcon?: boolean;
   navigation?: Navigation;
 }
 
@@ -30,15 +34,19 @@ class CustomHeader extends React.Component<
   handleGoBack = () => {
     this.props.navigation?.goBack && this.props.navigation.goBack();
   };
+  handleNavigateTo = (text: string) => {
+    this.props.navigation?.navigate && this.props.navigation.navigate(text);
+  };
 
   render() {
-    const {heading} = this.props;
+    const { heading } = this.props;
     return (
       <View style={styles.main}>
         <View style={styles.headingView}>
           <TouchableOpacity
             onPress={() => this.handleGoBack()}
-            style={styles.iconView}>
+            style={styles.iconView}
+          >
             <VectorIcon
               name="chevron-left"
               size={20}
@@ -47,10 +55,32 @@ class CustomHeader extends React.Component<
           </TouchableOpacity>
           <Text style={styles.headingText}>{heading ?? 'profile'}</Text>
         </View>
+
         {this.props.isIcon && (
-          <View style={styles.icon}>
-            <LightSvg width={'100%'} height={'100%'} style={styles.image} />
-          </View>
+          <TouchableOpacity style={styles.icon}>
+            <LightSvg width={'25'} height={'25'} style={styles.image} />
+          </TouchableOpacity>
+        )}
+        {this.props.isShowSearchIcon && (
+          <TouchableOpacity
+            style={styles.icon}
+            onPress={() => this.handleNavigateTo(DASHBOARD.SEARCHPAGE)}
+          >
+            <SearchSvg width={'25'} height={'20'} style={styles.image} />
+          </TouchableOpacity>
+        )}
+        {this.props.isShowNotificationIcon && (
+          <TouchableOpacity style={styles.icon}>
+            <NotificationBellSvg
+              width={'25'}
+              height={'25'}
+              resizeMode={'cover'}
+              style={styles.image}
+            />
+            <View style={styles.badge}>
+              <Text style={styles.badgeText}>1</Text>
+            </View>
+          </TouchableOpacity>
         )}
       </View>
     );
@@ -89,8 +119,24 @@ const styles = StyleSheet.create({
   icon: {
     marginLeft: responsiveScreenWidth(4),
     position: 'relative',
-    width: responsiveScreenWidth(10),
-    height: responsiveScreenWidth(10),
   },
-  image: {},
+  badge: {
+    width: responsiveScreenWidth(5),
+    height: responsiveScreenWidth(5),
+    position: 'absolute',
+    backgroundColor: 'red',
+    right: responsiveScreenWidth(-2),
+    top: responsiveScreenHeight(-2),
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: responsiveScreenWidth(2.5),
+  },
+  badgeText: {
+    fontFamily: FONTS.rubik.medium,
+    fontSize: moderateScale(10),
+    color: COLORS.white,
+  },
+  image: {
+    borderRadius: responsiveScreenWidth(10),
+  },
 });

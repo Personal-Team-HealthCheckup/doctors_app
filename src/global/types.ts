@@ -21,6 +21,7 @@ export interface YourAppointmentsData {
   image: string;
   available: string;
   isFaveritiated: boolean;
+  isAvailable?: boolean;
 }
 
 export interface MedicalStoreData {

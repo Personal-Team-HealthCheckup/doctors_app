@@ -1,20 +1,22 @@
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import React from 'react';
 import {
   responsiveScreenWidth,
   responsiveScreenHeight,
 } from 'react-native-responsive-dimensions';
-import {SvgRightArrowSvg} from '../../assets/assets';
-import {COLORS, FONTS} from '../../global/theme';
-import {moderateScale} from '../../helper/Scale';
+import { SvgRightArrowSvg } from '../../assets/assets';
+import { COLORS, FONTS } from '../../global/theme';
+import { moderateScale } from '../../helper/Scale';
 import VectorIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 interface CustomHeadingProps {
   title: string;
   isIcon?: boolean;
+  onPressSeeAll?: () => void;
 }
 const CustomHeading: React.FC<CustomHeadingProps> = ({
   title,
   isIcon = false,
+  onPressSeeAll,
 }) => {
   return (
     <View style={styles.mainTextView}>
@@ -29,9 +31,9 @@ const CustomHeading: React.FC<CustomHeadingProps> = ({
         )}
         <Text style={styles.mainText}>{title}</Text>
       </View>
-      <TouchableOpacity style={styles.btn}>
+      <TouchableOpacity style={styles.btn} onPress={onPressSeeAll}>
         <Text style={styles.buttonSeeText}>See all</Text>
-        <SvgRightArrowSvg />
+        <SvgRightArrowSvg width={10} height={10} />
       </TouchableOpacity>
     </View>
   );
@@ -61,6 +63,7 @@ const styles = StyleSheet.create({
     color: COLORS.white2gray,
     fontFamily: FONTS.rubik.light,
     fontSize: moderateScale(12),
+    marginRight: responsiveScreenWidth(1),
   },
   iconView: {
     flex: 1,

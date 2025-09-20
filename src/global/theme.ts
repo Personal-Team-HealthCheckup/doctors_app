@@ -18,13 +18,14 @@ export const COLORS = {
   yellow: '#F6D060',
   blueish: '#00FFFF',
   grey: '#393939',
+  lightBalckishGrey: 'rgba(203,203,203,.12)',
   lightYellow: '#CAFF59',
   lightCyan: '#59FFEB',
   light: '#677294CC',
   green3: '#0EBE7E',
   gradientWhite: '#858EA9',
-  tokenGreen : '#0F7986',
-  tokenGreen2 :'#076673'
+  tokenGreen: '#0F7986',
+  tokenGreen2: '#076673',
 };
 
 export const FONTS = {
@@ -42,20 +43,20 @@ export const FONTS = {
     semiBold: 'Rubik-SemiBold',
     bold: 'Rubik-Bold',
   },
-   spaceGrotesk: {
+  spaceGrotesk: {
     light: 'SpaceGrotesk-Light',
     regular: 'SpaceGrotesk-Regular',
     medium: 'SpaceGrotesk-Medium',
     semiBold: 'SpaceGrotesk-Bold',
     bold: 'SpaceGrotesk-Bold',
   },
-  inter:{
-    'light[300]':"Inter-ExtraLight",
-    'regular[400]':"Inter-Regular",
-    'medium[500]':"Inter-Medium",
-    'semiBold[600]':"Inter-SemiBold",
-    'bold[700]':"Inter-Bold",
-    'extrBold[800]':"Inter-ExtraBold",
-    'black[900]':"Inter-Black",
-  }
+  inter: {
+    'light[300]': 'Inter-ExtraLight',
+    'regular[400]': 'Inter-Regular',
+    'medium[500]': 'Inter-Medium',
+    'semiBold[600]': 'Inter-SemiBold',
+    'bold[700]': 'Inter-Bold',
+    'extrBold[800]': 'Inter-ExtraBold',
+    'black[900]': 'Inter-Black',
+  },
 };

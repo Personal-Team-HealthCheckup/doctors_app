@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import React from 'react';
 import {
   responsiveScreenHeight,
@@ -10,9 +10,9 @@ import {
   SearchSvg,
   NotificationBellSvg,
 } from '../../assets/assets';
-import {COLORS, FONTS} from '../../global/theme';
-import {moderateScale} from '../../helper/Scale';
-import {DASHBOARD} from '../../Constants/Navigator';
+import { COLORS, FONTS } from '../../global/theme';
+import { moderateScale } from '../../helper/Scale';
+import { DASHBOARD } from '../../Constants/Navigator';
 interface Iprops {
   navigateTo: (text: string) => void;
   toggleDrawer?: () => void;
@@ -22,7 +22,8 @@ const Header: React.FC<Iprops> = props => {
     <View style={styles.mainView}>
       <TouchableOpacity
         onPress={() => props.toggleDrawer && props.toggleDrawer()}
-        style={styles.icon}>
+        style={styles.icon}
+      >
         <OnBoarding1Svg
           width={responsiveScreenWidth(18)}
           height={responsiveScreenWidth(18)}
@@ -31,17 +32,19 @@ const Header: React.FC<Iprops> = props => {
       </TouchableOpacity>
       <View style={styles.iconView}>
         <TouchableOpacity style={styles.icon} onPress={() => {}}>
-          <LightSvg width={'100%'} height={'100%'} style={styles.image} />
+          <LightSvg width={'25'} height={'25'} style={styles.image} />
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.icon}
-          onPress={() => props.navigateTo(DASHBOARD.SEARCHPAGE)}>
-          <SearchSvg width={'100%'} height={'70%'} style={styles.image} />
+          onPress={() => props.navigateTo(DASHBOARD.SEARCHPAGE)}
+        >
+          <SearchSvg width={'25'} height={'20'} style={styles.image} />
         </TouchableOpacity>
         <View style={styles.icon}>
           <NotificationBellSvg
-            width={'100%'}
-            height={'100%'}
+            width={'25'}
+            height={'25'}
+            resizeMode={'cover'}
             style={styles.image}
           />
           <View style={styles.badge}>
@@ -74,8 +77,6 @@ const styles = StyleSheet.create({
   icon: {
     marginLeft: responsiveScreenWidth(4),
     position: 'relative',
-    width: responsiveScreenWidth(10),
-    height: responsiveScreenWidth(10),
   },
   badge: {
     width: responsiveScreenWidth(5),

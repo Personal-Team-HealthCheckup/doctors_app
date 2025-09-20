@@ -179,6 +179,68 @@ export const yourAppointmentsData: YourAppointmentsData[] = [
     isFaveritiated: false,
   },
 ];
+export const AllDoctorsData: YourAppointmentsData[] = [
+  {
+    id: 1,
+    rating: 4.8,
+    degree: 'B.D.S|M.B.B.S',
+    name: 'Dr. John Smith',
+    experience: 7,
+    views: 275,
+    available: '10AM tomorrow',
+    image: imageProfile1,
+    isFaveritiated: false,
+    isAvailable: true,
+  },
+  {
+    id: 2,
+    available: '12AM tomorrow',
+    degree: 'B.D.S|M.B.S',
+    experience: 9,
+    image: imageProfile2,
+    name: 'Dr. Watamaniuk',
+    rating: 3.5,
+    views: 3475,
+    isFaveritiated: true,
+    isAvailable: true,
+  },
+  {
+    id: 3,
+    available: '11AM tomorrow',
+    degree: 'B.D.S|M.B.S',
+    experience: 10,
+    image: imageProfile3,
+    name: 'Dr. Julie Will',
+    rating: 4.5,
+    views: 4475,
+    isFaveritiated: true,
+    isAvailable: true,
+  },
+  {
+    id: 4,
+    available: '1PM tomorrow',
+    degree: 'B.D.S|M.B.S',
+    experience: 2,
+    image: imageProfile4,
+    name: 'Dr. Crownover',
+    rating: 4.1,
+    views: 1475,
+    isFaveritiated: false,
+    isAvailable: true,
+  },
+  {
+    id: 5,
+    available: '4PM tomorrow',
+    degree: 'B.D.S|M.B.S',
+    experience: 5,
+    image: imageProfile5,
+    name: 'Dr. Balestra',
+    rating: 4.3,
+    views: 475,
+    isFaveritiated: false,
+    isAvailable: false,
+  },
+];
 
 // medical store data
 
@@ -301,4 +363,12 @@ export const slotsAvailable: SlotsAvailable[] = [
     date: 'Evening 5 slots',
     slots: ['5:00 PM', '5:30 PM', '6:00 PM', '6:30 PM', '7:00 PM'],
   },
+];
+
+// Patient Dummy data
+
+export const patientStatistic = [
+  { id: 1, title: 'Runing', count: 100 },
+  { id: 2, title: 'Ongoing', count: '500' },
+  { id: 3, title: 'Patient', count: '700' },
 ];

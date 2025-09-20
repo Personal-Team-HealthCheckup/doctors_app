@@ -1,5 +1,5 @@
 import React from 'react';
-import {YourAppointmentsData} from '../../global/types';
+import { YourAppointmentsData } from '../../global/types';
 import CustomGButton from './CustomGButton';
 import {
   View,
@@ -18,9 +18,9 @@ import {
   responsiveScreenWidth,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import {COLORS, FONTS} from '../../global/theme';
-import {moderateScale} from '../../helper/Scale';
-import {HeartImg, HeartRedImg} from '../../assets/assets';
+import { COLORS, FONTS } from '../../global/theme';
+import { moderateScale } from '../../helper/Scale';
+import { HeartImg, HeartRedImg } from '../../assets/assets';
 
 interface CustomAppointmentCardProps {
   item: YourAppointmentsData;
@@ -46,7 +46,7 @@ class CustomAppointmentCard extends React.Component<
     };
   }
   componentDidMount(): void {
-    this.setState({yourAppointmentsData: this.props.yourAppointmentsData});
+    this.setState({ yourAppointmentsData: this.props.yourAppointmentsData });
   }
 
   toggleFaverite = (appID: number) => {
@@ -71,28 +71,25 @@ class CustomAppointmentCard extends React.Component<
       }),
     }));
   };
+
   render() {
-    const {item} = this.props;
+    const { item } = this.props;
     const degree = item.degree.split('|').join(',');
     return (
       <View style={[styles.appointmentMainView]}>
         <View style={styles.viewImg}>
           <TouchableOpacity
             onPress={() => this.toggleFaverite(item.id)}
-            style={styles.likeView}>
+            style={styles.likeView}
+          >
             <Animated.Image
               resizeMode={'contain'}
-              source={item.isFaveritiated ? HeartRedImg : HeartImg} // Replace with your heart icon image
+              source={item.isFaveritiated ? HeartRedImg : HeartImg}
               style={[
                 styles.likeImage,
-                {transform: [{scale: this.state.animation}]},
+                { transform: [{ scale: this.state.animation }] },
               ]}
             />
-            {/* <FontAwesomeIcon
-              name={item.isFaveritiated ? 'heart' : 'heart-o'}
-              color={item.isFaveritiated ? COLORS.red1 : COLORS.lightBlack2}
-              size={20}
-            /> */}
           </TouchableOpacity>
           <Image
             source={item.image as ImageSourcePropType}
@@ -104,13 +101,19 @@ class CustomAppointmentCard extends React.Component<
             <Text style={styles.subTextExpe}>
               {item.experience} Years experience
             </Text>
-            <CustomRating
-              iconSize={20}
-              starViewStyle={[styles.viewStar, styles.customRating]}
-              initialValue={item.rating}
-              isDisable
-              onChange={() => {}}
-            />
+            <View style={styles.viewText}>
+              <CustomRating
+                iconSize={20}
+                starViewStyle={[styles.viewStar, styles.customRating]}
+                initialValue={item.rating}
+                isDisable
+                onChange={() => {}}
+              />
+              <Text style={styles.textdate}>
+                {item.rating}
+                <Text style={styles.text2}>({item.views})</Text>
+              </Text>
+            </View>
           </View>
         </View>
         <View style={styles.view1}>
@@ -123,7 +126,7 @@ class CustomAppointmentCard extends React.Component<
           </View>
           <View>
             <CustomGButton
-              tittle="Reschedule"
+              tittle={item.isAvailable ? 'Book Now' : 'Reschedule'}
               style={styles.button}
               textStyle={styles.buttonText}
               onPress={() => this.props?.navigateTo && this.props?.navigateTo()}
@@ -136,6 +139,13 @@ class CustomAppointmentCard extends React.Component<
 }
 
 const styles = StyleSheet.create({
+  viewText: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    alignContent: 'center',
+    paddingBottom: responsiveScreenHeight(1.5),
+  },
   container: {
     width: responsiveWidth(100),
     height: responsiveHeight(100),
@@ -233,9 +243,8 @@ const styles = StyleSheet.create({
   viewStar: {
     justifyContent: 'space-between',
     gap: responsiveWidth(1),
-    paddingBottom: responsiveScreenHeight(1.5),
   },
-  customRating: {justifyContent: 'flex-start', gap: responsiveWidth(2)},
+  customRating: { justifyContent: 'flex-start', gap: responsiveWidth(2) },
   cont: {
     marginRight: responsiveScreenWidth(1),
   },
