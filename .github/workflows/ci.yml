@@ -39,7 +39,16 @@ jobs:
       - name: Run Tests with Coverage
         run: yarn test --coverage
 
+      - name: Verify Coverage File
+        run: cat coverage/lcov.info
+
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@master
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.projectKey=Personal-Team-HealthCheckup_doctors_app
+            -Dsonar.organization=personal-team-healthcheckup
+            -Dsonar.host.url=https://sonarcloud.io
+            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
