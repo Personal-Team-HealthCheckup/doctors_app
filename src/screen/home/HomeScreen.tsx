@@ -92,12 +92,14 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
     this.props.navigation?.navigate &&
       this.props.navigation?.navigate(DASHBOARD.SELECTTIME);
   };
+
   _renderCommnDesease = ({ item }: { item: CommonDeseaseData }) => {
     const Svg = item.image;
     return (
       <ImageBackground
         source={item.backgroudImage as ImageSourcePropType}
-        style={styles.backImage}>
+        style={styles.backImage}
+      >
         <Svg />
         <Text style={styles.textTitle}>{item.title}</Text>
       </ImageBackground>
@@ -115,7 +117,8 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
         style={[
           index === yourAppointmentsData.length - 1 && styles.cont,
           index === 0 && styles.cont1,
-        ]}>
+        ]}
+      >
         <CustomAppointmentCard
           index={index}
           item={item}
@@ -146,7 +149,7 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
           starViewStyle={styles.viewStar}
           initialValue={item.rating}
           isDisable
-          onChange={() => { }}
+          onChange={() => {}}
         />
       </View>
     );
@@ -164,11 +167,13 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
         style={[
           styles.qualifierView,
           index === this.state.qualifiedDoctor.length - 1 && styles.lastCss,
-        ]}>
+        ]}
+      >
         <View style={[styles.flexCss, styles.ViewQualifier]}>
           <TouchableOpacity
             onPress={() => this.toggleFaverite(item.id)}
-            style={styles.likeView1}>
+            style={styles.likeView1}
+          >
             <FontAwesomeIcon
               name={item.isFaveritiated ? 'heart' : 'heart-o'}
               color={item.isFaveritiated ? COLORS.red1 : COLORS.lightBlack2}
@@ -184,7 +189,9 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
           <Image source={item.image} style={styles.image1} />
         </View>
         <View style={styles.textView1}>
-          <Text numberOfLines={1} style={[styles.textCommon, styles.text1]}>{item.name}</Text>
+          <Text numberOfLines={1} style={[styles.textCommon, styles.text1]}>
+            {item.name}
+          </Text>
           <View style={[styles.flexCss, styles.textView2]}>
             <Text style={[styles.textCommon, styles.text1$]}>$</Text>
             <Text style={[styles.textCommon, styles.text1sub]}>
@@ -213,7 +220,8 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
               colors={[COLORS.greeen2, COLORS.greeen1]}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
-              style={[styles.linearGradient]}>
+              style={[styles.linearGradient]}
+            >
               <View style={styles.viewText}>
                 <Text style={styles.profilename}>Hi Olivia Doe</Text>
                 <Text style={styles.welText}>Welcome To VHA</Text>
@@ -234,8 +242,9 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
             scrollEnabled
             bounces={false}
             contentContainerStyle={styles.contentContainerStyleMain}
-            style={styles.container}>
-
+            style={styles.container}
+          >
+            {/* Common Diseases */}
             <View style={styles.viewStyle}>
               <CustomHeading title="Common Diseases" />
               <FlatList
@@ -247,6 +256,8 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
                 contentContainerStyle={styles.contentContainerStyle}
               />
             </View>
+
+            {/* You Appointment */}
             <View style={styles.viewStyle}>
               <CustomHeading title="Your Appointments" />
               <FlatList
@@ -256,6 +267,7 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
                 keyExtractor={item => item.id.toString()}
               />
             </View>
+
             {/* Medical sotres */}
             <View style={styles.viewStyle}>
               <CustomHeading title="Medical Stores" />
@@ -271,7 +283,11 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
 
             {/* Qualified Doctors */}
             <View style={styles.viewStyle}>
-              <CustomHeading isIcon title="Qualified Doctor" />
+              <CustomHeading
+                isIcon
+                title="Qualified Doctor"
+                onPressSeeAll={() => this.handleNavigation(DASHBOARD.DOCTORS)}
+              />
               <FlatList
                 horizontal
                 showsHorizontalScrollIndicator={false}

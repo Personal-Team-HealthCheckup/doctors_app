@@ -1,0 +1,55 @@
+name: iOS Fastlane Practice
+
+on:
+  push:
+    branches: ['master']
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2
+          bundler-cache: true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install Node dependencies
+        run: |
+          npm install --legacy-peer-deps
+      - name: Install dependencies
+        run: |
+          cd ios
+          bundle init || true
+          echo 'gem "fastlane"' >> Gemfile
+          bundle install
+
+      - name: Install CocoaPods
+        run: |
+          cd ios
+          pod install --repo-update
+
+      - name: Build for Simulator with Fastlane
+        run: |
+          cd ios
+          bundle exec fastlane build_simulator
+
+      - name: Run Tests with Fastlane
+        run: |
+          cd ios
+          bundle exec fastlane tests
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-simulator-build
+          path: ios/build

@@ -1,45 +1,38 @@
 import React from 'react';
 import {
   ImageBackground,
-  NativeScrollEvent,
-  NativeSyntheticEvent,
-  ScrollView,
   FlatList,
   View,
+  TouchableOpacity,
 } from 'react-native';
 import CustomStatusBar from '../../Components/common/CustomStatusBar';
 import { COLORS } from '../../global/theme';
-import { handleScroll } from '../../helper/utilities';
 import { HomeScreenPng } from '../../assets/assets';
 import CustomHeader from '../../Components/common/CustomHeader';
-import CustomTextInput from '../../Components/common/CustomTextInput';
-import { YourAppointmentsData } from '../../global/types';
-import { yourAppointmentsData } from '../../global/data';
+import { Navigation, YourAppointmentsData } from '../../global/types';
+import { AllDoctorsData } from '../../global/data';
 import CustomAppointmentCard from '../../Components/common/CustomAppointmentCard';
+import { DASHBOARD } from '../../Constants/Navigator';
 import { CommonStyles as styles } from './CommonStyles';
-
-interface SearchPageProps {
-  navigation?: {
-    goBack: () => void;
-  };
+interface AllDoctorsProps {
+  navigation?: Navigation;
 }
 
-interface SearchPageState {
-  isScrollEnabled: boolean;
+interface AllDoctorsState {
   doctorDetailsData: YourAppointmentsData[];
 }
 
-class SearchPage extends React.Component<SearchPageProps, SearchPageState> {
-  constructor(props: SearchPageProps) {
+class AllDoctors extends React.Component<AllDoctorsProps, AllDoctorsState> {
+  constructor(props: AllDoctorsProps) {
     super(props);
     this.state = {
-      isScrollEnabled: false,
-      doctorDetailsData: yourAppointmentsData,
+      doctorDetailsData: AllDoctorsData,
     };
   }
-  handleScroll1 = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    this.setState({ isScrollEnabled: handleScroll(event) });
+  navigateTo = (text: string) => {
+    this.props.navigation?.navigate && this.props.navigation?.navigate(text);
   };
+
   _renderDoctors = ({
     item,
     index,
@@ -48,55 +41,54 @@ class SearchPage extends React.Component<SearchPageProps, SearchPageState> {
     index: number;
   }) => {
     return (
-      <View style={styles.doctorList}>
+      <TouchableOpacity
+        testID="doctor-detail-card"
+        style={styles.doctorList}
+        onPress={() => this.navigateTo(DASHBOARD.DOCTORDETAILS)}
+      >
         <CustomAppointmentCard
           item={item}
           index={index}
           yourAppointmentsData={this.state.doctorDetailsData}
           navigateTo={undefined}
         />
-      </View>
+      </TouchableOpacity>
     );
   };
+
   render() {
     return (
       <View style={styles.mainView}>
         <CustomStatusBar
-          isScrollEnabled={this.state.isScrollEnabled}
-          backgroundColor={
-            this.state.isScrollEnabled ? COLORS.white : COLORS.transparent
-          }
+          isScrollEnabled={false}
+          backgroundColor={COLORS.transparent}
         />
 
-        <ScrollView
-          scrollEnabled={false}
-          onScroll={event => this.handleScroll1(event)}
-          scrollEventThrottle={16}
-          bounces={false}
-          style={styles.container}
-        >
+        <View style={styles.container}>
           <ImageBackground source={HomeScreenPng} style={styles.imageView}>
             <CustomHeader
               navigation={this.props.navigation}
-              heading="Find Doctors"
+              heading="Qualified Doctors"
               isIcon
+              isShowSearchIcon
             />
-            <CustomTextInput style={styles.textInput} placeholder="Search" />
             <View>
               <FlatList
+                testID="flat-list-doctor-details"
                 bounces={false}
                 showsVerticalScrollIndicator={false}
                 style={styles.stylesFlatlist}
                 contentContainerStyle={styles.contentContainer}
                 data={this.state.doctorDetailsData}
                 renderItem={this._renderDoctors}
+                keyExtractor={item => item.id.toString()}
               />
             </View>
           </ImageBackground>
-        </ScrollView>
+        </View>
       </View>
     );
   }
 }
 
-export default SearchPage;
+export default AllDoctors;
