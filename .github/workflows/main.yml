@@ -2,7 +2,7 @@ name: iOS & Android Fastlane CI/CD
 
 on:
   push:
-    branches: ['master']
+    branches: ['master', 'feature/ui']
 
 jobs:
   ios-build:

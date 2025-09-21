@@ -13,23 +13,31 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 # Available Actions
 
-## iOS
+## Android
 
-### ios build_simulator
-
-```sh
-[bundle exec] fastlane ios build_simulator
-```
-
-Build for simulator (no signing needed)
-
-### ios tests
+### android test
 
 ```sh
-[bundle exec] fastlane ios tests
+[bundle exec] fastlane android test
 ```
 
-Run iOS tests
+Runs all the tests
+
+### android beta
+
+```sh
+[bundle exec] fastlane android beta
+```
+
+Submit a new Beta Build to Crashlytics Beta
+
+### android deploy
+
+```sh
+[bundle exec] fastlane android deploy
+```
+
+Deploy a new version to the Google Play
 
 ----
 

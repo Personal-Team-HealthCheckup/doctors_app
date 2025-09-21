@@ -15,12 +15,4 @@ platform :ios do
     )
   end
 
-  desc "Run iOS tests"
-  lane :tests do
-    scan(
-      scheme: "doctor_app",
-      devices: ["iPhone 15"],
-      clean: true
-    )
-  end
 end
