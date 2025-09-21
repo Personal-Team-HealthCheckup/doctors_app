@@ -40,7 +40,7 @@ jobs:
       - name: Build iOS IPA with Fastlane
         run: |
           cd ios
-          bundle exec fastlane ios build_release
+          bundle exec fastlane ios build_release --ci
 
       - name: Upload iOS IPA to GitHub Release
         if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
