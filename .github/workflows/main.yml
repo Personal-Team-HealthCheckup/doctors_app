@@ -2,11 +2,11 @@ name: iOS & Android Fastlane CI/CD
 
 on:
   push:
-    branches: ['master', 'feature/ui']
+    branches: ['master', 'main']
 
 jobs:
   ios-build:
-    name: iOS Build & Test
+    name: iOS Build & Upload
     runs-on: macos-latest
 
     steps:
@@ -39,19 +39,22 @@ jobs:
           cd ios
           pod install --repo-update
 
-      - name: Run iOS Fastlane lane
+      - name: Build iOS IPA with Fastlane
         run: |
           cd ios
-          bundle exec fastlane ios_build_and_test   # Replace with your lane name
+          bundle exec fastlane build_release
 
-      - name: Upload iOS Build Artifact
-        uses: actions/upload-artifact@v4
+      - name: Upload iOS IPA to GitHub Release
+        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
+        uses: ncipollo/release-action@v1
         with:
-          name: ios-build
-          path: ios/build
+          artifacts: ios/build/doctor_app.ipa
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          tag: v${{ github.run_number }}
+          name: Release ${{ github.run_number }}
 
   android-build:
-    name: Android Build & Release
+    name: Android Build & Upload
     runs-on: ubuntu-latest
 
     steps:
@@ -75,15 +78,13 @@ jobs:
         uses: android-actions/setup-android@v3
 
       - name: Install Fastlane
-        run: |
-          sudo gem install fastlane -NV
+        run: sudo gem install fastlane -NV
 
-      - name: Run Android Fastlane lane
-        run: |
-          bundle exec fastlane android_build_and_release   # Replace with your lane name
+      - name: Build Android Release APK with Fastlane
+        run: fastlane android build_release
 
       - name: Upload APK to GitHub Release
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
         uses: ncipollo/release-action@v1
         with:
           artifacts: android/app/build/outputs/apk/release/app-release.apk
