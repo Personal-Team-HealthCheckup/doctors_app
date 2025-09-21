@@ -21,15 +21,15 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 [bundle exec] fastlane ios build_simulator
 ```
 
-Build for simulator (no signing needed)
+Build iOS for simulator (no signing needed)
 
-### ios tests
+### ios build_release
 
 ```sh
-[bundle exec] fastlane ios tests
+[bundle exec] fastlane ios build_release
 ```
 
-Run iOS tests
+Build iOS Release IPA
 
 ----
 
