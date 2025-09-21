@@ -18,8 +18,7 @@ platform :android do
   desc "Build Android APK (Release)"
   lane :build_release do
     gradle(
-      task: "clean assembleRelease",
-      build_type: "Release"
+      task: "clean assembleRelease"
     )
   end
 end
