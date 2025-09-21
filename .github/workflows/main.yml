@@ -27,14 +27,7 @@ jobs:
       - name: Install Node dependencies
         run: npm install --legacy-peer-deps
 
-      - name: Install Fastlane
-        run: |
-          cd ios
-          bundle init || true
-          echo 'gem "fastlane"' >> Gemfile
-          bundle install
-
-      - name: Install CocoaPods
+      - name: Install CocoaPods dependencies
         run: |
           cd ios
           pod install --repo-update
