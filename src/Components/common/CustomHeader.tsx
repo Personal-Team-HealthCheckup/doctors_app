@@ -44,6 +44,7 @@ class CustomHeader extends React.Component<
       <View style={styles.main}>
         <View style={styles.headingView}>
           <TouchableOpacity
+            testID="back-button"
             onPress={() => this.handleGoBack()}
             style={styles.iconView}
           >
@@ -64,13 +65,14 @@ class CustomHeader extends React.Component<
         {this.props.isShowSearchIcon && (
           <TouchableOpacity
             style={styles.icon}
+            testID="search-button"
             onPress={() => this.handleNavigateTo(DASHBOARD.SEARCHPAGE)}
           >
             <SearchSvg width={'25'} height={'20'} style={styles.image} />
           </TouchableOpacity>
         )}
         {this.props.isShowNotificationIcon && (
-          <TouchableOpacity style={styles.icon}>
+          <TouchableOpacity style={styles.icon} testID="notification-button">
             <NotificationBellSvg
               width={'25'}
               height={'25'}
@@ -102,6 +104,17 @@ const styles = StyleSheet.create({
     gap: responsiveScreenWidth(5),
     flex: 1,
   },
+  badge: {
+    height: responsiveScreenWidth(5),
+    width: responsiveScreenWidth(5),
+    backgroundColor: 'red',
+    position: 'absolute',
+    top: responsiveScreenHeight(-2),
+    right: responsiveScreenWidth(-2),
+    alignItems: 'center',
+    borderRadius: responsiveScreenWidth(2.5),
+    justifyContent: 'center',
+  },
   iconView: {
     width: responsiveScreenHeight(5),
     height: responsiveScreenHeight(5),
@@ -117,23 +130,12 @@ const styles = StyleSheet.create({
     textTransform: 'capitalize',
   },
   icon: {
-    marginLeft: responsiveScreenWidth(4),
     position: 'relative',
-  },
-  badge: {
-    width: responsiveScreenWidth(5),
-    height: responsiveScreenWidth(5),
-    position: 'absolute',
-    backgroundColor: 'red',
-    right: responsiveScreenWidth(-2),
-    top: responsiveScreenHeight(-2),
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: responsiveScreenWidth(2.5),
+    marginLeft: responsiveScreenWidth(4),
   },
   badgeText: {
-    fontFamily: FONTS.rubik.medium,
     fontSize: moderateScale(10),
+    fontFamily: FONTS.rubik.medium,
     color: COLORS.white,
   },
   image: {

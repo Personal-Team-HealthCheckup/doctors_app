@@ -14,12 +14,14 @@ interface CustomRatingProps {
   onChange?: (text: number) => void;
   iconSize?: number;
   starViewStyle?: StyleProp<ViewStyle>;
+  testID?: string;
 }
 const CustomRating: React.FC<CustomRatingProps> = ({
   isDisable = false,
   iconSize = 30,
   initialValue,
-  onChange,
+  onChange = () => {},
+  testID = 'custom-rating',
   starViewStyle,
 }) => {
   const [rating, setRating] = useState(initialValue);
@@ -36,6 +38,7 @@ const CustomRating: React.FC<CustomRatingProps> = ({
         onPress={() => !isDisable && handleRatingChange(index)}
         style={!isDisable && styles.button}
         activeOpacity={1}
+        testID={`${testID}-${index}`}
         disabled={isDisable}
       >
         <Icon

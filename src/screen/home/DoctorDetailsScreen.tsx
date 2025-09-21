@@ -10,12 +10,7 @@ import {
 import CustomStatusBar from '../../Components/common/CustomStatusBar';
 import CustomHeader from '../../Components/common/CustomHeader';
 import { gradientPng } from '../../assets/assets';
-import {
-  Navigation,
-  Slots,
-  SlotsAvailableChangeData,
-  SlotsDateTimes,
-} from '../../global/types';
+import { Navigation } from '../../global/types';
 import { COLORS, FONTS } from '../../global/theme';
 import {
   responsiveHeight,
@@ -23,11 +18,7 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import { moderateScale } from '../../helper/Scale';
-import {
-  patientStatistic,
-  slotsAvailable,
-  slotsDateTimes,
-} from '../../global/data';
+import { patientStatistic } from '../../global/data';
 import CustomGButton from '../../Components/common/CustomGButton';
 import CustomDoctoDetailCard from '../../Components/CustomDoctoDetailCard';
 interface DoctorDetailsPageProps {
@@ -60,7 +51,7 @@ class DoctorDetailsPage extends React.Component<
   };
   render() {
     return (
-      <View style={styles.mainView}>
+      <View style={styles.mainContainer}>
         <CustomStatusBar
           isScrollEnabled={this.state.isScrollEnabled}
           backgroundColor={
@@ -139,7 +130,7 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.rubik.light,
     fontSize: moderateScale(15),
   },
-  mainView: {
+  mainContainer: {
     flex: 1,
     width: responsiveWidth(100),
     height: responsiveHeight(100),
@@ -162,25 +153,8 @@ const styles = StyleSheet.create({
     position: 'relative',
     flex: 1,
   },
-  textInput: { marginTop: responsiveHeight(4) },
-  stylesFlatlist: {
-    marginVertical: '5%',
-  },
-  doctorList: { marginVertical: 4 },
-  contentContainer: { paddingBottom: responsiveHeight(15) },
   mainView1: {
     marginTop: responsiveHeight(2),
-  },
-  slotView: {
-    borderColor: 'rgba(103, 114, 148, 0.10);',
-    borderWidth: responsiveWidth(0.5),
-    width: responsiveWidth(40),
-    padding: responsiveWidth(2),
-    paddingHorizontal: responsiveWidth(0),
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: responsiveHeight(8),
-    borderRadius: responsiveWidth(2),
   },
   gradient: {
     borderWidth: responsiveWidth(0),
@@ -191,25 +165,6 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(16),
     color: COLORS.white,
   },
-  subHeading1: {
-    fontSize: moderateScale(10),
-    color: COLORS.white2gray,
-    fontFamily: FONTS.rubik.light,
-  },
-  contentContainerStyle: {
-    gap: responsiveWidth(1),
-    paddingBottom: 0,
-  },
-  subHe: {
-    fontSize: moderateScale(14),
-    fontFamily: FONTS.rubik.regular,
-    marginTop: responsiveHeight(2),
-  },
-  styleFlat: {},
-  fltView: {
-    height: responsiveHeight(10),
-    marginVertical: responsiveHeight(2),
-  },
   text: {
     fontFamily: FONTS.rubik.medium,
     fontSize: moderateScale(18),
@@ -217,38 +172,6 @@ const styles = StyleSheet.create({
   text1: {
     color: COLORS.white2gray,
     marginBottom: responsiveHeight(2),
-  },
-  headingText: {
-    color: COLORS.green,
-    fontSize: moderateScale(13),
-  },
-  headingSelectText: {
-    color: COLORS.white,
-  },
-  buttonSlot: {
-    backgroundColor: COLORS.greygreeen,
-    width: responsiveWidth(20),
-    borderRadius: responsiveWidth(2),
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: responsiveWidth(1.5),
-    paddingVertical: responsiveHeight(2),
-  },
-  gradient1: {
-    padding: responsiveWidth(0),
-    paddingVertical: responsiveHeight(0),
-    borderRadius: responsiveWidth(2.5),
-  },
-  flatSlotList: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    gap: responsiveWidth(3),
-    marginTop: responsiveHeight(2),
-  },
-  slotAvailableView: {
-    marginTop: responsiveHeight(2),
   },
   buttonSlots: {
     alignSelf: 'center',

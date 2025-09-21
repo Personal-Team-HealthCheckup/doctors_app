@@ -71,16 +71,16 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
     borderRadius: responsiveWidth(2),
   },
-  heading: {
-    fontFamily: FONTS.rubik.medium,
-    fontSize: moderateScale(18),
-    color: COLORS.white,
-    width: '50%',
-  },
   subHeading: {
     fontSize: moderateScale(12),
     color: COLORS.white2gray,
     fontFamily: FONTS.rubik.light,
+    width: '50%',
+  },
+  heading: {
+    fontFamily: FONTS.rubik.medium,
+    fontSize: moderateScale(18),
+    color: COLORS.white,
     width: '50%',
   },
   mainView1: {

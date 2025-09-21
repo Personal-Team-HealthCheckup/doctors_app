@@ -79,10 +79,12 @@ class CustomAppointmentCard extends React.Component<
       <View style={[styles.appointmentMainView]}>
         <View style={styles.viewImg}>
           <TouchableOpacity
+            testID="like-button"
             onPress={() => this.toggleFaverite(item.id)}
             style={styles.likeView}
           >
             <Animated.Image
+              testID={'like-image'}
               resizeMode={'contain'}
               source={item.isFaveritiated ? HeartRedImg : HeartImg}
               style={[
@@ -107,7 +109,6 @@ class CustomAppointmentCard extends React.Component<
                 starViewStyle={[styles.viewStar, styles.customRating]}
                 initialValue={item.rating}
                 isDisable
-                onChange={() => {}}
               />
               <Text style={styles.textdate}>
                 {item.rating}
@@ -128,6 +129,7 @@ class CustomAppointmentCard extends React.Component<
             <CustomGButton
               tittle={item.isAvailable ? 'Book Now' : 'Reschedule'}
               style={styles.button}
+              testID="custom-appointment-card-button"
               textStyle={styles.buttonText}
               onPress={() => this.props?.navigateTo && this.props?.navigateTo()}
             />

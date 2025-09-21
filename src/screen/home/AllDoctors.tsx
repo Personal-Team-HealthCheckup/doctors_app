@@ -25,7 +25,6 @@ interface AllDoctorsProps {
 }
 
 interface AllDoctorsState {
-  isScrollEnabled: boolean;
   doctorDetailsData: YourAppointmentsData[];
 }
 
@@ -33,7 +32,6 @@ class AllDoctors extends React.Component<AllDoctorsProps, AllDoctorsState> {
   constructor(props: AllDoctorsProps) {
     super(props);
     this.state = {
-      isScrollEnabled: false,
       doctorDetailsData: AllDoctorsData,
     };
   }
@@ -50,6 +48,7 @@ class AllDoctors extends React.Component<AllDoctorsProps, AllDoctorsState> {
   }) => {
     return (
       <TouchableOpacity
+        testID="doctor-detail-card"
         style={styles.doctorList}
         onPress={() => this.navigateTo(DASHBOARD.DOCTORDETAILS)}
       >
@@ -67,10 +66,8 @@ class AllDoctors extends React.Component<AllDoctorsProps, AllDoctorsState> {
     return (
       <View style={styles.mainView}>
         <CustomStatusBar
-          isScrollEnabled={this.state.isScrollEnabled}
-          backgroundColor={
-            this.state.isScrollEnabled ? COLORS.white : COLORS.transparent
-          }
+          isScrollEnabled={false}
+          backgroundColor={COLORS.transparent}
         />
 
         <View style={styles.container}>
@@ -83,6 +80,7 @@ class AllDoctors extends React.Component<AllDoctorsProps, AllDoctorsState> {
             />
             <View>
               <FlatList
+                testID="flat-list-doctor-details"
                 bounces={false}
                 showsVerticalScrollIndicator={false}
                 style={styles.stylesFlatlist}
