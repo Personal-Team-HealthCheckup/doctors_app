@@ -6,4 +6,8 @@ module.exports = {
     '<rootDir>/__tests__/mock.ts',
     '<rootDir>/__mocks__',
   ],
+  collectCoverage: true,
+  coverageDirectory: 'coverage',
+  coverageReporters: ['lcov', 'text'],
+  testEnvironment: 'jsdom',
 };

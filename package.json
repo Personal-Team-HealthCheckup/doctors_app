@@ -83,13 +83,4 @@
   },
   "engines": {
     "node": ">=20"
-  },
-  "jest": {
-    "collectCoverage": true,
-    "coverageDirectory": "coverage",
-    "coverageReporters": [
-      "lcov",
-      "text"
-    ]
   }
-}

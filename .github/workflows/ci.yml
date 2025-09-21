@@ -37,7 +37,7 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Run Tests with Coverage
-        run: yarn test --coverage
+        run: yarn test --coverage --config jest.config.js
 
       - name: Verify Coverage File
         run: cat coverage/lcov.info
