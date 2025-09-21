@@ -1,69 +1,86 @@
-name: CI/CD Build Pipeline
+name: iOS & Android Fastlane CI/CD
 
 on:
   push:
-    branches:
-      - master
+    branches: ['master']
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  ios-build:
+    name: iOS Build & Test
+    runs-on: macos-latest
 
-    strategy:
-      matrix:
-        node-version: [20.x]
-        java-version: [17]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2
+          bundler-cache: true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install Node dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Install Fastlane
+        run: |
+          cd ios
+          bundle init || true
+          echo 'gem "fastlane"' >> Gemfile
+          bundle install
+
+      - name: Install CocoaPods
+        run: |
+          cd ios
+          pod install --repo-update
+
+      - name: Run iOS Fastlane lane
+        run: |
+          cd ios
+          bundle exec fastlane ios_build_and_test   # Replace with your lane name
+
+      - name: Upload iOS Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-build
+          path: ios/build
+
+  android-build:
+    name: Android Build & Release
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set up Java ${{ matrix.java-version }}
-        uses: actions/setup-java@v3
-        with:
-          java-version: ${{ matrix.java-version }}
-          distribution: temurin
-
-      - name: Set up Node.js ${{ matrix.node-version }}
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 20
 
-      - name: Cache Node Modules
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.npm
-            ~/.yarn
-            node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+      - name: Install Node dependencies
+        run: yarn install --frozen-lockfile
 
-      - name: Cache Gradle
-        uses: actions/cache@v3
+      - name: Install Java
+        uses: actions/setup-java@v3
         with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
+          distribution: temurin
+          java-version: 17
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Install Dependencies
-        run: yarn install --frozen-lockfile
-
-      - name: Verify Versions
+      - name: Install Fastlane
         run: |
-          node -v
-          java -version
+          sudo gem install fastlane -NV
 
-      - name: Build Android Project
+      - name: Run Android Fastlane lane
         run: |
-          cd android
-          ./gradlew assembleRelease -Dorg.gradle.jvmargs="-Xmx4096m"
+          bundle exec fastlane android_build_and_release   # Replace with your lane name
 
       - name: Upload APK to GitHub Release
         if: github.ref == 'refs/heads/master'
@@ -73,7 +90,3 @@ jobs:
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           tag: v${{ github.run_number }}
           name: Release ${{ github.run_number }}
-
-      - name: Provide APK Download Link
-        if: github.ref == 'refs/heads/master'
-        run: echo "APK uploaded successfully. Check the latest release for the download link."

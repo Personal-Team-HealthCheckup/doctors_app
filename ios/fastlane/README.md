@@ -31,6 +31,35 @@ Build for simulator (no signing needed)
 
 Run iOS tests
 
+### ios ios_build_and_test
+
+```sh
+[bundle exec] fastlane ios ios_build_and_test
+```
+
+Full iOS workflow: build & test
+
+----
+
+
+## Android
+
+### android build_release
+
+```sh
+[bundle exec] fastlane android build_release
+```
+
+Build Android APK (Release)
+
+### android android_build_and_release
+
+```sh
+[bundle exec] fastlane android android_build_and_release
+```
+
+Full Android workflow: build & release
+
 ----
 
 This README.md is auto-generated and will be re-generated every time [_fastlane_](https://fastlane.tools) is run.
