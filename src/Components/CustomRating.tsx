@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { ViewStyle } from 'react-native';
 import {
   View,
-  Text,
   TouchableOpacity,
+  ViewStyle,
   StyleSheet,
   StyleProp,
 } from 'react-native';
