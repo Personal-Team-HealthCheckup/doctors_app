@@ -25,9 +25,7 @@ interface DoctorDetailsPageProps {
   navigation?: Navigation;
 }
 
-interface DoctorDetailsPageState {
-  isScrollEnabled: boolean;
-}
+interface DoctorDetailsPageState {}
 
 class DoctorDetailsPage extends React.Component<
   DoctorDetailsPageProps,
@@ -35,9 +33,7 @@ class DoctorDetailsPage extends React.Component<
 > {
   constructor(props: DoctorDetailsPageProps) {
     super(props);
-    this.state = {
-      isScrollEnabled: false,
-    };
+    this.state = {};
   }
 
   _renterServices = ({ item, index }: { item: string; index: number }) => {
@@ -51,15 +47,13 @@ class DoctorDetailsPage extends React.Component<
   };
   render() {
     return (
-      <View style={styles.mainContainer}>
+      <View style={styles.mainContainerStyles}>
         <CustomStatusBar
-          isScrollEnabled={this.state.isScrollEnabled}
-          backgroundColor={
-            this.state.isScrollEnabled ? COLORS.white : COLORS.transparent
-          }
+          isScrollEnabled={false}
+          backgroundColor={COLORS.transparent}
         />
 
-        <ImageBackground source={gradientPng} style={styles.imageView}>
+        <ImageBackground source={gradientPng} style={styles.imageViewStyles}>
           <View style={styles.container}>
             <CustomHeader
               navigation={this.props.navigation}
@@ -69,7 +63,7 @@ class DoctorDetailsPage extends React.Component<
             <ScrollView
               scrollEnabled={true}
               bounces={false}
-              contentContainerStyle={styles.buttonContainerStyle}
+              contentContainerStyle={styles.contentContainerStyle}
             >
               <View style={styles.mainView1}>
                 <CustomDoctoDetailCard />
@@ -130,13 +124,13 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.rubik.light,
     fontSize: moderateScale(15),
   },
-  mainContainer: {
+  mainContainerStyles: {
     flex: 1,
     width: responsiveWidth(100),
     height: responsiveHeight(100),
     backgroundColor: COLORS.black,
   },
-  buttonContainerStyle: { paddingBottom: responsiveHeight(10) },
+  contentContainerStyle: { paddingBottom: responsiveHeight(10) },
   container: {
     width: responsiveWidth(100),
     height: responsiveHeight(100),
@@ -144,12 +138,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: responsiveScreenWidth(5),
     paddingVertical: responsiveHeight(3),
   },
-  imageView: {
+  imageViewStyles: {
     width: responsiveWidth(100),
     height: responsiveHeight(100),
     alignItems: 'center',
     resizeMode: 'cover',
-
     position: 'relative',
     flex: 1,
   },

@@ -4,7 +4,6 @@ import {
   NativeScrollEvent,
   NativeSyntheticEvent,
   ScrollView,
-  StyleSheet,
   FlatList,
   View,
 } from 'react-native';
@@ -12,16 +11,12 @@ import CustomStatusBar from '../../Components/common/CustomStatusBar';
 import { COLORS } from '../../global/theme';
 import { handleScroll } from '../../helper/utilities';
 import { HomeScreenPng } from '../../assets/assets';
-import {
-  responsiveHeight,
-  responsiveScreenWidth,
-  responsiveWidth,
-} from 'react-native-responsive-dimensions';
 import CustomHeader from '../../Components/common/CustomHeader';
 import CustomTextInput from '../../Components/common/CustomTextInput';
 import { YourAppointmentsData } from '../../global/types';
 import { yourAppointmentsData } from '../../global/data';
 import CustomAppointmentCard from '../../Components/common/CustomAppointmentCard';
+import { CommonStyles as styles } from './CommonStyles';
 
 interface SearchPageProps {
   navigation?: {
@@ -105,28 +100,3 @@ class SearchPage extends React.Component<SearchPageProps, SearchPageState> {
 }
 
 export default SearchPage;
-const styles = StyleSheet.create({
-  mainView: { flex: 1 },
-  container: {
-    width: responsiveWidth(100),
-    height: responsiveHeight(100),
-    backgroundColor: COLORS.black,
-    flex: 1,
-  },
-  imageView: {
-    width: responsiveWidth(100),
-    height: responsiveHeight(100),
-    alignItems: 'center',
-    resizeMode: 'cover',
-    paddingVertical: responsiveHeight(3),
-    position: 'relative',
-    paddingHorizontal: responsiveScreenWidth(5),
-    flex: 1,
-  },
-  textInput: { marginTop: responsiveHeight(4) },
-  stylesFlatlist: {
-    marginVertical: '5%',
-  },
-  doctorList: { marginVertical: 4 },
-  contentContainer: { paddingBottom: responsiveHeight(15) },
-});
