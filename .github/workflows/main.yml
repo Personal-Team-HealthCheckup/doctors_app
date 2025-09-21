@@ -32,6 +32,11 @@ jobs:
           cd ios
           pod install --repo-update
 
+      - name: Install Fastlane
+        run: |
+          cd ios
+          bundle install
+
       - name: Build iOS IPA with Fastlane
         run: |
           cd ios
