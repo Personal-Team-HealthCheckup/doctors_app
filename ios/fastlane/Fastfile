@@ -4,10 +4,14 @@ platform :ios do
   desc "Build for simulator (no signing needed)"
   lane :build_simulator do
     build_app(
-      scheme: "doctor_app", # replace with your scheme name
+      scheme: "doctor_app",
       sdk: "iphonesimulator",
+      configuration: "Debug",
       export_method: "development",
-      skip_codesigning: true
+      skip_package_ipa: true,      # 🚀 don’t try to package IPA
+      skip_codesigning: true,      # 🚀 no provisioning needed
+      destination: "generic/platform=iOS Simulator"
+      # destination: "platform=iOS Simulator,name=iPhone 16 Pro,OS=18.5"
     )
   end
 
