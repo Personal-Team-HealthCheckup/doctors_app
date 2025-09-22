@@ -1,0 +1,57 @@
+default_platform(:android)
+
+platform :android do
+  desc "Run Android unit tests"
+  lane :test do
+    gradle(task: "test")
+  end
+
+  desc "Build Android APK (Debug)"
+  lane :build_debug do
+    gradle(
+      task: "assembleDebug",
+      project_dir: "android"
+    )
+  end
+
+  desc "Build Android APK (Release)"
+  lane :build_release do
+    gradle(
+      task: "clean assembleRelease",
+      project_dir: "android"
+    )
+  end
+end
+
+platform :ios do
+  desc "Build iOS for simulator (no signing needed)"
+  lane :build_simulator do
+    build_app(
+      workspace: "ios/doctor_app.xcworkspace",
+      scheme: "doctor_app",
+      sdk: "iphonesimulator",
+      configuration: "Debug",
+      export_method: "development",
+      skip_package_ipa: true,
+      skip_codesigning: true,
+      skip_codesign: true ,
+      # destination: "generic/platform=iOS Simulator"
+      destination: "platform=iOS Simulator,name=iPhone 16 Pro,OS=18.5"
+    )
+  end
+
+  desc "Build iOS Release IPA"
+ lane :build_release do
+  build_app(
+    workspace: "ios/doctor_app.xcworkspace",
+    scheme: "doctor_app",
+    export_method: "development",
+    output_directory: "build",
+    export_options: {
+      signingStyle: "automatic",
+      compileBitcode: false
+    },
+    output_name: "doctor_app.ipa"
+  )
+end
+end

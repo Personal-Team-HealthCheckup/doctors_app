@@ -1,79 +1,91 @@
-name: CI/CD Build Pipeline
+name: iOS & Android Fastlane CI/CD
 
 on:
   push:
-    branches:
-      - master
+    branches: ['master', 'main']
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  ios-build:
+    name: iOS Build & Upload
+    runs-on: macos-latest
 
-    strategy:
-      matrix:
-        node-version: [20.x]
-        java-version: [17]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2
+          bundler-cache: true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install Node dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Install CocoaPods dependencies
+        run: |
+          cd ios
+          pod install --repo-update
+
+      - name: Install Fastlane
+        run: |
+          cd ios
+          bundle install
+
+      - name: Build iOS IPA with Fastlane
+        run: |
+          cd ios
+          bundle exec fastlane ios build_release --ci
+
+      - name: Upload iOS IPA to GitHub Release
+        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: ios/build/doctor_app.ipa
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          tag: v${{ github.run_number }}
+          name: Release ${{ github.run_number }}
+
+  android-build:
+    name: Android Build & Upload
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set up Java ${{ matrix.java-version }}
-        uses: actions/setup-java@v3
-        with:
-          java-version: ${{ matrix.java-version }}
-          distribution: temurin
-
-      - name: Set up Node.js ${{ matrix.node-version }}
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 20
 
-      - name: Cache Node Modules
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.npm
-            ~/.yarn
-            node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+      - name: Install Node dependencies
+        run: yarn install --frozen-lockfile
 
-      - name: Cache Gradle
-        uses: actions/cache@v3
+      - name: Install Java
+        uses: actions/setup-java@v3
         with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
+          distribution: temurin
+          java-version: 17
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Install Dependencies
-        run: yarn install --frozen-lockfile
+      - name: Install Fastlane
+        run: sudo gem install fastlane -NV
 
-      - name: Verify Versions
-        run: |
-          node -v
-          java -version
-
-      - name: Build Android Project
-        run: |
-          cd android
-          ./gradlew assembleRelease -Dorg.gradle.jvmargs="-Xmx4096m"
+      - name: Build Android Release APK with Fastlane
+        run: fastlane android build_release
 
       - name: Upload APK to GitHub Release
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
         uses: ncipollo/release-action@v1
         with:
           artifacts: android/app/build/outputs/apk/release/app-release.apk
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           tag: v${{ github.run_number }}
           name: Release ${{ github.run_number }}
-
-      - name: Provide APK Download Link
-        if: github.ref == 'refs/heads/master'
-        run: echo "APK uploaded successfully. Check the latest release for the download link."
