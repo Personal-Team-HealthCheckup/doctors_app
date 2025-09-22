@@ -34,19 +34,24 @@ platform :ios do
       export_method: "development",
       skip_package_ipa: true,
       skip_codesigning: true,
-      destination: "generic/platform=iOS Simulator"
-      # destination: "platform=iOS Simulator,name=iPhone 16 Pro,OS=18.5"
+      skip_codesign: true ,
+      # destination: "generic/platform=iOS Simulator"
+      destination: "platform=iOS Simulator,name=iPhone 16 Pro,OS=18.5"
     )
   end
 
   desc "Build iOS Release IPA"
-  lane :build_release do
-    build_app(
-      workspace: "ios/doctor_app.xcworkspace",
-      scheme: "doctor_app",
-      export_method: "ad-hoc",
-      output_directory: "build",
-      output_name: "doctor_app.ipa"
-    )
-  end
+ lane :build_release do
+  build_app(
+    workspace: "ios/doctor_app.xcworkspace",
+    scheme: "doctor_app",
+    export_method: "development",
+    output_directory: "build",
+    export_options: {
+      signingStyle: "automatic",
+      compileBitcode: false
+    },
+    output_name: "doctor_app.ipa"
+  )
+end
 end
