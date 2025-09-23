@@ -17,7 +17,6 @@ import SelectTimePage from '../screen/home/SelectTimePage';
 // import Video from '../Components/videoPlayer/Video';
 // import { useSelector } from 'react-redux';
 // import { RootState } from '../redux/store';
-import JoinChannelVideo from '../Components/videoPlayer/JoinChannelVideo';
 import AllDoctors from '../screen/home/AllDoctors';
 import DoctorDetailsPage from '../screen/home/DoctorDetailsScreen';
 
@@ -71,10 +70,10 @@ const MainNavigation = () => {
         name={MAINSTACK.HOMENAVIGATION}
         component={HomeNavigation}
       />
-      <MainStack.Screen
+      {/* <MainStack.Screen
         name={MAINSTACK.DUMMYStack}
         component={JoinChannelVideo}
-      />
+      /> */}
     </MainStack.Navigator>
   );
 };
