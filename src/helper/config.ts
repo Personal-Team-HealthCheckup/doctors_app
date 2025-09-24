@@ -8,4 +8,4 @@ export const endpoints = {
   GET_CATEGORIES: 'products/get-categories',
 };
 
-export const salt = 'doctor_app_salt'; // add the salt here
+export const salt = 'doctor_app_salt'; // add the salt here from env

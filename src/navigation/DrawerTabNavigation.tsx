@@ -1,12 +1,17 @@
-import React from 'react'
+import React from 'react';
 import {
   DrawerContentComponentProps,
   createDrawerNavigator,
 } from '@react-navigation/drawer';
 import BottomTabStackNavigator from './BottomTabNavigation';
-import {HOME} from '../Constants/Navigator';
-import CartPage from '../screen/home/Cartpage';
-import {View, SafeAreaView, Text, FlatList, TouchableOpacity, StyleSheet} from 'react-native';
+import { HOME } from '../Constants/Navigator';
+import {
+  View,
+  Text,
+  FlatList,
+  TouchableOpacity,
+  StyleSheet,
+} from 'react-native';
 import {
   responsiveFontSize,
   responsiveHeight,
@@ -14,6 +19,7 @@ import {
 } from 'react-native-responsive-dimensions';
 import FontAwesome5Icon from 'react-native-vector-icons/AntDesign';
 import { Image } from 'react-native';
+import AppointPage from '../screen/home/Appointment';
 interface DrawerData {
   id: number;
   title: string;
@@ -86,7 +92,7 @@ const CustomDrawerContent: React.FC<{}> = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       {/* Header */}
       <View style={styles.profileSection}>
         <Image
@@ -105,7 +111,7 @@ const CustomDrawerContent: React.FC<{}> = () => {
       {/* Drawer List */}
       <FlatList
         data={drawerData}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={item => item.id.toString()}
         renderItem={_renderDrawerContent}
         contentContainerStyle={{ paddingHorizontal: 20 }}
       />
@@ -115,15 +121,20 @@ const CustomDrawerContent: React.FC<{}> = () => {
 
       {/* Logout */}
       <TouchableOpacity style={styles.logoutButton} activeOpacity={0.7}>
-        <FontAwesome5Icon name="logout" size={responsiveWidth(6)} color="#FF6B6B" />
-        <Text style={[styles.drawerLabel, { marginLeft: 10, color: '#FF6B6B' }]}>
+        <FontAwesome5Icon
+          name="logout"
+          size={responsiveWidth(6)}
+          color="#FF6B6B"
+        />
+        <Text
+          style={[styles.drawerLabel, { marginLeft: 10, color: '#FF6B6B' }]}
+        >
           Logout
         </Text>
       </TouchableOpacity>
-    </SafeAreaView>
+    </View>
   );
 };
-
 
 function DrawerTabNavigation() {
   return (
@@ -140,12 +151,13 @@ function DrawerTabNavigation() {
           paddingHorizontal: responsiveWidth(2),
           backgroundColor: '#000000',
         },
-      }}>
+      }}
+    >
       <DrawerTab.Screen
         name={HOME.BOTTOMTABS}
         component={BottomTabStackNavigator}
       />
-      <DrawerTab.Screen name={HOME.CARTPAGE} component={CartPage} />
+      <DrawerTab.Screen name={HOME.APPOINTMENTPAGE} component={AppointPage} />
     </DrawerTab.Navigator>
   );
 }

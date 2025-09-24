@@ -1,9 +1,13 @@
 import moment from 'moment';
-import { Keyboard, NativeScrollEvent, NativeSyntheticEvent } from 'react-native';
+import {
+  Keyboard,
+  NativeScrollEvent,
+  NativeSyntheticEvent,
+} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CryptoJS from 'crypto-js';
 
-const secretKey = 'secret-strong-key'; // Use a strong key
+const secretKey = 'secret-strong-key'; // Use a strong key from environment variables in production
 
 export const formateDate = (date: string | Date) => {
   return moment(date).format('DD-MM-YYYY');
@@ -28,14 +32,20 @@ export const handleScroll = (
 
 export async function setStorageData(key: string, data: any) {
   if (key && data) {
-    const encryptedData = CryptoJS.AES.encrypt(JSON.stringify(data), secretKey).toString();
+    const encryptedData = CryptoJS.AES.encrypt(
+      JSON.stringify(data),
+      secretKey,
+    ).toString();
     await AsyncStorage.setItem(key, encryptedData);
   }
 }
 
-export async function getStorageData(key: string, parseToJson: boolean = false) {
+export async function getStorageData(
+  key: string,
+  parseToJson: boolean = false,
+) {
   if (key) {
-    const encryptedData = await AsyncStorage.getItem(key) || null;
+    const encryptedData = (await AsyncStorage.getItem(key)) || null;
     if (encryptedData) {
       const bytes = CryptoJS.AES.decrypt(encryptedData, secretKey);
       const decryptedData = bytes.toString(CryptoJS.enc.Utf8);
@@ -54,3 +64,41 @@ export async function removeStorageData(key: string) {
     await AsyncStorage.removeItem(key);
   }
 }
+
+// navigate to single screen
+export const navigateTo = (
+  navigation: any,
+  screenName: string,
+  params?: object,
+) => {
+  if (navigation && navigation.navigate) {
+    navigation.navigate(screenName, params);
+  }
+};
+
+// replace to single screen
+export const replaceTo = (
+  navigation: any,
+  screenName: string,
+  params?: object,
+) => {
+  if (navigation && navigation.navigate) {
+    navigation.replace(screenName, params);
+  }
+};
+
+// navigate to single screen with nested routes
+export const nestedNavigateTo = (
+  navigation: any,
+  screenName: string[],
+  parentRouteName: string,
+  params?: object,
+) => {
+  if (navigation && navigation.navigate) {
+    let nestedParams = { ...params };
+    for (let i = screenName.length - 1; i >= 0; i--) {
+      nestedParams = { screen: screenName[i], params: nestedParams };
+    }
+    navigation.navigate(parentRouteName, nestedParams);
+  }
+};

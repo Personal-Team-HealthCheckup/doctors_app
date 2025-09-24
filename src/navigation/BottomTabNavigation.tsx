@@ -25,8 +25,8 @@ import {
 } from '../assets/assets';
 import ProfilePage from '../screen/home/ProfilePage';
 import TokenOffer from '../screen/home/TokenOffer';
-import CartPage from '../screen/home/Cartpage';
 import LinearGradient from 'react-native-linear-gradient';
+import AppointPage from '../screen/home/Appointment';
 const BottomTab = createBottomTabNavigator();
 
 const BottomTabStackNavigator = () => {
@@ -75,7 +75,8 @@ const BottomTabStackNavigator = () => {
         tabBarInactiveTintColor: COLORS.grey,
         tabBarIconStyle: styles.tabBarIconStyle,
         tabBarHideOnKeyboard: true,
-      }}>
+      }}
+    >
       <BottomTab.Screen
         name={HOME.HOME}
         component={HomeScreen}
@@ -114,10 +115,10 @@ const BottomTabStackNavigator = () => {
       />
 
       <BottomTab.Screen
-        name={HOME.CARTPAGE}
-        component={CartPage}
+        name={HOME.APPOINTMENTPAGE}
+        component={AppointPage}
         options={{
-          tabBarLabel: HOME.CARTPAGE,
+          tabBarLabel: HOME.APPOINTMENTPAGE,
           tabBarIcon: ({ color, size, focused }) =>
             BottomTabIcon({
               color,

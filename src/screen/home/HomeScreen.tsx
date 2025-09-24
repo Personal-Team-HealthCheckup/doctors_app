@@ -41,6 +41,7 @@ import Header from '../../Components/common/Header';
 import CustomRating from '../../Components/CustomRating';
 import CustomAppointmentCard from '../../Components/common/CustomAppointmentCard';
 import { DASHBOARD } from '../../Constants/Navigator';
+import { navigateTo } from '../../helper/utilities';
 
 interface HomeScreenProps {
   navigation?: Navigation;
@@ -163,7 +164,13 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
     index: number;
   }) => {
     return (
-      <View
+      <TouchableOpacity
+        onPress={() => {
+          navigateTo(this.props.navigation, DASHBOARD.DOCTORDETAILS, {
+            doctorId: item.id,
+          });
+        }}
+        activeOpacity={1}
         style={[
           styles.qualifierView,
           index === this.state.qualifiedDoctor.length - 1 && styles.lastCss,
@@ -200,7 +207,7 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
             <Text style={[styles.textCommon, styles.text1sub]}>/hours</Text>
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
 

@@ -21,6 +21,9 @@ import { moderateScale } from '../../helper/Scale';
 import { customDataForServices, patientStatistic } from '../../global/data';
 import CustomGButton from '../../Components/common/CustomGButton';
 import CustomDoctoDetailCard from '../../Components/CustomDoctoDetailCard';
+import { nestedNavigateTo } from '../../helper/utilities';
+import { HOME } from '../../Constants/Navigator';
+
 interface DoctorDetailsPageProps {
   navigation?: Navigation;
 }
@@ -92,6 +95,13 @@ class DoctorDetailsPage extends React.Component<
               tittle="Next"
               style={styles.buttonSlots}
               textStyle={styles.text}
+              onPress={() => {
+                nestedNavigateTo(
+                  this.props.navigation,
+                  [HOME.BOTTOMTABS, HOME.APPOINTMENTPAGE],
+                  HOME.DASHBOARD,
+                );
+              }}
             />
           </View>
         </ImageBackground>
