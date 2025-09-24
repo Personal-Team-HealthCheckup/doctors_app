@@ -77,7 +77,7 @@ class AppointPage extends React.Component<AppointPageProps, AppointPageState> {
           <View style={styles.container}>
             <CustomHeader
               navigation={this.props.navigation}
-              heading="Doctor Details"
+              heading="Appointment Details"
               isIcon
             />
             <ScrollView
@@ -88,7 +88,7 @@ class AppointPage extends React.Component<AppointPageProps, AppointPageState> {
               <View style={styles.mainView1}>
                 <CustomDoctoDetailCard />
                 <View style={styles.flatMainView}>
-                  <Text
+                  {/*  <Text
                     style={[
                       styles.heading1,
                       { marginBottom: responsiveHeight(2) },
@@ -98,7 +98,7 @@ class AppointPage extends React.Component<AppointPageProps, AppointPageState> {
                   </Text>
 
                   <CustomTextInput placeholder="Patient Name" />
-                  <CustomTextInput placeholder="Contact Number" />
+                  <CustomTextInput placeholder="Contact Number" />*/}
                 </View>
                 <Text
                   style={[
@@ -106,7 +106,7 @@ class AppointPage extends React.Component<AppointPageProps, AppointPageState> {
                     { marginBottom: responsiveHeight(2) },
                   ]}
                 >
-                  Who is this patient?
+                  Appointment For
                 </Text>
 
                 <View style={styles.viewStyle}>
@@ -119,10 +119,59 @@ class AppointPage extends React.Component<AppointPageProps, AppointPageState> {
                     contentContainerStyle={styles.contentContainerStyle}
                   />
                 </View>
+                <View style={styles.sectionContainer}>
+                  <CustomTextInput
+                    label="Time"
+                    placeholder="Change Time"
+                    value="2:00 PM on 17th Feb"
+                    editable={false}
+                    style={styles.inputStyle}
+                    labelStyle={styles.inputLabel}
+                  />
+
+                  <CustomTextInput
+                    label="Select Type"
+                    placeholder="Change Type"
+                    value="Physical Appointment"
+                    editable={false}
+                    style={styles.inputStyle}
+                    labelStyle={styles.inputLabel}
+                  />
+                  <CustomTextInput
+                    label="Address"
+                    placeholder="Change Address"
+                    value="123 Main St, City, Country"
+                    editable={false}
+                    style={styles.inputStyle}
+                    labelStyle={styles.inputLabel}
+                  />
+                </View>
+
+                <View style={styles.sectionContainer}>
+                  <Text style={styles.sectionTitle}>Payment Methods</Text>
+                  {/* add payment method options here */}
+                  <View style={styles.paymentMethodPlaceholder} />
+                </View>
+                <View style={styles.sectionContainer}></View>
+                <Text style={styles.sectionTitle}>Order Summary</Text>
+                <View style={styles.orderSummaryContainer}>
+                  <View style={styles.orderRow}>
+                    <Text style={styles.orderLabel}>Consultation Fee:</Text>
+                    <Text style={styles.orderValue}>$50</Text>
+                  </View>
+                  <View style={styles.orderRow}>
+                    <Text style={styles.orderLabel}>Taxes:</Text>
+                    <Text style={styles.orderValue}>$5</Text>
+                  </View>
+                  <View style={styles.orderRow}>
+                    <Text style={styles.orderTotalLabel}>Total:</Text>
+                    <Text style={styles.orderTotalValue}>$55</Text>
+                  </View>
+                </View>
               </View>
             </ScrollView>
             <CustomGButton
-              tittle="Next"
+              tittle="Confirm Appointment"
               style={styles.buttonSlots}
               textStyle={styles.text}
             />
@@ -186,7 +235,7 @@ const styles = StyleSheet.create({
     height: responsiveHeight(100),
     backgroundColor: COLORS.black,
   },
-  contentContainerStyle: { paddingBottom: responsiveHeight(10) },
+  contentContainerStyle: { paddingBottom: responsiveHeight(2) },
   container: {
     width: responsiveWidth(100),
     height: responsiveHeight(100),
