@@ -7,6 +7,7 @@ import {
   Text,
   FlatList,
   Image,
+  TouchableOpacity,
 } from 'react-native';
 import CustomStatusBar from '../../Components/common/CustomStatusBar';
 import CustomHeader from '../../Components/common/CustomHeader';
@@ -20,20 +21,25 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import { moderateScale } from '../../helper/Scale';
-import { patientStatistic } from '../../global/data';
 import CustomGButton from '../../Components/common/CustomGButton';
 import CustomDoctoDetailCard from '../../Components/CustomDoctoDetailCard';
 import CustomTextInput from '../../Components/common/CustomTextInput';
+import CustomIcons from 'react-native-vector-icons/FontAwesome5';
+
 interface AppointPageProps {
   navigation?: Navigation;
 }
 
-interface AppointPageState {}
+interface AppointPageState {
+  selectedPayment: number;
+}
 
 class AppointPage extends React.Component<AppointPageProps, AppointPageState> {
   constructor(props: AppointPageProps) {
     super(props);
-    this.state = {};
+    this.state = {
+      selectedPayment: 0,
+    };
   }
 
   _renderPatients = ({ item, index }: { item: string; index: number }) => {
@@ -77,7 +83,7 @@ class AppointPage extends React.Component<AppointPageProps, AppointPageState> {
           <View style={styles.container}>
             <CustomHeader
               navigation={this.props.navigation}
-              heading="Doctor Details"
+              heading="Appointment Details"
               isIcon
             />
             <ScrollView
@@ -88,7 +94,7 @@ class AppointPage extends React.Component<AppointPageProps, AppointPageState> {
               <View style={styles.mainView1}>
                 <CustomDoctoDetailCard />
                 <View style={styles.flatMainView}>
-                  <Text
+                  {/*  <Text
                     style={[
                       styles.heading1,
                       { marginBottom: responsiveHeight(2) },
@@ -98,7 +104,7 @@ class AppointPage extends React.Component<AppointPageProps, AppointPageState> {
                   </Text>
 
                   <CustomTextInput placeholder="Patient Name" />
-                  <CustomTextInput placeholder="Contact Number" />
+                  <CustomTextInput placeholder="Contact Number" />*/}
                 </View>
                 <Text
                   style={[
@@ -106,7 +112,7 @@ class AppointPage extends React.Component<AppointPageProps, AppointPageState> {
                     { marginBottom: responsiveHeight(2) },
                   ]}
                 >
-                  Who is this patient?
+                  Appointment For
                 </Text>
 
                 <View style={styles.viewStyle}>
@@ -119,10 +125,92 @@ class AppointPage extends React.Component<AppointPageProps, AppointPageState> {
                     contentContainerStyle={styles.contentContainerStyle}
                   />
                 </View>
+                <View>
+                  <CustomTextInput
+                    label="Time"
+                    placeholder="Change Time"
+                    value="2:00 PM on 17th Feb"
+                    editable={false}
+                  />
+
+                  <CustomTextInput
+                    label="Select Type"
+                    placeholder="Change Type"
+                    value="Physical Appointment"
+                    editable={false}
+                  />
+                  <CustomTextInput
+                    label="Address"
+                    placeholder="Change Address"
+                    value="123 Main St, City, Country"
+                    editable={false}
+                  />
+                </View>
+
+                <View style={styles.orderSummaryContainer}>
+                  <Text style={styles.heading1}>Order Summary</Text>
+
+                  <View style={styles.orderCard}>
+                    <View style={styles.orderRow}>
+                      <Text style={styles.orderLabel}>Consultation Fee:</Text>
+                      <Text style={styles.orderValue}>$50</Text>
+                    </View>
+
+                    <View style={styles.orderRow}>
+                      <Text style={styles.orderLabel}>Taxes:</Text>
+                      <Text style={styles.orderValue}>$5</Text>
+                    </View>
+
+                    <View style={styles.orderRowTotal}>
+                      <Text style={styles.orderTotalLabel}>Total:</Text>
+                      <Text style={styles.orderTotalValue}>$55</Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+
+              <View style={styles.paymentContainer}>
+                <Text style={[styles.heading1, styles.paymentHeading]}>
+                  Payment Methods
+                </Text>
+
+                <View style={styles.paymentOptions}>
+                  {[
+                    'Wallet',
+                    'Credit Card',
+                    'Pay to doctor directly',
+                    'UPI',
+                  ].map((method, index) => (
+                    <View key={index} style={styles.paymentOptionRow}>
+                      <TouchableOpacity
+                        key={index}
+                        style={styles.paymentOptionRow}
+                        onPress={() =>
+                          this.setState({ selectedPayment: index })
+                        }
+                      >
+                        <CustomIcons
+                          name={
+                            this.state.selectedPayment === index
+                              ? 'check-circle'
+                              : 'circle'
+                          }
+                          size={20}
+                          color={
+                            this.state.selectedPayment === index
+                              ? COLORS.green
+                              : COLORS.greyBlack
+                          }
+                        />
+                        <Text style={styles.paymentText}>{method}</Text>
+                      </TouchableOpacity>
+                    </View>
+                  ))}
+                </View>
               </View>
             </ScrollView>
             <CustomGButton
-              tittle="Next"
+              tittle="Confirm Appointment"
               style={styles.buttonSlots}
               textStyle={styles.text}
             />
@@ -135,6 +223,84 @@ class AppointPage extends React.Component<AppointPageProps, AppointPageState> {
 
 export default AppointPage;
 const styles = StyleSheet.create({
+  orderSummaryContainer: {
+    marginTop: responsiveHeight(2),
+    marginBottom: responsiveHeight(2),
+  },
+  orderCard: {
+    backgroundColor: COLORS.lightBalckishGrey,
+    borderRadius: moderateScale(8),
+    padding: moderateScale(12),
+    marginTop: moderateScale(8),
+  },
+  orderRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: moderateScale(8),
+  },
+  orderLabel: {
+    fontFamily: FONTS.rubik.regular,
+    fontSize: moderateScale(14),
+    color: COLORS.white2gray,
+  },
+  orderValue: {
+    fontFamily: FONTS.rubik.regular,
+    fontSize: moderateScale(14),
+    color: COLORS.white,
+  },
+  orderRowTotal: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderTopWidth: 1,
+    borderTopColor: COLORS.white2gray + '40', // light divider
+    paddingTop: moderateScale(8),
+    marginTop: moderateScale(4),
+  },
+  orderTotalLabel: {
+    fontFamily: FONTS.rubik.medium,
+    fontSize: moderateScale(16),
+    color: COLORS.white,
+  },
+  orderTotalValue: {
+    fontFamily: FONTS.rubik.medium,
+    fontSize: moderateScale(16),
+    color: COLORS.green,
+  },
+  paymentContainer: {
+    marginTop: responsiveHeight(2),
+  },
+  paymentHeading: {
+    marginBottom: 10,
+  },
+  paymentOptions: {
+    flexDirection: 'column',
+  },
+  paymentOptionRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: moderateScale(12),
+  },
+  paymentText: {
+    color: COLORS.white2gray,
+    fontSize: moderateScale(14),
+    fontFamily: FONTS.rubik.regular,
+    marginLeft: moderateScale(10),
+  },
+  radioOuter: {
+    width: moderateScale(20),
+    height: moderateScale(20),
+    borderRadius: 50,
+    borderWidth: 2,
+    borderColor: COLORS.green,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  radioInner: {
+    width: moderateScale(10),
+    height: moderateScale(10),
+    borderRadius: 50,
+    backgroundColor: COLORS.green,
+  },
   imageStyles: {
     width: responsiveScreenWidth(22),
     height: responsiveScreenHeight(12),
@@ -186,7 +352,7 @@ const styles = StyleSheet.create({
     height: responsiveHeight(100),
     backgroundColor: COLORS.black,
   },
-  contentContainerStyle: { paddingBottom: responsiveHeight(10) },
+  contentContainerStyle: { paddingBottom: responsiveHeight(2) },
   container: {
     width: responsiveWidth(100),
     height: responsiveHeight(100),
