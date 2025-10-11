@@ -15,9 +15,13 @@ export const formateDate = (date: string | Date) => {
 };
 
 export const checkEmailValidation = (email: string) => {
-  const regEx =
-    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const regEx = /[a-zA-Z0-9#$%&\*\+-/=\?\_`|~]*[a-zA-Z0-9#$%&\*\+/=\?\_`|~]@/;
   return regEx.test(String(email).toLowerCase().trim());
+};
+
+export const checkNameValidation = (name: string) => {
+  const regEx = /^(?:[a-zA-Z]+(?:[ ][a-zA-Z]+)*)+$/;
+  return regEx.test(String(name).toLowerCase().trim());
 };
 
 export const closeKeyBoard = () => {

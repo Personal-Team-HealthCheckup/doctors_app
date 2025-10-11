@@ -13,7 +13,7 @@ import {
   responsiveScreenWidth,
 } from 'react-native-responsive-dimensions';
 import { moderateScale } from '../../helper/Scale';
-interface TextInputProps {
+interface TextInputProps extends React.ComponentProps<typeof TextInput> {
   style?: StyleProp<TextStyle>;
   placeholder?: string;
   value?: string;
@@ -34,14 +34,20 @@ const CustomTextInput: React.FC<TextInputProps> = ({
   errorMessage,
   editable = true,
   label,
+  ...props
 }) => {
   return (
     <View style={styles.view}>
       {label && <Text style={styles.labelStyles}>{label}</Text>}
       <TextInput
+        {...props}
         placeholder={placeholder}
         value={value}
-        style={[styles.textInput, style]}
+        style={[
+          styles.textInput,
+          style,
+          errorMessage && styles.errorStylesTextInput,
+        ]}
         placeholderTextColor={
           placeholderTextColor ? placeholderTextColor : COLORS.white2gray
         }
@@ -57,6 +63,10 @@ const CustomTextInput: React.FC<TextInputProps> = ({
 export default CustomTextInput;
 
 const styles = StyleSheet.create({
+  errorStylesTextInput: {
+    borderWidth: 1,
+    borderColor: COLORS.red,
+  },
   labelStyles: {
     fontFamily: FONTS.rubik.regular,
     fontSize: moderateScale(13),

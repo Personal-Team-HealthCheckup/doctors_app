@@ -34,7 +34,12 @@ import { connect } from 'react-redux';
 import { signupAction } from '../../redux/reducers/auth';
 import CustomLoader from '../../Components/CustomLoader';
 import { Navigation } from '../../global/types';
-import { navigateTo } from '../../helper/utilities';
+import {
+  checkEmailValidation,
+  checkNameValidation,
+  navigateTo,
+} from '../../helper/utilities';
+import CustomMainView from '../../Components/common/CustomMainView';
 
 interface SignupProps {
   navigation?: Navigation;
@@ -85,15 +90,56 @@ class Signup extends React.Component<Props, SignupState> {
     value: string,
     field: 'email' | 'password' | 'fullName',
   ) => {
-    this.setState({ ...this.state, [field]: value });
+    this.setState({
+      ...this.state,
+      [field]: value,
+      error: { ...this.state.error, [field]: '' },
+    });
   };
 
   navigateToLogin = () => {
     navigateTo(this.props.navigation, AUTH.SIGNIN);
   };
 
+  handleValidation = () => {
+    const { email, password, fullName, isChecked } = this.state;
+    let isValid = true;
+    const errors: any = {};
+    if (!email) {
+      errors.email = 'Email is required';
+      isValid = false;
+    }
+    if (!checkEmailValidation(email)) {
+      errors.email = 'Email is invalid';
+      isValid = false;
+    }
+    if (!password) {
+      errors.password = 'Password is required';
+      isValid = false;
+    }
+    if (password.length < 6) {
+      errors.password = 'Password must be at least 6 characters';
+      isValid = false;
+    }
+    if (!fullName) {
+      errors.fullName = 'Full Name is required';
+      isValid = false;
+    }
+    if (!checkNameValidation(fullName)) {
+      errors.fullName = 'Full Name is invalid';
+      isValid = false;
+    }
+    if (!isChecked) {
+      errors.isChecked = 'You must accept the terms and conditions';
+      isValid = false;
+    }
+    this.setState({ error: errors });
+    return isValid;
+  };
+
   handleRegister = async () => {
     const { email, password, fullName } = this.state;
+    if (!this.handleValidation()) return;
     try {
       await this.props.signup({
         email,
@@ -110,7 +156,7 @@ class Signup extends React.Component<Props, SignupState> {
 
   render() {
     return (
-      <>
+      <CustomMainView>
         <CustomStatusBar />
 
         <KeyboardAvoidingView
@@ -118,14 +164,25 @@ class Signup extends React.Component<Props, SignupState> {
           style={styles.main}
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         >
-          <ScrollView
-            bounces={false}
-            style={styles.main}
-            showsVerticalScrollIndicator={false}
-          >
-            <ImageBackground source={gradientSignupPng} style={styles.image}>
-              <StarSvg style={styles.imagesvg} />
-              <StarSvg style={styles.imagesvg2} />
+          <ImageBackground source={gradientSignupPng} style={styles.image}>
+            <StarSvg style={styles.imagesvg} />
+            <StarSvg style={styles.imagesvg2} />
+            <ScrollView
+              bounces={false}
+              style={[
+                styles.main,
+                {
+                  paddingTop: responsiveHeight(7),
+                  paddingHorizontal: responsiveScreenWidth(5),
+                },
+              ]}
+              contentContainerStyle={{
+                flexGrow: 1,
+                paddingBottom: responsiveHeight(4),
+                alignItems: 'center',
+              }}
+              showsVerticalScrollIndicator={false}
+            >
               <Text style={styles.textSignup}>Sign up</Text>
               <LogoSvg
                 width={responsiveScreenWidth(70)}
@@ -159,18 +216,21 @@ class Signup extends React.Component<Props, SignupState> {
                   placeholder="Name"
                   errorMessage={this.state.error.fullName}
                   value={this.state.fullName}
+                  maxLength={30}
                   onChangeText={value => this.handleOnChange(value, 'fullName')}
                 />
                 <CustomTextInput
                   placeholder="Email"
                   errorMessage={this.state.error.email}
                   value={this.state.email}
+                  maxLength={50}
                   onChangeText={value => this.handleOnChange(value, 'email')}
                 />
                 <CustomTextInput
                   placeholder="Password"
                   errorMessage={this.state.error.password}
                   value={this.state.password}
+                  maxLength={15}
                   onChangeText={value => this.handleOnChange(value, 'password')}
                 />
                 <Pressable
@@ -188,11 +248,21 @@ class Signup extends React.Component<Props, SignupState> {
                     I agree with the Terms of Service & Privacy Policy
                   </Text>
                 </Pressable>
+                {this.state.error.isChecked && (
+                  <View style={{ marginTop: 5 }}>
+                    <Text style={styles.errMessage}>
+                      {this.state.error.isChecked}
+                    </Text>
+                  </View>
+                )}
               </View>
+
               {this.props.signupData.message && (
-                <Text style={styles.errMessage}>
-                  {this.props.signupData.message}
-                </Text>
+                <View style={{ marginTop: responsiveHeight(3) }}>
+                  <Text style={styles.errMessage}>
+                    {this.props.signupData.message}
+                  </Text>
+                </View>
               )}
               {this.props.signupData.loading ? (
                 <CustomLoader />
@@ -209,10 +279,10 @@ class Signup extends React.Component<Props, SignupState> {
                   Log in
                 </Text>
               </View>
-            </ImageBackground>
-          </ScrollView>
+            </ScrollView>
+          </ImageBackground>
         </KeyboardAvoidingView>
-      </>
+      </CustomMainView>
     );
   }
 }
@@ -242,9 +312,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     resizeMode: 'cover',
-    paddingTop: responsiveHeight(7),
+
     position: 'relative',
-    paddingHorizontal: responsiveScreenWidth(5),
   },
   textSignup: {
     color: COLORS.white,
@@ -255,7 +324,6 @@ const styles = StyleSheet.create({
   main: {
     width: responsiveWidth(100),
     height: responsiveHeight(100),
-    backgroundColor: COLORS.black,
     flex: 1,
   },
   imagesvg: {

@@ -1,5 +1,5 @@
-import Reactotron from 'reactotron-react-native';
-import { reactotronRedux, stateResponse } from 'reactotron-redux';
+import Reactotron, { trackGlobalErrors } from 'reactotron-react-native';
+import { reactotronRedux } from 'reactotron-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const host = '10.129.124.247'; // ⚠️ Replace with your machine IP if using a real device
@@ -18,6 +18,7 @@ const reactotron = Reactotron.setAsyncStorageHandler(AsyncStorage)
   })
   // .use(stateResponse())
   .use(reactotronRedux())
+  .use(trackGlobalErrors()) // intercept global errors
   .connect();
 
 if (__DEV__) {

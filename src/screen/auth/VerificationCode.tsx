@@ -62,16 +62,19 @@ class VerificationCode extends React.Component<Props, VerificationCodeState> {
       await this.props.verifyOtpApi({
         otp: this.state.code,
       });
-      Alert.alert(
-        'Success',
-        this.props.verifyOTPData.message || 'OTP Verified',
-      );
-      // navigateTo(this.props.navigation, MAINSTACK.HOMENAVIGATION);
+      if (this.props.verifyOTPData.message?.includes('success')) {
+        Alert.alert('Successs', this.props.verifyOTPData.message);
+        navigateTo(this.props.navigation, MAINSTACK.HOMENAVIGATION);
+      } else {
+        Alert.alert(
+          'Error',
+          this.props.verifyOTPData.message || 'OTP not Verified',
+        );
+      }
     } catch (error) {}
   };
 
   handleOTPChange = (code: string) => {
-    console.log('Entered OTP:', code);
     this.setState({ code });
   };
 
@@ -119,8 +122,8 @@ class VerificationCode extends React.Component<Props, VerificationCodeState> {
                   Enter 4 Digits Code
                 </Text>
                 <Text style={styles.verificationSubtitle}>
-                  We’ve sent a 4-digit verification code to your email
-                  shubham@yopmail.com
+                  We’ve sent a 4-digit verification code to your email{' '}
+                  {verifyOTPData.email}
                 </Text>
                 <OTPTextInput
                   value={this.state.code}

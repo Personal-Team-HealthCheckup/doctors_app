@@ -9,6 +9,7 @@ export interface authDataType {
   loading: boolean;
   token: string | null;
   userRole: string;
+  email: string;
 }
 
 const initialState: authDataType = {
@@ -16,6 +17,7 @@ const initialState: authDataType = {
   loading: false,
   token: null,
   userRole: 'user',
+  email: '',
 };
 
 export const loginAction = createAsyncThunk(
@@ -73,7 +75,7 @@ export const signupAction = createAsyncThunk(
     );
 
     if (response) return fulfillWithValue(response);
-    return rejectWithValue('Something went wrong!' + error);
+    return rejectWithValue({ message: error });
   },
 );
 export const verifyOtpAction = createAsyncThunk(
@@ -98,7 +100,7 @@ export const verifyOtpAction = createAsyncThunk(
 
     if (response) return fulfillWithValue(response);
 
-    return rejectWithValue('Something went wrong!' + error);
+    return rejectWithValue({ message: error });
   },
 );
 
@@ -111,6 +113,8 @@ export const AuthSlice = createSlice({
     },
   },
   extraReducers: builder => {
+    console.log('Extra reducers triggered', builder);
+
     // login
     builder.addCase(loginAction.pending, (state, action) => {
       state.loading = true;
@@ -133,14 +137,18 @@ export const AuthSlice = createSlice({
       state.message = null;
     });
     builder.addCase(signupAction.fulfilled, (state, action) => {
+      console.log('Verify OTP sucesss', action, state);
       state.loading = false;
       state.token = action.payload.token;
       state.userRole = action.payload.role;
-      state.message = null;
+      state.email = action.payload.email;
+      state.message = action.payload.message;
     });
     builder.addCase(signupAction.rejected, (state, action) => {
       state.loading = false;
-      state.message = 'Please try again!';
+      state.message = action.payload
+        ? (action.payload as any).message
+        : 'Please try again!';
     });
 
     // verify otp
@@ -149,13 +157,17 @@ export const AuthSlice = createSlice({
       state.message = null;
     });
     builder.addCase(verifyOtpAction.fulfilled, (state, action) => {
+      console.log('Verify OTP success', action, state);
       state.loading = false;
       state.token = action.payload.token ?? state.token;
-      state.message = null;
+      state.message = action.payload.message;
     });
     builder.addCase(verifyOtpAction.rejected, (state, action) => {
+      console.log('Verify OTP failed', action, state);
       state.loading = false;
-      state.message = action.error.message || 'Please try again!';
+      state.message = action.payload
+        ? (action.payload as any).message
+        : 'Please try again!';
     });
   },
 });
