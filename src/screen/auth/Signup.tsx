@@ -17,42 +17,97 @@ import {
   StarSvg,
   gradientSignupPng,
 } from '../../assets/assets';
-import {COLORS, FONTS} from '../../global/theme';
+import { COLORS, FONTS } from '../../global/theme';
 import {
   responsiveHeight,
   responsiveScreenWidth,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import {moderateScale, verticalScale} from '../../helper/Scale';
+import { moderateScale, verticalScale } from '../../helper/Scale';
 import CustomButton from '../../Components/common/CustomButton';
 import CustomTextInput from '../../Components/common/CustomTextInput';
 import CustomIcons from 'react-native-vector-icons/FontAwesome5';
 import CustomGButton from '../../Components/common/CustomGButton';
-import {AUTH} from '../../Constants/Navigator';
+import { AUTH, MAINSTACK } from '../../Constants/Navigator';
+import { RootState } from '../../redux/store';
+import { connect } from 'react-redux';
+import { signupAction } from '../../redux/reducers/auth';
+import CustomLoader from '../../Components/CustomLoader';
+import { Navigation } from '../../global/types';
+import { navigateTo } from '../../helper/utilities';
 
 interface SignupProps {
-  navigation?: {
-    navigate: (args: string) => void;
-  };
+  navigation?: Navigation;
 }
 
 interface SignupState {
   isChecked: boolean;
+  email: string;
+  password: string;
+  fullName: string;
+  error: {
+    email?: string;
+    password?: string;
+    fullName?: string;
+    isChecked?: string;
+  };
 }
-class Signup extends React.Component<SignupProps, SignupState> {
-  constructor(props: SignupProps) {
+
+interface ReduxProps {
+  signupData: RootState['Auth'];
+  signup: (data: {
+    email: string;
+    password: string;
+    fullName: string;
+    role: 'user';
+    acceptedTerms: boolean;
+  }) => void;
+}
+
+type Props = SignupProps & ReduxProps;
+
+class Signup extends React.Component<Props, SignupState> {
+  constructor(props: Props) {
     super(props);
     this.state = {
       isChecked: false,
+      email: '',
+      password: '',
+      fullName: '',
+      error: {},
     };
   }
 
   toggleCheck = () => {
-    this.setState(prev => ({isChecked: !prev.isChecked}));
+    this.setState(prev => ({ isChecked: !prev.isChecked }));
   };
+  handleOnChange = (
+    value: string,
+    field: 'email' | 'password' | 'fullName',
+  ) => {
+    this.setState({ ...this.state, [field]: value });
+  };
+
   navigateToLogin = () => {
-    this.props.navigation?.navigate(AUTH.SIGNIN);
+    navigateTo(this.props.navigation, AUTH.SIGNIN);
   };
+
+  handleRegister = async () => {
+    const { email, password, fullName } = this.state;
+    try {
+      await this.props.signup({
+        email,
+        password,
+        fullName,
+        role: 'user',
+        acceptedTerms: this.state.isChecked,
+      });
+      if (this.props.signupData.token) {
+        navigateTo(this.props.navigation, MAINSTACK.HOMENAVIGATION);
+      }
+    } catch (error) {}
+  };
+
   render() {
     return (
       <>
@@ -61,11 +116,13 @@ class Signup extends React.Component<SignupProps, SignupState> {
         <KeyboardAvoidingView
           enabled
           style={styles.main}
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        >
           <ScrollView
             bounces={false}
             style={styles.main}
-            showsVerticalScrollIndicator={false}>
+            showsVerticalScrollIndicator={false}
+          >
             <ImageBackground source={gradientSignupPng} style={styles.image}>
               <StarSvg style={styles.imagesvg} />
               <StarSvg style={styles.imagesvg2} />
@@ -98,12 +155,28 @@ class Signup extends React.Component<SignupProps, SignupState> {
                 />
               </View>
               <View style={styles.inputView}>
-                <CustomTextInput placeholder="Name" />
-                <CustomTextInput placeholder="Email" />
-                <CustomTextInput placeholder="Password" />
+                <CustomTextInput
+                  placeholder="Name"
+                  errorMessage={this.state.error.fullName}
+                  value={this.state.fullName}
+                  onChangeText={value => this.handleOnChange(value, 'fullName')}
+                />
+                <CustomTextInput
+                  placeholder="Email"
+                  errorMessage={this.state.error.email}
+                  value={this.state.email}
+                  onChangeText={value => this.handleOnChange(value, 'email')}
+                />
+                <CustomTextInput
+                  placeholder="Password"
+                  errorMessage={this.state.error.password}
+                  value={this.state.password}
+                  onChangeText={value => this.handleOnChange(value, 'password')}
+                />
                 <Pressable
                   style={styles.buttonCheck}
-                  onPress={this.toggleCheck}>
+                  onPress={this.toggleCheck}
+                >
                   <CustomIcons
                     name={this.state.isChecked ? 'check-circle' : 'circle'}
                     size={20}
@@ -116,7 +189,20 @@ class Signup extends React.Component<SignupProps, SignupState> {
                   </Text>
                 </Pressable>
               </View>
-              <CustomGButton tittle="Sign up" style={styles.buttonView1} />
+              {this.props.signupData.message && (
+                <Text style={styles.errMessage}>
+                  {this.props.signupData.message}
+                </Text>
+              )}
+              {this.props.signupData.loading ? (
+                <CustomLoader />
+              ) : (
+                <CustomGButton
+                  tittle="Sign up"
+                  style={styles.buttonView1}
+                  onPress={() => this.handleRegister()}
+                />
+              )}
               <View style={styles.lastView}>
                 <Text style={styles.textIhave}>Have an account?</Text>
                 <Text style={styles.textIhave} onPress={this.navigateToLogin}>
@@ -131,8 +217,27 @@ class Signup extends React.Component<SignupProps, SignupState> {
   }
 }
 
-export default Signup;
+const mapStateToProps = (state: RootState) => ({
+  signupData: state.Auth,
+});
+
+const mapDispatchToProps = {
+  signup: (data: {
+    email: string;
+    password: string;
+    fullName: string;
+    role: 'user';
+    acceptedTerms: boolean;
+  }) => signupAction(data),
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);
 const styles = StyleSheet.create({
+  errMessage: {
+    color: COLORS.red,
+    fontFamily: FONTS.rubik.light,
+    fontSize: moderateScale(12),
+  },
   image: {
     flex: 1,
     alignItems: 'center',

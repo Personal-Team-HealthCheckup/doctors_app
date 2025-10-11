@@ -20,7 +20,7 @@ interface TextInputProps {
   placeholderTextColor?: string;
   onChangeText?: (value: string) => void;
   secureTextEntry?: boolean;
-  errMessage?: string;
+  errorMessage?: string;
   label?: string;
   editable?: boolean;
 }
@@ -31,7 +31,7 @@ const CustomTextInput: React.FC<TextInputProps> = ({
   placeholderTextColor,
   onChangeText,
   secureTextEntry,
-  errMessage,
+  errorMessage,
   editable = true,
   label,
 }) => {
@@ -49,7 +49,7 @@ const CustomTextInput: React.FC<TextInputProps> = ({
         secureTextEntry={secureTextEntry}
         editable={editable}
       />
-      {errMessage && <Text style={styles.errMessage}>{errMessage}</Text>}
+      {errorMessage && <Text style={styles.errMessage}>{errorMessage}</Text>}
     </View>
   );
 };

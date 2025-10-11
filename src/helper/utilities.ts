@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CryptoJS from 'crypto-js';
+import { Navigation } from '../global/types';
 
 const secretKey = 'secret-strong-key'; // Use a strong key from environment variables in production
 
@@ -67,8 +68,8 @@ export async function removeStorageData(key: string) {
 
 // navigate to single screen
 export const navigateTo = (
-  navigation: any,
-  screenName: string,
+  navigation?: Navigation,
+  screenName: string = '',
   params?: object,
 ) => {
   if (navigation && navigation.navigate) {
@@ -78,18 +79,18 @@ export const navigateTo = (
 
 // replace to single screen
 export const replaceTo = (
-  navigation: any,
+  navigation: Navigation,
   screenName: string,
   params?: object,
 ) => {
-  if (navigation && navigation.navigate) {
+  if (navigation && navigation.replace) {
     navigation.replace(screenName, params);
   }
 };
 
 // navigate to single screen with nested routes
 export const nestedNavigateTo = (
-  navigation: any,
+  navigation: Navigation,
   screenName: string[],
   parentRouteName: string,
   params?: object,

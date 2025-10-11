@@ -1,5 +1,5 @@
-import {baseURL} from './config';
-import {store} from '../redux/store';
+import { baseURL } from './config';
+import { store } from '../redux/store';
 
 type IResponseType = 'json' | 'text' | 'blob';
 type IResolve = {
@@ -38,14 +38,16 @@ const networkCall = async (
       const defaultHeaders = {
         'Content-Type':
           body instanceof FormData ? 'multipart/form-data' : 'application/json',
-        ...(token && {token}),
+        ...(token && { token }),
         ...headers,
       };
+
       const response = await fetch(fullUrl, {
         method,
         headers: defaultHeaders,
-        ...(body && {body}),
+        ...(body && { body }),
       });
+
       return response[responseType]();
     } catch (error) {
       return error;
