@@ -155,7 +155,7 @@ export const AuthSlice = createSlice({
     });
     builder.addCase(verifyOtpAction.rejected, (state, action) => {
       state.loading = false;
-      state.message = action.payload.message || 'Please try again!';
+      state.message = action.error.message || 'Please try again!';
     });
   },
 });

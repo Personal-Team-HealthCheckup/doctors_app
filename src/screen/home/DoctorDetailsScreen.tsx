@@ -94,6 +94,7 @@ class DoctorDetailsPage extends React.Component<
             <CustomGButton
               tittle="Next"
               style={styles.buttonSlots}
+              testID="button-slots"
               textStyle={styles.text}
               onPress={() => {
                 nestedNavigateTo(

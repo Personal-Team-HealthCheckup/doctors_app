@@ -1,11 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 import Auth from './reducers/auth';
-import Products from './reducers/products';
 import Reactotron from '../config/reactotron.config';
 
 const rootReducer = {
   Auth,
-  Products,
 };
 
 // ✅ Add enhancer only in dev mode

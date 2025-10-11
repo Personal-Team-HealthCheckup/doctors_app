@@ -12,6 +12,9 @@ jest.mock('react-native-vector-icons/Entypo', () => (props: {}) => (
 jest.mock('react-native-vector-icons/FontAwesome', () => (props: {}) => (
   <MockView {...props} />
 ));
+jest.mock('react-native-vector-icons/FontAwesome5', () => (props: {}) => (
+  <MockView {...props} />
+));
 
 jest.mock('../src/assets/assets', () => ({
   LightSvg: (props: {}) => <MockView {...props} />,
