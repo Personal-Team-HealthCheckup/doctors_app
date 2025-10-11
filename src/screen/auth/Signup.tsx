@@ -28,7 +28,7 @@ import CustomButton from '../../Components/common/CustomButton';
 import CustomTextInput from '../../Components/common/CustomTextInput';
 import CustomIcons from 'react-native-vector-icons/FontAwesome5';
 import CustomGButton from '../../Components/common/CustomGButton';
-import { AUTH, MAINSTACK } from '../../Constants/Navigator';
+import { AUTH } from '../../Constants/Navigator';
 import { RootState } from '../../redux/store';
 import { connect } from 'react-redux';
 import { signupAction } from '../../redux/reducers/auth';
@@ -103,7 +103,7 @@ class Signup extends React.Component<Props, SignupState> {
         acceptedTerms: this.state.isChecked,
       });
       if (this.props.signupData.token) {
-        navigateTo(this.props.navigation, MAINSTACK.HOMENAVIGATION);
+        navigateTo(this.props.navigation, AUTH.VERIFICATION);
       }
     } catch (error) {}
   };

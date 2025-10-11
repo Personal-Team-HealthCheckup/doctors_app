@@ -76,6 +76,31 @@ export const signupAction = createAsyncThunk(
     return rejectWithValue('Something went wrong!' + error);
   },
 );
+export const verifyOtpAction = createAsyncThunk(
+  'verifyOtpAction',
+  async (
+    {
+      otp,
+    }: {
+      otp: string;
+    },
+    { getState, rejectWithValue, fulfillWithValue },
+  ) => {
+    const data = {
+      otp,
+    };
+
+    const { response, error } = await networkCall(
+      endpoints.VERIFYOTP,
+      'POST',
+      JSON.stringify(data),
+    );
+
+    if (response) return fulfillWithValue(response);
+
+    return rejectWithValue('Something went wrong!' + error);
+  },
+);
 
 export const AuthSlice = createSlice({
   name: 'authlice',
@@ -86,6 +111,7 @@ export const AuthSlice = createSlice({
     },
   },
   extraReducers: builder => {
+    // login
     builder.addCase(loginAction.pending, (state, action) => {
       state.loading = true;
       state.message = null;
@@ -100,6 +126,8 @@ export const AuthSlice = createSlice({
       state.loading = false;
       state.message = 'Please try again!';
     });
+
+    // signup
     builder.addCase(signupAction.pending, (state, action) => {
       state.loading = true;
       state.message = null;
@@ -107,11 +135,27 @@ export const AuthSlice = createSlice({
     builder.addCase(signupAction.fulfilled, (state, action) => {
       state.loading = false;
       state.token = action.payload.token;
+      state.userRole = action.payload.role;
       state.message = null;
     });
     builder.addCase(signupAction.rejected, (state, action) => {
       state.loading = false;
       state.message = 'Please try again!';
+    });
+
+    // verify otp
+    builder.addCase(verifyOtpAction.pending, (state, action) => {
+      state.loading = true;
+      state.message = null;
+    });
+    builder.addCase(verifyOtpAction.fulfilled, (state, action) => {
+      state.loading = false;
+      state.token = action.payload.token ?? state.token;
+      state.message = null;
+    });
+    builder.addCase(verifyOtpAction.rejected, (state, action) => {
+      state.loading = false;
+      state.message = action.payload.message || 'Please try again!';
     });
   },
 });

@@ -4,6 +4,7 @@ export const baseURL = 'http://10.129.124.247:4000/api/'; // add the base url he
 export const endpoints = {
   LOGIN: 'signin',
   REGISTER: 'signup',
+  VERIFYOTP: 'verifyotp',
   GET_PRODUCTS: 'products',
   SINGLE_PRODUCTS: 'products/:productId',
   GET_CATEGORIES: 'products/get-categories',

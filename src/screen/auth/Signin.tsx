@@ -1,6 +1,6 @@
 import React from 'react';
 import CustomStatusBar from '../../Components/common/CustomStatusBar';
-import {ImageBackground, Text, View, StyleSheet} from 'react-native';
+import { ImageBackground, Text, View, StyleSheet } from 'react-native';
 import {
   responsiveScreenWidth,
   responsiveHeight,
@@ -17,9 +17,9 @@ import {
   FacebookSvg,
   StarBlueSvg,
 } from '../../assets/assets';
-import {COLORS, FONTS} from '../../global/theme';
-import {moderateScale, verticalScale} from '../../helper/Scale';
-import {AUTH, MAINSTACK} from '../../Constants/Navigator';
+import { COLORS, FONTS } from '../../global/theme';
+import { moderateScale, verticalScale } from '../../helper/Scale';
+import { AUTH, MAINSTACK } from '../../Constants/Navigator';
 import CustomMainView from '../../Components/common/CustomMainView';
 import BottomSheet from '../../Components/CustomBottomSheet';
 
@@ -40,9 +40,9 @@ class Signin extends React.Component<SigninProps, SigninState> {
   navigateToSignup = () => {
     this.props.navigation?.navigate(AUTH.SIGNUP);
   };
-  openForgot =() => {
-    this.forgotPasswordSheetRef?.show()
-  }
+  openForgot = () => {
+    this.forgotPasswordSheetRef?.show();
+  };
   handleLogin = () => {
     this.props.navigation?.navigate(MAINSTACK.HOMENAVIGATION);
   };
@@ -87,24 +87,30 @@ class Signin extends React.Component<SigninProps, SigninState> {
               style={styles.buttonView1}
               onPress={this.handleLogin}
             />
-            <Text style={styles.textIhave} onPress={()=>this.openForgot()}>Forgor password</Text>
+            <Text style={styles.textIhave} onPress={() => this.openForgot()}>
+              Forgor password
+            </Text>
             <View style={styles.lastView}>
               <Text style={styles.textIhave}>Don’t have an account?</Text>
-              <Text style={styles.textIhave} onPress={()=>this.navigateToSignup()}>
+              <Text
+                style={styles.textIhave}
+                onPress={() => this.navigateToSignup()}
+              >
                 Join us
               </Text>
             </View>
 
             <BottomSheet
-          ref={ref => (this.forgotPasswordSheetRef = ref)}
-          backgroundColor="rgba(0, 0, 0, 0.50)"
-          radius={20}
-          sheetBackgroundColor={COLORS.black2gray}
-          height={responsiveHeight(50)}>
-          <View style={styles.buttonView}>
-            <Text style={styles.text}>BottomSheet</Text>
-          </View>
-        </BottomSheet>
+              ref={ref => (this.forgotPasswordSheetRef = ref)}
+              backgroundColor="rgba(0, 0, 0, 0.50)"
+              radius={20}
+              sheetBackgroundColor={COLORS.black2gray}
+              height={responsiveHeight(50)}
+            >
+              <View style={styles.buttonView}>
+                <Text style={styles.text}>BottomSheet</Text>
+              </View>
+            </BottomSheet>
           </ImageBackground>
         </CustomMainView>
       </>
@@ -114,7 +120,7 @@ class Signin extends React.Component<SigninProps, SigninState> {
 
 export default Signin;
 const styles = StyleSheet.create({
-  text:{},
+  text: {},
   image: {
     alignItems: 'center',
     resizeMode: 'cover',

@@ -9,17 +9,14 @@ const rootReducer = {
 };
 
 // ✅ Add enhancer only in dev mode
-const enhancers = (getDefaultEnhancers: any) => {
-  if (__DEV__ && Reactotron.createEnhancer) {
-    return getDefaultEnhancers().concat(Reactotron.createEnhancer());
-  }
-  return getDefaultEnhancers();
-};
 
 // ✅ Configure store
 export const store = configureStore({
   reducer: rootReducer,
-  enhancers,
+  enhancers: getDefaultEnhancers => {
+    const reactotronEnhancer = __DEV__ ? [Reactotron.createEnhancer!()] : [];
+    return getDefaultEnhancers().concat(reactotronEnhancer);
+  },
 });
 
 // ✅ Export types

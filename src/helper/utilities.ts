@@ -90,9 +90,9 @@ export const replaceTo = (
 
 // navigate to single screen with nested routes
 export const nestedNavigateTo = (
-  navigation: Navigation,
-  screenName: string[],
-  parentRouteName: string,
+  navigation?: Navigation,
+  screenName: string[] = [],
+  parentRouteName: string = '',
   params?: object,
 ) => {
   if (navigation && navigation.navigate) {
