@@ -21,7 +21,7 @@ const AuthNavigation = () => {
   return (
     <AuthStack.Navigator
       screenOptions={{ headerShown: false }}
-      initialRouteName={AUTH.VERIFICATION}
+      initialRouteName={AUTH.ONBOARDING}
     >
       <AuthStack.Screen name={AUTH.SIGNUP} component={Signup} />
       <AuthStack.Screen name={AUTH.VERIFICATION} component={VerificationCode} />
@@ -53,7 +53,7 @@ const MainNavigation = () => {
   return (
     <MainStack.Navigator
       screenOptions={{ headerShown: false }}
-      initialRouteName={MAINSTACK.AUTHNAVIGATION}
+      initialRouteName={MAINSTACK.SPLASHSCREEN}
     >
       <MainStack.Screen
         name={MAINSTACK.SPLASHSCREEN}
