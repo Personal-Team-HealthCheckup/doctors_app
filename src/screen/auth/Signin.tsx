@@ -1,6 +1,6 @@
 import React from 'react';
 import CustomStatusBar from '../../Components/common/CustomStatusBar';
-import { ImageBackground, Text, View, StyleSheet } from 'react-native';
+import { ImageBackground, Text, View, StyleSheet, Alert } from 'react-native';
 import {
   responsiveScreenWidth,
   responsiveHeight,
@@ -22,30 +22,103 @@ import { moderateScale, verticalScale } from '../../helper/Scale';
 import { AUTH, MAINSTACK } from '../../Constants/Navigator';
 import CustomMainView from '../../Components/common/CustomMainView';
 import BottomSheet from '../../Components/CustomBottomSheet';
+import { RootState } from '../../redux/store';
+import { loginAction } from '../../redux/reducers/auth';
+import { connect } from 'react-redux';
+import { Navigation } from '../../global/types';
+import {
+  checkEmailValidation,
+  handleOnChange,
+  navigateTo,
+} from '../../helper/utilities';
 
 interface SigninProps {
-  navigation?: {
-    navigate: (args: string) => void;
-  };
+  navigation?: Navigation;
 }
 
-interface SigninState {}
+type ErrorType = {
+  email?: string;
+  password?: string;
+};
+interface SigninState {
+  email: string;
+  password: string;
+  error: ErrorType;
+}
 
-class Signin extends React.Component<SigninProps, SigninState> {
+interface ReduxProps {
+  loginData: RootState['Auth'];
+  loginApi: (data: { email: string; password: string }) => void;
+}
+
+type Props = SigninProps & ReduxProps;
+class Signin extends React.Component<Props, SigninState> {
   forgotPasswordSheetRef: BottomSheet | null = null;
-  constructor(props: SigninProps) {
+  constructor(props: Props) {
     super(props);
-    this.state = {};
+    this.state = {
+      email: '',
+      password: '',
+      error: {},
+    };
   }
   navigateToSignup = () => {
-    this.props.navigation?.navigate(AUTH.SIGNUP);
+    navigateTo(this.props.navigation, AUTH.SIGNUP);
   };
   openForgot = () => {
     this.forgotPasswordSheetRef?.show();
   };
-  handleLogin = () => {
-    this.props.navigation?.navigate(MAINSTACK.HOMENAVIGATION);
+  handleValidation = () => {
+    const { email, password } = this.state;
+    let isValid = true;
+    const errors: ErrorType = {};
+    if (!email) {
+      errors.email = 'Email is required';
+      isValid = false;
+    }
+    if (!checkEmailValidation(email)) {
+      errors.email = 'Email is invalid';
+      isValid = false;
+    }
+    if (!password) {
+      errors.password = 'Password is required';
+      isValid = false;
+    }
+    if (password.length < 6) {
+      errors.password = 'Password must be at least 6 characters';
+      isValid = false;
+    }
+    this.setState({ error: errors });
+    return isValid;
   };
+
+  handleLogin = async () => {
+    if (!this.handleValidation()) return;
+    try {
+      await this.props.loginApi({
+        email: this.state.email,
+        password: this.state.password,
+      });
+
+      if (this.props.loginData.message?.includes('success')) {
+        Alert.alert('Successs', this.props.loginData.message);
+        navigateTo(this.props.navigation, MAINSTACK.HOMENAVIGATION);
+      } else {
+        Alert.alert('Error', this.props.loginData.message || 'Login failed');
+        if (this.props.loginData.message?.includes('not verified')) {
+          navigateTo(this.props.navigation, AUTH.VERIFICATION, {
+            email: this.state.email,
+          });
+        }
+      }
+    } catch (error) {}
+  };
+
+  handleOnChange = (value: string, field: 'email' | 'password') => {
+    const newState = handleOnChange(this.state, value, field);
+    this.setState(newState);
+  };
+
   render() {
     return (
       <>
@@ -79,8 +152,18 @@ class Signin extends React.Component<SigninProps, SigninState> {
               />
             </View>
             <View style={styles.inputView}>
-              <CustomTextInput placeholder="Email" />
-              <CustomTextInput placeholder="Password" />
+              <CustomTextInput
+                placeholder="Email"
+                value={this.state.email}
+                onChangeText={text => this.handleOnChange(text, 'email')}
+                errorMessage={this.state.error.email}
+              />
+              <CustomTextInput
+                placeholder="Password"
+                value={this.state.password}
+                onChangeText={text => this.handleOnChange(text, 'password')}
+                errorMessage={this.state.error.password}
+              />
             </View>
             <CustomGButton
               tittle="Login"
@@ -101,7 +184,9 @@ class Signin extends React.Component<SigninProps, SigninState> {
             </View>
 
             <BottomSheet
-              ref={ref => (this.forgotPasswordSheetRef = ref)}
+              ref={ref => {
+                this.forgotPasswordSheetRef = ref;
+              }}
               backgroundColor="rgba(0, 0, 0, 0.50)"
               radius={20}
               sheetBackgroundColor={COLORS.black2gray}
@@ -118,7 +203,16 @@ class Signin extends React.Component<SigninProps, SigninState> {
   }
 }
 
-export default Signin;
+const mapStateToProps = (state: RootState) => ({
+  loginData: state.Auth,
+});
+
+const mapDispatchToProps = {
+  loginApi: (data: { email: string; password: string }) => loginAction(data),
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signin);
+
 const styles = StyleSheet.create({
   text: {},
   image: {

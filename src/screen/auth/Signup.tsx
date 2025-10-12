@@ -37,6 +37,7 @@ import { Navigation } from '../../global/types';
 import {
   checkEmailValidation,
   checkNameValidation,
+  handleOnChange,
   navigateTo,
 } from '../../helper/utilities';
 import CustomMainView from '../../Components/common/CustomMainView';
@@ -90,11 +91,8 @@ class Signup extends React.Component<Props, SignupState> {
     value: string,
     field: 'email' | 'password' | 'fullName',
   ) => {
-    this.setState({
-      ...this.state,
-      [field]: value,
-      error: { ...this.state.error, [field]: '' },
-    });
+    const newState = handleOnChange(this.state, value, field);
+    this.setState(newState);
   };
 
   navigateToLogin = () => {

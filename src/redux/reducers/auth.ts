@@ -24,23 +24,20 @@ const initialState: authDataType = {
 export const loginAction = createAsyncThunk(
   'loginAction',
   async (
-    { username, password }: { username: string; password: string },
+    { email, password }: { email: string; password: string },
     { getState, rejectWithValue, fulfillWithValue },
   ) => {
     const data = {
-      username,
+      email,
       password,
     };
-    const { response, error } = await networkCall(
+    const { response, error, errorResponse } = await networkCall(
       endpoints.LOGIN,
       'POST',
       JSON.stringify(data),
     );
-    if (response) {
-      return fulfillWithValue(response);
-    } else {
-      return rejectWithValue('Something went wrong!');
-    }
+    if (response) return fulfillWithValue(response);
+    return rejectWithValue({ message: error, ...errorResponse });
   },
 );
 
@@ -159,7 +156,12 @@ export const AuthSlice = createSlice({
     });
     builder.addCase(loginAction.rejected, (state, action) => {
       state.loading = false;
-      state.message = 'Please try again!';
+      const payload = action.payload as any;
+      state.message = payload?.message || 'Please try again!';
+      if (payload?.message?.includes('not verified')) {
+        state.token = payload.token;
+        state.email = payload.email;
+      }
     });
 
     // signup
@@ -171,8 +173,8 @@ export const AuthSlice = createSlice({
       console.log('Verify OTP sucesss', action, state);
       state.loading = false;
       state.token = action.payload.token;
-      state.userRole = action.payload.role;
       state.email = action.payload.email;
+      state.userRole = action.payload.role;
       state.message = action.payload.message;
     });
     builder.addCase(signupAction.rejected, (state, action) => {
@@ -188,13 +190,11 @@ export const AuthSlice = createSlice({
       state.message = null;
     });
     builder.addCase(verifyOtpAction.fulfilled, (state, action) => {
-      console.log('Verify OTP success', action, state);
       state.loading = false;
       state.token = action.payload.token ?? state.token;
       state.message = action.payload.message;
     });
     builder.addCase(verifyOtpAction.rejected, (state, action) => {
-      console.log('Verify OTP failed', action, state);
       state.loading = false;
       state.message = action.payload
         ? (action.payload as any).message
@@ -206,7 +206,6 @@ export const AuthSlice = createSlice({
       state.message = null;
     });
     builder.addCase(resendOtpAction.fulfilled, (state, action) => {
-      console.log('Resend Otp Action sucesss', action, state);
       state.loading = false;
       state.token = action.payload.token;
       state.message = action.payload.message;

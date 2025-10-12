@@ -18,9 +18,9 @@ import {
   responsiveScreenWidth,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import { moderateScale, verticalScale } from '../../helper/Scale';
+import { moderateScale } from '../../helper/Scale';
 import CustomGButton from '../../Components/common/CustomGButton';
-import { MAINSTACK } from '../../Constants/Navigator';
+import { AUTH } from '../../Constants/Navigator';
 import { RootState } from '../../redux/store';
 import { connect } from 'react-redux';
 import { Navigation } from '../../global/types';
@@ -82,7 +82,7 @@ class VerificationCode extends React.Component<Props, VerificationCodeState> {
       });
       if (this.props.verifyOTPData.message?.includes('success')) {
         Alert.alert('Successs', this.props.verifyOTPData.message);
-        navigateTo(this.props.navigation, MAINSTACK.HOMENAVIGATION);
+        navigateTo(this.props.navigation, AUTH.SIGNIN);
       } else {
         Alert.alert(
           'Error',
