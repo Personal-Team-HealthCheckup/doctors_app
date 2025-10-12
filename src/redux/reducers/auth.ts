@@ -4,12 +4,20 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { endpoints } from '../../helper/config';
 import networkCall from '../../helper/networkCall';
 
+interface IUser {
+  _id: string;
+  fullName: string;
+  email: string;
+  role: string;
+  acceptedTerms: boolean;
+}
 export interface authDataType {
   message: string | null;
   loading: boolean;
   token: string | null;
   userRole: string;
   email: string;
+  user?: IUser;
 }
 
 const initialState: authDataType = {
@@ -149,10 +157,12 @@ export const AuthSlice = createSlice({
       state.message = null;
     });
     builder.addCase(loginAction.fulfilled, (state, action) => {
+      const { message, token, user } = action.payload;
       state.loading = false;
-      state.token = action.payload.token;
-      state.userRole = action.payload.role;
-      state.message = null;
+      state.token = token;
+      state.userRole = user.role;
+      state.user = user;
+      state.message = message;
     });
     builder.addCase(loginAction.rejected, (state, action) => {
       state.loading = false;
@@ -170,7 +180,6 @@ export const AuthSlice = createSlice({
       state.message = null;
     });
     builder.addCase(signupAction.fulfilled, (state, action) => {
-      console.log('Verify OTP sucesss', action, state);
       state.loading = false;
       state.token = action.payload.token;
       state.email = action.payload.email;
