@@ -5,6 +5,7 @@ export const endpoints = {
   LOGIN: 'signin',
   REGISTER: 'signup',
   VERIFYOTP: 'verifyotp',
+  RESEND_OTP: 'resend-otp',
   GET_PRODUCTS: 'products',
   SINGLE_PRODUCTS: 'products/:productId',
   GET_CATEGORIES: 'products/get-categories',

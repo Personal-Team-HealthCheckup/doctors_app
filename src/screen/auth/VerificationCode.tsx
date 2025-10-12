@@ -28,7 +28,7 @@ import { navigateTo } from '../../helper/utilities';
 import CustomHeader from '../../Components/common/CustomHeader';
 import OTPTextInput from '../../Components/OTPTextInput';
 import CustomMainView from '../../Components/common/CustomMainView';
-import { verifyOtpAction } from '../../redux/reducers/auth';
+import { resendOtpAction, verifyOtpAction } from '../../redux/reducers/auth';
 
 interface VerificationCodeProps {
   navigation?: Navigation;
@@ -36,25 +36,43 @@ interface VerificationCodeProps {
 
 interface VerificationCodeState {
   code: string;
+  timer: number;
 }
 
 interface ReduxProps {
   verifyOTPData: RootState['Auth'];
   verifyOtpApi: (data: { otp: string }) => void;
+  resendOtpApi: (data: { email: string }) => void;
 }
 
 type Props = VerificationCodeProps & ReduxProps;
 
+// constants
+const MAX_TIME = 120; // 2 minutes in seconds
 class VerificationCode extends React.Component<Props, VerificationCodeState> {
+  timer: any = null;
   constructor(props: Props) {
     super(props);
     this.state = {
       code: '',
+      timer: MAX_TIME,
     };
   }
 
-  handleResendOtp = () => {
-    // logic for resend otp
+  handleResendOtp = async () => {
+    try {
+      await this.props.resendOtpApi({
+        email: this.props.verifyOTPData.email,
+      });
+      if (this.props.verifyOTPData.message?.includes('success')) {
+        Alert.alert('Successs', this.props.verifyOTPData.message);
+      } else {
+        Alert.alert(
+          'Error',
+          this.props.verifyOTPData.message || 'OTP not Verified',
+        );
+      }
+    } catch (error) {}
   };
 
   handleVerification = async () => {
@@ -78,8 +96,31 @@ class VerificationCode extends React.Component<Props, VerificationCodeState> {
     this.setState({ code });
   };
 
+  componentDidMount(): void {
+    this.timer = setInterval(() => {
+      if (this.state.timer > 0) {
+        this.setState({ timer: this.state.timer - 1 });
+      }
+    }, 1000);
+  }
+
+  componentWillUnmount(): void {
+    if (this.timer) {
+      clearInterval(this.timer);
+    }
+  }
+
+  formatedTime = (time: number) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    return `(${minutes < 10 ? '0' + minutes : minutes}:${
+      seconds < 10 ? '0' + seconds : seconds
+    })`;
+  };
+
   render() {
     const { verifyOTPData } = this.props;
+    const isResendingDisabled = this.state.timer > 0;
     return (
       <CustomMainView>
         <CustomStatusBar />
@@ -131,12 +172,16 @@ class VerificationCode extends React.Component<Props, VerificationCodeState> {
                 />
                 <Pressable
                   onPress={this.handleResendOtp}
-                  style={{
-                    marginTop: responsiveHeight(3),
-                    alignSelf: 'center',
-                  }}
+                  style={[
+                    styles.resendCodeView,
+                    !isResendingDisabled && styles.resendCodeEnabled,
+                  ]}
+                  disabled={isResendingDisabled || verifyOTPData.loading}
                 >
-                  <Text style={styles.resendCodeText}>Resend Code 02:00</Text>
+                  <Text style={styles.resendCodeText}>
+                    Resend Code{' '}
+                    {isResendingDisabled && this.formatedTime(this.state.timer)}
+                  </Text>
                 </Pressable>
               </View>
 
@@ -160,11 +205,20 @@ const mapStateToProps = (state: RootState) => ({
 
 const mapDispatchToProps = {
   verifyOtpApi: (data: { otp: string }) => verifyOtpAction(data),
+  resendOtpApi: (data: { email: string }) => resendOtpAction(data),
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(VerificationCode);
 
 const styles = StyleSheet.create({
+  resendCodeView: {
+    marginTop: responsiveHeight(3),
+    alignSelf: 'center',
+  },
+  resendCodeEnabled: {
+    borderBottomWidth: 1,
+    borderBottomColor: COLORS.white,
+  },
   resendCodeText: {
     color: COLORS.white,
     fontFamily: FONTS.inter['regular[400]'],

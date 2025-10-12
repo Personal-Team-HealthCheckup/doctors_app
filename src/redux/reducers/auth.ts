@@ -20,6 +20,7 @@ const initialState: authDataType = {
   email: '',
 };
 
+// Login action
 export const loginAction = createAsyncThunk(
   'loginAction',
   async (
@@ -42,6 +43,8 @@ export const loginAction = createAsyncThunk(
     }
   },
 );
+
+// Signup action
 export const signupAction = createAsyncThunk(
   'signupAction',
   async (
@@ -78,6 +81,7 @@ export const signupAction = createAsyncThunk(
     return rejectWithValue({ message: error });
   },
 );
+// Verify OTP action
 export const verifyOtpAction = createAsyncThunk(
   'verifyOtpAction',
   async (
@@ -94,6 +98,33 @@ export const verifyOtpAction = createAsyncThunk(
 
     const { response, error } = await networkCall(
       endpoints.VERIFYOTP,
+      'POST',
+      JSON.stringify(data),
+    );
+
+    if (response) return fulfillWithValue(response);
+
+    return rejectWithValue({ message: error });
+  },
+);
+
+// Resend OTP action
+export const resendOtpAction = createAsyncThunk(
+  'resendOtpAction',
+  async (
+    {
+      email,
+    }: {
+      email: string;
+    },
+    { getState, rejectWithValue, fulfillWithValue },
+  ) => {
+    const data = {
+      email,
+    };
+
+    const { response, error } = await networkCall(
+      endpoints.RESEND_OTP,
       'POST',
       JSON.stringify(data),
     );
@@ -164,6 +195,23 @@ export const AuthSlice = createSlice({
     });
     builder.addCase(verifyOtpAction.rejected, (state, action) => {
       console.log('Verify OTP failed', action, state);
+      state.loading = false;
+      state.message = action.payload
+        ? (action.payload as any).message
+        : 'Please try again!';
+    });
+    // Resend otp
+    builder.addCase(resendOtpAction.pending, (state, action) => {
+      state.loading = true;
+      state.message = null;
+    });
+    builder.addCase(resendOtpAction.fulfilled, (state, action) => {
+      console.log('Resend Otp Action sucesss', action, state);
+      state.loading = false;
+      state.token = action.payload.token;
+      state.message = action.payload.message;
+    });
+    builder.addCase(resendOtpAction.rejected, (state, action) => {
       state.loading = false;
       state.message = action.payload
         ? (action.payload as any).message

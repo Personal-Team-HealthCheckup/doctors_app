@@ -1,5 +1,5 @@
 import { View as MockView } from 'react-native';
-import React from 'react';
+import React, { use } from 'react';
 
 jest.mock('react-native-linear-gradient', () => (props: {}) => (
   <MockView {...props} />
@@ -27,4 +27,38 @@ jest.mock('@react-native-async-storage/async-storage', () => ({
   setItem: jest.fn(),
   removeItem: jest.fn(),
   clear: jest.fn(),
+}));
+
+jest.mock('react-redux', () => {
+  return {
+    useSelector: jest.fn(),
+    useDispatch: jest.fn(),
+    connect: (Children: any) => (props: {}) => <Children {...props} />,
+  };
+});
+
+jest.mock('@reduxjs/toolkit', () => {
+  return {
+    createSlice: jest.fn().mockImplementation(props => ({
+      ...props,
+      actions: { ...props.actions, actionLogout: jest.fn() },
+    })),
+    createAsyncThunk: jest.fn(),
+    configureStore: jest.fn(),
+  };
+});
+
+jest.mock('reactotron-react-native', () => ({
+  setAsyncStorageHandler: jest.fn().mockImplementation(() => ({
+    configure: jest.fn().mockReturnThis(),
+    useReactNative: jest.fn().mockReturnThis(),
+    use: jest.fn().mockReturnThis(),
+    connect: jest.fn().mockReturnThis(),
+    clear: jest.fn().mockReturnThis(),
+    log: jest.fn().mockReturnThis(),
+    error: jest.fn().mockReturnThis(),
+    warn: jest.fn().mockReturnThis(),
+    display: jest.fn().mockReturnThis(),
+  })),
+  createEnhancer: jest.fn(),
 }));
