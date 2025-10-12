@@ -1,6 +1,13 @@
 import React from 'react';
 import CustomStatusBar from '../../Components/common/CustomStatusBar';
-import { ImageBackground, Text, View, StyleSheet, Alert } from 'react-native';
+import {
+  ImageBackground,
+  Text,
+  View,
+  StyleSheet,
+  Alert,
+  TouchableOpacity,
+} from 'react-native';
 import {
   responsiveScreenWidth,
   responsiveHeight,
@@ -31,6 +38,7 @@ import {
   handleOnChange,
   navigateTo,
 } from '../../helper/utilities';
+import CustomLoader from '../../Components/CustomLoader';
 
 interface SigninProps {
   navigation?: Navigation;
@@ -100,7 +108,11 @@ class Signin extends React.Component<Props, SigninState> {
         password: this.state.password,
       });
 
-      if (this.props.loginData.message?.includes('success')) {
+      if (
+        this.props.loginData.message?.includes('success') &&
+        this.props.loginData.token &&
+        this.props.loginData.userRole === 'user'
+      ) {
         Alert.alert('Successs', this.props.loginData.message);
         navigateTo(this.props.navigation, MAINSTACK.HOMENAVIGATION);
       } else {
@@ -120,6 +132,7 @@ class Signin extends React.Component<Props, SigninState> {
   };
 
   render() {
+    const { loading } = this.props.loginData;
     return (
       <>
         <CustomStatusBar />
@@ -165,18 +178,27 @@ class Signin extends React.Component<Props, SigninState> {
                 errorMessage={this.state.error.password}
               />
             </View>
-            <CustomGButton
-              tittle="Login"
-              style={styles.buttonView1}
-              onPress={this.handleLogin}
-            />
-            <Text style={styles.textIhave} onPress={() => this.openForgot()}>
-              Forgor password
-            </Text>
+            {loading ? (
+              <CustomLoader />
+            ) : (
+              <CustomGButton
+                tittle="Login"
+                style={styles.buttonView1}
+                onPress={this.handleLogin}
+                disabled={loading || !this.state.email || !this.state.password}
+              />
+            )}
+            <TouchableOpacity
+              disabled={loading}
+              onPress={() => this.openForgot()}
+            >
+              <Text style={styles.textIhave}>Forgor password</Text>
+            </TouchableOpacity>
             <View style={styles.lastView}>
               <Text style={styles.textIhave}>Don’t have an account?</Text>
               <Text
                 style={styles.textIhave}
+                disabled={loading}
                 onPress={() => this.navigateToSignup()}
               >
                 Join us
