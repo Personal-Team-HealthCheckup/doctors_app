@@ -2,7 +2,6 @@ import React from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import {
   responsiveHeight,
-  responsiveScreenHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import { COLORS, FONTS } from '../global/theme';

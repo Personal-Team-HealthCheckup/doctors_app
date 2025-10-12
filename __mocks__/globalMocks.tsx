@@ -20,6 +20,22 @@ jest.mock('../src/assets/assets', () => ({
   LightSvg: (props: {}) => <MockView {...props} />,
   NotificationBellSvg: (props: {}) => <MockView {...props} />,
   SearchSvg: (props: {}) => <MockView {...props} />,
+  LogoSvg: (props: {}) => <MockView {...props} />,
+  StarSvg: (props: {}) => <MockView {...props} />,
+  GoogleSvg: (props: {}) => <MockView {...props} />,
+  FacebookSvg: (props: {}) => <MockView {...props} />,
+  gradientSignupPng: 'mocked-image',
+  gradientPng: 'mocked-image',
+  HomeScreenPng: 'mocked-image',
+  HomeScreenPng2: 'mocked-image',
+  starImage: 'mocked-image',
+}));
+
+jest.mock('../src/helper/Scale', () => ({
+  moderateScale: (size: number) => size,
+  verticalScale: (size: number) => size,
+  scale: (size: number) => size,
+  horizontalScale: (size: number) => size,
 }));
 
 jest.mock('@react-native-async-storage/async-storage', () => ({
@@ -33,7 +49,7 @@ jest.mock('react-redux', () => {
   return {
     useSelector: jest.fn(),
     useDispatch: jest.fn(),
-    connect: (Children: any) => (props: {}) => <Children {...props} />,
+    connect: (mapStateToProps?: any, mapDispatchToProps?: any) => (Component: any) => Component,
   };
 });
 
