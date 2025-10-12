@@ -19,6 +19,10 @@ export const checkEmailValidation = (email: string) => {
   return regEx.test(String(email).toLowerCase().trim());
 };
 
+export const handleOnChange = (state: any, value: string, field: any) => {
+  return { ...state, [field]: value, error: { ...state.error, [field]: '' } };
+};
+
 export const checkNameValidation = (name: string) => {
   const regEx = /^(?:[a-zA-Z]+(?:[ ][a-zA-Z]+)*)+$/;
   return regEx.test(String(name).toLowerCase().trim());

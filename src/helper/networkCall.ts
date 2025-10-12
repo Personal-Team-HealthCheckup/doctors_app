@@ -5,6 +5,7 @@ type IResponseType = 'json' | 'text' | 'blob';
 type IResolve<T = any> = {
   response: T | null;
   error: string | null;
+  errorResponse: any | null;
 };
 type IMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
@@ -12,6 +13,7 @@ const resolve = async <T>(promise: () => Promise<T>): Promise<IResolve<T>> => {
   const resolved: IResolve<T> = {
     response: null,
     error: null,
+    errorResponse: null,
   };
 
   try {
@@ -19,9 +21,9 @@ const resolve = async <T>(promise: () => Promise<T>): Promise<IResolve<T>> => {
     resolved.response = response;
   } catch (e: any) {
     console.error('NetworkCall Error:', e);
-    // If the error has a message, use it; otherwise fallback
     resolved.error =
       e?.message || 'Something went wrong. Please try again later.';
+    resolved.errorResponse = e?.response || e;
   }
 
   return resolved;
@@ -53,15 +55,21 @@ const networkCall = async <T = any>(
     });
 
     if (!response.ok) {
-      // Try to parse error message from server
+      let errorData: any = null;
       let errorMessage = `HTTP Error ${response.status}`;
+
       try {
-        const data = await response.json();
-        if (data?.message) errorMessage = data.message;
+        errorData = await response.json();
+        if (errorData?.message) {
+          errorMessage = errorData.message;
+        }
       } catch (e) {
+        console.warn('Error parsing error response:', e);
         throw e;
       }
-      throw new Error(errorMessage);
+      const error: any = new Error(errorMessage);
+      error.response = errorData;
+      throw error;
     }
 
     // Return response based on responseType
