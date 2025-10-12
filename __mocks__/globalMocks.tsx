@@ -61,4 +61,5 @@ jest.mock('reactotron-react-native', () => ({
     display: jest.fn().mockReturnThis(),
   })),
   createEnhancer: jest.fn(),
+  trackGlobalErrors: jest.fn(),
 }));
