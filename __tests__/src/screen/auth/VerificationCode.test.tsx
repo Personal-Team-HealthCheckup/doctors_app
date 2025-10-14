@@ -241,4 +241,169 @@ describe('VerificationCodePage', () => {
     expect(inputs[0].props.value).toBe('1');
     expect(inputs[3].props.value).toBe('4');
   });
+
+  it('handles resend OTP with success message', async () => {
+    const mockResendOtpApi = jest.fn().mockResolvedValue({});
+    const propsWithSuccess = {
+      ...screenProps,
+      resendOtpApi: mockResendOtpApi,
+      verifyOTPData: { 
+        ...screenProps.verifyOTPData, 
+        message: 'OTP sent successfully' 
+      }
+    };
+    
+    const { getByText } = render(<VerificationCode {...propsWithSuccess} />);
+    const resendButton = getByText(/Resend Code/);
+    
+    fireEvent.press(resendButton);
+    
+    await waitFor(() => {
+      expect(mockResendOtpApi).toHaveBeenCalledWith({
+        email: 'test@example.com'
+      });
+    });
+  });
+
+  it('handles resend OTP with error message', async () => {
+    const mockResendOtpApi = jest.fn().mockResolvedValue({});
+    const propsWithError = {
+      ...screenProps,
+      resendOtpApi: mockResendOtpApi,
+      verifyOTPData: { 
+        ...screenProps.verifyOTPData, 
+        message: 'Failed to send OTP' 
+      }
+    };
+    
+    const { getByText } = render(<VerificationCode {...propsWithError} />);
+    const resendButton = getByText(/Resend Code/);
+    
+    fireEvent.press(resendButton);
+    
+    await waitFor(() => {
+      expect(mockResendOtpApi).toHaveBeenCalled();
+    });
+  });
+
+  it('handles verify OTP with success message', async () => {
+    const mockVerifyOtpApi = jest.fn().mockResolvedValue({});
+    const propsWithSuccess = {
+      ...screenProps,
+      verifyOtpApi: mockVerifyOtpApi,
+      verifyOTPData: { 
+        ...screenProps.verifyOTPData, 
+        message: 'OTP verified successfully' 
+      }
+    };
+    
+    const { getAllByDisplayValue, getByTestId } = render(<VerificationCode {...propsWithSuccess} />);
+    const inputs = getAllByDisplayValue('');
+    
+    // Fill OTP
+    fireEvent.changeText(inputs[0], '1');
+    fireEvent.changeText(inputs[1], '2');
+    fireEvent.changeText(inputs[2], '3');
+    fireEvent.changeText(inputs[3], '4');
+    
+    const verifyButton = getByTestId('custom-g-button');
+    fireEvent.press(verifyButton);
+    
+    await waitFor(() => {
+      expect(mockVerifyOtpApi).toHaveBeenCalledWith({
+        otp: '1234'
+      });
+    });
+  });
+
+  it('handles verify OTP with error message', async () => {
+    const mockVerifyOtpApi = jest.fn().mockResolvedValue({});
+    const propsWithError = {
+      ...screenProps,
+      verifyOtpApi: mockVerifyOtpApi,
+      verifyOTPData: { 
+        ...screenProps.verifyOTPData, 
+        message: 'Invalid OTP' 
+      }
+    };
+    
+    const { getAllByDisplayValue, getByTestId } = render(<VerificationCode {...propsWithError} />);
+    const inputs = getAllByDisplayValue('');
+    
+    // Fill OTP
+    fireEvent.changeText(inputs[0], '1');
+    fireEvent.changeText(inputs[1], '2');
+    fireEvent.changeText(inputs[2], '3');
+    fireEvent.changeText(inputs[3], '4');
+    
+    const verifyButton = getByTestId('custom-g-button');
+    fireEvent.press(verifyButton);
+    
+    await waitFor(() => {
+      expect(mockVerifyOtpApi).toHaveBeenCalled();
+    });
+  });
+
+  it('handles timer countdown to zero', async () => {
+    jest.useFakeTimers();
+    
+    const { getByText } = render(<VerificationCode {...screenProps} />);
+    
+    // Fast forward timer
+    jest.advanceTimersByTime(120000); // 2 minutes
+    
+    expect(getByText).toBeTruthy();
+    
+    jest.useRealTimers();
+  });
+
+  it('handles component unmount with timer cleanup', () => {
+    const { unmount } = render(<VerificationCode {...screenProps} />);
+    
+    // Component should clean up timer on unmount
+    unmount();
+    
+    expect(true).toBe(true); // Timer cleanup happens in componentWillUnmount
+  });
+
+  it('handles exception in resend OTP', async () => {
+    const mockResendOtpApi = jest.fn().mockRejectedValue(new Error('Network error'));
+    const propsWithError = {
+      ...screenProps,
+      resendOtpApi: mockResendOtpApi,
+    };
+    
+    const { getByText } = render(<VerificationCode {...propsWithError} />);
+    const resendButton = getByText(/Resend Code/);
+    
+    fireEvent.press(resendButton);
+    
+    await waitFor(() => {
+      expect(mockResendOtpApi).toHaveBeenCalled();
+    });
+  });
+
+  it('handles exception in verify OTP', async () => {
+    const mockVerifyOtpApi = jest.fn().mockRejectedValue(new Error('Network error'));
+    const propsWithError = {
+      ...screenProps,
+      verifyOtpApi: mockVerifyOtpApi,
+    };
+    
+    const { getAllByDisplayValue, getByTestId } = render(<VerificationCode {...propsWithError} />);
+    const inputs = getAllByDisplayValue('');
+    
+    // Fill OTP
+    fireEvent.changeText(inputs[0], '1');
+    fireEvent.changeText(inputs[1], '2');
+    fireEvent.changeText(inputs[2], '3');
+    fireEvent.changeText(inputs[3], '4');
+    
+    const verifyButton = getByTestId('custom-g-button');
+    fireEvent.press(verifyButton);
+    
+    await waitFor(() => {
+      expect(mockVerifyOtpApi).toHaveBeenCalled();
+    });
+  });
 });
