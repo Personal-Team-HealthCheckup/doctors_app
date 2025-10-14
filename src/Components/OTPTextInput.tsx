@@ -14,12 +14,14 @@ interface OTPTextInputProps {
   length?: number;
   onChangeOTP?: (otp: string) => void;
   value: string;
+  testID?: string;
 }
 
 const OTPTextInput: React.FC<OTPTextInputProps> = ({
   length = 4,
   onChangeOTP,
   value,
+  testID,
 }) => {
   const [otp, setOtp] = useState<string[]>(
     value ? value.split('') : new Array(length).fill(''),
@@ -52,6 +54,7 @@ const OTPTextInput: React.FC<OTPTextInputProps> = ({
     <View style={styles.container}>
       {otp.map((digit, index) => (
         <TextInput
+          testID={testID && `${testID}-${index}`}
           key={index}
           ref={(ref: any) => (inputs.current[index] = ref)}
           style={styles.input}

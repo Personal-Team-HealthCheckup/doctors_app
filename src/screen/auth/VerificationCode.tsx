@@ -167,10 +167,12 @@ class VerificationCode extends React.Component<Props, VerificationCodeState> {
                   {verifyOTPData.email}
                 </Text>
                 <OTPTextInput
+                  testID="otp-text-input"
                   value={this.state.code}
                   onChangeOTP={(otp: string) => this.handleOTPChange(otp)}
                 />
                 <Pressable
+                  testID="btn-resend-otp"
                   onPress={this.handleResendOtp}
                   style={[
                     styles.resendCodeView,
@@ -186,6 +188,7 @@ class VerificationCode extends React.Component<Props, VerificationCodeState> {
               </View>
 
               <CustomGButton
+                testID="btn-verify"
                 tittle="Verify Code"
                 disabled={this.state.code.length < 4 || verifyOTPData.loading}
                 style={styles.verifyButtonContainer}
