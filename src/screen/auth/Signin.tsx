@@ -39,6 +39,7 @@ import {
   navigateTo,
 } from '../../helper/utilities';
 import CustomLoader from '../../Components/CustomLoader';
+import { translate } from '../../helper/i18';
 
 interface SigninProps {
   navigation?: Navigation;
@@ -81,19 +82,19 @@ class Signin extends React.Component<Props, SigninState> {
     let isValid = true;
     const errors: ErrorType = {};
     if (!email) {
-      errors.email = 'Email is required';
+      errors.email = translate('auth.emailRequired');
       isValid = false;
     }
     if (!checkEmailValidation(email)) {
-      errors.email = 'Email is invalid';
+      errors.email = translate('auth.emailInvalid');
       isValid = false;
     }
     if (!password) {
-      errors.password = 'Password is required';
+      errors.password = translate('auth.passwordRequired');
       isValid = false;
     }
     if (password.length < 6) {
-      errors.password = 'Password must be at least 6 characters';
+      errors.password = translate('auth.passwordMin');
       isValid = false;
     }
     this.setState({ error: errors });
@@ -146,11 +147,11 @@ class Signin extends React.Component<Props, SigninState> {
               style={styles.svg}
               resizeMode="cover"
             />
-            <Text style={styles.textSignup}>Welcome back</Text>
+            <Text style={styles.textSignup}>
+              {translate('auth.welcomeBack')}
+            </Text>
             <Text style={styles.subText}>
-              VHA is an innovated, automated system and the very first
-              blockchain based Virtual Health Assistant that will provide
-              immediate medical assistance to the patients 24/7.
+              {translate('auth.subHeadingText')}
             </Text>
             <View style={styles.googleView}>
               <CustomButton
@@ -166,13 +167,13 @@ class Signin extends React.Component<Props, SigninState> {
             </View>
             <View style={styles.inputView}>
               <CustomTextInput
-                placeholder="Email"
+                placeholder={translate('auth.emailPlaceholder')}
                 value={this.state.email}
                 onChangeText={text => this.handleOnChange(text, 'email')}
                 errorMessage={this.state.error.email}
               />
               <CustomTextInput
-                placeholder="Password"
+                placeholder={translate('auth.passwordPlaceholder')}
                 value={this.state.password}
                 onChangeText={text => this.handleOnChange(text, 'password')}
                 errorMessage={this.state.error.password}
@@ -182,7 +183,7 @@ class Signin extends React.Component<Props, SigninState> {
               <CustomLoader />
             ) : (
               <CustomGButton
-                tittle="Login"
+                tittle={translate('auth.login')}
                 style={styles.buttonView1}
                 onPress={this.handleLogin}
                 disabled={loading || !this.state.email || !this.state.password}
@@ -192,10 +193,14 @@ class Signin extends React.Component<Props, SigninState> {
               disabled={loading}
               onPress={() => this.openForgot()}
             >
-              <Text style={styles.textIhave}>Forgor password</Text>
+              <Text style={styles.textIhave}>
+                {translate('auth.forgotPassword')}
+              </Text>
             </TouchableOpacity>
             <View style={styles.lastView}>
-              <Text style={styles.textIhave}>Don’t have an account?</Text>
+              <Text style={styles.textIhave}>
+                {translate('auth.noAccount')}
+              </Text>
               <Text
                 style={styles.textIhave}
                 disabled={loading}

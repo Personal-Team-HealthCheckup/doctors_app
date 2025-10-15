@@ -29,6 +29,7 @@ import CustomHeader from '../../Components/common/CustomHeader';
 import OTPTextInput from '../../Components/OTPTextInput';
 import CustomMainView from '../../Components/common/CustomMainView';
 import { resendOtpAction, verifyOtpAction } from '../../redux/reducers/auth';
+import { translate } from '../../helper/i18';
 
 interface VerificationCodeProps {
   navigation?: Navigation;
@@ -141,7 +142,7 @@ class VerificationCode extends React.Component<Props, VerificationCodeState> {
             >
               <CustomHeader
                 navigation={this.props.navigation}
-                heading="Verification Code"
+                heading={translate('auth.verifyCodeTxt')}
                 isIcon={false}
                 isShowSearchIcon={false}
                 isShowNotificationIcon={false}
@@ -160,10 +161,10 @@ class VerificationCode extends React.Component<Props, VerificationCodeState> {
               />
               <View style={styles.inputContainer}>
                 <Text style={styles.verificationCodeText}>
-                  Enter 4 Digits Code
+                  {translate('auth.digitVerificationTxt')}
                 </Text>
                 <Text style={styles.verificationSubtitle}>
-                  We’ve sent a 4-digit verification code to your email{' '}
+                  {translate('auth.verificationSubtitle')}
                   {verifyOTPData.email}
                 </Text>
                 <OTPTextInput
@@ -181,7 +182,7 @@ class VerificationCode extends React.Component<Props, VerificationCodeState> {
                   disabled={isResendingDisabled || verifyOTPData.loading}
                 >
                   <Text style={styles.resendCodeText}>
-                    Resend Code{' '}
+                    {translate('auth.resendCodeTxt')}
                     {isResendingDisabled && this.formatedTime(this.state.timer)}
                   </Text>
                 </Pressable>
@@ -189,7 +190,7 @@ class VerificationCode extends React.Component<Props, VerificationCodeState> {
 
               <CustomGButton
                 testID="btn-verify"
-                tittle="Verify Code"
+                tittle={translate('auth.verify')}
                 disabled={this.state.code.length < 4 || verifyOTPData.loading}
                 style={styles.verifyButtonContainer}
                 onPress={() => this.handleVerification()}

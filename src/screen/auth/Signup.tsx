@@ -41,6 +41,7 @@ import {
   navigateTo,
 } from '../../helper/utilities';
 import CustomMainView from '../../Components/common/CustomMainView';
+import { translate } from '../../helper/i18';
 
 interface SignupProps {
   navigation?: Navigation;
@@ -104,31 +105,31 @@ class Signup extends React.Component<Props, SignupState> {
     let isValid = true;
     const errors: any = {};
     if (!email) {
-      errors.email = 'Email is required';
+      errors.email = translate('auth.emailRequired');
       isValid = false;
     }
     if (!checkEmailValidation(email)) {
-      errors.email = 'Email is invalid';
+      errors.email = translate('auth.emailInvalid');
       isValid = false;
     }
     if (!password) {
-      errors.password = 'Password is required';
+      errors.password = translate('auth.passwordRequired');
       isValid = false;
     }
     if (password.length < 6) {
-      errors.password = 'Password must be at least 6 characters';
+      errors.password = translate('auth.passwordMin');
       isValid = false;
     }
     if (!fullName) {
-      errors.fullName = 'Full Name is required';
+      errors.fullName = translate('auth.fullNameRequired');
       isValid = false;
     }
     if (!checkNameValidation(fullName)) {
-      errors.fullName = 'Full Name is invalid';
+      errors.fullName = translate('auth.fullNameInvalid');
       isValid = false;
     }
     if (!isChecked) {
-      errors.isChecked = 'You must accept the terms and conditions';
+      errors.isChecked = translate('auth.termsRequired');
       isValid = false;
     }
     this.setState({ error: errors });
@@ -211,21 +212,21 @@ class Signup extends React.Component<Props, SignupState> {
               </View>
               <View style={styles.inputView}>
                 <CustomTextInput
-                  placeholder="Name"
+                  placeholder={translate('auth.fullNamePlaceholder')}
                   errorMessage={this.state.error.fullName}
                   value={this.state.fullName}
                   maxLength={30}
                   onChangeText={value => this.handleOnChange(value, 'fullName')}
                 />
                 <CustomTextInput
-                  placeholder="Email"
+                  placeholder={translate('auth.emailPlaceholder')}
                   errorMessage={this.state.error.email}
                   value={this.state.email}
                   maxLength={50}
                   onChangeText={value => this.handleOnChange(value, 'email')}
                 />
                 <CustomTextInput
-                  placeholder="Password"
+                  placeholder={translate('auth.passwordPlaceholder')}
                   errorMessage={this.state.error.password}
                   value={this.state.password}
                   maxLength={15}
@@ -243,7 +244,7 @@ class Signup extends React.Component<Props, SignupState> {
                     }
                   />
                   <Text style={styles.textIAgree}>
-                    I agree with the Terms of Service & Privacy Policy
+                    {translate('auth.termsText')}
                   </Text>
                 </Pressable>
                 {this.state.error.isChecked && (
@@ -267,14 +268,21 @@ class Signup extends React.Component<Props, SignupState> {
               ) : (
                 <CustomGButton
                   tittle="Sign up"
+                  testID="btn-signup"
                   style={styles.buttonView1}
                   onPress={() => this.handleRegister()}
                 />
               )}
               <View style={styles.lastView}>
-                <Text style={styles.textIhave}>Have an account?</Text>
-                <Text style={styles.textIhave} onPress={this.navigateToLogin}>
-                  Log in
+                <Text style={styles.textIhave}>
+                  {translate('auth.haveAccount')}
+                </Text>
+                <Text
+                  testID="login-txt"
+                  style={styles.textIhave}
+                  onPress={this.navigateToLogin}
+                >
+                  {translate('auth.login')}
                 </Text>
               </View>
             </ScrollView>

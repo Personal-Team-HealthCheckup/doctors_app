@@ -49,7 +49,9 @@ jest.mock('react-redux', () => {
   return {
     useSelector: jest.fn(),
     useDispatch: jest.fn(),
-    connect: (mapStateToProps?: any, mapDispatchToProps?: any) => (Component: any) => Component,
+    connect:
+      (mapStateToProps?: any, mapDispatchToProps?: any) => (Component: any) =>
+        Component,
   };
 });
 
@@ -79,3 +81,13 @@ jest.mock('reactotron-react-native', () => ({
   createEnhancer: jest.fn(),
   trackGlobalErrors: jest.fn(),
 }));
+
+// jest.mock('i18n-js', () => ({
+//   I18n: jest.fn().mockImplementation(() => ({
+//     t: jest.fn(key => key),
+//     locale: 'en',
+//     enableFallback: false,
+//     translations: { en: {} },
+//     missingTranslation: { get: (text: string) => text },
+//   })),
+// }));
