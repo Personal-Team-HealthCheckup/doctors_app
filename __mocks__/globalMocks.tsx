@@ -50,8 +50,14 @@ jest.mock('react-redux', () => {
     useSelector: jest.fn(),
     useDispatch: jest.fn(),
     connect:
-      (mapStateToProps?: any, mapDispatchToProps?: any) => (Component: any) =>
-        Component,
+      (mapStateToProps?: any, mapDispatchToProps?: any) => (Component: any) => {
+        mapStateToProps &&
+          mapStateToProps({
+            Auth: {},
+          });
+
+        return Component;
+      },
   };
 });
 

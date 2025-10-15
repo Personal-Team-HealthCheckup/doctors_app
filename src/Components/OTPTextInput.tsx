@@ -7,7 +7,6 @@ import {
   NativeSyntheticEvent,
 } from 'react-native';
 import { COLORS, FONTS } from '../global/theme';
-import { ColorProperties } from 'react-native-reanimated/lib/typescript/Colors';
 import { responsiveHeight } from 'react-native-responsive-dimensions';
 
 interface OTPTextInputProps {
