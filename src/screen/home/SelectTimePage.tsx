@@ -13,24 +13,24 @@ import {
 } from 'react-native';
 import CustomStatusBar from '../../Components/common/CustomStatusBar';
 import CustomHeader from '../../Components/common/CustomHeader';
-import {gradientPng, imageProfile3} from '../../assets/assets';
+import { gradientPng, imageProfile3 } from '../../assets/assets';
 import {
   Navigation,
   Slots,
   SlotsAvailableChangeData,
   SlotsDateTimes,
 } from '../../global/types';
-import {handleScroll} from '../../helper/utilities';
-import {COLORS, FONTS} from '../../global/theme';
+import { handleScroll } from '../../helper/utilities';
+import { COLORS, FONTS } from '../../global/theme';
 import {
   responsiveHeight,
   responsiveScreenWidth,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import {moderateScale} from '../../helper/Scale';
+import { moderateScale } from '../../helper/Scale';
 import CustomRating from '../../Components/CustomRating';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
-import {slotsAvailable, slotsDateTimes} from '../../global/data';
+import { slotsAvailable, slotsDateTimes } from '../../global/data';
 import LinearGradient from 'react-native-linear-gradient';
 import CustomGButton from '../../Components/common/CustomGButton';
 import CustomButton from '../../Components/common/CustomButton';
@@ -39,7 +39,6 @@ interface SelectTimePageProps {
 }
 
 interface SelectTimePageState {
-  isScrollEnabled: boolean;
   slotItem?: SlotsDateTimes;
   slotsDateTimes: SlotsDateTimes[];
   isNextAvailabilityClicked: boolean;
@@ -53,21 +52,17 @@ class SelectTimePage extends React.Component<
   constructor(props: SelectTimePageProps) {
     super(props);
     this.state = {
-      isScrollEnabled: false,
       slotsDateTimes: slotsDateTimes,
       isNextAvailabilityClicked: false,
       slotsAvailable: slotsAvailable,
     };
   }
 
-  handleScroll1 = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    this.setState({isScrollEnabled: handleScroll(event)});
-  };
-
   Card = (item: SlotsDateTimes) => (
     <TouchableOpacity
       onPress={() => this.selectTheSlot(item)}
-      style={styles.slotView}>
+      style={styles.slotView}
+    >
       <Text style={styles.heading1}>{item.date}</Text>
       <Text style={styles.subHeading1}>
         {item.slotsAvailable > 0 ? item.slotsAvailable : 'No'} slots available
@@ -75,17 +70,18 @@ class SelectTimePage extends React.Component<
     </TouchableOpacity>
   );
 
-  _renderSlots = ({item}: {item: SlotsDateTimes}) => {
-    const {Card} = this;
+  _renderSlots = ({ item }: { item: SlotsDateTimes }) => {
+    const { Card } = this;
 
     return (
       <>
         {item.isSelected ? (
           <LinearGradient
             colors={[COLORS.greeen2, COLORS.greeen1]}
-            start={{x: 0, y: 0}}
-            end={{x: 1, y: 1}}
-            style={[styles.slotView, styles.gradient]}>
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            style={[styles.slotView, styles.gradient]}
+          >
             <Card {...item} />
           </LinearGradient>
         ) : (
@@ -110,10 +106,10 @@ class SelectTimePage extends React.Component<
         };
       }) as unknown as string[];
 
-      return {...slot, slots: x};
+      return { ...slot, slots: x };
     });
-    this.setState({slotsAvailable: slotsAvailable1});
-    this.setState({slotItem: slotItem});
+    this.setState({ slotsAvailable: slotsAvailable1 });
+    this.setState({ slotItem: slotItem });
   }
   selectTheSlot = (item: SlotsDateTimes) => {
     this.setState(
@@ -131,7 +127,7 @@ class SelectTimePage extends React.Component<
         const slotItem = this.state.slotsDateTimes.find(
           slot => slot.isSelected,
         );
-        this.setState({slotItem: slotItem});
+        this.setState({ slotItem: slotItem });
       },
     );
   };
@@ -148,30 +144,33 @@ class SelectTimePage extends React.Component<
         return items;
       }) as unknown as string[];
 
-      return {...slot, slots: x};
+      return { ...slot, slots: x };
     });
-    this.setState({slotsAvailable: slotsAvailable1});
+    this.setState({ slotsAvailable: slotsAvailable1 });
   };
 
-  _renderTime = ({item}: {item: Slots | string}) => {
-    const {isSelected, slots} = item as Slots;
+  _renderTime = ({ item }: { item: Slots | string }) => {
+    const { isSelected, slots } = item as Slots;
     return (
       <>
         {isSelected ? (
           <LinearGradient
             colors={[COLORS.greeen2, COLORS.greeen1]}
-            start={{x: 0, y: 0}}
-            end={{x: 1, y: 1}}
-            style={[styles.buttonSlot, styles.gradient1]}>
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            style={[styles.buttonSlot, styles.gradient1]}
+          >
             <TouchableOpacity
               onPress={() => this.toggleSlotTimeAvail(slots)}
-              style={styles.buttonSlot}>
+              style={styles.buttonSlot}
+            >
               <Text
                 style={[
                   styles.heading1,
                   styles.headingText,
                   isSelected && styles.headingSelectText,
-                ]}>
+                ]}
+              >
                 {slots}
               </Text>
             </TouchableOpacity>
@@ -179,14 +178,15 @@ class SelectTimePage extends React.Component<
         ) : (
           <TouchableOpacity
             onPress={() => this.toggleSlotTimeAvail(slots)}
-            style={styles.buttonSlot}>
+            style={styles.buttonSlot}
+          >
             <Text style={[styles.heading1, styles.headingText]}>{slots}</Text>
           </TouchableOpacity>
         )}
       </>
     );
   };
-  _renderSlotsTime = ({item}: {item: SlotsAvailableChangeData}) => {
+  _renderSlotsTime = ({ item }: { item: SlotsAvailableChangeData }) => {
     return (
       <View style={styles.slotAvailableView}>
         <Text style={styles.heading1}>{item.date}</Text>
@@ -206,118 +206,117 @@ class SelectTimePage extends React.Component<
     return (
       <View style={styles.mainView}>
         <CustomStatusBar
-          isScrollEnabled={this.state.isScrollEnabled}
-          backgroundColor={
-            this.state.isScrollEnabled ? COLORS.white : COLORS.transparent
-          }
+          isScrollEnabled={false}
+          backgroundColor={COLORS.transparent}
         />
 
         <ImageBackground source={gradientPng} style={styles.imageView}>
-          <ScrollView
-            scrollEnabled={true}
-            onScroll={event => this.handleScroll1(event)}
-            scrollEventThrottle={16}
-            bounces={false}
-            contentContainerStyle={styles.buttonContainerStyle}
-            style={styles.container}>
+          <View style={styles.mainViewContainer}>
             <CustomHeader
               navigation={this.props.navigation}
               heading="Select Time"
               isIcon
             />
-            <View style={styles.mainView1}>
-              <View style={styles.cardDoctor}>
-                <View style={styles.imageView1}>
-                  <Image source={imageProfile3} style={styles.imageStyles} />
-                  <View style={styles.textView}>
-                    <Text numberOfLines={2} style={styles.heading}>
-                      Dr. Julie Will Dr. Julie Will Dr. Julie Will
-                    </Text>
-                    <Text numberOfLines={3} style={[styles.subHeading]}>
-                      Upasana Dental Clinic, salt lake
-                    </Text>
-                    <CustomRating
-                      initialValue={3}
-                      iconSize={18}
-                      isDisable
-                      starViewStyle={styles.customRating}
+            <ScrollView
+              bounces={false}
+              contentContainerStyle={styles.buttonContainerStyle}
+              style={styles.container}
+              showsVerticalScrollIndicator={false}
+            >
+              <View style={styles.mainView1}>
+                <View style={styles.cardDoctor}>
+                  <View style={styles.imageView1}>
+                    <Image source={imageProfile3} style={styles.imageStyles} />
+                    <View style={styles.textView}>
+                      <Text numberOfLines={2} style={styles.heading}>
+                        Dr. Julie Will Dr. Julie Will Dr. Julie Will
+                      </Text>
+                      <Text numberOfLines={3} style={[styles.subHeading]}>
+                        Upasana Dental Clinic, salt lake
+                      </Text>
+                      <CustomRating
+                        initialValue={3}
+                        iconSize={18}
+                        isDisable
+                        starViewStyle={styles.customRating}
+                      />
+                    </View>
+                  </View>
+                  <TouchableOpacity style={styles.likeButton}>
+                    <FontAwesomeIcon
+                      name={true ? 'heart' : 'heart-o'}
+                      color={true ? COLORS.red1 : COLORS.lightBlack2}
+                      size={20}
+                    />
+                  </TouchableOpacity>
+                </View>
+                <View style={styles.fltView}>
+                  <FlatList
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    data={this.state.slotsDateTimes}
+                    contentContainerStyle={styles.contentContainerStyle}
+                    style={styles.styleFlat}
+                    renderItem={this._renderSlots}
+                    keyExtractor={item => item.id.toString()}
+                  />
+                </View>
+                <View style={styles.noSlotView}>
+                  {this.state.slotItem && (
+                    <TouchableOpacity activeOpacity={1} style={styles.slotView}>
+                      <Text style={styles.heading1}>
+                        {this.state.slotItem.date}
+                      </Text>
+                      <Text style={[styles.subHeading1, styles.subHe]}>
+                        {this.state.slotItem.slotsAvailable > 0
+                          ? this.state.slotItem.slotsAvailable
+                          : 'No'}{' '}
+                        slots available
+                      </Text>
+                    </TouchableOpacity>
+                  )}
+                </View>
+                {this.state.isNextAvailabilityClicked ? (
+                  <View style={{}}>
+                    <FlatList
+                      bounces={false}
+                      data={this.state.slotsAvailable}
+                      renderItem={this._renderSlotsTime}
+                      keyExtractor={item => item.date}
+                    />
+                    <View style={styles.buttonViewSlot}>
+                      <CustomGButton
+                        tittle="Edit"
+                        isGray={true}
+                        style={styles.buttonSlots}
+                        textStyle={styles.text}
+                      />
+                      <CustomGButton
+                        tittle="Book Now"
+                        style={styles.buttonSlots}
+                        textStyle={styles.text}
+                      />
+                    </View>
+                  </View>
+                ) : (
+                  <View style={styles.buttonView}>
+                    <CustomGButton
+                      tittle={`Next availability on ${this.state.slotItem?.date}`}
+                      style={styles.button}
+                      textStyle={styles.text}
+                      onPress={this.isNextAvailabilityClicked}
+                    />
+                    <Text style={[styles.subHe, styles.text1]}>OR</Text>
+                    <CustomButton
+                      title="Contact Clinic"
+                      style={[styles.button, styles.button1]}
+                      textStyle={[styles.text, styles.textGreen]}
                     />
                   </View>
-                </View>
-                <TouchableOpacity style={styles.likeButton}>
-                  <FontAwesomeIcon
-                    name={true ? 'heart' : 'heart-o'}
-                    color={true ? COLORS.red1 : COLORS.lightBlack2}
-                    size={20}
-                  />
-                </TouchableOpacity>
-              </View>
-              <View style={styles.fltView}>
-                <FlatList
-                  horizontal
-                  showsHorizontalScrollIndicator={false}
-                  data={this.state.slotsDateTimes}
-                  contentContainerStyle={styles.contentContainerStyle}
-                  style={styles.styleFlat}
-                  renderItem={this._renderSlots}
-                  keyExtractor={item => item.id.toString()}
-                />
-              </View>
-              <View style={styles.noSlotView}>
-                {this.state.slotItem && (
-                  <TouchableOpacity activeOpacity={1} style={styles.slotView}>
-                    <Text style={styles.heading1}>
-                      {this.state.slotItem.date}
-                    </Text>
-                    <Text style={[styles.subHeading1, styles.subHe]}>
-                      {this.state.slotItem.slotsAvailable > 0
-                        ? this.state.slotItem.slotsAvailable
-                        : 'No'}{' '}
-                      slots available
-                    </Text>
-                  </TouchableOpacity>
                 )}
               </View>
-              {this.state.isNextAvailabilityClicked ? (
-                <View style={{}}>
-                  <FlatList
-                    bounces={false}
-                    data={this.state.slotsAvailable}
-                    renderItem={this._renderSlotsTime}
-                    keyExtractor={item => item.date}
-                  />
-                  <View style={styles.buttonViewSlot}>
-                    <CustomGButton
-                      tittle="Edit"
-                      isGray={true}
-                      style={styles.buttonSlots}
-                      textStyle={styles.text}
-                    />
-                    <CustomGButton
-                      tittle="Book Now"
-                      style={styles.buttonSlots}
-                      textStyle={styles.text}
-                    />
-                  </View>
-                </View>
-              ) : (
-                <View style={styles.buttonView}>
-                  <CustomGButton
-                    tittle={`Next availability on ${this.state.slotItem?.date}`}
-                    style={styles.button}
-                    textStyle={styles.text}
-                    onPress={this.isNextAvailabilityClicked}
-                  />
-                  <Text style={[styles.subHe, styles.text1]}>OR</Text>
-                  <CustomButton
-                    title="Contact Clinic"
-                    style={[styles.button, styles.button1]}
-                    textStyle={[styles.text, styles.textGreen]}
-                  />
-                </View>
-              )}
-            </View>
-          </ScrollView>
+            </ScrollView>
+          </View>
         </ImageBackground>
       </View>
     );
@@ -326,35 +325,37 @@ class SelectTimePage extends React.Component<
 
 export default SelectTimePage;
 const styles = StyleSheet.create({
+  mainViewContainer: {
+    flex: 1,
+    paddingHorizontal: responsiveScreenWidth(5),
+    paddingVertical: responsiveHeight(3),
+    width: responsiveWidth(100),
+    height: responsiveHeight(100),
+  },
   mainView: {
     flex: 1,
     width: responsiveWidth(100),
     height: responsiveHeight(100),
     backgroundColor: COLORS.black,
   },
-  buttonContainerStyle: {paddingBottom: responsiveHeight(10)},
+  buttonContainerStyle: { paddingBottom: responsiveHeight(10) },
   container: {
-    width: responsiveWidth(100),
-    height: responsiveHeight(100),
     flex: 1,
-    paddingHorizontal: responsiveScreenWidth(5),
-    paddingVertical: responsiveHeight(3),
   },
   imageView: {
     width: responsiveWidth(100),
     height: responsiveHeight(100),
     alignItems: 'center',
     resizeMode: 'cover',
-
     position: 'relative',
     flex: 1,
   },
-  textInput: {marginTop: responsiveHeight(4)},
+  textInput: { marginTop: responsiveHeight(4) },
   stylesFlatlist: {
     marginVertical: '5%',
   },
-  doctorList: {marginVertical: 4},
-  contentContainer: {paddingBottom: responsiveHeight(15)},
+  doctorList: { marginVertical: 4 },
+  contentContainer: { paddingBottom: responsiveHeight(15) },
   cardDoctor: {
     backgroundColor: COLORS.black2gray,
     borderRadius: responsiveHeight(2),

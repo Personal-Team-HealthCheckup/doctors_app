@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text} from 'react-native';
+import { Text } from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
 
 interface LocationManagerProps {}
@@ -22,7 +22,7 @@ class LocationManager extends React.Component<
       error => {
         console.log('----position', error);
       },
-      {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
+      { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 },
     );
   }
   render() {

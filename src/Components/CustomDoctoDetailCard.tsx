@@ -15,55 +15,70 @@ function CustomDoctoDetailCard() {
     <View style={styles.cardDoctor}>
       <View style={styles.imageView1}>
         <Image source={imageProfile3} style={styles.imageStyles} />
-        <View style={styles.textView}>
-          <Text numberOfLines={2} style={styles.heading}>
-            Dr. Julie Will Dr. Julie Will Dr. Julie Will
-          </Text>
-          <Text numberOfLines={3} style={[styles.subHeading]}>
-            Upasana Dental Clinic, salt lake
-          </Text>
+      </View>
+      <View style={styles.textView}>
+        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+          <View style={{ flex: 1 }}>
+            <Text numberOfLines={2} style={styles.heading}>
+              Dr. Julie Will Dr. Julie Will Dr. Julie Will
+            </Text>
+            <Text numberOfLines={3} style={[styles.subHeading]}>
+              Upasana Dental Clinic, salt lake
+            </Text>
+          </View>
+          <TouchableOpacity style={styles.likeButton}>
+            <FontAwesomeIcon
+              name={true ? 'heart' : 'heart-o'}
+              color={true ? COLORS.red1 : COLORS.lightBlack2}
+              size={20}
+            />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.viewTextMainRating}>
           <CustomRating
             initialValue={3}
             iconSize={18}
             isDisable
             starViewStyle={styles.customRating}
           />
-          <Text>
-            $ <Text> 28/hr</Text>
+          <Text style={styles.textPrice}>
+            $ <Text style={styles.text2}>28.00/hr</Text>
           </Text>
         </View>
       </View>
-      <TouchableOpacity style={styles.likeButton}>
-        <FontAwesomeIcon
-          name={true ? 'heart' : 'heart-o'}
-          color={true ? COLORS.red1 : COLORS.lightBlack2}
-          size={20}
-        />
-      </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  viewTextMainRating: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flex: 1,
+  },
+  textPrice: {
+    fontFamily: FONTS.rubik.medium,
+    fontSize: moderateScale(12),
+    color: COLORS.green,
+  },
+  text2: {
+    fontFamily: FONTS.rubik.light,
+    color: COLORS.white,
+  },
   cardDoctor: {
     backgroundColor: COLORS.black2gray,
     borderRadius: responsiveHeight(2),
     width: responsiveWidth(90),
     minHeight: responsiveHeight(16),
     padding: responsiveWidth(4),
-    alignItems: 'flex-start',
     flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  imageView1: {
-    flexDirection: 'row',
-    flex: 1,
     gap: responsiveWidth(3),
-    alignItems: 'center',
   },
+  imageView1: {},
   customRating: {
-    marginTop: responsiveHeight(1),
     gap: responsiveWidth(1),
+    justifyContent: 'flex-start',
   },
   imageStyles: {
     width: responsiveHeight(14),
@@ -75,22 +90,24 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(12),
     color: COLORS.white2gray,
     fontFamily: FONTS.rubik.light,
-    width: '50%',
+    // width: '50%',
   },
   heading: {
     fontFamily: FONTS.rubik.medium,
     fontSize: moderateScale(18),
     color: COLORS.white,
-    width: '50%',
+    // width: '50%',
   },
   mainView1: {
     marginTop: responsiveHeight(2),
   },
 
   likeButton: {
-    alignItems: 'flex-start',
+    // alignItems: 'flex-start',
   },
-  textView: {},
+  textView: {
+    flex: 1,
+  },
 });
 
 export default CustomDoctoDetailCard;

@@ -31,8 +31,8 @@ import CustomTextInput from '../../Components/common/CustomTextInput';
 import CustomGButton from '../../Components/common/CustomGButton';
 import { closeKeyBoard, handleScroll } from '../../helper/utilities';
 import { Navigation } from '../../global/types';
-interface ProfilePageProps { 
-  navigation?: Navigation
+interface ProfilePageProps {
+  navigation?: Navigation;
 }
 
 interface ProfilePageState {
@@ -60,10 +60,18 @@ class ProfilePage extends React.Component<ProfilePageProps, ProfilePageState> {
           <ScrollView
             scrollEventThrottle={16}
             bounces={false}
-            contentContainerStyle={{ paddingBottom: "10%" }}
-            style={styles.container}>
-            <TouchableWithoutFeedback style={{ flex: 1 }} onPress={() => closeKeyBoard()}>
-              <KeyboardAvoidingView keyboardVerticalOffset={12} behavior={Platform.OS === "ios" ? "padding" : undefined} style={{ flex: 1 }}>
+            contentContainerStyle={{ paddingBottom: '10%' }}
+            style={styles.container}
+          >
+            <TouchableWithoutFeedback
+              style={{ flex: 1 }}
+              onPress={() => closeKeyBoard()}
+            >
+              <KeyboardAvoidingView
+                keyboardVerticalOffset={12}
+                behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+                style={{ flex: 1 }}
+              >
                 <View style={styles.mainView}>
                   <Text style={styles.title}>Set up your profile</Text>
                   <Text style={styles.subtitle}>
@@ -75,7 +83,8 @@ class ProfilePage extends React.Component<ProfilePageProps, ProfilePageState> {
                     colors={[COLORS.lightCyan, COLORS.lightYellow]}
                     start={{ x: 0.0, y: 0.5 }}
                     end={{ x: 1.0, y: 0.5 }}
-                    style={styles.imageView}>
+                    style={styles.imageView}
+                  >
                     <View style={styles.cameraView}>
                       <VectorIcon
                         name="camera"

@@ -18,9 +18,12 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import { moderateScale } from '../../helper/Scale';
-import { patientStatistic } from '../../global/data';
+import { customDataForServices, patientStatistic } from '../../global/data';
 import CustomGButton from '../../Components/common/CustomGButton';
 import CustomDoctoDetailCard from '../../Components/CustomDoctoDetailCard';
+import { nestedNavigateTo } from '../../helper/utilities';
+import { HOME } from '../../Constants/Navigator';
+
 interface DoctorDetailsPageProps {
   navigation?: Navigation;
 }
@@ -38,9 +41,9 @@ class DoctorDetailsPage extends React.Component<
 
   _renterServices = ({ item, index }: { item: string; index: number }) => {
     return (
-      <View>
-        <Text style={styles.text1}>
-          {index + 1}.{item}
+      <View style={{ marginTop: responsiveHeight(1) }}>
+        <Text style={[styles.heading1, styles.textStyles]}>
+          <Text style={{ color: COLORS.green }}>{index + 1}.</Text> {item}
         </Text>
       </View>
     );
@@ -57,7 +60,7 @@ class DoctorDetailsPage extends React.Component<
           <View style={styles.container}>
             <CustomHeader
               navigation={this.props.navigation}
-              heading="Select Time"
+              heading="Doctor Details"
               isIcon
             />
             <ScrollView
@@ -78,26 +81,29 @@ class DoctorDetailsPage extends React.Component<
                     </View>
                   ))}
                 </View>
-                <View>
+                <View style={styles.flatMainView}>
                   <Text style={styles.heading1}>Services</Text>
 
                   <FlatList
-                    data={[
-                      'Instant Appointments',
-                      'Specialists Available',
-                      ' Physical and Virtual Consultations',
-                      'Instant Prescriptions',
-                    ]}
+                    data={customDataForServices}
                     renderItem={item => this._renterServices(item)}
                   />
                 </View>
-                <CustomGButton
-                  tittle="Next"
-                  style={styles.buttonSlots}
-                  textStyle={styles.text}
-                />
               </View>
             </ScrollView>
+            <CustomGButton
+              tittle="Next"
+              style={styles.buttonSlots}
+              testID="button-slots"
+              textStyle={styles.text}
+              onPress={() => {
+                nestedNavigateTo(
+                  this.props.navigation,
+                  [HOME.BOTTOMTABS, HOME.APPOINTMENTPAGE],
+                  HOME.DASHBOARD,
+                );
+              }}
+            />
           </View>
         </ImageBackground>
       </View>
@@ -107,6 +113,15 @@ class DoctorDetailsPage extends React.Component<
 
 export default DoctorDetailsPage;
 const styles = StyleSheet.create({
+  textStyles: {
+    color: COLORS.white2gray,
+    marginBottom: 0,
+    fontFamily: FONTS.rubik.regular,
+    fontSize: moderateScale(15),
+  },
+  flatMainView: {
+    marginTop: responsiveHeight(2),
+  },
   textCard: {
     backgroundColor: COLORS.lightBalckishGrey,
     width: 90,
@@ -169,6 +184,7 @@ const styles = StyleSheet.create({
   buttonSlots: {
     alignSelf: 'center',
     width: responsiveWidth(70),
+    marginBottom: responsiveHeight(5),
   },
   buttonViewSlot: {
     flexDirection: 'row',
