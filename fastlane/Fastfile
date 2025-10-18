@@ -3,7 +3,10 @@ default_platform(:android)
 platform :android do
   desc "Run Android unit tests"
   lane :test do
-    gradle(task: "test")
+    gradle(
+      task: "test",
+      project_dir: "android"
+    )
   end
 
   desc "Build Android APK (Debug)"
@@ -34,24 +37,26 @@ platform :ios do
       export_method: "development",
       skip_package_ipa: true,
       skip_codesigning: true,
-      skip_codesign: true ,
-      # destination: "generic/platform=iOS Simulator"
+      skip_codesign: true,
       destination: "platform=iOS Simulator,name=iPhone 16 Pro,OS=18.5"
     )
   end
 
-  desc "Build iOS Release IPA"
- lane :build_release do
-  build_app(
-    workspace: "ios/doctor_app.xcworkspace",
-    scheme: "doctor_app",
-    export_method: "development",
-    output_directory: "build",
-    export_options: {
-      signingStyle: "automatic",
-      compileBitcode: false
-    },
-    output_name: "doctor_app.ipa"
-  )
-end
+  desc "Build iOS Release IPA (Development)"
+  lane :build_release do
+    setup_ci if ENV['CI']
+
+    build_app(
+      workspace: "ios/doctor_app.xcworkspace",
+      scheme: "doctor_app",
+      configuration: "Release",
+      export_method: "development",
+      output_directory: "./build",
+      output_name: "doctor_app.ipa",
+      export_options: {
+        signingStyle: "automatic",
+        compileBitcode: false
+      }
+    )
+  end
 end

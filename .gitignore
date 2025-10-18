@@ -54,6 +54,17 @@ yarn-error.log
 **/fastlane/screenshots
 **/fastlane/test_output
 
+# Fastlane secrets and certificates (DO NOT COMMIT)
+**/fastlane/google-play-service-account.json
+**/fastlane/*.p12
+**/fastlane/*.cer
+**/fastlane/*.mobileprovision
+**/fastlane/*.certSigningRequest
+**/fastlane/.env*
+android/app/release.keystore
+android/app/*.keystore
+!android/app/debug.keystore
+
 # Bundle artifact
 *.jsbundle
 
