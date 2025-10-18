@@ -87,8 +87,8 @@ export const navigateTo = (
 
 // replace to single screen
 export const replaceTo = (
-  navigation: Navigation,
-  screenName: string,
+  navigation?: Navigation,
+  screenName: string = '',
   params?: object,
 ) => {
   if (navigation && navigation.replace) {

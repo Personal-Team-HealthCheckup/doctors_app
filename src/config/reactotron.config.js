@@ -7,7 +7,7 @@ const host = '10.129.124.247'; // ⚠️ Replace with your machine IP if using a
 const reactotron = Reactotron.setAsyncStorageHandler(AsyncStorage)
   .configure({
     name: 'doctor_app',
-    host, // ✅ uncomment this if running on a real device
+    // host, // ✅ uncomment this if running on a real device
   })
   .useReactNative({
     asyncStorage: true,
