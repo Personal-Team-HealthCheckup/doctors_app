@@ -145,28 +145,13 @@ jobs:
       - name: Setup Fastlane
         run: bundle install
 
-      - name: Build iOS Release IPA
-        run: bundle exec fastlane ios build_release
+      - name: Build iOS for Simulator
+        run: bundle exec fastlane ios build_simulator
 
-      - name: Upload IPA artifact
+      - name: Upload Build Summary
         if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: ios-release-ipa
-          path: build/doctor_app.ipa
-          retention-days: 30
-
-      - name: Upload IPA to GitHub Release
-        if: github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main')
-        uses: ncipollo/release-action@v1
-        with:
-          artifacts: build/doctor_app.ipa
-          token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ios-v${{ github.run_number }}
-          name: iOS Release ${{ github.run_number }}
-          body: |
-            Automated iOS build from commit ${{ github.sha }}
-
-            **Download the IPA below to install on your device**
-          allowUpdates: true
-          makeLatest: true
+        run: |
+          echo "✅ iOS Simulator build completed successfully" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Note: Device IPA builds require an Apple Developer account." >> $GITHUB_STEP_SUMMARY
+          echo "Once you have credentials, update the workflow to use 'build_release' lane." >> $GITHUB_STEP_SUMMARY

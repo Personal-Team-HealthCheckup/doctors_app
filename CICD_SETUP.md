@@ -16,12 +16,14 @@ This guide explains how to set up the CI/CD pipeline for building iOS and Androi
 ## Overview
 
 The CI/CD pipeline automatically:
-- Builds iOS and Android release apps
-- Signs the apps properly
-- Uploads APK and IPA files as downloadable artifacts
-- Creates GitHub Releases with downloadable builds
+- Builds Android release APK (signed and ready to install)
+- Builds iOS app for simulator (no Apple Developer account required)
+- Uploads APK as downloadable artifact
+- Creates GitHub Releases with downloadable Android APK
 - Runs on every push to `main` or `master` branches
 - Can be triggered manually via workflow dispatch
+
+**Note**: iOS device builds (IPA) require an Apple Developer account and will be enabled once you have the necessary credentials.
 
 ## Prerequisites
 
@@ -84,7 +86,19 @@ Go to your GitHub repository → Settings → Secrets and variables → Actions 
 | `ANDROID_KEY_ALIAS` | Key alias | Alias you set when creating keystore (e.g., "my-key-alias") |
 | `ANDROID_KEY_PASSWORD` | Key password | Key password you set when creating keystore |
 
-**Note**: iOS builds use automatic signing with development profile, so no iOS secrets are needed for now.
+**Note**: iOS simulator builds don't require signing, so no iOS secrets are needed for now.
+
+### Optional: iOS Device Build Secrets (When You Get Apple Developer Account)
+
+To enable iOS device builds later, you'll need to add these secrets:
+
+| Secret Name | Description |
+|-------------|-------------|
+| `IOS_CERTIFICATE_BASE64` | Base64 encoded .p12 certificate |
+| `IOS_CERTIFICATE_PASSWORD` | Password for .p12 certificate |
+| `KEYCHAIN_PASSWORD` | Any secure password for temporary keychain |
+
+Then update `.github/workflows/main.yml` to use `build_release` instead of `build_simulator`.
 
 ## Running the Pipeline
 
@@ -116,14 +130,13 @@ There are two ways to download your builds:
 2. Click on the workflow run you want
 3. Scroll down to "Artifacts" section
 4. Download:
-   - `android-release-apk` - Android APK file
-   - `ios-release-ipa` - iOS IPA file
+   - `android-release-apk` - Android APK file (ready to install)
 
 ### Method 2: GitHub Releases (Permanent)
 
 1. Go to your repository → "Releases" section
-2. Find the release you want (tagged as `android-vXXX` or `ios-vXXX`)
-3. Download the APK or IPA file from the Assets section
+2. Find the release tagged as `android-vXXX`
+3. Download the APK file from the Assets section
 
 ### Installing on Devices
 
@@ -133,8 +146,12 @@ There are two ways to download your builds:
 - Tap the APK file to install
 
 **iOS:**
-- You'll need to use a distribution service like TestFlight, Diawi, or install via Xcode
-- For development, you can use Xcode → Window → Devices and Simulators → Install app
+- Currently, only simulator builds are generated (no device IPA)
+- To run on iOS devices, you'll need:
+  1. An Apple Developer account ($99/year)
+  2. Update the workflow to use `build_release` lane
+  3. Configure signing certificates in GitHub secrets
+- For development on simulator: Use Xcode to build and run locally
 
 ## Local Testing
 
@@ -169,15 +186,14 @@ MYAPP_UPLOAD_KEY_PASSWORD=your-key-password
 bundle install
 cd ios && pod install && cd ..
 
-# Build for simulator
+# Build for simulator (no signing required)
 bundle exec fastlane ios build_simulator
 
-# Build ad-hoc IPA
-bundle exec fastlane ios build_adhoc
-
-# Build app store IPA
+# Build release IPA (requires Apple Developer account)
 bundle exec fastlane ios build_release
 ```
+
+**Note**: The `build_release` lane requires proper code signing setup with an Apple Developer account.
 
 ## Available Fastlane Lanes
 
