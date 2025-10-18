@@ -37,7 +37,7 @@ platform :ios do
       skip_package_ipa: true,
       skip_codesigning: true,
       skip_archive: true,
-      destination: "platform=iOS Simulator,name=iPhone 16 Pro,OS=18.5"
+      destination: "generic/platform=iOS Simulator"
     )
   end
 
