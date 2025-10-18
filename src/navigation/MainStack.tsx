@@ -3,23 +3,15 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Signup from '../screen/auth/Signup';
 import Signin from '../screen/auth/Signin';
 import SplashScreens from '../screen/Splashscreen';
-import {
-  AUTH,
-  DASHBOARD,
-  HOME,
-  LANDING,
-  MAINSTACK,
-} from '../Constants/Navigator';
+import { AUTH, DASHBOARD, HOME, MAINSTACK } from '../Constants/Navigator';
 import OnBoarding from '../screen/auth/OnBoarding';
 import DrawerTabNavigation from './DrawerTabNavigation';
 import SearchPage from '../screen/home/SearchPage';
 import SelectTimePage from '../screen/home/SelectTimePage';
-// import Video from '../Components/videoPlayer/Video';
-// import { useSelector } from 'react-redux';
-// import { RootState } from '../redux/store';
-import JoinChannelVideo from '../Components/videoPlayer/JoinChannelVideo';
+
 import AllDoctors from '../screen/home/AllDoctors';
 import DoctorDetailsPage from '../screen/home/DoctorDetailsScreen';
+import VerificationCode from '../screen/auth/VerificationCode';
 
 const MainStack = createNativeStackNavigator();
 const AuthStack = createNativeStackNavigator();
@@ -32,6 +24,7 @@ const AuthNavigation = () => {
       initialRouteName={AUTH.ONBOARDING}
     >
       <AuthStack.Screen name={AUTH.SIGNUP} component={Signup} />
+      <AuthStack.Screen name={AUTH.VERIFICATION} component={VerificationCode} />
       <AuthStack.Screen name={AUTH.SIGNIN} component={Signin} />
       <AuthStack.Screen name={AUTH.ONBOARDING} component={OnBoarding} />
     </AuthStack.Navigator>
@@ -60,9 +53,12 @@ const MainNavigation = () => {
   return (
     <MainStack.Navigator
       screenOptions={{ headerShown: false }}
-      initialRouteName={MAINSTACK.HOMENAVIGATION}
+      initialRouteName={MAINSTACK.SPLASHSCREEN}
     >
-      <MainStack.Screen name={LANDING.SPLASHSCREEN} component={SplashScreens} />
+      <MainStack.Screen
+        name={MAINSTACK.SPLASHSCREEN}
+        component={SplashScreens}
+      />
       <MainStack.Screen
         name={MAINSTACK.AUTHNAVIGATION}
         component={AuthNavigation}
@@ -71,10 +67,10 @@ const MainNavigation = () => {
         name={MAINSTACK.HOMENAVIGATION}
         component={HomeNavigation}
       />
-      <MainStack.Screen
+      {/* <MainStack.Screen
         name={MAINSTACK.DUMMYStack}
         component={JoinChannelVideo}
-      />
+      /> */}
     </MainStack.Navigator>
   );
 };

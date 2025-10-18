@@ -3,6 +3,6 @@
     "jsx": "react"
   },
   "extends": "@react-native/typescript-config",
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": ["**/*.ts", "**/*.tsx", "src/config/reactotron.config.js"],
   "exclude": ["**/node_modules", "**/Pods"]
 }

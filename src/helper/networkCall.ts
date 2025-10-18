@@ -1,57 +1,82 @@
-import {baseURL} from './config';
-import {store} from '../redux/store';
+import { baseURL } from './config';
+import { store } from '../redux/store';
 
 type IResponseType = 'json' | 'text' | 'blob';
-type IResolve = {
-  response: any;
-  error: string | unknown | null;
+type IResolve<T = any> = {
+  response: T | null;
+  error: string | null;
+  errorResponse: any | null;
 };
 type IMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
-const resolve = async (promise: () => void) => {
-  const resolved: IResolve = {
+const resolve = async <T>(promise: () => Promise<T>): Promise<IResolve<T>> => {
+  const resolved: IResolve<T> = {
     response: null,
     error: null,
+    errorResponse: null,
   };
+
   try {
     const response = await promise();
     resolved.response = response;
-  } catch (e) {
-    resolved.error = 'Something went wrong...';
+  } catch (e: any) {
+    console.error('NetworkCall Error:', e);
+    resolved.error =
+      e?.message || 'Something went wrong. Please try again later.';
+    resolved.errorResponse = e?.response || e;
   }
 
   return resolved;
 };
 
-const networkCall = async (
+const networkCall = async <T = any>(
   url: string,
   method: IMethod = 'GET',
   body?: RequestInit['body'],
   headers?: RequestInit['headers'],
   responseType: IResponseType = 'json',
-) => {
-  const makeCall = async () => {
-    try {
-      const fullUrl = /(http(s?)):\/\//i.test(url) ? url : baseURL + '/' + url;
-      const AuthData = store.getState()?.Auth;
-      const token = AuthData.token;
-      const defaultHeaders = {
-        'Content-Type':
-          body instanceof FormData ? 'multipart/form-data' : 'application/json',
-        ...(token && {token}),
-        ...headers,
-      };
-      const response = await fetch(fullUrl, {
-        method,
-        headers: defaultHeaders,
-        ...(body && {body}),
-      });
-      return response[responseType]();
-    } catch (error) {
-      return error;
+): Promise<IResolve<T>> => {
+  const makeCall = async (): Promise<T> => {
+    const fullUrl = /(http(s?)):\/\//i.test(url) ? url : `${baseURL}/${url}`;
+    const AuthData = store.getState()?.Auth;
+    const token = AuthData?.token;
+
+    const defaultHeaders = {
+      'Content-Type':
+        body instanceof FormData ? 'multipart/form-data' : 'application/json',
+      ...(token && { token }),
+      ...headers,
+    };
+
+    const response = await fetch(fullUrl, {
+      method,
+      headers: defaultHeaders,
+      ...(body && { body }),
+    });
+
+    if (!response.ok) {
+      let errorData: any = null;
+      let errorMessage = `HTTP Error ${response.status}`;
+
+      try {
+        errorData = await response.json();
+        if (errorData?.message) {
+          errorMessage = errorData.message;
+        }
+      } catch (e) {
+        console.warn('Error parsing error response:', e);
+        throw e;
+      }
+      const error: any = new Error(errorMessage);
+      error.response = errorData;
+      throw error;
     }
+
+    // Return response based on responseType
+    return response[responseType]();
   };
-  return await resolve(makeCall);
+
+  return resolve(makeCall);
 };
 
 export default networkCall;

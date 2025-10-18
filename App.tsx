@@ -100,6 +100,11 @@ class App extends React.Component<AppProps, AppState> {
   };
 
   render() {
+    if (__DEV__) {
+      import('./src/config/reactotron.config').then(() =>
+        console.log('Reactotron Configured'),
+      );
+    }
     return (
       <SafeAreaProvider>
         <NavigationContainer linking={linking}>

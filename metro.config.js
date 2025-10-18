@@ -14,6 +14,11 @@ const config = {
     babelTransformerPath: require.resolve(
       'react-native-svg-transformer/react-native',
     ),
+    minifierConfig: {
+      compress: {
+        drop_console: true, // Remove console.log in production
+      },
+    },
   },
   resolver: {
     assetExts: assetExts.filter(ext => ext !== 'svg'),

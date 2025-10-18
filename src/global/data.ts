@@ -372,3 +372,11 @@ export const patientStatistic = [
   { id: 2, title: 'Ongoing', count: '500' },
   { id: 3, title: 'Patient', count: '700' },
 ];
+
+// custom data for services
+export const customDataForServices = [
+  'Instant Appointments',
+  'Specialists Available',
+  'Physical and Virtual Consultations',
+  'Instant Prescriptions',
+];

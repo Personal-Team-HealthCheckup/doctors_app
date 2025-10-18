@@ -45,7 +45,8 @@ export interface QualifiedDoctorData {
 }
 
 export interface Navigation {
-  navigate?: (url: string) => void;
+  navigate?: (url: string, data?: any) => void;
+  replace?: (url: string, data?: any) => void;
   goBack?: () => void;
   toggleDrawer?: () => void;
   openDrawer?: () => void;

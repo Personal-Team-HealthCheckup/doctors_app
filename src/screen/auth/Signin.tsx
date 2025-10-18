@@ -1,6 +1,13 @@
 import React from 'react';
 import CustomStatusBar from '../../Components/common/CustomStatusBar';
-import {ImageBackground, Text, View, StyleSheet} from 'react-native';
+import {
+  ImageBackground,
+  Text,
+  View,
+  StyleSheet,
+  Alert,
+  TouchableOpacity,
+} from 'react-native';
 import {
   responsiveScreenWidth,
   responsiveHeight,
@@ -17,36 +24,117 @@ import {
   FacebookSvg,
   StarBlueSvg,
 } from '../../assets/assets';
-import {COLORS, FONTS} from '../../global/theme';
-import {moderateScale, verticalScale} from '../../helper/Scale';
-import {AUTH, MAINSTACK} from '../../Constants/Navigator';
+import { COLORS, FONTS } from '../../global/theme';
+import { moderateScale, verticalScale } from '../../helper/Scale';
+import { AUTH, MAINSTACK } from '../../Constants/Navigator';
 import CustomMainView from '../../Components/common/CustomMainView';
 import BottomSheet from '../../Components/CustomBottomSheet';
+import { RootState } from '../../redux/store';
+import { loginAction } from '../../redux/reducers/auth';
+import { connect } from 'react-redux';
+import { Navigation } from '../../global/types';
+import {
+  checkEmailValidation,
+  handleOnChange,
+  navigateTo,
+  replaceTo,
+} from '../../helper/utilities';
+import CustomLoader from '../../Components/CustomLoader';
+import { translate } from '../../helper/i18';
 
 interface SigninProps {
-  navigation?: {
-    navigate: (args: string) => void;
-  };
+  navigation?: Navigation;
 }
 
-interface SigninState {}
+type ErrorType = {
+  email?: string;
+  password?: string;
+};
+interface SigninState {
+  email: string;
+  password: string;
+  error: ErrorType;
+}
 
-class Signin extends React.Component<SigninProps, SigninState> {
+interface ReduxProps {
+  loginData: RootState['Auth'];
+  loginApi: (data: { email: string; password: string }) => void;
+}
+
+type Props = SigninProps & ReduxProps;
+class Signin extends React.Component<Props, SigninState> {
   forgotPasswordSheetRef: BottomSheet | null = null;
-  constructor(props: SigninProps) {
+  constructor(props: Props) {
     super(props);
-    this.state = {};
+    this.state = {
+      email: '',
+      password: '',
+      error: {},
+    };
   }
   navigateToSignup = () => {
-    this.props.navigation?.navigate(AUTH.SIGNUP);
+    navigateTo(this.props.navigation, AUTH.SIGNUP);
   };
-  openForgot =() => {
-    this.forgotPasswordSheetRef?.show()
-  }
-  handleLogin = () => {
-    this.props.navigation?.navigate(MAINSTACK.HOMENAVIGATION);
+  openForgot = () => {
+    this.forgotPasswordSheetRef?.show();
   };
+  handleValidation = () => {
+    const { email, password } = this.state;
+    let isValid = true;
+    const errors: ErrorType = {};
+    if (!email) {
+      errors.email = translate('auth.emailRequired');
+      isValid = false;
+    }
+    if (!checkEmailValidation(email)) {
+      errors.email = translate('auth.emailInvalid');
+      isValid = false;
+    }
+    if (!password) {
+      errors.password = translate('auth.passwordRequired');
+      isValid = false;
+    }
+    if (password.length < 6) {
+      errors.password = translate('auth.passwordMin');
+      isValid = false;
+    }
+    this.setState({ error: errors });
+    return isValid;
+  };
+
+  handleLogin = async () => {
+    if (!this.handleValidation()) return;
+    try {
+      await this.props.loginApi({
+        email: this.state.email,
+        password: this.state.password,
+      });
+
+      if (
+        this.props.loginData.message?.includes('success') &&
+        this.props.loginData.token &&
+        this.props.loginData.userRole === 'user'
+      ) {
+        Alert.alert('Successs', this.props.loginData.message);
+        replaceTo(this.props.navigation, MAINSTACK.HOMENAVIGATION);
+      } else {
+        Alert.alert('Error', this.props.loginData.message || 'Login failed');
+        if (this.props.loginData.message?.includes('not verified')) {
+          navigateTo(this.props.navigation, AUTH.VERIFICATION, {
+            email: this.state.email,
+          });
+        }
+      }
+    } catch (error) {}
+  };
+
+  handleOnChange = (value: string, field: 'email' | 'password') => {
+    const newState = handleOnChange(this.state, value, field);
+    this.setState(newState);
+  };
+
   render() {
+    const { loading } = this.props.loginData;
     return (
       <>
         <CustomStatusBar />
@@ -60,11 +148,11 @@ class Signin extends React.Component<SigninProps, SigninState> {
               style={styles.svg}
               resizeMode="cover"
             />
-            <Text style={styles.textSignup}>Welcome back</Text>
+            <Text style={styles.textSignup}>
+              {translate('auth.welcomeBack')}
+            </Text>
             <Text style={styles.subText}>
-              VHA is an innovated, automated system and the very first
-              blockchain based Virtual Health Assistant that will provide
-              immediate medical assistance to the patients 24/7.
+              {translate('auth.subHeadingText')}
             </Text>
             <View style={styles.googleView}>
               <CustomButton
@@ -79,32 +167,63 @@ class Signin extends React.Component<SigninProps, SigninState> {
               />
             </View>
             <View style={styles.inputView}>
-              <CustomTextInput placeholder="Email" />
-              <CustomTextInput placeholder="Password" />
+              <CustomTextInput
+                placeholder={translate('auth.emailPlaceholder')}
+                value={this.state.email}
+                onChangeText={text => this.handleOnChange(text, 'email')}
+                errorMessage={this.state.error.email}
+              />
+              <CustomTextInput
+                placeholder={translate('auth.passwordPlaceholder')}
+                value={this.state.password}
+                onChangeText={text => this.handleOnChange(text, 'password')}
+                errorMessage={this.state.error.password}
+              />
             </View>
-            <CustomGButton
-              tittle="Login"
-              style={styles.buttonView1}
-              onPress={this.handleLogin}
-            />
-            <Text style={styles.textIhave} onPress={()=>this.openForgot()}>Forgor password</Text>
+            {loading ? (
+              <CustomLoader />
+            ) : (
+              <CustomGButton
+                tittle={translate('auth.login')}
+                style={styles.buttonView1}
+                onPress={this.handleLogin}
+                disabled={loading || !this.state.email || !this.state.password}
+              />
+            )}
+            <TouchableOpacity
+              disabled={loading}
+              onPress={() => this.openForgot()}
+            >
+              <Text style={styles.textIhave}>
+                {translate('auth.forgotPassword')}
+              </Text>
+            </TouchableOpacity>
             <View style={styles.lastView}>
-              <Text style={styles.textIhave}>Don’t have an account?</Text>
-              <Text style={styles.textIhave} onPress={()=>this.navigateToSignup()}>
+              <Text style={styles.textIhave}>
+                {translate('auth.noAccount')}
+              </Text>
+              <Text
+                style={styles.textIhave}
+                disabled={loading}
+                onPress={() => this.navigateToSignup()}
+              >
                 Join us
               </Text>
             </View>
 
             <BottomSheet
-          ref={ref => (this.forgotPasswordSheetRef = ref)}
-          backgroundColor="rgba(0, 0, 0, 0.50)"
-          radius={20}
-          sheetBackgroundColor={COLORS.black2gray}
-          height={responsiveHeight(50)}>
-          <View style={styles.buttonView}>
-            <Text style={styles.text}>BottomSheet</Text>
-          </View>
-        </BottomSheet>
+              ref={ref => {
+                this.forgotPasswordSheetRef = ref;
+              }}
+              backgroundColor="rgba(0, 0, 0, 0.50)"
+              radius={20}
+              sheetBackgroundColor={COLORS.black2gray}
+              height={responsiveHeight(50)}
+            >
+              <View style={styles.buttonView}>
+                <Text style={styles.text}>BottomSheet</Text>
+              </View>
+            </BottomSheet>
           </ImageBackground>
         </CustomMainView>
       </>
@@ -112,9 +231,18 @@ class Signin extends React.Component<SigninProps, SigninState> {
   }
 }
 
-export default Signin;
+const mapStateToProps = (state: RootState) => ({
+  loginData: state.Auth,
+});
+
+const mapDispatchToProps = {
+  loginApi: (data: { email: string; password: string }) => loginAction(data),
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signin);
+
 const styles = StyleSheet.create({
-  text:{},
+  text: {},
   image: {
     alignItems: 'center',
     resizeMode: 'cover',
