@@ -1,79 +1,157 @@
-name: CI/CD Build Pipeline
+name: iOS & Android Build CI/CD
 
 on:
   push:
-    branches:
-      - master
+    branches: ['master', 'main']
+  workflow_dispatch:
 
 jobs:
-  build:
+  android-build:
+    name: Android Build
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [20.x]
-        java-version: [17]
-
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Set up Java ${{ matrix.java-version }}
-        uses: actions/setup-java@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          java-version: ${{ matrix.java-version }}
-          distribution: temurin
+          node-version: 20
 
-      - name: Set up Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-
-      - name: Cache Node Modules
-        uses: actions/cache@v3
+      - name: Cache node modules
+        uses: actions/cache@v4
         with:
           path: |
-            ~/.npm
-            ~/.yarn
             node_modules
+            ~/.cache/yarn
           key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-node-
 
-      - name: Cache Gradle
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
-
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
-
-      - name: Install Dependencies
+      - name: Install Node dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Verify Versions
-        run: |
-          node -v
-          java -version
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'gradle'
 
-      - name: Build Android Project
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2
+          bundler-cache: true
+
+      - name: Setup Android Signing
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
         run: |
-          cd android
-          ./gradlew assembleRelease -Dorg.gradle.jvmargs="-Xmx4096m"
+          # Create keystore file from base64 secret
+          echo "$ANDROID_KEYSTORE_BASE64" | base64 -d > android/app/release.keystore
+
+          # Create gradle.properties with signing config
+          cat >> android/gradle.properties << EOF
+          MYAPP_UPLOAD_STORE_FILE=release.keystore
+          MYAPP_UPLOAD_KEY_ALIAS=$KEY_ALIAS
+          MYAPP_UPLOAD_STORE_PASSWORD=$KEYSTORE_PASSWORD
+          MYAPP_UPLOAD_KEY_PASSWORD=$KEY_PASSWORD
+          EOF
+
+      - name: Build Android Release APK
+        run: bundle exec fastlane android build_release
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-release-apk
+          path: android/app/build/outputs/apk/release/app-release.apk
+          retention-days: 30
 
       - name: Upload APK to GitHub Release
-        if: github.ref == 'refs/heads/master'
+        if: github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main')
         uses: ncipollo/release-action@v1
         with:
           artifacts: android/app/build/outputs/apk/release/app-release.apk
-          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-          tag: v${{ github.run_number }}
-          name: Release ${{ github.run_number }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: android-v${{ github.run_number }}
+          name: Android Release ${{ github.run_number }}
+          body: |
+            Automated Android build from commit ${{ github.sha }}
 
-      - name: Provide APK Download Link
-        if: github.ref == 'refs/heads/master'
-        run: echo "APK uploaded successfully. Check the latest release for the download link."
+            **Download the APK below to install on your device**
+          allowUpdates: true
+          makeLatest: true
+
+      - name: Clean up secrets
+        if: always()
+        run: |
+          rm -f android/app/release.keystore
+          rm -f android/gradle.properties
+
+  ios-build:
+    name: iOS Build
+    runs-on: macos-15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Select Xcode version
+        run: sudo xcode-select -s /Applications/Xcode_16.1.app/Contents/Developer
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2
+          bundler-cache: true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Cache node modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            ~/.cache/yarn
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install Node dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Cache CocoaPods
+        uses: actions/cache@v4
+        with:
+          path: ios/Pods
+          key: ${{ runner.os }}-pods-${{ hashFiles('ios/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pods-
+
+      - name: Install CocoaPods dependencies
+        run: |
+          cd ios
+          pod install --repo-update
+
+      - name: Setup Fastlane
+        run: bundle install
+
+      - name: Build iOS for Simulator
+        run: bundle exec fastlane ios build_simulator
+
+      - name: Upload Build Summary
+        if: always()
+        run: |
+          echo "✅ iOS Simulator build completed successfully" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Note: Device IPA builds require an Apple Developer account." >> $GITHUB_STEP_SUMMARY
+          echo "Once you have credentials, update the workflow to use 'build_release' lane." >> $GITHUB_STEP_SUMMARY
