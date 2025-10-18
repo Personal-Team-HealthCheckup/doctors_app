@@ -58,7 +58,7 @@ Build iOS for simulator (no signing needed)
 [bundle exec] fastlane ios build_release
 ```
 
-Build iOS Release IPA
+Build iOS Release IPA (Development)
 
 ----
 

@@ -34,10 +34,9 @@ platform :ios do
       scheme: "doctor_app",
       sdk: "iphonesimulator",
       configuration: "Debug",
-      export_method: "development",
       skip_package_ipa: true,
       skip_codesigning: true,
-      skip_codesign: true,
+      skip_archive: true,
       destination: "platform=iOS Simulator,name=iPhone 16 Pro,OS=18.5"
     )
   end
