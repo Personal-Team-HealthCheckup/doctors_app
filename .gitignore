@@ -78,7 +78,6 @@ android/app/*.keystore
 # testing
 /coverage
 package-lock.json
-*.lock
 .env
 .env.local
 *.mp3
