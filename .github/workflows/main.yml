@@ -3,8 +3,6 @@ name: iOS & Android Build CI/CD
 on:
   push:
     branches: ['master', 'main']
-  pull_request:
-    branches: ['master', 'main']
   workflow_dispatch:
 
 jobs:
@@ -98,11 +96,14 @@ jobs:
 
   ios-build:
     name: iOS Build
-    runs-on: macos-14
+    runs-on: macos-15
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Select Xcode version
+        run: sudo xcode-select -s /Applications/Xcode_16.1.app/Contents/Developer
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
