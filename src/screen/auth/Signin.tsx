@@ -37,6 +37,7 @@ import {
   checkEmailValidation,
   handleOnChange,
   navigateTo,
+  replaceTo,
 } from '../../helper/utilities';
 import CustomLoader from '../../Components/CustomLoader';
 import { translate } from '../../helper/i18';
@@ -115,7 +116,7 @@ class Signin extends React.Component<Props, SigninState> {
         this.props.loginData.userRole === 'user'
       ) {
         Alert.alert('Successs', this.props.loginData.message);
-        navigateTo(this.props.navigation, MAINSTACK.HOMENAVIGATION);
+        replaceTo(this.props.navigation, MAINSTACK.HOMENAVIGATION);
       } else {
         Alert.alert('Error', this.props.loginData.message || 'Login failed');
         if (this.props.loginData.message?.includes('not verified')) {
