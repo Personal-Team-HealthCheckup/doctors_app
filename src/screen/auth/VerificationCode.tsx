@@ -90,7 +90,11 @@ class VerificationCode extends React.Component<Props, VerificationCodeState> {
           this.props.verifyOTPData.message || 'OTP not Verified',
         );
       }
-    } catch (error) {}
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : 'An unexpected error occurred';
+      Alert.alert('Error', errorMessage);
+    }
   };
 
   handleOTPChange = (code: string) => {

@@ -13,7 +13,7 @@ function DrawerTabNavigation() {
     <DrawerTab.Navigator
       drawerContent={props => <DrawerComponent {...props} />}
       screenOptions={{
-        drawerType: 'front',
+        drawerType: 'slide',
         headerShown: false,
         drawerActiveBackgroundColor: '#000000',
         drawerInactiveBackgroundColor: '#000000',
@@ -22,6 +22,7 @@ function DrawerTabNavigation() {
           width: responsiveWidth(52),
           paddingHorizontal: responsiveWidth(2),
           backgroundColor: '#000000',
+          paddingVertical: responsiveWidth(5),
         },
       }}
     >

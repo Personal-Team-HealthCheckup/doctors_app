@@ -125,7 +125,11 @@ class Signin extends React.Component<Props, SigninState> {
           });
         }
       }
-    } catch (error) {}
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : 'An unexpected error occurred';
+      Alert.alert('Error', errorMessage);
+    }
   };
 
   handleOnChange = (value: string, field: 'email' | 'password') => {
