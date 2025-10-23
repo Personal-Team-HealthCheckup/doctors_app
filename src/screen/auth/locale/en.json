@@ -22,5 +22,9 @@
   "digitVerificationTxt": "Enter 4 Digits Code",
   "verificationSubtitle": "We’ve sent a 4-digit verification code to your email ",
   "resendCodeTxt": "Resend Code",
-  "verify": "Verify Code"
+  "verify": "Verify Code",
+  "forgotPasswordHeading": "Forgot Password",
+  "forgotPasswordDescription": "Enter your registered email address and we’ll send you instructions to reset your password.",
+  "sendResetLink": "Send Reset Link",
+  "rememberPassword": "Remembered your password?"
 }
