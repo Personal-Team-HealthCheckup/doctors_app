@@ -5,7 +5,8 @@ import { HOME } from '../Constants/Navigator';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
 import AppointPage from '../screen/home/Appointment';
 import DrawerComponent from '../Components/DrawerComponent';
-
+import { COLORS } from '../global/theme';
+import DrawerGestureWrapper from '../Components/DrawerGetureWrapper';
 const DrawerTab = createDrawerNavigator();
 
 function DrawerTabNavigation() {
@@ -15,34 +16,23 @@ function DrawerTabNavigation() {
       screenOptions={{
         drawerType: 'slide',
         headerShown: false,
-        drawerActiveBackgroundColor: '#000000',
-        drawerInactiveBackgroundColor: '#000000',
+        drawerActiveBackgroundColor: COLORS.black,
+        drawerInactiveBackgroundColor: COLORS.black,
         overlayColor: 'transparent',
         drawerStyle: {
-          width: responsiveWidth(72),
-          paddingHorizontal: responsiveWidth(2),
-          backgroundColor: '#000000',
-          // paddingVertical: responsiveWidth(5),
+          width: responsiveWidth(52),
+          backgroundColor: COLORS.black,
         },
-        swipeEdgeWidth: responsiveWidth(16),
-        swipeEnabled: true,
-        drawerContentStyle: {
-          marginTop: responsiveWidth(10),
-          paddingHorizontal: responsiveWidth(2),
-          backgroundColor: 'red',
-        },
-        drawerPosition: 'left',
-        drawerStatusBarAnimation: 'slide',
-        swipeMinDistance: responsiveWidth(10),
-        // configureGestureHandler: true,
-        drawerAllowFontScaling: true,
-        lazy: true,
-        drawerHideStatusBarOnOpen: true,
+        sceneStyle: { backgroundColor: COLORS.black },
       }}
     >
       <DrawerTab.Screen
         name={HOME.BOTTOMTABS}
-        component={BottomTabStackNavigator}
+        component={(props: {}) => (
+          <DrawerGestureWrapper>
+            <BottomTabStackNavigator {...props} />
+          </DrawerGestureWrapper>
+        )}
       />
       <DrawerTab.Screen name={HOME.APPOINTMENTPAGE} component={AppointPage} />
     </DrawerTab.Navigator>

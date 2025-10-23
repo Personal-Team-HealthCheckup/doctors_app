@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   Image,
+  Alert,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {
@@ -26,6 +27,7 @@ import { clearStoredAuthToken } from '../helper/authKeychain';
 import { actionLogout } from '../redux/reducers/auth';
 import { AUTH, MAINSTACK } from '../Constants/Navigator';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { closeDrawer } from '../helper/utilities';
 
 interface DrawerComponentProps {
   state: DrawerNavigationState<ParamListBase>;
@@ -93,13 +95,14 @@ const drawerData: DrawerData[] = [
 const DrawerComponent: React.FC<DrawerComponentProps> = ({ navigation }) => {
   const dispatch = useDispatch();
 
-  const handleLogout = React.useCallback(async () => {
+  const performLogout = React.useCallback(async () => {
     try {
       await clearStoredAuthToken();
-      dispatch(actionLogout());
     } catch (error) {
       console.warn('Failed to clear auth token on logout', error);
     }
+
+    dispatch(actionLogout());
 
     const drawerNav = navigation as any;
     drawerNav?.closeDrawer?.();
@@ -130,14 +133,28 @@ const DrawerComponent: React.FC<DrawerComponentProps> = ({ navigation }) => {
     }
   }, [dispatch, navigation]);
 
+  const handleLogout = () => {
+    Alert.alert('Logout', 'Are you sure you want to logout?', [
+      {
+        text: 'Cancel',
+        style: 'cancel',
+      },
+      {
+        text: 'Logout',
+        style: 'destructive',
+        onPress: () => {
+          performLogout();
+        },
+      },
+    ]);
+  };
+
   const _renderDrawerContent = ({ item }: { item: any }) => {
     const { Icon } = item;
     return (
       <TouchableOpacity style={styles.drawerItem} activeOpacity={0.7}>
-        <View style={styles.row}>
-          {Icon}
-          <Text style={styles.drawerLabel}>{item.title}</Text>
-        </View>
+        {Icon}
+        <Text style={styles.drawerLabel}>{item.title}</Text>
         <FontAwesomeIcon name="chevron-right" size={18} color="#fff" />
       </TouchableOpacity>
     );
@@ -156,7 +173,7 @@ const DrawerComponent: React.FC<DrawerComponentProps> = ({ navigation }) => {
 
           <TouchableOpacity
             style={styles.closeButton}
-            onPress={() => navigation?.closeDrawer()}
+            onPress={() => closeDrawer(navigation)}
             activeOpacity={0.9}
           >
             <AntDesign name="close" size={20} color="#fff" />
@@ -235,6 +252,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: responsiveFontSize(2),
     marginLeft: 15,
+    flex: 1,
   },
   logoutButton: {
     flexDirection: 'row',

@@ -95,6 +95,12 @@ export const replaceTo = (
     navigation.replace(screenName, params);
   }
 };
+// replace to single screen
+export const closeDrawer = (navigation?: Navigation) => {
+  if (navigation && navigation.closeDrawer) {
+    navigation.closeDrawer();
+  }
+};
 
 // navigate to single screen with nested routes
 export const nestedNavigateTo = (
