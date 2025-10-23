@@ -1,10 +1,16 @@
 import React from 'react';
-import {Animated, ImageBackground, StyleSheet, Text, View} from 'react-native';
+import {
+  Animated,
+  ImageBackground,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import {COLORS, FONTS} from '../global/theme';
+import { COLORS, FONTS } from '../global/theme';
 import {
   BinanceLogoSvg,
   CheckImg,
@@ -12,11 +18,12 @@ import {
   LogoSvg,
   gradientPng,
 } from '../assets/assets';
-import {moderateScale} from '../helper/Scale';
+import { moderateScale } from '../helper/Scale';
 import CustomStatusBar from '../Components/common/CustomStatusBar';
 import CustomMainView from '../Components/common/CustomMainView';
-import {MAINSTACK} from '../Constants/Navigator';
+import { MAINSTACK } from '../Constants/Navigator';
 import CustomLoader from '../Components/CustomLoader';
+import { getStoredAuthToken } from '../helper/authKeychain';
 interface SplashScreensProps {
   navigation?: {
     replace: (args: string) => void;
@@ -35,7 +42,7 @@ class SplashScreens extends React.Component<
   SplashScreensState,
   SplashScreensSS
 > {
-  timer: number = 0;
+  private timers: ReturnType<typeof setTimeout>[] = [];
   constructor(props: SplashScreensProps) {
     super(props);
     this.state = {
@@ -45,30 +52,35 @@ class SplashScreens extends React.Component<
   }
 
   componentDidMount(): void {
-    this.setState({firstTime: 'loading'});
-    this.timer = Number(
-      setTimeout(() => {
-        this.setState({firstTime: 'Check'});
-      }, 1000),
-    );
-    this.timer = Number(
-      setTimeout(() => {
-        this.setState({firstTime: 'splashScreen'});
-      }, 2000),
-    );
-    this.timer = Number(
-      setTimeout(() => {
-        // if(token){
-        //   this.props.navigation?.replace(MAINSTACK.HOMENAVIGATION);
-        // }else{
-          this.props.navigation?.replace(MAINSTACK.AUTHNAVIGATION);
-        // }
-      }, 3000),
-    );
+    this.setState({ firstTime: 'loading' });
+    this.registerTimeout(() => {
+      this.setState({ firstTime: 'Check' });
+    }, 1000);
+    this.registerTimeout(() => {
+      this.setState({ firstTime: 'splashScreen' });
+    }, 2000);
+    this.registerTimeout(() => {
+      void this.handleNavigation();
+    }, 3000);
   }
   componentWillUnmount(): void {
-    clearTimeout(this.timer);
+    this.timers.forEach(timer => clearTimeout(timer));
+    this.timers = [];
   }
+
+  private registerTimeout = (callback: () => void, delay: number) => {
+    const timer = setTimeout(callback, delay);
+    this.timers.push(timer);
+  };
+
+  private handleNavigation = async () => {
+    const token = await getStoredAuthToken();
+    if (token) {
+      this.props.navigation?.replace(MAINSTACK.HOMENAVIGATION);
+    } else {
+      this.props.navigation?.replace(MAINSTACK.AUTHNAVIGATION);
+    }
+  };
   render() {
     switch (this.state.firstTime) {
       case 'loading':
@@ -122,7 +134,7 @@ const styles = StyleSheet.create({
     textTransform: 'capitalize',
     fontSize: moderateScale(15.13),
   },
-  svg: {marginBottom: 0, width: responsiveWidth(100)},
+  svg: { marginBottom: 0, width: responsiveWidth(100) },
   svg2: {
     marginBottom: responsiveHeight(7),
   },

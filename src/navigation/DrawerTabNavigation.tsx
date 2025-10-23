@@ -5,7 +5,8 @@ import { HOME } from '../Constants/Navigator';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
 import AppointPage from '../screen/home/Appointment';
 import DrawerComponent from '../Components/DrawerComponent';
-
+import { COLORS } from '../global/theme';
+import DrawerGestureWrapper from '../Components/DrawerGetureWrapper';
 const DrawerTab = createDrawerNavigator();
 
 function DrawerTabNavigation() {
@@ -13,21 +14,25 @@ function DrawerTabNavigation() {
     <DrawerTab.Navigator
       drawerContent={props => <DrawerComponent {...props} />}
       screenOptions={{
-        drawerType: 'front',
+        drawerType: 'slide',
         headerShown: false,
-        drawerActiveBackgroundColor: '#000000',
-        drawerInactiveBackgroundColor: '#000000',
+        drawerActiveBackgroundColor: COLORS.black,
+        drawerInactiveBackgroundColor: COLORS.black,
         overlayColor: 'transparent',
         drawerStyle: {
           width: responsiveWidth(52),
-          paddingHorizontal: responsiveWidth(2),
-          backgroundColor: '#000000',
+          backgroundColor: COLORS.black,
         },
+        sceneStyle: { backgroundColor: COLORS.black },
       }}
     >
       <DrawerTab.Screen
         name={HOME.BOTTOMTABS}
-        component={BottomTabStackNavigator}
+        component={(props: {}) => (
+          <DrawerGestureWrapper>
+            <BottomTabStackNavigator {...props} />
+          </DrawerGestureWrapper>
+        )}
       />
       <DrawerTab.Screen name={HOME.APPOINTMENTPAGE} component={AppointPage} />
     </DrawerTab.Navigator>

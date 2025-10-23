@@ -9,7 +9,6 @@ import {
   ImageStyle,
   StyleProp,
   StyleSheet,
-  View,
 } from 'react-native';
 import { COLORS } from '../global/theme';
 import {
@@ -159,13 +158,14 @@ const styles = StyleSheet.create({
     width: responsiveWidth(7),
     height: responsiveWidth(7),
     resizeMode: 'contain',
+    marginVertical: responsiveHeight(1),
   },
   gradient: {
     flex: 1,
-    width: '90%',
-    height: responsiveHeight(0.5),
+    width: '100%',
+    height: responsiveHeight(0.3),
     position: 'absolute',
     alignSelf: 'center',
-    top: responsiveHeight(-0.2),
+    top: responsiveHeight(-0.5),
   },
 });

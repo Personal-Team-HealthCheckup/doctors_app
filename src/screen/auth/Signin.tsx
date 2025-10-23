@@ -28,7 +28,6 @@ import { COLORS, FONTS } from '../../global/theme';
 import { moderateScale, verticalScale } from '../../helper/Scale';
 import { AUTH, MAINSTACK } from '../../Constants/Navigator';
 import CustomMainView from '../../Components/common/CustomMainView';
-import BottomSheet from '../../Components/CustomBottomSheet';
 import { RootState } from '../../redux/store';
 import { loginAction } from '../../redux/reducers/auth';
 import { connect } from 'react-redux';
@@ -63,7 +62,6 @@ interface ReduxProps {
 
 type Props = SigninProps & ReduxProps;
 class Signin extends React.Component<Props, SigninState> {
-  forgotPasswordSheetRef: BottomSheet | null = null;
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -75,8 +73,8 @@ class Signin extends React.Component<Props, SigninState> {
   navigateToSignup = () => {
     navigateTo(this.props.navigation, AUTH.SIGNUP);
   };
-  openForgot = () => {
-    this.forgotPasswordSheetRef?.show();
+  navigateToForgotPassword = () => {
+    navigateTo(this.props.navigation, AUTH.FORGOTPASSWORD);
   };
   handleValidation = () => {
     const { email, password } = this.state;
@@ -125,7 +123,11 @@ class Signin extends React.Component<Props, SigninState> {
           });
         }
       }
-    } catch (error) {}
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : 'An unexpected error occurred';
+      Alert.alert('Error', errorMessage);
+    }
   };
 
   handleOnChange = (value: string, field: 'email' | 'password') => {
@@ -192,7 +194,7 @@ class Signin extends React.Component<Props, SigninState> {
             )}
             <TouchableOpacity
               disabled={loading}
-              onPress={() => this.openForgot()}
+              onPress={() => this.navigateToForgotPassword()}
             >
               <Text style={styles.textIhave}>
                 {translate('auth.forgotPassword')}
@@ -210,20 +212,6 @@ class Signin extends React.Component<Props, SigninState> {
                 Join us
               </Text>
             </View>
-
-            <BottomSheet
-              ref={ref => {
-                this.forgotPasswordSheetRef = ref;
-              }}
-              backgroundColor="rgba(0, 0, 0, 0.50)"
-              radius={20}
-              sheetBackgroundColor={COLORS.black2gray}
-              height={responsiveHeight(50)}
-            >
-              <View style={styles.buttonView}>
-                <Text style={styles.text}>BottomSheet</Text>
-              </View>
-            </BottomSheet>
           </ImageBackground>
         </CustomMainView>
       </>

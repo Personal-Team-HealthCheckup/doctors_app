@@ -1,3 +1,4 @@
+// export const baseURL = 'http://172.20.201.247:4000/api/'; // add the base url here
 export const baseURL = 'https://doctor-app-backend-miij.onrender.com/api/'; // production url
 
 // add the endpoints here like this

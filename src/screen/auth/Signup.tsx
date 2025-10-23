@@ -150,7 +150,10 @@ class Signup extends React.Component<Props, SignupState> {
       if (this.props.signupData.token) {
         navigateTo(this.props.navigation, AUTH.VERIFICATION);
       }
-    } catch (error) {}
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'An unexpected error occurred';
+      Alert.alert('Error', errorMessage);
+    }
   };
 
   render() {

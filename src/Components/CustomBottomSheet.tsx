@@ -12,9 +12,6 @@ import {
   PanResponder,
   Alert,
 } from 'react-native';
-import {
-  responsiveFontSize,
-} from 'react-native-responsive-dimensions';
 import { COLORS } from '../global/theme';
 
 interface BottomSheetProps {
@@ -55,10 +52,10 @@ class BottomSheet extends React.PureComponent<
   }
 
   setModalVisible(visible: boolean) {
-    const {closeFunction, height} = this.props;
-    const {animatedHeight, pan} = this.state;
+    const { closeFunction, height } = this.props;
+    const { animatedHeight, pan } = this.state;
     if (visible) {
-      this.setState({modalVisible: visible});
+      this.setState({ modalVisible: visible });
       Animated.timing(animatedHeight, {
         toValue: height,
         duration: 300,
@@ -70,7 +67,7 @@ class BottomSheet extends React.PureComponent<
         duration: 400,
         useNativeDriver: false,
       }).start(() => {
-        pan.setValue({x: 0, y: 0});
+        pan.setValue({ x: 0, y: 0 });
         this.setState({
           modalVisible: visible,
           animatedHeight: new Animated.Value(0),
@@ -84,18 +81,18 @@ class BottomSheet extends React.PureComponent<
 
   onStartShouldSetPanResponder = () => true;
 
-  onPanResponderMove = (event: {}, gestureState: {dy: number}) => {
-    const {pan} = this.state;
+  onPanResponderMove = (event: {}, gestureState: { dy: number }) => {
+    const { pan } = this.state;
     if (gestureState.dy > 0) {
-      Animated.event([null, {dy: pan.y}], {
+      Animated.event([null, { dy: pan.y }], {
         useNativeDriver: false,
       })(event, gestureState);
     }
   };
 
-  onPanResponderRelease = (event: {}, gestureState: {dy: number}) => {
-    const {height} = this.props;
-    const {pan} = this.state;
+  onPanResponderRelease = (event: {}, gestureState: { dy: number }) => {
+    const { height } = this.props;
+    const { pan } = this.state;
     try {
       const gestureLimitArea = height / 3;
       const gestureDistance = gestureState.dy;
@@ -103,7 +100,7 @@ class BottomSheet extends React.PureComponent<
         this.setModalVisible(false);
       } else {
         Animated.spring(pan, {
-          toValue: {x: 0, y: 0},
+          toValue: { x: 0, y: 0 },
           useNativeDriver: false,
         }).start();
       }
@@ -147,7 +144,7 @@ class BottomSheet extends React.PureComponent<
       radius,
       testID,
     } = this.props;
-    const {animatedHeight, pan, modalVisible} = this.state;
+    const { animatedHeight, pan, modalVisible } = this.state;
     const panStyle = {
       transform: pan.getTranslateTransform(),
     };
@@ -159,32 +156,29 @@ class BottomSheet extends React.PureComponent<
     };
 
     return (
-        <Modal
-          transparent
-          visible={modalVisible}
-          onRequestClose={onRequestClose}>
-          <KeyboardAvoidingView behavior={'padding'} style={styles.flex1}>
-            <View
-              style={[
-                styles.wrapper,
-                {backgroundColor: backgroundColor || COLORS.black2gray},
-              ]}>
-              <TouchableOpacity
-                style={styles.background}
-                activeOpacity={1}
-                onPress={onClose}
-                testID={testID}
-              />
-              <Animated.View
-                {...(draggable &&
-                  this.panResponder &&
-                  this.panResponder.panHandlers)}
-                style={[panStyle, styles.container, styleAnimated]}>
-                {children}
-              </Animated.View>
-            </View>
-          </KeyboardAvoidingView>
-        </Modal>
+      <Modal transparent visible={modalVisible} onRequestClose={onRequestClose}>
+        <KeyboardAvoidingView behavior={'padding'} style={styles.flex1}>
+          <View
+            style={[
+              styles.wrapper,
+              { backgroundColor: backgroundColor || COLORS.black2gray },
+            ]}
+          >
+            <TouchableOpacity
+              style={styles.background}
+              activeOpacity={1}
+              onPress={onClose}
+              testID={testID}
+            />
+            <Animated.View
+              {...(draggable && this.panResponder?.panHandlers)}
+              style={[panStyle, styles.container, styleAnimated]}
+            >
+              {children}
+            </Animated.View>
+          </View>
+        </KeyboardAvoidingView>
+      </Modal>
     );
   }
 }
@@ -209,6 +203,6 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     borderTopRightRadius: 10,
     borderTopLeftRadius: 10,
-    backgroundColor:COLORS.black2gray
+    backgroundColor: COLORS.black2gray,
   },
 });

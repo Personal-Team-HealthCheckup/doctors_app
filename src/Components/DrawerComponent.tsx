@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   Image,
+  Alert,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {
@@ -14,9 +15,19 @@ import {
 } from 'react-native-responsive-dimensions';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome6';
-import { DrawerNavigationState, ParamListBase } from '@react-navigation/native';
+import {
+  CommonActions,
+  DrawerNavigationState,
+  ParamListBase,
+} from '@react-navigation/native';
 import { imageProfile2 } from '../assets/assets';
 import { Navigation } from '../global/types';
+import { useDispatch } from 'react-redux';
+import { clearStoredAuthToken } from '../helper/authKeychain';
+import { actionLogout } from '../redux/reducers/auth';
+import { AUTH, MAINSTACK } from '../Constants/Navigator';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { closeDrawer } from '../helper/utilities';
 
 interface DrawerComponentProps {
   state: DrawerNavigationState<ParamListBase>;
@@ -81,15 +92,69 @@ const drawerData: DrawerData[] = [
   },
 ];
 
-const DrawerComponent: React.FC<DrawerComponentProps> = () => {
+const DrawerComponent: React.FC<DrawerComponentProps> = ({ navigation }) => {
+  const dispatch = useDispatch();
+
+  const performLogout = React.useCallback(async () => {
+    try {
+      await clearStoredAuthToken();
+    } catch (error) {
+      console.warn('Failed to clear auth token on logout', error);
+    }
+
+    dispatch(actionLogout());
+
+    const drawerNav = navigation as any;
+    drawerNav?.closeDrawer?.();
+
+    const mainNav =
+      drawerNav?.getParent?.()?.getParent?.() ?? drawerNav?.getParent?.();
+
+    const resetAction = CommonActions.reset({
+      index: 0,
+      routes: [
+        {
+          name: MAINSTACK.AUTHNAVIGATION as never,
+          state: {
+            routes: [{ name: AUTH.SIGNIN as never }],
+          },
+        },
+      ],
+    });
+
+    if (mainNav?.dispatch) {
+      mainNav.dispatch(resetAction);
+    } else if (drawerNav?.dispatch) {
+      drawerNav.dispatch(resetAction);
+    } else {
+      navigation?.navigate?.(MAINSTACK.AUTHNAVIGATION, {
+        screen: AUTH.SIGNIN,
+      });
+    }
+  }, [dispatch, navigation]);
+
+  const handleLogout = () => {
+    Alert.alert('Logout', 'Are you sure you want to logout?', [
+      {
+        text: 'Cancel',
+        style: 'cancel',
+      },
+      {
+        text: 'Logout',
+        style: 'destructive',
+        onPress: () => {
+          performLogout();
+        },
+      },
+    ]);
+  };
+
   const _renderDrawerContent = ({ item }: { item: any }) => {
     const { Icon } = item;
     return (
       <TouchableOpacity style={styles.drawerItem} activeOpacity={0.7}>
-        <View style={styles.row}>
-          {Icon}
-          <Text style={styles.drawerLabel}>{item.title}</Text>
-        </View>
+        {Icon}
+        <Text style={styles.drawerLabel}>{item.title}</Text>
         <FontAwesomeIcon name="chevron-right" size={18} color="#fff" />
       </TouchableOpacity>
     );
@@ -97,32 +162,41 @@ const DrawerComponent: React.FC<DrawerComponentProps> = () => {
 
   return (
     <LinearGradient colors={['#001524', '#0A192F']} style={styles.container}>
-      {/* Profile Section */}
-      <View style={styles.profileSection}>
-        <Image source={imageProfile2} style={styles.avatar} />
-        <View>
-          <Text style={styles.name}>Olivia Doe</Text>
-          <Text style={styles.phone}>01303-527300</Text>
+      <SafeAreaView style={{ flex: 1 }}>
+        {/* Profile Section */}
+        <View style={styles.profileSection}>
+          <Image source={imageProfile2} style={styles.avatar} />
+          <View>
+            <Text style={styles.name}>Olivia Doe</Text>
+            <Text style={styles.phone}>01303-527300</Text>
+          </View>
+
+          <TouchableOpacity
+            style={styles.closeButton}
+            onPress={() => closeDrawer(navigation)}
+            activeOpacity={0.9}
+          >
+            <AntDesign name="close" size={20} color="#fff" />
+          </TouchableOpacity>
         </View>
 
-        <TouchableOpacity style={styles.closeButton}>
-          <AntDesign name="close" size={20} color="#fff" />
+        {/* Drawer List */}
+        <FlatList
+          data={drawerData}
+          keyExtractor={item => item.id.toString()}
+          renderItem={_renderDrawerContent}
+          contentContainerStyle={{ paddingHorizontal: 20 }}
+        />
+        {/* Logout */}
+        <TouchableOpacity
+          style={styles.logoutButton}
+          activeOpacity={0.7}
+          onPress={handleLogout}
+        >
+          <AntDesign name="logout" size={22} color="#FF6B6B" />
+          <Text style={styles.logoutText}>Logout</Text>
         </TouchableOpacity>
-      </View>
-
-      {/* Drawer List */}
-      <FlatList
-        data={drawerData}
-        keyExtractor={item => item.id.toString()}
-        renderItem={_renderDrawerContent}
-        contentContainerStyle={{ paddingHorizontal: 20 }}
-      />
-
-      {/* Logout */}
-      <TouchableOpacity style={styles.logoutButton} activeOpacity={0.7}>
-        <AntDesign name="logout" size={22} color="#FF6B6B" />
-        <Text style={styles.logoutText}>Logout</Text>
-      </TouchableOpacity>
+      </SafeAreaView>
     </LinearGradient>
   );
 };
@@ -132,13 +206,13 @@ export default DrawerComponent;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: responsiveHeight(6),
+    justifyContent: 'space-between',
   },
   profileSection: {
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 20,
-    marginBottom: 30,
+    marginBottom: responsiveHeight(4),
     position: 'relative',
   },
   avatar: {
@@ -178,12 +252,14 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: responsiveFontSize(2),
     marginLeft: 15,
+    flex: 1,
   },
   logoutButton: {
     flexDirection: 'row',
     alignItems: 'center',
     padding: 20,
     marginTop: 'auto',
+    paddingBottom: responsiveHeight(4),
   },
   logoutText: {
     marginLeft: 10,

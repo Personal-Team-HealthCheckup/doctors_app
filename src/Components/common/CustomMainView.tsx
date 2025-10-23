@@ -1,15 +1,15 @@
-import {View, StyleSheet, StyleProp, ViewStyle} from 'react-native';
+import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
 import React from 'react';
 import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import {COLORS} from '../../global/theme';
+import { COLORS } from '../../global/theme';
 
 const CustomMainView: React.FC<{
   children: React.ReactNode;
   style?: StyleProp<ViewStyle>;
-}> = ({children, style}) => {
+}> = ({ children, style }) => {
   return <View style={[styles.container, style]}>{children}</View>;
 };
 
