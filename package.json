@@ -33,6 +33,7 @@
     "react-native-biometrics": "^3.0.1",
     "react-native-gesture-handler": "^2.21.1",
     "react-native-image-crop-picker": "^0.51.0",
+    "react-native-keychain": "^10.0.0",
     "react-native-linear-gradient": "^2.8.3",
     "react-native-maps": "1.20.1",
     "react-native-parsed-text": "^0.0.22",

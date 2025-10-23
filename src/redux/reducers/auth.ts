@@ -3,6 +3,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { endpoints } from '../../helper/config';
 import networkCall from '../../helper/networkCall';
+import { storeAuthToken } from '../../helper/authKeychain';
 
 interface IUser {
   _id: string;
@@ -23,7 +24,7 @@ export interface authDataType {
 const initialState: authDataType = {
   message: null,
   loading: false,
-  token: null,
+  token: null, // Auth token null when not logged in getStoredAuthToken
   userRole: 'user',
   email: '',
 };
@@ -44,7 +45,10 @@ export const loginAction = createAsyncThunk(
       'POST',
       JSON.stringify(data),
     );
-    if (response) return fulfillWithValue(response);
+    if (response) {
+      await storeAuthToken(response.token);
+      return fulfillWithValue(response);
+    }
     return rejectWithValue({ message: error, ...errorResponse });
   },
 );
@@ -82,7 +86,10 @@ export const signupAction = createAsyncThunk(
       JSON.stringify(data),
     );
 
-    if (response) return fulfillWithValue(response);
+    if (response) {
+      await storeAuthToken(response.token);
+      return fulfillWithValue(response);
+    }
     return rejectWithValue({ message: error });
   },
 );
@@ -107,7 +114,10 @@ export const verifyOtpAction = createAsyncThunk(
       JSON.stringify(data),
     );
 
-    if (response) return fulfillWithValue(response);
+    if (response) {
+      await storeAuthToken(response.token);
+      return fulfillWithValue(response);
+    }
 
     return rejectWithValue({ message: error });
   },
@@ -134,7 +144,10 @@ export const resendOtpAction = createAsyncThunk(
       JSON.stringify(data),
     );
 
-    if (response) return fulfillWithValue(response);
+    if (response) {
+      await storeAuthToken(response.token);
+      return fulfillWithValue(response);
+    }
 
     return rejectWithValue({ message: error });
   },

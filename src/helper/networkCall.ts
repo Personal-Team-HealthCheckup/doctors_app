@@ -1,5 +1,6 @@
 import { baseURL } from './config';
 import { store } from '../redux/store';
+import { getStoredAuthToken } from './authKeychain';
 
 type IResponseType = 'json' | 'text' | 'blob';
 type IResolve<T = any> = {
@@ -38,8 +39,9 @@ const networkCall = async <T = any>(
 ): Promise<IResolve<T>> => {
   const makeCall = async (): Promise<T> => {
     const fullUrl = /(http(s?)):\/\//i.test(url) ? url : `${baseURL}/${url}`;
+    const tokenStored = await getStoredAuthToken();
     const AuthData = store.getState()?.Auth;
-    const token = AuthData?.token;
+    const token = AuthData?.token ?? tokenStored;
 
     const defaultHeaders = {
       'Content-Type':
