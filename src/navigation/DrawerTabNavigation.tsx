@@ -19,11 +19,25 @@ function DrawerTabNavigation() {
         drawerInactiveBackgroundColor: '#000000',
         overlayColor: 'transparent',
         drawerStyle: {
-          width: responsiveWidth(52),
+          width: responsiveWidth(72),
           paddingHorizontal: responsiveWidth(2),
           backgroundColor: '#000000',
-          paddingVertical: responsiveWidth(5),
+          // paddingVertical: responsiveWidth(5),
         },
+        swipeEdgeWidth: responsiveWidth(16),
+        swipeEnabled: true,
+        drawerContentStyle: {
+          marginTop: responsiveWidth(10),
+          paddingHorizontal: responsiveWidth(2),
+          backgroundColor: 'red',
+        },
+        drawerPosition: 'left',
+        drawerStatusBarAnimation: 'slide',
+        swipeMinDistance: responsiveWidth(10),
+        // configureGestureHandler: true,
+        drawerAllowFontScaling: true,
+        lazy: true,
+        drawerHideStatusBarOnOpen: true,
       }}
     >
       <DrawerTab.Screen

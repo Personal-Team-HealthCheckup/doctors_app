@@ -147,6 +147,7 @@ class ForgotPassword extends React.Component<
                       value={email}
                       onChangeText={this.handleEmailChange}
                       errorMessage={error}
+                      style={{ width: responsiveWidth(80) }}
                     />
                   </View>
 
@@ -209,7 +210,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     alignSelf: 'center',
-    marginTop: responsiveHeight(6),
+    marginTop: responsiveHeight(3),
     marginBottom: responsiveHeight(4),
   },
   card: {

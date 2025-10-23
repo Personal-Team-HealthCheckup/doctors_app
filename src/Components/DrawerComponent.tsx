@@ -11,183 +11,147 @@ import LinearGradient from 'react-native-linear-gradient';
 import {
   responsiveFontSize,
   responsiveHeight,
-  responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome6';
-import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { DrawerNavigationState, ParamListBase } from '@react-navigation/native';
-import { HomeScreenPng2, imageProfile2 } from '../assets/assets';
+import {
+  CommonActions,
+  DrawerNavigationState,
+  ParamListBase,
+} from '@react-navigation/native';
+import { imageProfile2 } from '../assets/assets';
 import { Navigation } from '../global/types';
-import CommonGradientText from './CommonGradientText';
-import { COLORS } from '../global/theme';
+import { useDispatch } from 'react-redux';
+import { clearStoredAuthToken } from '../helper/authKeychain';
+import { actionLogout } from '../redux/reducers/auth';
+import { AUTH, MAINSTACK } from '../Constants/Navigator';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface DrawerComponentProps {
   state: DrawerNavigationState<ParamListBase>;
   navigation?: Navigation;
 }
 
-interface DrawerItem {
+interface DrawerData {
   id: number;
   title: string;
   link: string;
-  iconName: string;
+  Icon: React.JSX.Element;
 }
 
-const drawerData: DrawerItem[] = [
+const drawerData: DrawerData[] = [
   {
     id: 1,
     title: 'My Doctors',
     link: '',
-    iconName: 'account-group-outline',
+    Icon: <AntDesign name="user" size={22} color="#fff" />,
   },
   {
     id: 2,
     title: 'Medical Records',
     link: '',
-    iconName: 'file-document-outline',
+    Icon: <AntDesign name="folder1" size={22} color="#fff" />,
   },
   {
     id: 3,
     title: 'Payments',
     link: '',
-    iconName: 'wallet-outline',
+    Icon: <AntDesign name="creditcard" size={22} color="#fff" />,
   },
   {
     id: 4,
     title: 'Medicine Orders',
     link: '',
-    iconName: 'clipboard-check-outline',
+    Icon: <AntDesign name="medicinebox" size={22} color="#fff" />,
   },
   {
     id: 5,
     title: 'Test Bookings',
     link: '',
-    iconName: 'calendar-outline',
+    Icon: <AntDesign name="calendar" size={22} color="#fff" />,
   },
   {
     id: 6,
     title: 'Favorite Doctors',
     link: '',
-    iconName: 'heart-outline',
+    Icon: <AntDesign name="hearto" size={22} color="#fff" />,
   },
   {
     id: 7,
     title: 'Help Center',
     link: '',
-    iconName: 'help-circle-outline',
+    Icon: <AntDesign name="questioncircleo" size={22} color="#fff" />,
   },
   {
     id: 8,
     title: 'Settings',
     link: '',
-    iconName: 'cog-outline',
+    Icon: <AntDesign name="setting" size={22} color="#fff" />,
   },
 ];
 
-const DrawerComponent: React.FC<DrawerComponentProps> = ({
-  navigation,
-  state,
-}) => {
-  const renderDrawerContent = ({
-    item,
-    index,
-  }: {
-    item: DrawerItem;
-    index: number;
-  }) => {
-    const isActive = state.index === index;
+const DrawerComponent: React.FC<DrawerComponentProps> = ({ navigation }) => {
+  const dispatch = useDispatch();
 
+  const handleLogout = React.useCallback(async () => {
+    try {
+      await clearStoredAuthToken();
+      dispatch(actionLogout());
+    } catch (error) {
+      console.warn('Failed to clear auth token on logout', error);
+    }
+
+    const drawerNav = navigation as any;
+    drawerNav?.closeDrawer?.();
+
+    const mainNav =
+      drawerNav?.getParent?.()?.getParent?.() ?? drawerNav?.getParent?.();
+
+    const resetAction = CommonActions.reset({
+      index: 0,
+      routes: [
+        {
+          name: MAINSTACK.AUTHNAVIGATION as never,
+          state: {
+            routes: [{ name: AUTH.SIGNIN as never }],
+          },
+        },
+      ],
+    });
+
+    if (mainNav?.dispatch) {
+      mainNav.dispatch(resetAction);
+    } else if (drawerNav?.dispatch) {
+      drawerNav.dispatch(resetAction);
+    } else {
+      navigation?.navigate?.(MAINSTACK.AUTHNAVIGATION, {
+        screen: AUTH.SIGNIN,
+      });
+    }
+  }, [dispatch, navigation]);
+
+  const _renderDrawerContent = ({ item }: { item: any }) => {
+    const { Icon } = item;
     return (
-      <TouchableOpacity
-        style={styles.drawerItem}
-        activeOpacity={0.75}
-        onPress={() => {
-          if (item.link) {
-            navigation?.navigate(item.link);
-          }
-        }}
-      >
-        <LinearGradient
-          colors={
-            isActive
-              ? ['rgba(27, 46, 72, 0.95)', 'rgba(16, 29, 48, 0.92)']
-              : ['rgba(255, 255, 255, 0.06)', 'rgba(255, 255, 255, 0.02)']
-          }
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 1 }}
-          style={[
-            styles.drawerItemGradient,
-            isActive && styles.drawerItemGradientActive,
-          ]}
-        >
-          <View style={styles.row}>
-            <View
-              style={[
-                styles.iconContainer,
-                isActive && styles.iconContainerActive,
-              ]}
-            >
-              <MaterialIcon
-                name={item.iconName}
-                size={22}
-                color={COLORS.white}
-                style={styles.icon}
-              />
-            </View>
-            <Text
-              style={[styles.drawerLabel, isActive && styles.drawerLabelActive]}
-            >
-              {item.title}
-            </Text>
-          </View>
-          <FontAwesomeIcon
-            name="chevron-right"
-            size={16}
-            color={COLORS.white}
-            style={{ opacity: isActive ? 1 : 0.5 }}
-          />
-        </LinearGradient>
+      <TouchableOpacity style={styles.drawerItem} activeOpacity={0.7}>
+        <View style={styles.row}>
+          {Icon}
+          <Text style={styles.drawerLabel}>{item.title}</Text>
+        </View>
+        <FontAwesomeIcon name="chevron-right" size={18} color="#fff" />
       </TouchableOpacity>
     );
   };
 
   return (
-    <LinearGradient
-      colors={['#040C1C', '#071B33', '#0A2947']}
-      style={styles.container}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 1 }}
-    >
-      <Image
-        source={HomeScreenPng2}
-        resizeMode="contain"
-        style={styles.previewImage}
-        pointerEvents="none"
-      />
-      <View style={styles.content}>
+    <LinearGradient colors={['#001524', '#0A192F']} style={styles.container}>
+      <SafeAreaView style={{ flex: 1 }}>
+        {/* Profile Section */}
         <View style={styles.profileSection}>
-          <LinearGradient
-            colors={[COLORS.blueish, COLORS.lightCyan, COLORS.greeen2]}
-            style={styles.avatarBorder}
-          >
-            <View style={styles.avatarInner}>
-              <Image source={imageProfile2} style={styles.avatar} />
-            </View>
-          </LinearGradient>
-
-          <View style={styles.profileInfo}>
-            <CommonGradientText
-              colors={[COLORS.white, COLORS.lightCyan]}
-              locations={[0, 1]}
-              style={styles.name}
-            >
-              Olivia Doe
-            </CommonGradientText>
-            <View style={styles.phoneRow}>
-              <AntDesign name="phone" size={14} color={COLORS.lightCyan} />
-              <Text style={styles.phone}>01303-527300</Text>
-            </View>
+          <Image source={imageProfile2} style={styles.avatar} />
+          <View>
+            <Text style={styles.name}>Olivia Doe</Text>
+            <Text style={styles.phone}>01303-527300</Text>
           </View>
 
           <TouchableOpacity
@@ -195,75 +159,27 @@ const DrawerComponent: React.FC<DrawerComponentProps> = ({
             onPress={() => navigation?.closeDrawer()}
             activeOpacity={0.9}
           >
-            <LinearGradient
-              colors={['#FF5A5A', '#D50000']}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 1 }}
-              style={styles.closeButtonGradient}
-            >
-              <AntDesign name="close" size={18} color={COLORS.white} />
-            </LinearGradient>
+            <AntDesign name="close" size={20} color="#fff" />
           </TouchableOpacity>
         </View>
 
-        <View style={styles.sectionSpacer}>
-          <LinearGradient
-            colors={[
-              'rgba(255,255,255,0.14)',
-              'transparent',
-              'rgba(255,255,255,0.14)',
-            ]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 0 }}
-            style={styles.divider}
-          />
-        </View>
-
+        {/* Drawer List */}
         <FlatList
           data={drawerData}
           keyExtractor={item => item.id.toString()}
-          renderItem={renderDrawerContent}
-          contentContainerStyle={styles.listContainer}
-          showsVerticalScrollIndicator={false}
+          renderItem={_renderDrawerContent}
+          contentContainerStyle={{ paddingHorizontal: 20 }}
         />
-
-        <View style={styles.logoutContainer}>
-          <LinearGradient
-            colors={[
-              'rgba(255,255,255,0.14)',
-              'transparent',
-              'rgba(255,255,255,0.14)',
-            ]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 0 }}
-            style={[styles.divider, styles.logoutDivider]}
-          />
-          <TouchableOpacity
-            style={styles.logoutButton}
-            activeOpacity={0.75}
-            onPress={() => {
-              // TODO: add logout behaviour
-              console.log('Logout pressed');
-            }}
-          >
-            <LinearGradient
-              colors={['rgba(255,255,255,0.14)', 'rgba(255,255,255,0.05)']}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 1 }}
-              style={styles.logoutGradient}
-            >
-              <View style={styles.logoutIconContainer}>
-                <MaterialIcon
-                  name="logout-variant"
-                  size={22}
-                  color={COLORS.white}
-                />
-              </View>
-              <Text style={styles.logoutText}>Logout</Text>
-            </LinearGradient>
-          </TouchableOpacity>
-        </View>
-      </View>
+        {/* Logout */}
+        <TouchableOpacity
+          style={styles.logoutButton}
+          activeOpacity={0.7}
+          onPress={handleLogout}
+        >
+          <AntDesign name="logout" size={22} color="#FF6B6B" />
+          <Text style={styles.logoutText}>Logout</Text>
+        </TouchableOpacity>
+      </SafeAreaView>
     </LinearGradient>
   );
 };
@@ -273,185 +189,63 @@ export default DrawerComponent;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  content: {
-    flex: 1,
-    paddingTop: responsiveHeight(6),
-    paddingHorizontal: responsiveWidth(5),
-    paddingBottom: responsiveHeight(3),
-  },
-  previewImage: {
-    position: 'absolute',
-    right: -responsiveWidth(12),
-    bottom: -responsiveHeight(4),
-    width: responsiveWidth(62),
-    height: responsiveHeight(62),
-    opacity: 0.22,
-    transform: [{ rotate: '-10deg' }],
+    justifyContent: 'space-between',
   },
   profileSection: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: responsiveHeight(2.5),
-    paddingRight: responsiveWidth(10),
+    paddingHorizontal: 20,
+    marginBottom: responsiveHeight(4),
     position: 'relative',
   },
-  avatarBorder: {
-    width: 66,
-    height: 66,
-    borderRadius: 33,
-    padding: 2.5,
-    marginRight: responsiveWidth(3),
-  },
-  avatarInner: {
-    flex: 1,
-    backgroundColor: COLORS.gereyBack,
-    borderRadius: 30,
-    overflow: 'hidden',
-  },
   avatar: {
-    width: '100%',
-    height: '100%',
+    height: 55,
+    width: 55,
     borderRadius: 30,
-  },
-  profileInfo: {
-    flex: 1,
+    marginRight: 15,
   },
   name: {
-    fontSize: responsiveFontSize(2.3),
-    fontWeight: '700',
-    marginBottom: 6,
-  },
-  phoneRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    color: '#fff',
+    fontSize: responsiveFontSize(2.2),
+    fontWeight: 'bold',
   },
   phone: {
-    color: COLORS.gradientWhite,
-    fontSize: responsiveFontSize(1.65),
-    opacity: 0.85,
-    marginLeft: 6,
+    color: '#ccc',
+    fontSize: responsiveFontSize(1.8),
   },
   closeButton: {
     position: 'absolute',
-    right: 0,
-    top: responsiveHeight(0.2),
-  },
-  closeButtonGradient: {
-    borderRadius: 24,
-    padding: 9,
-    shadowColor: '#FF4D4D',
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.35,
-    shadowRadius: 10,
-    elevation: 8,
-  },
-  divider: {
-    height: 1,
-    width: '100%',
-    marginBottom: responsiveHeight(2),
-    opacity: 0.4,
-  },
-  listContainer: {
-    paddingBottom: responsiveHeight(2),
+    right: 20,
+    top: 5,
+    backgroundColor: '#FF4D4D',
+    borderRadius: 20,
+    padding: 6,
   },
   drawerItem: {
-    marginBottom: responsiveHeight(1.2),
-    borderRadius: 16,
-    overflow: 'hidden',
-  },
-  drawerItemGradient: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingVertical: responsiveHeight(1.9),
-    paddingHorizontal: responsiveWidth(3.5),
-    borderRadius: 16,
-    borderWidth: 0.5,
-    borderColor: 'rgba(255,255,255,0.06)',
-    backgroundColor: 'rgba(255,255,255,0.04)',
-  },
-  drawerItemGradientActive: {
-    backgroundColor: 'rgba(27, 46, 72, 0.95)',
-    borderColor: 'rgba(94, 239, 255, 0.28)',
-    shadowColor: 'rgba(17, 114, 199, 0.6)',
-    shadowOffset: { width: 0, height: 12 },
-    shadowOpacity: 0.25,
-    shadowRadius: 18,
-    elevation: 6,
+    paddingVertical: 14,
   },
   row: {
     flexDirection: 'row',
     alignItems: 'center',
-    flex: 1,
-  },
-  iconContainer: {
-    width: 42,
-    height: 42,
-    borderRadius: 12,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: responsiveWidth(3),
-  },
-  iconContainerActive: {
-    backgroundColor: 'rgba(255, 255, 255, 0.22)',
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.24)',
-  },
-  icon: {
-    opacity: 0.92,
   },
   drawerLabel: {
-    color: 'rgba(255,255,255,0.82)',
+    color: '#fff',
     fontSize: responsiveFontSize(2),
-    fontWeight: '500',
-  },
-  drawerLabelActive: {
-    color: COLORS.white,
-    fontWeight: '700',
-  },
-  logoutContainer: {
-    marginTop: 'auto',
-  },
-  logoutDivider: {
-    marginBottom: responsiveHeight(1.5),
-    opacity: 0.25,
+    marginLeft: 15,
   },
   logoutButton: {
-    borderRadius: 16,
-    overflow: 'hidden',
-  },
-  logoutGradient: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: responsiveHeight(1.8),
-    paddingHorizontal: responsiveWidth(3.5),
-    borderRadius: 16,
-    borderWidth: 0.5,
-    borderColor: 'rgba(255,255,255,0.08)',
-    backgroundColor: 'rgba(255,255,255,0.05)',
-    shadowColor: 'rgba(13, 37, 66, 0.8)',
-    shadowOffset: { width: 0, height: 12 },
-    shadowOpacity: 0.3,
-    shadowRadius: 16,
-    elevation: 8,
-  },
-  logoutIconContainer: {
-    width: 42,
-    height: 42,
-    borderRadius: 12,
-    backgroundColor: 'rgba(255, 255, 255, 0.12)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: responsiveWidth(3),
+    padding: 20,
+    marginTop: 'auto',
+    paddingBottom: responsiveHeight(4),
   },
   logoutText: {
-    color: COLORS.white,
+    marginLeft: 10,
+    color: '#FF6B6B',
     fontSize: responsiveFontSize(2),
-    fontWeight: '700',
-  },
-  sectionSpacer: {
-    marginBottom: responsiveHeight(2.2),
   },
 });
