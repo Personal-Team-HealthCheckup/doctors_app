@@ -28,22 +28,28 @@ import { AUTH } from '../../Constants/Navigator';
 import { translate } from '../../helper/i18';
 import { navigateTo, checkEmailValidation } from '../../helper/utilities';
 import { LogoSvg, StarSvg, gradientSignupPng } from '../../assets/assets';
+import { connect } from 'react-redux';
+import { forgotPasswordAction } from '../../redux/reducers/auth';
+import { RootState } from '../../redux/store';
 
 interface ForgotPasswordProps {
   navigation?: Navigation;
 }
 
+interface ReduxProps {
+  forgotPassData: RootState['Auth'];
+  forgotPasswordApi: (data: { email: string }) => void;
+}
+
+type Props = ForgotPasswordProps & ReduxProps;
 interface ForgotPasswordState {
   email: string;
   error: string;
   loading: boolean;
 }
 
-class ForgotPassword extends React.Component<
-  ForgotPasswordProps,
-  ForgotPasswordState
-> {
-  constructor(props: ForgotPasswordProps) {
+class ForgotPassword extends React.Component<Props, ForgotPasswordState> {
+  constructor(props: Props) {
     super(props);
     this.state = {
       email: '',
@@ -53,10 +59,7 @@ class ForgotPassword extends React.Component<
   }
 
   handleEmailChange = (value: string) => {
-    this.setState({
-      email: value,
-      error: '',
-    });
+    this.setState({ email: value, error: '' });
   };
 
   validateEmail = () => {
@@ -77,19 +80,22 @@ class ForgotPassword extends React.Component<
       return;
     }
     try {
-      this.setState({ loading: true });
-      await new Promise(resolve => setTimeout(resolve, 1200));
-      Alert.alert(
-        translate('auth.forgotPasswordHeading'),
-        `We have sent a reset link to ${this.state.email}.`,
-      );
-      navigateTo(this.props.navigation, AUTH.SIGNIN);
+      const { forgotPasswordApi } = this.props;
+      await forgotPasswordApi({ email: this.state.email });
+      const { message, token, type } = this.props.forgotPassData;
+      Alert.alert('Success', JSON.stringify(message));
+      console.log({ message, token, type });
+
+      if (message?.includes('success') && token && type === 'forgot-password') {
+        navigateTo(this.props.navigation, AUTH.VERIFICATION, {
+          email: this.state.email,
+          fromScreen: 'ForgotPassword',
+        });
+      }
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : 'An unexpected error occurred';
       Alert.alert('Error', errorMessage);
-    } finally {
-      this.setState({ loading: false });
     }
   };
 
@@ -98,7 +104,8 @@ class ForgotPassword extends React.Component<
   };
 
   render() {
-    const { email, error, loading } = this.state;
+    const { loading } = this.props.forgotPassData;
+    const { error, email } = this.state;
 
     return (
       <CustomMainView>
@@ -145,7 +152,7 @@ class ForgotPassword extends React.Component<
                     <CustomTextInput
                       placeholder={translate('auth.emailPlaceholder')}
                       value={email}
-                      onChangeText={this.handleEmailChange}
+                      onChangeText={value => this.handleEmailChange(value)}
                       errorMessage={error}
                       style={{ width: responsiveWidth(80) }}
                     />
@@ -179,7 +186,14 @@ class ForgotPassword extends React.Component<
   }
 }
 
-export default ForgotPassword;
+const mapStateToProps = (state: RootState) => ({
+  forgotPassData: state.Auth,
+});
+
+const mapDispatchToProps = {
+  forgotPasswordApi: (data: { email: string }) => forgotPasswordAction(data),
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ForgotPassword);
 
 const styles = StyleSheet.create({
   keyboardAvoid: {

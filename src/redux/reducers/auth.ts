@@ -19,6 +19,7 @@ export interface authDataType {
   userRole: string;
   email: string;
   user?: IUser;
+  type: string;
 }
 
 const initialState: authDataType = {
@@ -27,6 +28,7 @@ const initialState: authDataType = {
   token: null, // Auth token null when not logged in getStoredAuthToken
   userRole: 'user',
   email: '',
+  type: '',
 };
 
 // Login action
@@ -82,6 +84,34 @@ export const signupAction = createAsyncThunk(
 
     const { response, error } = await networkCall(
       endpoints.REGISTER,
+      'POST',
+      JSON.stringify(data),
+    );
+
+    if (response) {
+      await storeAuthToken(response.token);
+      return fulfillWithValue(response);
+    }
+    return rejectWithValue({ message: error });
+  },
+);
+// forgot password action
+export const forgotPasswordAction = createAsyncThunk(
+  'forgotPasswordAction',
+  async (
+    {
+      email,
+    }: {
+      email: string;
+    },
+    { getState, rejectWithValue, fulfillWithValue },
+  ) => {
+    const data = {
+      email,
+    };
+
+    const { response, error } = await networkCall(
+      endpoints.FORGOT_PASSWORD,
       'POST',
       JSON.stringify(data),
     );
@@ -206,6 +236,26 @@ export const AuthSlice = createSlice({
         state.message = action.payload.message;
       })
       .addCase(signupAction.rejected, (state, action) => {
+        state.loading = false;
+        state.message = action.payload
+          ? (action.payload as any).message
+          : 'Please try again!';
+      });
+
+    // forgot password
+    builder
+      .addCase(forgotPasswordAction.pending, state => {
+        state.loading = true;
+        state.message = null;
+      })
+      .addCase(forgotPasswordAction.fulfilled, (state, action) => {
+        state.loading = false;
+        state.token = action.payload.token;
+        state.email = action.payload.email;
+        state.message = action.payload.message;
+        state.type = action.payload.type;
+      })
+      .addCase(forgotPasswordAction.rejected, (state, action) => {
         state.loading = false;
         state.message = action.payload
           ? (action.payload as any).message

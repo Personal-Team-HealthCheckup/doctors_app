@@ -28,6 +28,7 @@ const AuthNavigation = () => {
       <AuthStack.Screen name={AUTH.VERIFICATION} component={VerificationCode} />
       <AuthStack.Screen name={AUTH.SIGNIN} component={Signin} />
       <AuthStack.Screen name={AUTH.FORGOTPASSWORD} component={ForgotPassword} />
+      <AuthStack.Screen name={AUTH.RESETPASSWORD} component={ForgotPassword} />
       <AuthStack.Screen name={AUTH.ONBOARDING} component={OnBoarding} />
     </AuthStack.Navigator>
   );
