@@ -123,6 +123,42 @@ export const forgotPasswordAction = createAsyncThunk(
     return rejectWithValue({ message: error });
   },
 );
+
+export const resetPasswordAction = createAsyncThunk(
+  'resetPasswordAction',
+  async (
+    {
+      email,
+      otp,
+      password,
+    }: {
+      email: string;
+      otp: string;
+      password: string;
+    },
+    { getState, rejectWithValue, fulfillWithValue },
+  ) => {
+    const data = {
+      email,
+      otp,
+      password,
+    };
+
+    const { response, error } = await networkCall(
+      endpoints.RESET_PASSWORD,
+      'POST',
+      JSON.stringify(data),
+    );
+
+    if (response) {
+      if (response.token) {
+        await storeAuthToken(response.token);
+      }
+      return fulfillWithValue(response);
+    }
+    return rejectWithValue({ message: error });
+  },
+);
 // Verify OTP action
 export const verifyOtpAction = createAsyncThunk(
   'verifyOtpAction',
@@ -196,8 +232,6 @@ export const AuthSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    console.log('Extra reducers triggered', builder);
-
     // login
     builder
       .addCase(loginAction.pending, state => {
@@ -262,6 +296,25 @@ export const AuthSlice = createSlice({
           : 'Please try again!';
       });
 
+    // reset password
+    builder
+      .addCase(resetPasswordAction.pending, state => {
+        state.loading = true;
+        state.message = null;
+      })
+      .addCase(resetPasswordAction.fulfilled, (state, action) => {
+        state.loading = false;
+        state.message = action.payload.message;
+        state.token = action.payload.token ?? state.token;
+        state.type = action.payload.type ?? state.type;
+      })
+      .addCase(resetPasswordAction.rejected, (state, action) => {
+        state.loading = false;
+        state.message = action.payload
+          ? (action.payload as any).message
+          : 'Please try again!';
+      });
+
     // verify otp
     builder
       .addCase(verifyOtpAction.pending, state => {
@@ -272,6 +325,8 @@ export const AuthSlice = createSlice({
         state.loading = false;
         state.token = action.payload.token ?? state.token;
         state.message = action.payload.message;
+        state.email = action.payload.email ?? state.email;
+        state.type = action.payload.type ?? state.type;
       })
       .addCase(verifyOtpAction.rejected, (state, action) => {
         state.loading = false;

@@ -85,10 +85,19 @@ class VerificationCode extends React.Component<Props, VerificationCodeState> {
       });
       if (this.props.verifyOTPData.message?.includes('success')) {
         Alert.alert('Successs', this.props.verifyOTPData.message);
-        navigateTo(
-          this.props.navigation,
-          !this.state.isForgotPasswordFlow ? AUTH.SIGNIN : AUTH.RESETPASSWORD,
-        );
+        const isForgotFlow = this.state.isForgotPasswordFlow;
+        const targetScreen = !isForgotFlow ? AUTH.SIGNIN : AUTH.RESETPASSWORD;
+        const emailParam =
+          this.props.verifyOTPData.email ||
+          this.props.route?.params?.email ||
+          '';
+        const params = isForgotFlow
+          ? {
+              email: emailParam,
+              otp: this.state.code,
+            }
+          : undefined;
+        navigateTo(this.props.navigation, targetScreen, params);
       } else {
         Alert.alert(
           'Error',
@@ -108,8 +117,6 @@ class VerificationCode extends React.Component<Props, VerificationCodeState> {
 
   componentDidMount(): void {
     const { fromScreen } = this.props.route?.params || {};
-    console.log('fromScreen', fromScreen);
-    console.log('props forgot', this.props);
 
     if (fromScreen && fromScreen === 'ForgotPassword') {
       this.setState({ isForgotPasswordFlow: true });

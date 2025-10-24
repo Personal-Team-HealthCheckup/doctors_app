@@ -7,8 +7,8 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  View,
   TouchableOpacity,
+  View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CustomMainView from '../../Components/common/CustomMainView';
@@ -26,70 +26,142 @@ import { moderateScale, verticalScale } from '../../helper/Scale';
 import { Navigation } from '../../global/types';
 import { AUTH } from '../../Constants/Navigator';
 import { translate } from '../../helper/i18';
-import { navigateTo, checkEmailValidation } from '../../helper/utilities';
+import { navigateTo, replaceTo } from '../../helper/utilities';
 import { LogoSvg, StarSvg, gradientSignupPng } from '../../assets/assets';
 import { connect } from 'react-redux';
-import { forgotPasswordAction } from '../../redux/reducers/auth';
 import { RootState } from '../../redux/store';
+import { resetPasswordAction } from '../../redux/reducers/auth';
 
-interface ForgotPasswordProps {
+interface ResetPasswordProps {
   navigation?: Navigation;
+  route?: any;
 }
 
 interface ReduxProps {
-  forgotPassData: RootState['Auth'];
-  forgotPasswordApi: (data: { email: string }) => void;
+  authData: RootState['Auth'];
+  resetPasswordApi: (data: {
+    email: string;
+    otp: string;
+    password: string;
+  }) => void;
 }
 
-type Props = ForgotPasswordProps & ReduxProps;
-interface ForgotPasswordState {
+type Props = ResetPasswordProps & ReduxProps;
+
+type ErrorType = {
+  password?: string;
+  confirmPassword?: string;
+};
+
+interface ResetPasswordState {
+  password: string;
+  confirmPassword: string;
+  error: ErrorType;
   email: string;
-  error: string;
-  loading: boolean;
+  otp: string;
 }
 
-class ForgotPassword extends React.Component<Props, ForgotPasswordState> {
+class ResetPassword extends React.Component<Props, ResetPasswordState> {
   constructor(props: Props) {
     super(props);
+    const { email = '', otp = '' } = props.route?.params ?? {};
+    const fallbackEmail = email || props.authData.email || '';
     this.state = {
-      email: '',
-      error: '',
-      loading: false,
+      password: '',
+      confirmPassword: '',
+      error: {},
+      email: fallbackEmail,
+      otp: otp || '',
     };
   }
 
-  handleEmailChange = (value: string) => {
-    this.setState({ email: value, error: '' });
+  componentDidMount(): void {
+    if (!this.state.otp) {
+      Alert.alert('Error', translate('auth.resetSessionMissing'), [
+        {
+          text: 'OK',
+          onPress: () =>
+            navigateTo(this.props.navigation, AUTH.FORGOTPASSWORD),
+        },
+      ]);
+    }
+  }
+
+  handlePasswordChange = (value: string) => {
+    this.setState(prevState => ({
+      password: value,
+      error: { ...prevState.error, password: undefined },
+    }));
   };
 
-  validateEmail = () => {
-    const { email } = this.state;
-    if (!email) {
-      this.setState({ error: translate('auth.emailRequired') });
-      return false;
+  handleConfirmPasswordChange = (value: string) => {
+    this.setState(prevState => ({
+      confirmPassword: value,
+      error: { ...prevState.error, confirmPassword: undefined },
+    }));
+  };
+
+  validateForm = () => {
+    const { password, confirmPassword } = this.state;
+    const errors: ErrorType = {};
+    let isValid = true;
+
+    if (!password) {
+      errors.password = translate('auth.passwordRequired');
+      isValid = false;
+    } else if (password.length < 6) {
+      errors.password = translate('auth.passwordMin');
+      isValid = false;
     }
-    if (!checkEmailValidation(email)) {
-      this.setState({ error: translate('auth.emailInvalid') });
-      return false;
+
+    if (!confirmPassword) {
+      errors.confirmPassword = translate('auth.passwordRequired');
+      isValid = false;
+    } else if (confirmPassword !== password) {
+      errors.confirmPassword = translate('auth.passwordMismatch');
+      isValid = false;
     }
-    return true;
+
+    this.setState({ error: errors });
+    return isValid;
   };
 
   handleResetPress = async () => {
-    if (!this.validateEmail()) {
+    if (!this.validateForm()) {
       return;
     }
-    try {
-      const { forgotPasswordApi } = this.props;
-      await forgotPasswordApi({ email: this.state.email });
-      const { message, token, type } = this.props.forgotPassData;
-      Alert.alert('Success', JSON.stringify(message));
 
-      if (message?.includes('success') && token && type === 'forgot-password') {
-        navigateTo(this.props.navigation, AUTH.VERIFICATION, {
-          email: this.state.email,
-          fromScreen: 'ForgotPassword',
+    const { email, otp, password } = this.state;
+
+    if (!email || !otp) {
+      Alert.alert('Error', translate('auth.resetSessionInvalid'));
+      return;
+    }
+
+    try {
+      await this.props.resetPasswordApi({ email, otp, password });
+      const { message } = this.props.authData;
+
+      if (message?.toLowerCase().includes('success')) {
+        Alert.alert(
+          'Success',
+          message || translate('auth.passwordUpdated'),
+          [
+            {
+              text: 'OK',
+              onPress: () => replaceTo(this.props.navigation, AUTH.SIGNIN),
+            },
+          ],
+        );
+        this.setState({
+          password: '',
+          confirmPassword: '',
         });
+      } else {
+        Alert.alert(
+          'Error',
+          message || translate('auth.loginErrorMessage'),
+        );
       }
     } catch (error) {
       const errorMessage =
@@ -99,12 +171,12 @@ class ForgotPassword extends React.Component<Props, ForgotPasswordState> {
   };
 
   handleNavigateToLogin = () => {
-    navigateTo(this.props.navigation, AUTH.SIGNIN);
+    replaceTo(this.props.navigation, AUTH.SIGNIN);
   };
 
   render() {
-    const { loading } = this.props.forgotPassData;
-    const { error, email } = this.state;
+    const { loading } = this.props.authData;
+    const { password, confirmPassword, error } = this.state;
 
     return (
       <CustomMainView>
@@ -126,7 +198,7 @@ class ForgotPassword extends React.Component<Props, ForgotPasswordState> {
               <SafeAreaView style={styles.safeArea}>
                 <CustomHeader
                   navigation={this.props.navigation}
-                  heading={translate('auth.forgotPasswordHeading')}
+                  heading={translate('auth.resetPasswordHeading')}
                   isIcon={false}
                   isShowSearchIcon={false}
                   isShowNotificationIcon={false}
@@ -142,23 +214,35 @@ class ForgotPassword extends React.Component<Props, ForgotPasswordState> {
 
                 <View style={styles.card}>
                   <Text style={styles.titleText}>
-                    {translate('auth.forgotPasswordHeading')}
+                    {translate('auth.resetPasswordHeading')}
                   </Text>
                   <Text style={styles.subtitleText}>
-                    {translate('auth.forgotPasswordDescription')}
+                    {translate('auth.resetPasswordDescription')}
                   </Text>
+
                   <View style={styles.inputWrapper}>
                     <CustomTextInput
-                      placeholder={translate('auth.emailPlaceholder')}
-                      value={email}
-                      onChangeText={value => this.handleEmailChange(value)}
-                      errorMessage={error}
+                      placeholder={translate('auth.newPasswordPlaceholder')}
+                      value={password}
+                      onChangeText={this.handlePasswordChange}
+                      errorMessage={error.password}
                       style={{ width: responsiveWidth(80) }}
+                      secureTextEntry
+                    />
+                    <CustomTextInput
+                      placeholder={translate(
+                        'auth.confirmPasswordPlaceholder',
+                      )}
+                      value={confirmPassword}
+                      onChangeText={this.handleConfirmPasswordChange}
+                      errorMessage={error.confirmPassword}
+                      style={{ width: responsiveWidth(80) }}
+                      secureTextEntry
                     />
                   </View>
 
                   <CustomGButton
-                    tittle={translate('auth.sendResetLink')}
+                    tittle={translate('auth.resetPasswordButton')}
                     style={styles.resetButton}
                     disabled={loading}
                     onPress={this.handleResetPress}
@@ -166,13 +250,10 @@ class ForgotPassword extends React.Component<Props, ForgotPasswordState> {
                   <TouchableOpacity
                     activeOpacity={0.8}
                     onPress={this.handleNavigateToLogin}
-                    style={styles.rememberContainer}
+                    style={styles.backToLoginContainer}
                   >
-                    <Text style={styles.rememberText}>
-                      {translate('auth.rememberPassword')}{' '}
-                      <Text style={styles.loginLink}>
-                        {translate('auth.login')}
-                      </Text>
+                    <Text style={styles.backToLoginText}>
+                      {translate('auth.backToLogin')}
                     </Text>
                   </TouchableOpacity>
                 </View>
@@ -186,13 +267,18 @@ class ForgotPassword extends React.Component<Props, ForgotPasswordState> {
 }
 
 const mapStateToProps = (state: RootState) => ({
-  forgotPassData: state.Auth,
+  authData: state.Auth,
 });
 
 const mapDispatchToProps = {
-  forgotPasswordApi: (data: { email: string }) => forgotPasswordAction(data),
+  resetPasswordApi: (data: {
+    email: string;
+    otp: string;
+    password: string;
+  }) => resetPasswordAction(data),
 };
-export default connect(mapStateToProps, mapDispatchToProps)(ForgotPassword);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ResetPassword);
 
 const styles = StyleSheet.create({
   keyboardAvoid: {
@@ -203,8 +289,8 @@ const styles = StyleSheet.create({
   },
   background: {
     flex: 1,
-    paddingHorizontal: responsiveScreenWidth(5),
-    paddingBottom: responsiveHeight(4),
+    paddingHorizontal: responsiveWidth(6),
+    paddingVertical: responsiveHeight(4),
   },
   safeArea: {
     flex: 1,
@@ -212,8 +298,8 @@ const styles = StyleSheet.create({
   decorationOne: {
     position: 'absolute',
     top: responsiveHeight(10),
-    right: responsiveWidth(20),
-    opacity: 0.65,
+    left: responsiveWidth(8),
+    opacity: 0.45,
   },
   decorationTwo: {
     position: 'absolute',
@@ -260,17 +346,13 @@ const styles = StyleSheet.create({
   resetButton: {
     height: verticalScale(54),
   },
-  rememberContainer: {
+  backToLoginContainer: {
     marginTop: responsiveHeight(2.5),
     alignItems: 'center',
   },
-  rememberText: {
-    fontFamily: FONTS.rubik.regular,
-    fontSize: moderateScale(14),
-    color: COLORS.white2gray,
-  },
-  loginLink: {
-    color: COLORS.green,
+  backToLoginText: {
     fontFamily: FONTS.rubik.medium,
+    fontSize: moderateScale(14),
+    color: COLORS.green,
   },
 });

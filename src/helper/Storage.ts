@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {salt} from './config';
+import { salt } from './config';
 
 const getItem = async (key: string) => {
   try {
@@ -13,7 +13,6 @@ const getItem = async (key: string) => {
 const setItem = async (key: string, value: unknown) => {
   try {
     await AsyncStorage.setItem(key, encryption(JSON.stringify(value)));
-    console.log('encryption', encryption(JSON.stringify(value)));
     return true;
   } catch (error) {
     return false;

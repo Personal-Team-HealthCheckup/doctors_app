@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Signup from '../screen/auth/Signup';
 import Signin from '../screen/auth/Signin';
 import ForgotPassword from '../screen/auth/ForgotPassword';
+import ResetPassword from '../screen/auth/ResetPassword';
 import SplashScreens from '../screen/Splashscreen';
 import { AUTH, DASHBOARD, HOME, MAINSTACK } from '../Constants/Navigator';
 import OnBoarding from '../screen/auth/OnBoarding';
@@ -28,7 +29,7 @@ const AuthNavigation = () => {
       <AuthStack.Screen name={AUTH.VERIFICATION} component={VerificationCode} />
       <AuthStack.Screen name={AUTH.SIGNIN} component={Signin} />
       <AuthStack.Screen name={AUTH.FORGOTPASSWORD} component={ForgotPassword} />
-      <AuthStack.Screen name={AUTH.RESETPASSWORD} component={ForgotPassword} />
+      <AuthStack.Screen name={AUTH.RESETPASSWORD} component={ResetPassword} />
       <AuthStack.Screen name={AUTH.ONBOARDING} component={OnBoarding} />
     </AuthStack.Navigator>
   );

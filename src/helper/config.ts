@@ -8,6 +8,7 @@ export const endpoints = {
   VERIFYOTP: 'verifyotp',
   RESEND_OTP: 'resend-otp',
   FORGOT_PASSWORD: 'forgot-password',
+  RESET_PASSWORD: 'reset-password',
   GET_PRODUCTS: 'products',
   SINGLE_PRODUCTS: 'products/:productId',
   GET_CATEGORIES: 'products/get-categories',
