@@ -23,6 +23,9 @@ const DrawerGetureWrapper: React.FC<DrawerGetureWrapperProps> = ({
           scale: interpolate(value, [0, 1], [1, 0.8], 'clamp'),
         },
       ],
+      marginTop: interpolate(value, [0, 1], [1, 20], 'clamp'),
+      borderTopStartRadius: interpolate(value, [0, 1], [0, 26], 'clamp'),
+      borderBottomStartRadius: interpolate(value, [0, 1], [0, 26], 'clamp'),
       borderRadius: interpolate(value, [0, 1], [0, 26], 'clamp'),
       overflow: 'hidden',
     };

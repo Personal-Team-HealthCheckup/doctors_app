@@ -7,11 +7,13 @@ import {
   StyleSheet,
   Image,
   Alert,
+  Dimensions,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {
   responsiveFontSize,
   responsiveHeight,
+  responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome6';
@@ -28,6 +30,9 @@ import { actionLogout } from '../redux/reducers/auth';
 import { AUTH, MAINSTACK } from '../Constants/Navigator';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { closeDrawer } from '../helper/utilities';
+import { COLORS, FONTS } from '../global/theme';
+import { moderateScale } from '../helper/Scale';
+import { useDrawerStatus } from '@react-navigation/drawer';
 
 interface DrawerComponentProps {
   state: DrawerNavigationState<ParamListBase>;
@@ -46,54 +51,55 @@ const drawerData: DrawerData[] = [
     id: 1,
     title: 'My Doctors',
     link: '',
-    Icon: <AntDesign name="user" size={22} color="#fff" />,
+    Icon: <AntDesign name="user" size={20} color="#fff" />,
   },
   {
     id: 2,
     title: 'Medical Records',
     link: '',
-    Icon: <AntDesign name="folder1" size={22} color="#fff" />,
+    Icon: <AntDesign name="folder1" size={20} color="#fff" />,
   },
   {
     id: 3,
     title: 'Payments',
     link: '',
-    Icon: <AntDesign name="creditcard" size={22} color="#fff" />,
+    Icon: <AntDesign name="creditcard" size={20} color="#fff" />,
   },
   {
     id: 4,
     title: 'Medicine Orders',
     link: '',
-    Icon: <AntDesign name="medicinebox" size={22} color="#fff" />,
+    Icon: <AntDesign name="medicinebox" size={20} color="#fff" />,
   },
   {
     id: 5,
     title: 'Test Bookings',
     link: '',
-    Icon: <AntDesign name="calendar" size={22} color="#fff" />,
+    Icon: <AntDesign name="calendar" size={20} color="#fff" />,
   },
   {
     id: 6,
     title: 'Favorite Doctors',
     link: '',
-    Icon: <AntDesign name="hearto" size={22} color="#fff" />,
+    Icon: <AntDesign name="hearto" size={20} color="#fff" />,
   },
   {
     id: 7,
     title: 'Help Center',
     link: '',
-    Icon: <AntDesign name="questioncircleo" size={22} color="#fff" />,
+    Icon: <AntDesign name="questioncircleo" size={20} color="#fff" />,
   },
   {
     id: 8,
     title: 'Settings',
     link: '',
-    Icon: <AntDesign name="setting" size={22} color="#fff" />,
+    Icon: <AntDesign name="setting" size={20} color="#fff" />,
   },
 ];
 
 const DrawerComponent: React.FC<DrawerComponentProps> = ({ navigation }) => {
   const dispatch = useDispatch();
+  const isOpen = useDrawerStatus() === 'open';
 
   const performLogout = React.useCallback(async () => {
     try {
@@ -153,15 +159,20 @@ const DrawerComponent: React.FC<DrawerComponentProps> = ({ navigation }) => {
     const { Icon } = item;
     return (
       <TouchableOpacity style={styles.drawerItem} activeOpacity={0.7}>
-        {Icon}
-        <Text style={styles.drawerLabel}>{item.title}</Text>
-        <FontAwesomeIcon name="chevron-right" size={18} color="#fff" />
+        <View style={styles.row}>
+          {Icon}
+          <Text style={styles.drawerLabel}>{item.title}</Text>
+        </View>
+        <FontAwesomeIcon name="chevron-right" size={20} color="#fff" />
       </TouchableOpacity>
     );
   };
 
   return (
-    <LinearGradient colors={['#001524', '#0A192F']} style={styles.container}>
+    <LinearGradient
+      colors={[COLORS.black, COLORS.black]}
+      style={styles.container}
+    >
       <SafeAreaView style={{ flex: 1 }}>
         {/* Profile Section */}
         <View style={styles.profileSection}>
@@ -171,13 +182,15 @@ const DrawerComponent: React.FC<DrawerComponentProps> = ({ navigation }) => {
             <Text style={styles.phone}>01303-527300</Text>
           </View>
 
-          <TouchableOpacity
-            style={styles.closeButton}
-            onPress={() => closeDrawer(navigation)}
-            activeOpacity={0.9}
-          >
-            <AntDesign name="close" size={20} color="#fff" />
-          </TouchableOpacity>
+          {isOpen && (
+            <TouchableOpacity
+              style={styles.closeButton}
+              onPress={() => closeDrawer(navigation)}
+              activeOpacity={0.9}
+            >
+              <AntDesign name="close" size={20} color="#fff" />
+            </TouchableOpacity>
+          )}
         </View>
 
         {/* Drawer List */}
@@ -189,12 +202,14 @@ const DrawerComponent: React.FC<DrawerComponentProps> = ({ navigation }) => {
         />
         {/* Logout */}
         <TouchableOpacity
-          style={styles.logoutButton}
+          style={[styles.drawerItem, styles.logoutButton]}
           activeOpacity={0.7}
           onPress={handleLogout}
         >
-          <AntDesign name="logout" size={22} color="#FF6B6B" />
-          <Text style={styles.logoutText}>Logout</Text>
+          <View style={styles.row}>
+            <AntDesign name="logout" size={20} color="#fff" />
+            <Text style={styles.drawerLabel}>Logout</Text>
+          </View>
         </TouchableOpacity>
       </SafeAreaView>
     </LinearGradient>
@@ -232,8 +247,8 @@ const styles = StyleSheet.create({
   },
   closeButton: {
     position: 'absolute',
-    right: 20,
-    top: 5,
+    right: -(Dimensions.get('screen').width - 40 - responsiveWidth(52)),
+    top: responsiveHeight(2),
     backgroundColor: '#FF4D4D',
     borderRadius: 20,
     padding: 6,
@@ -243,27 +258,21 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingVertical: 14,
+    marginBottom: 10,
   },
   row: {
     flexDirection: 'row',
     alignItems: 'center',
+    flex: 1,
   },
   drawerLabel: {
     color: '#fff',
-    fontSize: responsiveFontSize(2),
-    marginLeft: 15,
-    flex: 1,
+    fontSize: moderateScale(16),
+    fontFamily: FONTS.rubik.regular,
+    marginLeft: 8,
   },
   logoutButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 20,
-    marginTop: 'auto',
+    marginLeft: 20,
     paddingBottom: responsiveHeight(4),
-  },
-  logoutText: {
-    marginLeft: 10,
-    color: '#FF6B6B',
-    fontSize: responsiveFontSize(2),
   },
 });

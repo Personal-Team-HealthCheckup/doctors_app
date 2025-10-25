@@ -26,5 +26,15 @@
   "forgotPasswordHeading": "Forgot Password",
   "forgotPasswordDescription": "Enter your registered email address and we’ll send you instructions to reset your password.",
   "sendResetLink": "Send Reset Link",
-  "rememberPassword": "Remembered your password?"
+  "rememberPassword": "Remembered your password?",
+  "resetPasswordHeading": "Reset Password",
+  "resetPasswordDescription": "Create a new password for your account.",
+  "newPasswordPlaceholder": "New Password",
+  "confirmPasswordPlaceholder": "Confirm Password",
+  "passwordMismatch": "Passwords do not match",
+  "passwordUpdated": "Password updated successfully",
+  "resetPasswordButton": "Reset Password",
+  "backToLogin": "Back to Login",
+  "resetSessionMissing": "Missing verification details. Please request a new reset link.",
+  "resetSessionInvalid": "We could not find your reset session. Please try again."
 }

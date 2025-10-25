@@ -5,6 +5,7 @@ import {
   TextStyle,
   View,
   Text,
+  TouchableOpacity,
 } from 'react-native';
 import React from 'react';
 import { COLORS, FONTS } from '../../global/theme';
@@ -13,6 +14,8 @@ import {
   responsiveScreenWidth,
 } from 'react-native-responsive-dimensions';
 import { moderateScale } from '../../helper/Scale';
+import FeatherIcon from 'react-native-vector-icons/Feather';
+
 interface TextInputProps extends React.ComponentProps<typeof TextInput> {
   style?: StyleProp<TextStyle>;
   placeholder?: string;
@@ -23,6 +26,7 @@ interface TextInputProps extends React.ComponentProps<typeof TextInput> {
   errorMessage?: string;
   label?: string;
   editable?: boolean;
+  shouldShowTogglePassword?: boolean;
 }
 const CustomTextInput: React.FC<TextInputProps> = ({
   style,
@@ -30,31 +34,64 @@ const CustomTextInput: React.FC<TextInputProps> = ({
   value,
   placeholderTextColor,
   onChangeText,
-  secureTextEntry,
+  secureTextEntry = false,
   errorMessage,
   editable = true,
   label,
+  shouldShowTogglePassword,
   ...props
 }) => {
+  const [isPasswordHidden, setIsPasswordHidden] =
+    React.useState<boolean>(secureTextEntry);
+
+  React.useEffect(() => {
+    setIsPasswordHidden(secureTextEntry);
+  }, [secureTextEntry]);
+
+  const shouldShowToggle =
+    typeof shouldShowTogglePassword === 'boolean'
+      ? shouldShowTogglePassword
+      : secureTextEntry;
+
   return (
     <View style={styles.view}>
       {label && <Text style={styles.labelStyles}>{label}</Text>}
-      <TextInput
-        {...props}
-        placeholder={placeholder}
-        value={value}
-        style={[
-          styles.textInput,
-          style,
-          errorMessage && styles.errorStylesTextInput,
-        ]}
-        placeholderTextColor={
-          placeholderTextColor ? placeholderTextColor : COLORS.white2gray
-        }
-        onChangeText={onChangeText}
-        secureTextEntry={secureTextEntry}
-        editable={editable}
-      />
+      <View style={styles.inputContainer}>
+        <TextInput
+          {...props}
+          placeholder={placeholder}
+          value={value}
+          style={[
+            styles.textInput,
+            shouldShowToggle && styles.textInputWithIcon,
+            style,
+            errorMessage && styles.errorStylesTextInput,
+          ]}
+          placeholderTextColor={
+            placeholderTextColor ? placeholderTextColor : COLORS.white2gray
+          }
+          onChangeText={onChangeText}
+          secureTextEntry={shouldShowToggle ? isPasswordHidden : secureTextEntry}
+          editable={editable}
+        />
+        {shouldShowToggle && (
+          <TouchableOpacity
+            accessibilityRole="button"
+            accessibilityLabel={
+              isPasswordHidden ? 'Show password' : 'Hide password'
+            }
+            onPress={() => setIsPasswordHidden(prev => !prev)}
+            style={styles.iconContainer}
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+          >
+            <FeatherIcon
+              name={isPasswordHidden ? 'eye-off' : 'eye'}
+              size={moderateScale(18)}
+              color={COLORS.white2gray}
+            />
+          </TouchableOpacity>
+        )}
+      </View>
       {errorMessage && <Text style={styles.errMessage}>{errorMessage}</Text>}
     </View>
   );
@@ -95,5 +132,19 @@ const styles = StyleSheet.create({
     position: 'relative',
     height: responsiveScreenHeight(9.5),
     marginVertical: responsiveScreenHeight(0.5),
+  },
+  inputContainer: {
+    position: 'relative',
+    justifyContent: 'center',
+  },
+  iconContainer: {
+    position: 'absolute',
+    right: moderateScale(16),
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100%',
+  },
+  textInputWithIcon: {
+    paddingRight: moderateScale(48),
   },
 });
