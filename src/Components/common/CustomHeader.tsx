@@ -1,5 +1,11 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  SafeAreaView,
+} from 'react-native';
 import { COLORS, FONTS } from '../../global/theme';
 import {
   responsiveFontSize,
@@ -41,50 +47,52 @@ class CustomHeader extends React.Component<
   render() {
     const { heading } = this.props;
     return (
-      <View style={styles.main}>
-        <View style={styles.headingView}>
-          <TouchableOpacity
-            testID="back-button"
-            onPress={() => this.handleGoBack()}
-            style={styles.iconView}
-          >
-            <VectorIcon
-              name="chevron-left"
-              size={20}
-              color={COLORS.white2gray}
-            />
-          </TouchableOpacity>
-          <Text style={styles.headingText}>{heading ?? 'profile'}</Text>
-        </View>
+      <SafeAreaView>
+        <View style={styles.main}>
+          <View style={styles.headingView}>
+            <TouchableOpacity
+              testID="back-button"
+              onPress={() => this.handleGoBack()}
+              style={styles.iconView}
+            >
+              <VectorIcon
+                name="chevron-left"
+                size={20}
+                color={COLORS.white2gray}
+              />
+            </TouchableOpacity>
+            <Text style={styles.headingText}>{heading ?? 'profile'}</Text>
+          </View>
 
-        {this.props.isIcon && (
-          <TouchableOpacity style={styles.icon}>
-            <LightSvg width={'25'} height={'25'} style={styles.image} />
-          </TouchableOpacity>
-        )}
-        {this.props.isShowSearchIcon && (
-          <TouchableOpacity
-            style={styles.icon}
-            testID="search-button"
-            onPress={() => this.handleNavigateTo(DASHBOARD.SEARCHPAGE)}
-          >
-            <SearchSvg width={'25'} height={'20'} style={styles.image} />
-          </TouchableOpacity>
-        )}
-        {this.props.isShowNotificationIcon && (
-          <TouchableOpacity style={styles.icon} testID="notification-button">
-            <NotificationBellSvg
-              width={'25'}
-              height={'25'}
-              resizeMode={'cover'}
-              style={styles.image}
-            />
-            <View style={styles.badge}>
-              <Text style={styles.badgeText}>1</Text>
-            </View>
-          </TouchableOpacity>
-        )}
-      </View>
+          {this.props.isIcon && (
+            <TouchableOpacity style={styles.icon}>
+              <LightSvg width={'25'} height={'25'} style={styles.image} />
+            </TouchableOpacity>
+          )}
+          {this.props.isShowSearchIcon && (
+            <TouchableOpacity
+              style={styles.icon}
+              testID="search-button"
+              onPress={() => this.handleNavigateTo(DASHBOARD.SEARCHPAGE)}
+            >
+              <SearchSvg width={'25'} height={'20'} style={styles.image} />
+            </TouchableOpacity>
+          )}
+          {this.props.isShowNotificationIcon && (
+            <TouchableOpacity style={styles.icon} testID="notification-button">
+              <NotificationBellSvg
+                width={'25'}
+                height={'25'}
+                resizeMode={'cover'}
+                style={styles.image}
+              />
+              <View style={styles.badge}>
+                <Text style={styles.badgeText}>1</Text>
+              </View>
+            </TouchableOpacity>
+          )}
+        </View>
+      </SafeAreaView>
     );
   }
 }
@@ -95,7 +103,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: responsiveHeight(3.5),
   },
   headingView: {
     flexDirection: 'row',

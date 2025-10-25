@@ -240,10 +240,12 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
               />
             </LinearGradient>
           )}
+
           <Header
             navigateTo={this.handleNavigation}
             toggleDrawer={this.toggleDrawer}
           />
+
           <ScrollView
             scrollEventThrottle={16}
             scrollEnabled
