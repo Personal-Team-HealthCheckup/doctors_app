@@ -80,8 +80,7 @@ class ResetPassword extends React.Component<Props, ResetPasswordState> {
       Alert.alert('Error', translate('auth.resetSessionMissing'), [
         {
           text: 'OK',
-          onPress: () =>
-            navigateTo(this.props.navigation, AUTH.FORGOTPASSWORD),
+          onPress: () => navigateTo(this.props.navigation, AUTH.FORGOTPASSWORD),
         },
       ]);
     }
@@ -143,25 +142,18 @@ class ResetPassword extends React.Component<Props, ResetPasswordState> {
       const { message } = this.props.authData;
 
       if (message?.toLowerCase().includes('success')) {
-        Alert.alert(
-          'Success',
-          message || translate('auth.passwordUpdated'),
-          [
-            {
-              text: 'OK',
-              onPress: () => replaceTo(this.props.navigation, AUTH.SIGNIN),
-            },
-          ],
-        );
+        Alert.alert('Success', message || translate('auth.passwordUpdated'), [
+          {
+            text: 'OK',
+            onPress: () => replaceTo(this.props.navigation, AUTH.SIGNIN),
+          },
+        ]);
         this.setState({
           password: '',
           confirmPassword: '',
         });
       } else {
-        Alert.alert(
-          'Error',
-          message || translate('auth.loginErrorMessage'),
-        );
+        Alert.alert('Error', message || translate('auth.loginErrorMessage'));
       }
     } catch (error) {
       const errorMessage =
@@ -227,17 +219,17 @@ class ResetPassword extends React.Component<Props, ResetPasswordState> {
                       onChangeText={this.handlePasswordChange}
                       errorMessage={error.password}
                       style={{ width: responsiveWidth(80) }}
-                      secureTextEntry
+                      shouldShowTogglePassword={true}
+                      secureTextEntry={true}
                     />
                     <CustomTextInput
-                      placeholder={translate(
-                        'auth.confirmPasswordPlaceholder',
-                      )}
+                      placeholder={translate('auth.confirmPasswordPlaceholder')}
                       value={confirmPassword}
                       onChangeText={this.handleConfirmPasswordChange}
                       errorMessage={error.confirmPassword}
                       style={{ width: responsiveWidth(80) }}
-                      secureTextEntry
+                      shouldShowTogglePassword={true}
+                      secureTextEntry={true}
                     />
                   </View>
 
@@ -271,11 +263,8 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const mapDispatchToProps = {
-  resetPasswordApi: (data: {
-    email: string;
-    otp: string;
-    password: string;
-  }) => resetPasswordAction(data),
+  resetPasswordApi: (data: { email: string; otp: string; password: string }) =>
+    resetPasswordAction(data),
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ResetPassword);

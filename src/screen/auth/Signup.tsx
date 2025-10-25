@@ -236,6 +236,8 @@ class Signup extends React.Component<Props, SignupState> {
                   value={this.state.password}
                   maxLength={15}
                   onChangeText={value => this.handleOnChange(value, 'password')}
+                  shouldShowTogglePassword={true}
+                  secureTextEntry={true}
                 />
                 <Pressable
                   style={styles.buttonCheck}
