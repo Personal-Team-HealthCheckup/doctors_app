@@ -23,7 +23,7 @@ module.exports = {
     '<rootDir>/src/config/*',
   ],
   transformIgnorePatterns: [
-    'node_modules/(?!(jest-)?react-native|@react-native|react-native-vector-icons|@reduxjs/toolkit|immer)',
+    'node_modules/(?!(jest-)?react-native|@react-native|react-native-vector-icons|@reduxjs/toolkit|immer|@react-navigation)',
   ],
   // testEnvironment: 'jsdom',
 };

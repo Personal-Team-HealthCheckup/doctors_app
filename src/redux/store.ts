@@ -66,7 +66,7 @@ export type AppStore = typeof store;
 // ✅ Export store
 export default store;
 export const persistor = persistStore(store);
-if (__DEV__) {
+if (__DEV__ && process.env.NODE_ENV !== 'test') {
   persistor.subscribe(() => {
     const { bootstrapped } = persistor.getState();
     const snapshot = store.getState();

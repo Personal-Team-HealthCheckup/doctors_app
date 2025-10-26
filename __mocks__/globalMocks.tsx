@@ -25,6 +25,7 @@ jest.mock('../src/assets/assets', () => ({
   SearchSvg: (props: {}) => <MockView {...props} />,
   LogoSvg: (props: {}) => <MockView {...props} />,
   StarSvg: (props: {}) => <MockView {...props} />,
+  OnBoarding1Svg: (props: {}) => <MockView {...props} />,
   GoogleSvg: (props: {}) => <MockView {...props} />,
   FacebookSvg: (props: {}) => <MockView {...props} />,
   gradientSignupPng: 'mocked-image',
@@ -56,6 +57,11 @@ const getMockState = () =>
 const mockDispatch = jest.fn();
 
 jest.mock('react-redux', () => {
+  const setMockState = (state: unknown) => {
+    global.__TEST_REDUX_STATE__ = state;
+    mockDispatch.mockClear();
+  };
+
   const useSelector = jest.fn(selector => selector(getMockState()));
   const useDispatch = jest.fn(() => mockDispatch);
 
@@ -79,6 +85,7 @@ jest.mock('react-redux', () => {
       ConnectedComponent.displayName = `MockConnect(${
         Component.displayName || Component.name || 'Component'
       })`;
+      (ConnectedComponent as any).WrappedComponent = Component;
 
       return ConnectedComponent;
     };
@@ -90,13 +97,17 @@ jest.mock('react-redux', () => {
     useDispatch,
     connect,
     Provider,
-    __setMockState: (state: unknown) => {
-      global.__TEST_REDUX_STATE__ = state;
-      mockDispatch.mockClear();
-    },
+    __setMockState: setMockState,
     __getMockDispatch: () => mockDispatch,
   };
 });
+
+(global as any).__setMockReduxState = (state: unknown) => {
+  global.__TEST_REDUX_STATE__ = state;
+  mockDispatch.mockClear();
+};
+
+(global as any).__getMockReduxDispatch = () => mockDispatch;
 
 jest.mock('@reduxjs/toolkit', () => jest.requireActual('@reduxjs/toolkit'));
 
