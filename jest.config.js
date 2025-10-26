@@ -1,6 +1,10 @@
 module.exports = {
   preset: 'react-native',
   setupFiles: ['<rootDir>/__mocks__/globalMocks.tsx'],
+  moduleNameMapper: {
+    '^react-native-vector-icons/(.*)$':
+      '<rootDir>/__mocks__/reactNativeVectorIcons.tsx',
+  },
   testPathIgnorePatterns: [
     '<rootDir>/node_modules/',
     '<rootDir>/src/helper/',
@@ -17,6 +21,9 @@ module.exports = {
     '<rootDir>/__tests__/mock.ts',
     '<rootDir>/__mocks__',
     '<rootDir>/src/config/*',
+  ],
+  transformIgnorePatterns: [
+    'node_modules/(?!(jest-)?react-native|@react-native|react-native-vector-icons|@reduxjs/toolkit|immer)',
   ],
   // testEnvironment: 'jsdom',
 };

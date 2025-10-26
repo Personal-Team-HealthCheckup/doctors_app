@@ -15,6 +15,9 @@ jest.mock('react-native-vector-icons/FontAwesome', () => (props: {}) => (
 jest.mock('react-native-vector-icons/FontAwesome5', () => (props: {}) => (
   <MockView {...props} />
 ));
+jest.mock('react-native-vector-icons/Feather', () => (props: {}) => (
+  <MockView {...props} />
+));
 
 jest.mock('../src/assets/assets', () => ({
   LightSvg: (props: {}) => <MockView {...props} />,
@@ -45,32 +48,57 @@ jest.mock('@react-native-async-storage/async-storage', () => ({
   clear: jest.fn(),
 }));
 
+const getMockState = () =>
+  global.__TEST_REDUX_STATE__ ?? {
+    Auth: {},
+  };
+
+const mockDispatch = jest.fn();
+
 jest.mock('react-redux', () => {
-  return {
-    useSelector: jest.fn(),
-    useDispatch: jest.fn(),
-    connect:
-      (mapStateToProps?: any, mapDispatchToProps?: any) => (Component: any) => {
-        mapStateToProps &&
-          mapStateToProps({
-            Auth: {},
-          });
+  const useSelector = jest.fn(selector => selector(getMockState()));
+  const useDispatch = jest.fn(() => mockDispatch);
 
-        return Component;
-      },
+  const connect =
+    (mapStateToProps?: any, mapDispatchToProps?: any) => (Component: any) => {
+      const ConnectedComponent = (props: any) => {
+        const stateProps = mapStateToProps
+          ? mapStateToProps(getMockState(), props)
+          : {};
+
+        let dispatchProps = {};
+        if (typeof mapDispatchToProps === 'function') {
+          dispatchProps = mapDispatchToProps(mockDispatch, props) ?? {};
+        } else if (mapDispatchToProps) {
+          dispatchProps = mapDispatchToProps;
+        }
+
+        return <Component {...stateProps} {...dispatchProps} {...props} />;
+      };
+
+      ConnectedComponent.displayName = `MockConnect(${
+        Component.displayName || Component.name || 'Component'
+      })`;
+
+      return ConnectedComponent;
+    };
+
+  const Provider = ({ children }: { children: React.ReactNode }) => children;
+
+  return {
+    useSelector,
+    useDispatch,
+    connect,
+    Provider,
+    __setMockState: (state: unknown) => {
+      global.__TEST_REDUX_STATE__ = state;
+      mockDispatch.mockClear();
+    },
+    __getMockDispatch: () => mockDispatch,
   };
 });
 
-jest.mock('@reduxjs/toolkit', () => {
-  return {
-    createSlice: jest.fn().mockImplementation(props => ({
-      ...props,
-      actions: { ...props.actions, actionLogout: jest.fn() },
-    })),
-    createAsyncThunk: jest.fn(),
-    configureStore: jest.fn(),
-  };
-});
+jest.mock('@reduxjs/toolkit', () => jest.requireActual('@reduxjs/toolkit'));
 
 jest.mock('reactotron-react-native', () => ({
   setAsyncStorageHandler: jest.fn().mockImplementation(() => ({
@@ -84,8 +112,27 @@ jest.mock('reactotron-react-native', () => ({
     warn: jest.fn().mockReturnThis(),
     display: jest.fn().mockReturnThis(),
   })),
-  createEnhancer: jest.fn(),
+  createEnhancer: jest.fn(() => (createStore: any) => (...args: any[]) => {
+    const store = createStore(...args);
+    return {
+      ...store,
+      dispatch: store.dispatch,
+    };
+  }),
   trackGlobalErrors: jest.fn(),
+}));
+
+jest.mock('../src/config/reactotron.config', () => ({
+  createEnhancer: jest
+    .fn()
+    .mockImplementation(() => (createStore: any) => (...args: any[]) => {
+      const store = createStore(...args);
+      return {
+        ...store,
+        dispatch: store.dispatch,
+      };
+    }),
+  display: jest.fn(),
 }));
 
 // jest.mock('i18n-js', () => ({
