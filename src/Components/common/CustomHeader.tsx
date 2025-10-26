@@ -9,7 +9,6 @@ import {
 import { COLORS, FONTS } from '../../global/theme';
 import {
   responsiveFontSize,
-  responsiveHeight,
   responsiveScreenHeight,
   responsiveScreenWidth,
 } from 'react-native-responsive-dimensions';

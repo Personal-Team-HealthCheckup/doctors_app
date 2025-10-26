@@ -7,20 +7,16 @@ module.exports = {
   },
   testPathIgnorePatterns: [
     '<rootDir>/node_modules/',
-    '<rootDir>/src/helper/',
     '<rootDir>/__tests__/mock.ts',
     '<rootDir>/__mocks__',
-    '<rootDir>/src/config/*',
   ],
   collectCoverage: true,
   coverageDirectory: 'coverage',
   coverageReporters: ['lcov', 'text'],
   coveragePathIgnorePatterns: [
     '<rootDir>/node_modules/',
-    '<rootDir>/src/helper/',
     '<rootDir>/__tests__/mock.ts',
     '<rootDir>/__mocks__',
-    '<rootDir>/src/config/*',
   ],
   transformIgnorePatterns: [
     'node_modules/(?!(jest-)?react-native|@react-native|react-native-vector-icons|@reduxjs/toolkit|immer|@react-navigation)',

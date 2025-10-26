@@ -36,7 +36,6 @@ import { useDrawerStatus } from '@react-navigation/drawer';
 import { RootState } from '../redux/store';
 
 interface DrawerComponentProps {
-  state: DrawerNavigationState<ParamListBase>;
   navigation?: Navigation;
 }
 
