@@ -24,7 +24,7 @@ import {
 } from '@react-navigation/native';
 import { imageProfile2 } from '../assets/assets';
 import { Navigation } from '../global/types';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { clearStoredAuthToken } from '../helper/authKeychain';
 import { actionLogout } from '../redux/reducers/auth';
 import { AUTH, MAINSTACK } from '../Constants/Navigator';
@@ -33,6 +33,7 @@ import { closeDrawer } from '../helper/utilities';
 import { COLORS, FONTS } from '../global/theme';
 import { moderateScale } from '../helper/Scale';
 import { useDrawerStatus } from '@react-navigation/drawer';
+import { RootState } from '../redux/store';
 
 interface DrawerComponentProps {
   state: DrawerNavigationState<ParamListBase>;
@@ -100,6 +101,7 @@ const drawerData: DrawerData[] = [
 const DrawerComponent: React.FC<DrawerComponentProps> = ({ navigation }) => {
   const dispatch = useDispatch();
   const isOpen = useDrawerStatus() === 'open';
+  const { user } = useSelector((state: RootState) => state.Auth);
 
   const performLogout = React.useCallback(async () => {
     try {
@@ -178,8 +180,8 @@ const DrawerComponent: React.FC<DrawerComponentProps> = ({ navigation }) => {
         <View style={styles.profileSection}>
           <Image source={imageProfile2} style={styles.avatar} />
           <View>
-            <Text style={styles.name}>Olivia Doe</Text>
-            <Text style={styles.phone}>01303-527300</Text>
+            <Text style={styles.name}>{user?.fullName}</Text>
+            <Text style={styles.phone}>{user?.phoneNumber ?? user?.email}</Text>
           </View>
 
           {isOpen && (

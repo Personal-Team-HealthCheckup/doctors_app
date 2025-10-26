@@ -17,7 +17,28 @@ const reactotron = Reactotron.setAsyncStorageHandler(AsyncStorage)
     overlay: false,
   })
   // .use(stateResponse())
-  .use(reactotronRedux())
+  .use(
+    reactotronRedux({
+      onRestore: persistedState => {
+        Reactotron.display({
+          name: 'PERSIST_RESTORE',
+          value: persistedState,
+          preview: 'redux-persist rehydrated',
+        });
+        return persistedState;
+      },
+      onDispatch: action => {
+        Reactotron.display({
+          name: 'REDUX_ACTION',
+          value: action,
+          preview: action.type,
+        });
+      },
+      isActionImportant: action =>
+        action.type?.startsWith?.('persist/') ||
+        action.type === 'persist/REHYDRATE',
+    }),
+  )
   .use(trackGlobalErrors()) // intercept global errors
   .connect();
 
