@@ -11,6 +11,7 @@ interface IUser {
   email: string;
   role: string;
   acceptedTerms: boolean;
+  phoneNumber?: string;
 }
 export interface authDataType {
   message: string | null;
