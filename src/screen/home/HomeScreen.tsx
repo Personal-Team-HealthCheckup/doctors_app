@@ -42,11 +42,18 @@ import CustomRating from '../../Components/CustomRating';
 import CustomAppointmentCard from '../../Components/common/CustomAppointmentCard';
 import { DASHBOARD } from '../../Constants/Navigator';
 import { navigateTo } from '../../helper/utilities';
+import { connect } from 'react-redux';
+import { RootState } from '../../redux/store';
 
 interface HomeScreenProps {
   navigation?: Navigation;
 }
 
+interface HomeScreenReduxProps {
+  authData: RootState['Auth'];
+}
+
+type Props = HomeScreenProps & HomeScreenReduxProps;
 interface HomeScreenState {
   isLinearGradient: boolean;
   yourAppointmentsData: YourAppointmentsData[];
@@ -54,9 +61,9 @@ interface HomeScreenState {
   qualifiedDoctor: QualifiedDoctorData[];
 }
 const time = 2000;
-class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
+class HomeScreen extends React.Component<Props, HomeScreenState> {
   timer: number = 0;
-  constructor(props: HomeScreenProps) {
+  constructor(props: Props) {
     super(props);
     this.state = {
       isLinearGradient: true,
@@ -218,6 +225,7 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
     this.props.navigation?.openDrawer && this.props.navigation?.openDrawer();
   };
   render() {
+    const { user } = this.props.authData;
     return (
       <View style={styles.mainView}>
         <CustomStatusBar />
@@ -230,7 +238,7 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
               style={[styles.linearGradient]}
             >
               <View style={styles.viewText}>
-                <Text style={styles.profilename}>Hi Olivia Doe</Text>
+                <Text style={styles.profilename}>Hi {user?.fullName}</Text>
                 <Text style={styles.welText}>Welcome To VHA</Text>
               </View>
               <OnBoarding1Svg
@@ -313,7 +321,13 @@ class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState> {
   }
 }
 
-export default HomeScreen;
+const mapStateToProps = (state: RootState) => ({
+  authData: state.Auth,
+});
+
+const mapDispatchToProps = {};
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
 
 const styles = StyleSheet.create({
   container: {
