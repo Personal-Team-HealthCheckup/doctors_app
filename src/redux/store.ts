@@ -1,6 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import StorageProvider from '../helper/Storage';
-// import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   FLUSH,
   PAUSE,
@@ -33,6 +32,7 @@ const persistConfig = {
   key: 'root',
   storage: StorageProvider,
   whitelist: ['Auth'],
+  blacklist: ['Auth.loading', 'Auth.error', 'Auth.message'],
 };
 
 const rootReducer = combineReducers({

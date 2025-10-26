@@ -123,8 +123,7 @@ class VideoPlayerWithMediaControls extends React.Component<
       redirectAdsUrl: '',
       videoAdUrl: '',
       videoAdId: '',
-      token:
-        'eyJhbGciOiJIUzUxMiJ9.eyJpZCI6MzIwLCJleHAiOjE2ODkwNTc4NzV9.UnJTGBnOZaQ0dHToSiZfXXgyBwkjM_GOxr8n7blM4T0IGmetyeSVnFwJuiBiN92JCDs3NyxjEYLuPs0XsJuFNQ',
+      token: '',
     };
   }
 
