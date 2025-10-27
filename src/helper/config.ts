@@ -1,5 +1,5 @@
-export const baseURL = 'http://10.78.46.247:4000/api/'; // add the base url here
-// export const baseURL = 'https://doctor-app-backend-miij.onrender.com/api/'; // production url
+// export const baseURL = 'http://10.78.46.247:4000/api/'; // add the base url here
+export const baseURL = 'https://doctor-app-backend-miij.onrender.com/api/'; // production url
 
 // add the endpoints here like this
 export const endpoints = {
