@@ -22,7 +22,7 @@ import {
   responsiveScreenWidth,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import { moderateScale, verticalScale } from '../../helper/Scale';
+import { moderateScale } from '../../helper/Scale';
 import { Navigation } from '../../global/types';
 import { AUTH } from '../../Constants/Navigator';
 import { translate } from '../../helper/i18';

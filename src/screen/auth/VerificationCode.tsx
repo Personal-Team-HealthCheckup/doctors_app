@@ -86,7 +86,7 @@ class VerificationCode extends React.Component<Props, VerificationCodeState> {
       if (this.props.verifyOTPData.message?.includes('success')) {
         Alert.alert('Successs', this.props.verifyOTPData.message);
         const isForgotFlow = this.state.isForgotPasswordFlow;
-        const targetScreen = !isForgotFlow ? AUTH.SIGNIN : AUTH.RESETPASSWORD;
+        const targetScreen = isForgotFlow ? AUTH.RESETPASSWORD : AUTH.SIGNIN;
         const emailParam =
           this.props.verifyOTPData.email ||
           this.props.route?.params?.email ||

@@ -17,11 +17,7 @@ import {
 } from 'react-native-responsive-dimensions';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome6';
-import {
-  CommonActions,
-  DrawerNavigationState,
-  ParamListBase,
-} from '@react-navigation/native';
+import { CommonActions } from '@react-navigation/native';
 import { imageProfile2 } from '../assets/assets';
 import { Navigation } from '../global/types';
 import { useDispatch, useSelector } from 'react-redux';
