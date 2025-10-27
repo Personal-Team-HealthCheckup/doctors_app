@@ -1,11 +1,5 @@
 import React, { useRef, useState } from 'react';
-import {
-  View,
-  TextInput,
-  StyleSheet,
-  TextInputKeyPressEventData,
-  NativeSyntheticEvent,
-} from 'react-native';
+import { View, TextInput, StyleSheet } from 'react-native';
 import { COLORS, FONTS } from '../global/theme';
 import { responsiveHeight } from 'react-native-responsive-dimensions';
 
@@ -41,7 +35,7 @@ const OTPTextInput: React.FC<OTPTextInputProps> = ({
   };
 
   const handleKeyPress = (
-    event: NativeSyntheticEvent<TextInputKeyPressEventData>,
+    event: { nativeEvent: { key: string } },
     index: number,
   ) => {
     if (event.nativeEvent.key === 'Backspace' && index > 0) {
