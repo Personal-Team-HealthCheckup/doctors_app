@@ -28,11 +28,11 @@ jest.mock('../src/assets/assets', () => ({
   OnBoarding1Svg: (props: {}) => <MockView {...props} />,
   GoogleSvg: (props: {}) => <MockView {...props} />,
   FacebookSvg: (props: {}) => <MockView {...props} />,
-  gradientSignupPng: 'mocked-image',
-  gradientPng: 'mocked-image',
-  HomeScreenPng: 'mocked-image',
-  HomeScreenPng2: 'mocked-image',
-  starImage: 'mocked-image',
+  gradientSignupPng: (props: {}) => <MockView {...props} />,
+  gradientPng: (props: {}) => <MockView {...props} />,
+  HomeScreenPng: (props: {}) => <MockView {...props} />,
+  HomeScreenPng2: (props: {}) => <MockView {...props} />,
+  starImage: (props: {}) => <MockView {...props} />,
 }));
 
 jest.mock('../src/helper/Scale', () => ({

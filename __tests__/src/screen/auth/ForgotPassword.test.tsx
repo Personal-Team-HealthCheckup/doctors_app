@@ -1,4 +1,6 @@
+import React from 'react';
 import { Alert } from 'react-native';
+import { render, fireEvent, waitFor } from '@testing-library/react-native';
 import { AUTH } from '../../../../src/Constants/Navigator';
 import ForgotPasswordConnected from '../../../../src/screen/auth/ForgotPassword';
 import { navigateTo } from '../../../../src/helper/utilities';
@@ -11,14 +13,12 @@ jest.mock('../../../../src/helper/utilities', () => {
   };
 });
 
-const translate = (key: string) => key;
 jest.mock('../../../../src/helper/i18', () => ({
   translate: (key: string) => key,
 }));
 
 const ForgotPassword =
-  (ForgotPasswordConnected as any).WrappedComponent ||
-  ForgotPasswordConnected;
+  (ForgotPasswordConnected as any).WrappedComponent || ForgotPasswordConnected;
 
 jest.mock('../../../../src/redux/store', () => {
   const mockStore = {
@@ -94,10 +94,14 @@ describe('ForgotPassword screen logic', () => {
     expect(props.forgotPasswordApi).toHaveBeenCalledWith({
       email: 'user@example.com',
     });
-    expect(navigateTo).toHaveBeenCalledWith(props.navigation, AUTH.VERIFICATION, {
-      email: 'user@example.com',
-      fromScreen: 'ForgotPassword',
-    });
+    expect(navigateTo).toHaveBeenCalledWith(
+      props.navigation,
+      AUTH.VERIFICATION,
+      {
+        email: 'user@example.com',
+        fromScreen: 'ForgotPassword',
+      },
+    );
     expect(alertSpy).toHaveBeenCalledWith('Success', JSON.stringify('success'));
   });
 
@@ -117,5 +121,61 @@ describe('ForgotPassword screen logic', () => {
     await component.handleResetPress();
 
     expect(alertSpy).toHaveBeenCalledWith('Error', 'fail');
+  });
+
+  it('renders form and shows validation message when email missing', async () => {
+    const props = createProps();
+    const { getByText } = render(<ForgotPassword {...props} />);
+
+    fireEvent.press(getByText('auth.sendResetLink'));
+
+    await waitFor(() => {
+      expect(getByText('auth.emailRequired')).toBeTruthy();
+    });
+    expect(props.forgotPasswordApi).not.toHaveBeenCalled();
+  });
+
+  it('submits reset request and navigates on success', async () => {
+    const props = createProps();
+    props.forgotPassData = {
+      loading: false,
+      message: 'success reset',
+      token: 'token',
+      type: 'forgot-password',
+      email: 'user@example.com',
+    };
+
+    const { getByPlaceholderText, getByText } = render(
+      <ForgotPassword {...props} />,
+    );
+
+    fireEvent.changeText(
+      getByPlaceholderText('auth.emailPlaceholder'),
+      'user@example.com',
+    );
+    fireEvent.press(getByText('auth.sendResetLink'));
+
+    await waitFor(() => {
+      expect(props.forgotPasswordApi).toHaveBeenCalledWith({
+        email: 'user@example.com',
+      });
+    });
+
+    expect(navigateTo).toHaveBeenCalledWith(
+      props.navigation,
+      AUTH.VERIFICATION,
+      {
+        email: 'user@example.com',
+        fromScreen: 'ForgotPassword',
+      },
+    );
+  });
+
+  it('navigates to login when link pressed', () => {
+    const props = createProps();
+    const { getByText } = render(<ForgotPassword {...props} />);
+
+    fireEvent.press(getByText('auth.rememberPassword auth.login'));
+    expect(navigateTo).toHaveBeenCalledWith(props.navigation, AUTH.SIGNIN);
   });
 });

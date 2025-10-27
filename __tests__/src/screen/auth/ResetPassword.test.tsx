@@ -129,4 +129,51 @@ describe('ResetPassword screen logic', () => {
 
     expect(alertSpy).toHaveBeenCalledWith('Error', 'auth.resetSessionInvalid');
   });
+
+  it('alerts when api response is not success', async () => {
+    const props = createProps();
+    props.authData.message = 'unexpected';
+    const component = new ResetPassword(props as any);
+    setStateSync(component);
+    component.setState({ password: '123456', confirmPassword: '123456' });
+
+    await component.handleResetPress();
+
+    expect(alertSpy).toHaveBeenCalledWith('Error', 'unexpected');
+  });
+
+  it('alerts when api throws error', async () => {
+    const props = createProps();
+    props.resetPasswordApi.mockRejectedValueOnce(new Error('server down'));
+    const component = new ResetPassword(props as any);
+    setStateSync(component);
+    component.setState({ password: '654321', confirmPassword: '654321' });
+
+    await component.handleResetPress();
+
+    expect(alertSpy).toHaveBeenCalledWith('Error', 'server down');
+  });
+
+  it('navigates back to login explicitly', () => {
+    const props = createProps();
+    const component = new ResetPassword(props as any);
+    component.handleNavigateToLogin();
+    expect(replaceTo).toHaveBeenCalledWith(props.navigation, AUTH.SIGNIN);
+  });
+
+  it('clears individual field errors when changing inputs', () => {
+    const component = new ResetPassword(createProps() as any);
+    setStateSync(component);
+    component.setState({
+      password: '',
+      confirmPassword: '',
+      error: { password: 'err', confirmPassword: 'err' },
+    });
+
+    component.handlePasswordChange('newPass');
+    expect(component.state.error.password).toBeUndefined();
+
+    component.handleConfirmPasswordChange('newPass');
+    expect(component.state.error.confirmPassword).toBeUndefined();
+  });
 });
