@@ -11,6 +11,7 @@ import {
   persistStore,
 } from 'redux-persist';
 import Auth from './reducers/auth';
+import Profile from './reducers/profileSlice';
 import Reactotron from '../config/reactotron.config';
 
 type ReactotronConsole = {
@@ -37,6 +38,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   Auth,
+  Profile,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

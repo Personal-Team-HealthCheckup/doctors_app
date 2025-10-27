@@ -31,6 +31,9 @@ import CustomTextInput from '../../Components/common/CustomTextInput';
 import CustomGButton from '../../Components/common/CustomGButton';
 import { closeKeyBoard, handleScroll } from '../../helper/utilities';
 import { Navigation } from '../../global/types';
+import { connect } from 'react-redux';
+import { getProfileAction } from '../../redux/reducers/profileSlice';
+import { RootState } from '../../redux/store';
 interface ProfilePageProps {
   navigation?: Navigation;
 }
@@ -39,19 +42,31 @@ interface ProfilePageState {
   isScrollEnabled: boolean;
 }
 
-class ProfilePage extends React.Component<ProfilePageProps, ProfilePageState> {
-  constructor(props: ProfilePageProps) {
+interface ReduxProps {
+  data: RootState['Profile']['data'];
+  loading: RootState['Profile']['loading'];
+  message: RootState['Profile']['message'];
+  getProfileApi: () => void;
+}
+
+type Props = ProfilePageProps & ReduxProps;
+
+class ProfilePage extends React.Component<Props, ProfilePageState> {
+  constructor(props: Props) {
     super(props);
     this.state = {
       isScrollEnabled: false,
     };
   }
 
-  handleScroll1 = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    this.setState({ isScrollEnabled: handleScroll(event) });
-  };
+  async componentDidMount() {
+    await this.props.getProfileApi();
+  }
 
   render() {
+    const { data, loading, message } = this.props;
+    console.log('------>>>>>> data, loading, message ', data, loading, message);
+
     return (
       <View style={styles.mainContainer}>
         <CustomStatusBar />
@@ -115,7 +130,18 @@ class ProfilePage extends React.Component<ProfilePageProps, ProfilePageState> {
   }
 }
 
-export default ProfilePage;
+const mapStateToProps = (state: RootState) => ({
+  data: state.Profile.data,
+  loading: state.Profile.loading,
+  message: state.Profile.message,
+});
+
+const mapDispatchToProps = {
+  getProfileApi: getProfileAction,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);
+
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
