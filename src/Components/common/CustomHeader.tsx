@@ -1,12 +1,7 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  SafeAreaView,
-} from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { COLORS, FONTS } from '../../global/theme';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import {
   responsiveFontSize,
   responsiveScreenHeight,
