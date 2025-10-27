@@ -1,69 +1,123 @@
-import React, { act } from 'react';
-import {
-  fireEvent,
-  render,
-  screen,
-  waitFor,
-} from '@testing-library/react-native';
 import { Alert } from 'react-native';
-import { mockNavigation } from '../../../../__mocks__/mock';
-import VerificationCode from '../../../../src/screen/auth/VerificationCode';
+import { AUTH } from '../../../../src/Constants/Navigator';
+import VerificationCodeConnected from '../../../../src/screen/auth/VerificationCode';
+import { navigateTo } from '../../../../src/helper/utilities';
 
-// Mock Alert
-jest.spyOn(Alert, 'alert');
+jest.mock('../../../../src/helper/utilities', () => {
+  const actual = jest.requireActual('../../../../src/helper/utilities');
+  return {
+    ...actual,
+    navigateTo: jest.fn(),
+  };
+});
 
-const screenProps = {
-  navigation: mockNavigation,
+jest.mock('../../../../src/helper/i18', () => ({
+  translate: (key: string) => key,
+}));
+
+const VerificationCode =
+  (VerificationCodeConnected as any).WrappedComponent ||
+  VerificationCodeConnected;
+
+const createProps = (overrides: Partial<any> = {}) => ({
+  navigation: { navigate: jest.fn() },
+  route: { params: { email: 'user@example.com' } },
   verifyOTPData: {
-    email: 'test@example.com',
+    email: 'user@example.com',
+    message: 'otp success',
     loading: false,
-    error: null,
-    message: null,
   },
-  verifyOtpApi: jest.fn(),
-  resendOtpApi: jest.fn(),
-};
-let mockTimer: Function;
-describe('VerificationCodePage', () => {
+  verifyOtpApi: jest.fn().mockResolvedValue(undefined),
+  resendOtpApi: jest.fn().mockResolvedValue(undefined),
+  ...overrides,
+});
+
+describe('VerificationCode screen logic', () => {
+  const alertSpy = jest.spyOn(Alert, 'alert').mockImplementation(() => {});
+
   beforeEach(() => {
-    jest.spyOn(globalThis, 'setInterval').mockImplementation(cb => {
-      cb && cb();
-      mockTimer = cb;
-      return 1 as unknown as ReturnType<typeof setInterval>;
-    });
     jest.clearAllMocks();
   });
 
-  it('renders correctly (snapshot)', () => {
-    render(<VerificationCode {...screenProps} />);
-    expect(screen).toBeTruthy();
+  afterAll(() => {
+    alertSpy.mockRestore();
   });
 
-  it('enter the otp', () => {
-    render(<VerificationCode {...screenProps} />);
-    const otpInput_0 = screen.getByTestId('otp-text-input-0');
-    const otpInput_1 = screen.getByTestId('otp-text-input-1');
-    const otpInput_2 = screen.getByTestId('otp-text-input-2');
-    const otpInput_3 = screen.getByTestId('otp-text-input-3');
-    fireEvent.changeText(otpInput_0, '1');
-    fireEvent.changeText(otpInput_1, '2');
-    fireEvent.changeText(otpInput_2, '3');
-    fireEvent.changeText(otpInput_3, '4');
+  it('flags forgot password flow in componentDidMount', () => {
+    const props = createProps({ route: { params: { fromScreen: 'ForgotPassword' } } });
+    const component = new VerificationCode(props as any);
+    component.setState = updater => {
+      const value =
+        typeof updater === 'function'
+          ? updater(component.state, component.props)
+          : updater;
+      component.state = { ...component.state, ...value };
+    };
+    component.componentDidMount();
+    expect(component.state.isForgotPasswordFlow).toBe(true);
+    component.componentWillUnmount();
   });
-  it('Enable Resend Otp Button ', async () => {
-    render(<VerificationCode {...screenProps} />);
 
-    const otpInput_0 = screen.getByTestId('otp-text-input-0');
-    const otpInput_1 = screen.getByTestId('otp-text-input-1');
-    const otpInput_2 = screen.getByTestId('otp-text-input-2');
-    const otpInput_3 = screen.getByTestId('otp-text-input-3');
-    fireEvent.changeText(otpInput_0, '1');
-    fireEvent.changeText(otpInput_1, '2');
-    fireEvent.changeText(otpInput_2, '3');
-    fireEvent.changeText(otpInput_3, '4');
-    // const resendOtp = screen.getByTestId('btn-resend-otp"');
-    // fireEvent.press(resendOtp);
-    const verifyOtpButton = screen.getByTestId('btn-verify');
-    fireEvent.press(verifyOtpButton);
+  it('handles resend OTP and alerts success', async () => {
+    const props = createProps();
+    const component = new VerificationCode(props as any);
+    await component.handleResendOtp();
+    expect(props.resendOtpApi).toHaveBeenCalledWith({ email: 'user@example.com' });
+    expect(alertSpy).toHaveBeenCalledWith('Successs', 'otp success');
+  });
+
+  it('navigates to reset password when forgot flow', async () => {
+    const props = createProps({ route: { params: { fromScreen: 'ForgotPassword', email: 'user@example.com' } } });
+    props.verifyOTPData.message = 'success';
+    const component = new VerificationCode(props as any);
+    component.setState = updater => {
+      const value =
+        typeof updater === 'function'
+          ? updater(component.state, component.props)
+          : updater;
+      component.state = { ...component.state, ...value };
+    };
+    component.setState({ code: '1234', isForgotPasswordFlow: true });
+
+    await component.handleVerification();
+
+    expect(navigateTo).toHaveBeenCalledWith(props.navigation, AUTH.RESETPASSWORD, {
+      email: 'user@example.com',
+      otp: '1234',
+    });
+  });
+
+  it('navigates to signin when verification succeeds for login flow', async () => {
+    const props = createProps();
+    props.verifyOTPData.message = 'success';
+    const component = new VerificationCode(props as any);
+    component.setState = updater => {
+      const value =
+        typeof updater === 'function'
+          ? updater(component.state, component.props)
+          : updater;
+      component.state = { ...component.state, ...value };
+    };
+    component.setState({ code: '9999' });
+
+    await component.handleVerification();
+
+    expect(navigateTo).toHaveBeenCalledWith(props.navigation, AUTH.SIGNIN, undefined);
+  });
+
+  it('stops timer on unmount', () => {
+    jest.useFakeTimers();
+    const component = new VerificationCode(createProps() as any);
+    const clearSpy = jest.spyOn(global, 'clearInterval');
+    component.componentDidMount();
+    jest.advanceTimersByTime(2000);
+    component.componentWillUnmount();
+    expect(clearSpy).toHaveBeenCalled();
+    jest.useRealTimers();
+  });
+
+  it('formats time in mm:ss format', () => {
+    const component = new VerificationCode(createProps() as any);
+    expect(component.formatedTime(125)).toBe('(02:05)');
   });
 });

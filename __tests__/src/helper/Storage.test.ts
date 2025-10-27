@@ -35,4 +35,21 @@ describe('Storage helper', () => {
     expect(asyncStorageMock.removeItem).toHaveBeenCalledWith('transient');
     expect(asyncStorageMock.setItem).not.toHaveBeenCalled();
   });
+
+  it('handles get errors gracefully', async () => {
+    const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    asyncStorageMock.getItem.mockRejectedValueOnce(new Error('failure'));
+
+    await expect(Storage.getItem('broken')).resolves.toBeNull();
+    expect(warnSpy).toHaveBeenCalled();
+    warnSpy.mockRestore();
+  });
+
+  it('handles remove errors gracefully', async () => {
+    const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    asyncStorageMock.removeItem.mockRejectedValueOnce(new Error('failure'));
+
+    await expect(Storage.removeItem('key')).resolves.toBeUndefined();
+    warnSpy.mockRestore();
+  });
 });

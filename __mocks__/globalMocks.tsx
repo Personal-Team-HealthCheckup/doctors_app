@@ -111,6 +111,8 @@ jest.mock('react-redux', () => {
 
 jest.mock('@reduxjs/toolkit', () => jest.requireActual('@reduxjs/toolkit'));
 
+const mockReactotronDisplay = jest.fn().mockReturnThis();
+
 jest.mock('reactotron-react-native', () => ({
   setAsyncStorageHandler: jest.fn().mockImplementation(() => ({
     configure: jest.fn().mockReturnThis(),
@@ -121,7 +123,7 @@ jest.mock('reactotron-react-native', () => ({
     log: jest.fn().mockReturnThis(),
     error: jest.fn().mockReturnThis(),
     warn: jest.fn().mockReturnThis(),
-    display: jest.fn().mockReturnThis(),
+    display: mockReactotronDisplay,
   })),
   createEnhancer: jest.fn(() => (createStore: any) => (...args: any[]) => {
     const store = createStore(...args);
@@ -131,6 +133,17 @@ jest.mock('reactotron-react-native', () => ({
     };
   }),
   trackGlobalErrors: jest.fn(),
+  display: mockReactotronDisplay,
+}));
+
+const mockReactotronRedux = jest.fn(config => {
+  mockReactotronRedux.configs = mockReactotronRedux.configs || [];
+  mockReactotronRedux.configs.push(config);
+  return jest.fn();
+});
+
+jest.mock('reactotron-redux', () => ({
+  reactotronRedux: mockReactotronRedux,
 }));
 
 jest.mock('../src/config/reactotron.config', () => ({
