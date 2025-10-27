@@ -6,11 +6,8 @@ import { Provider } from 'react-redux';
 import { persistor, store } from './src/redux/store';
 import { Linking, Platform } from 'react-native';
 import ReactNativeBiometrics from 'react-native-biometrics';
-import { NewAppScreen } from '@react-native/new-app-screen';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { PersistGate } from 'redux-persist/integration/react';
 interface AppProps {}
 

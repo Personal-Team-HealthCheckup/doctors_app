@@ -20,6 +20,23 @@ const ForgotPassword =
   (ForgotPasswordConnected as any).WrappedComponent ||
   ForgotPasswordConnected;
 
+jest.mock('../../../../src/redux/store', () => {
+  const mockStore = {
+    dispatch: jest.fn(),
+    getState: jest.fn(() => ({ Auth: {} })),
+  };
+  const mockPersistor = {
+    subscribe: jest.fn(),
+    getState: jest.fn(() => ({ bootstrapped: false })),
+  };
+  return {
+    __esModule: true,
+    default: mockStore,
+    store: mockStore,
+    persistor: mockPersistor,
+  };
+});
+
 const createProps = () => ({
   navigation: { navigate: jest.fn() },
   forgotPassData: {

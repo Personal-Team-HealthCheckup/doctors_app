@@ -43,17 +43,16 @@ describe('DrawerGetureWrapper', () => {
 
     const view = getByTestId('animated-view');
 
-    const { interpolate } = require('react-native-reanimated');
-    expect(interpolate).toHaveBeenCalled();
-    expect(view.props.style).toMatchObject({
-      borderRadius: expect.any(Number),
-      borderTopStartRadius: expect.any(Number),
-      borderBottomStartRadius: expect.any(Number),
-      marginTop: expect.any(Number),
-      transform: expect.arrayContaining([
-        expect.objectContaining({ scale: expect.any(Number) }),
-      ]),
-      overflow: 'hidden',
-    });
+    expect(view.props.style).toMatchObject([
+      { flex: 1 },
+      {
+        borderBottomStartRadius: 13,
+        borderRadius: 13,
+        borderTopStartRadius: 13,
+        marginTop: 10.5,
+        overflow: 'hidden',
+        transform: [{ scale: 0.9 }],
+      },
+    ]);
   });
 });

@@ -18,6 +18,23 @@ jest.mock('../../../../src/helper/i18', () => ({
 
 const Signin = (SigninConnected as any).WrappedComponent || SigninConnected;
 
+jest.mock('../../../../src/redux/store', () => {
+  const mockStore = {
+    dispatch: jest.fn(),
+    getState: jest.fn(() => ({ Auth: {} })),
+  };
+  const mockPersistor = {
+    subscribe: jest.fn(),
+    getState: jest.fn(() => ({ bootstrapped: false })),
+  };
+  return {
+    __esModule: true,
+    default: mockStore,
+    store: mockStore,
+    persistor: mockPersistor,
+  };
+});
+
 const createProps = () => ({
   navigation: { navigate: jest.fn(), replace: jest.fn() },
   loginData: {
@@ -52,7 +69,7 @@ describe('Signin screen logic', () => {
     component.setState({ email: '', password: '' });
     const result = component.handleValidation();
     expect(result).toBe(false);
-
+    expect(component.state.error.email).toBe('auth.emailInvalid');
     expect(component.state.error.password).toBe('auth.passwordMin');
   });
 

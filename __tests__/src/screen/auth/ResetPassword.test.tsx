@@ -19,17 +19,46 @@ jest.mock('../../../../src/helper/i18', () => ({
 const ResetPassword =
   (ResetPasswordConnected as any).WrappedComponent || ResetPasswordConnected;
 
-const createProps = (overrides: Partial<any> = {}) => ({
-  navigation: { navigate: jest.fn(), replace: jest.fn() },
-  route: { params: { email: 'user@example.com', otp: '1234' } },
-  authData: {
-    loading: false,
-    message: 'Password reset success',
-    email: 'user@example.com',
-  },
-  resetPasswordApi: jest.fn().mockResolvedValue(undefined),
-  ...overrides,
+jest.mock('../../../../src/redux/store', () => {
+  const mockStore = {
+    dispatch: jest.fn(),
+    getState: jest.fn(() => ({ Auth: {} })),
+  };
+  const mockPersistor = {
+    subscribe: jest.fn(),
+    getState: jest.fn(() => ({ bootstrapped: false })),
+  };
+  return {
+    __esModule: true,
+    default: mockStore,
+    store: mockStore,
+    persistor: mockPersistor,
+  };
 });
+
+const createProps = (overrides: Partial<any> = {}) => {
+  const base = {
+    navigation: { navigate: jest.fn(), replace: jest.fn() },
+    route: { params: { email: 'user@example.com', otp: '1234' } },
+    authData: {
+      loading: false,
+      message: 'Password reset success',
+      email: 'user@example.com',
+    },
+    resetPasswordApi: jest.fn().mockResolvedValue(undefined),
+  };
+  return { ...base, ...overrides };
+};
+
+const setStateSync = (component: any) => {
+  component.setState = (update: any) => {
+    const value =
+      typeof update === 'function'
+        ? update(component.state, component.props)
+        : update;
+    component.state = { ...component.state, ...value };
+  };
+};
 
 describe('ResetPassword screen logic', () => {
   const alertSpy = jest.spyOn(Alert, 'alert').mockImplementation(() => {});
@@ -44,13 +73,7 @@ describe('ResetPassword screen logic', () => {
 
   it('validates form fields and sets errors', () => {
     const component = new ResetPassword(createProps() as any);
-    component.setState = updater => {
-      const value =
-        typeof updater === 'function'
-          ? updater(component.state, component.props)
-          : updater;
-      component.state = { ...component.state, ...value };
-    };
+    setStateSync(component);
     component.setState({ password: '123', confirmPassword: '12' });
     expect(component.validateForm()).toBe(false);
     expect(component.state.error.password).toBe('auth.passwordMin');
@@ -58,15 +81,12 @@ describe('ResetPassword screen logic', () => {
   });
 
   it('alerts when session data missing', () => {
-    const props = createProps({ route: { params: { email: '', otp: '' } } });
+    const props = createProps({
+      route: { params: { email: '', otp: '' } },
+      authData: { loading: false, message: '', email: '' },
+    });
     const component = new ResetPassword(props as any);
-    component.setState = updater => {
-      const value =
-        typeof updater === 'function'
-          ? updater(component.state, component.props)
-          : updater;
-      component.state = { ...component.state, ...value };
-    };
+    setStateSync(component);
     component.componentDidMount();
     expect(alertSpy).toHaveBeenCalledWith(
       'Error',
@@ -78,13 +98,7 @@ describe('ResetPassword screen logic', () => {
   it('handles successful password reset', async () => {
     const props = createProps();
     const component = new ResetPassword(props as any);
-    component.setState = updater => {
-      const value =
-        typeof updater === 'function'
-          ? updater(component.state, component.props)
-          : updater;
-      component.state = { ...component.state, ...value };
-    };
+    setStateSync(component);
     component.setState({ password: '123456', confirmPassword: '123456' });
 
     await component.handleResetPress();
@@ -94,18 +108,21 @@ describe('ResetPassword screen logic', () => {
       otp: '1234',
       password: '123456',
     });
+
+    expect(alertSpy).toHaveBeenCalledWith(
+      'Success',
+      'Password reset success',
+      expect.any(Array),
+    );
   });
 
   it('alerts when email or otp missing', async () => {
-    const props = createProps({ route: { params: { email: '', otp: '' } } });
+    const props = createProps({
+      route: { params: { email: '', otp: '' } },
+      authData: { loading: false, message: '', email: '' },
+    });
     const component = new ResetPassword(props as any);
-    component.setState = updater => {
-      const value =
-        typeof updater === 'function'
-          ? updater(component.state, component.props)
-          : updater;
-      component.state = { ...component.state, ...value };
-    };
+    setStateSync(component);
     component.setState({ password: '123456', confirmPassword: '123456' });
 
     await component.handleResetPress();

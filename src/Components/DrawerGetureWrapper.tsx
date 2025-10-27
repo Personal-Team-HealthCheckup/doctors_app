@@ -32,7 +32,10 @@ const DrawerGetureWrapper: React.FC<DrawerGetureWrapperProps> = ({
   });
 
   return (
-    <Animated.View style={[styles.container, animatedStyles]}>
+    <Animated.View
+      style={[styles.container, animatedStyles]}
+      testID={'animated-view'}
+    >
       {children}
     </Animated.View>
   );
