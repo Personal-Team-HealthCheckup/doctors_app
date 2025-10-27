@@ -1,9 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Animated } from 'react-native';
-import {
-  Gesture,
-  GestureDetector,
-} from 'react-native-gesture-handler';
+import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import {
   useSharedValue,
   withSpring,
@@ -47,9 +44,12 @@ const RightCheckArrow: React.FC<RightCheckArrowProps> = ({ onCompleted }) => {
   });
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID="check-arrow-container">
       <GestureDetector gesture={gesture}>
-        <Animated.View style={[styles.arrow, animatedStyle]}>
+        <Animated.View
+          style={[styles.arrow, animatedStyle]}
+          testID="check-arrow"
+        >
           <FontAwesomeIcon name="star" color={COLORS.yellow} size={18} />
         </Animated.View>
       </GestureDetector>
