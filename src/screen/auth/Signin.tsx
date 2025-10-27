@@ -180,6 +180,8 @@ class Signin extends React.Component<Props, SigninState> {
                 value={this.state.password}
                 onChangeText={text => this.handleOnChange(text, 'password')}
                 errorMessage={this.state.error.password}
+                shouldShowTogglePassword={true}
+                secureTextEntry={true}
               />
             </View>
             {loading ? (

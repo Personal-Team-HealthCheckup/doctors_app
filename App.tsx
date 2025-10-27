@@ -3,14 +3,12 @@ import React from 'react';
 import { LinkingOptions, NavigationContainer } from '@react-navigation/native';
 import MainStack from './src/navigation/MainStack';
 import { Provider } from 'react-redux';
-import { store } from './src/redux/store';
+import { persistor, store } from './src/redux/store';
 import { Linking, Platform } from 'react-native';
 import ReactNativeBiometrics from 'react-native-biometrics';
-import { NewAppScreen } from '@react-native/new-app-screen';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { PersistGate } from 'redux-persist/integration/react';
 interface AppProps {}
 
 interface AppState {}
@@ -109,7 +107,9 @@ class App extends React.Component<AppProps, AppState> {
       <SafeAreaProvider>
         <NavigationContainer linking={linking}>
           <Provider store={store}>
-            <MainStack />
+            <PersistGate loading={null} persistor={persistor}>
+              <MainStack />
+            </PersistGate>
           </Provider>
         </NavigationContainer>
       </SafeAreaProvider>

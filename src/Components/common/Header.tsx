@@ -1,4 +1,5 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import React from 'react';
 import {
   responsiveScreenHeight,
@@ -19,40 +20,42 @@ interface Iprops {
 }
 const Header: React.FC<Iprops> = props => {
   return (
-    <View style={styles.mainView}>
-      <TouchableOpacity
-        onPress={() => props.toggleDrawer && props.toggleDrawer()}
-        style={styles.icon}
-      >
-        <OnBoarding1Svg
-          width={responsiveScreenWidth(18)}
-          height={responsiveScreenWidth(18)}
-          style={styles.image}
-        />
-      </TouchableOpacity>
-      <View style={styles.iconView}>
-        <TouchableOpacity style={styles.icon} onPress={() => {}}>
-          <LightSvg width={'25'} height={'25'} style={styles.image} />
-        </TouchableOpacity>
+    <SafeAreaView>
+      <View style={styles.mainView}>
         <TouchableOpacity
+          onPress={() => props.toggleDrawer && props.toggleDrawer()}
           style={styles.icon}
-          onPress={() => props.navigateTo(DASHBOARD.SEARCHPAGE)}
         >
-          <SearchSvg width={'25'} height={'20'} style={styles.image} />
-        </TouchableOpacity>
-        <View style={styles.icon}>
-          <NotificationBellSvg
-            width={'25'}
-            height={'25'}
-            resizeMode={'cover'}
+          <OnBoarding1Svg
+            width={responsiveScreenWidth(18)}
+            height={responsiveScreenWidth(18)}
             style={styles.image}
           />
-          <View style={styles.badge}>
-            <Text style={styles.badgeText}>1</Text>
+        </TouchableOpacity>
+        <View style={styles.iconView}>
+          <TouchableOpacity style={styles.icon} onPress={() => {}}>
+            <LightSvg width={'25'} height={'25'} style={styles.image} />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.icon}
+            onPress={() => props.navigateTo(DASHBOARD.SEARCHPAGE)}
+          >
+            <SearchSvg width={'25'} height={'20'} style={styles.image} />
+          </TouchableOpacity>
+          <View style={styles.icon}>
+            <NotificationBellSvg
+              width={'25'}
+              height={'25'}
+              resizeMode={'cover'}
+              style={styles.image}
+            />
+            <View style={styles.badge}>
+              <Text style={styles.badgeText}>1</Text>
+            </View>
           </View>
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -64,7 +67,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: responsiveScreenWidth(4),
     width: responsiveScreenWidth(100),
-    height: responsiveScreenHeight(16),
+    paddingVertical: responsiveScreenHeight(1),
   },
   leftView: {
     flex: 1,

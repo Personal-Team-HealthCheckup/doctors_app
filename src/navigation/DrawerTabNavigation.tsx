@@ -9,6 +9,12 @@ import { COLORS } from '../global/theme';
 import DrawerGestureWrapper from '../Components/DrawerGetureWrapper';
 const DrawerTab = createDrawerNavigator();
 
+const DrawerTabScreen = (props: {}) => (
+  <DrawerGestureWrapper>
+    <BottomTabStackNavigator {...props} />
+  </DrawerGestureWrapper>
+);
+
 function DrawerTabNavigation() {
   return (
     <DrawerTab.Navigator
@@ -26,14 +32,7 @@ function DrawerTabNavigation() {
         sceneStyle: { backgroundColor: COLORS.black },
       }}
     >
-      <DrawerTab.Screen
-        name={HOME.BOTTOMTABS}
-        component={(props: {}) => (
-          <DrawerGestureWrapper>
-            <BottomTabStackNavigator {...props} />
-          </DrawerGestureWrapper>
-        )}
-      />
+      <DrawerTab.Screen name={HOME.BOTTOMTABS} component={DrawerTabScreen} />
       <DrawerTab.Screen name={HOME.APPOINTMENTPAGE} component={AppointPage} />
     </DrawerTab.Navigator>
   );

@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-import { ColorValue, Platform, SafeAreaView, StatusBar, StyleSheet, View } from 'react-native';
-import { COLORS } from '../../global/theme';
+import { ColorValue, StatusBar, StyleSheet } from 'react-native';
 
 interface IProps {
   backgroundColor?: ColorValue;
   isScrollEnabled?: boolean;
 }
-interface IState { }
+interface IState {}
 class CustomStatusBar extends Component<IProps, IState> {
   render() {
-    const { backgroundColor = "transparent", isScrollEnabled } = this.props;
+    const { backgroundColor = 'transparent', isScrollEnabled } = this.props;
     // if (Platform.OS === 'ios') {
     //   return <View style={[styles.statusBar, { backgroundColor: backgroundColor ?? COLORS.black }]}>
     //     <SafeAreaView>

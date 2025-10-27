@@ -33,11 +33,13 @@ import { translate } from '../../helper/i18';
 
 interface VerificationCodeProps {
   navigation?: Navigation;
+  route?: any;
 }
 
 interface VerificationCodeState {
   code: string;
   timer: number;
+  isForgotPasswordFlow?: boolean;
 }
 
 interface ReduxProps {
@@ -83,7 +85,19 @@ class VerificationCode extends React.Component<Props, VerificationCodeState> {
       });
       if (this.props.verifyOTPData.message?.includes('success')) {
         Alert.alert('Successs', this.props.verifyOTPData.message);
-        navigateTo(this.props.navigation, AUTH.SIGNIN);
+        const isForgotFlow = this.state.isForgotPasswordFlow;
+        const targetScreen = isForgotFlow ? AUTH.RESETPASSWORD : AUTH.SIGNIN;
+        const emailParam =
+          this.props.verifyOTPData.email ||
+          this.props.route?.params?.email ||
+          '';
+        const params = isForgotFlow
+          ? {
+              email: emailParam,
+              otp: this.state.code,
+            }
+          : undefined;
+        navigateTo(this.props.navigation, targetScreen, params);
       } else {
         Alert.alert(
           'Error',
@@ -102,6 +116,11 @@ class VerificationCode extends React.Component<Props, VerificationCodeState> {
   };
 
   componentDidMount(): void {
+    const { fromScreen } = this.props.route?.params || {};
+
+    if (fromScreen && fromScreen === 'ForgotPassword') {
+      this.setState({ isForgotPasswordFlow: true });
+    }
     this.timer = setInterval(() => {
       if (this.state.timer > 0) {
         this.setState({ timer: this.state.timer - 1 });

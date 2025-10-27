@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Alert,
   ImageBackground,
   KeyboardAvoidingView,
   Platform,
@@ -151,7 +152,8 @@ class Signup extends React.Component<Props, SignupState> {
         navigateTo(this.props.navigation, AUTH.VERIFICATION);
       }
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'An unexpected error occurred';
+      const errorMessage =
+        error instanceof Error ? error.message : 'An unexpected error occurred';
       Alert.alert('Error', errorMessage);
     }
   };
@@ -234,6 +236,8 @@ class Signup extends React.Component<Props, SignupState> {
                   value={this.state.password}
                   maxLength={15}
                   onChangeText={value => this.handleOnChange(value, 'password')}
+                  shouldShowTogglePassword={true}
+                  secureTextEntry={true}
                 />
                 <Pressable
                   style={styles.buttonCheck}

@@ -15,7 +15,7 @@ export const formateDate = (date: string | Date) => {
 };
 
 export const checkEmailValidation = (email: string) => {
-  const regEx = /[a-zA-Z0-9#$%&\*\+-/=\?\_`|~]*[a-zA-Z0-9#$%&\*\+/=\?\_`|~]@/;
+  const regEx = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   return regEx.test(String(email).toLowerCase().trim());
 };
 
