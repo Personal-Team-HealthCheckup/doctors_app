@@ -24,6 +24,7 @@ const Header: React.FC<Iprops> = props => {
       <View style={styles.mainView}>
         <TouchableOpacity
           onPress={() => props.toggleDrawer && props.toggleDrawer()}
+          testID="header-drawer-button"
           style={styles.icon}
         >
           <OnBoarding1Svg
@@ -33,12 +34,17 @@ const Header: React.FC<Iprops> = props => {
           />
         </TouchableOpacity>
         <View style={styles.iconView}>
-          <TouchableOpacity style={styles.icon} onPress={() => {}}>
+          <TouchableOpacity
+            style={styles.icon}
+            onPress={() => {}}
+            testID="header-light-button"
+          >
             <LightSvg width={'25'} height={'25'} style={styles.image} />
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.icon}
             onPress={() => props.navigateTo(DASHBOARD.SEARCHPAGE)}
+            testID="header-search-button"
           >
             <SearchSvg width={'25'} height={'20'} style={styles.image} />
           </TouchableOpacity>

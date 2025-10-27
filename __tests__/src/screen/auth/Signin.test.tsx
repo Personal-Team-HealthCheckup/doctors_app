@@ -1,8 +1,14 @@
-import { Alert } from 'react-native';
+import React from 'react';
+import { Alert, View } from 'react-native';
+import { render, fireEvent } from '@testing-library/react-native';
 import { AUTH, MAINSTACK } from '../../../../src/Constants/Navigator';
 import SigninConnected from '../../../../src/screen/auth/Signin';
 import { navigateTo, replaceTo } from '../../../../src/helper/utilities';
-
+import { mockNavigation } from '../../../../__mocks__/mock';
+import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
+import store from '../../../../src/redux/store';
+import { NavigationContainer } from '@react-navigation/native';
 jest.mock('../../../../src/helper/utilities', () => {
   const actual = jest.requireActual('../../../../src/helper/utilities');
   return {
@@ -141,5 +147,42 @@ describe('Signin screen logic', () => {
     await component.handleLogin();
 
     expect(alertSpy).toHaveBeenCalledWith('Error', 'failure');
+  });
+
+  it('handles non-success responses without verification', async () => {
+    const props = createProps();
+    props.loginData.message = 'invalid credentials';
+    const component = new Signin(props as any);
+    component.setState = updater => {
+      const value =
+        typeof updater === 'function'
+          ? updater(component.state, component.props)
+          : updater;
+      component.state = { ...component.state, ...value };
+    };
+    component.setState({ email: 'user@example.com', password: '123456' });
+
+    await component.handleLogin();
+
+    expect(alertSpy).toHaveBeenCalledWith('Error', 'invalid credentials');
+    expect(replaceTo).not.toHaveBeenCalled();
+  });
+
+  it('does not submit when validation fails', async () => {
+    const props = createProps();
+    const component = new Signin(props as any);
+    component.setState = updater => {
+      const value =
+        typeof updater === 'function'
+          ? updater(component.state, component.props)
+          : updater;
+      component.state = { ...component.state, ...value };
+    };
+
+    component.setState({ email: '', password: '' });
+    await component.handleLogin();
+    expect(props.loginApi).not.toHaveBeenCalled();
+    await component.navigateToForgotPassword();
+    await component.navigateToSignup();
   });
 });

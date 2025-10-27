@@ -138,7 +138,7 @@ class Signin extends React.Component<Props, SigninState> {
   render() {
     const { loading } = this.props.loginData;
     return (
-      <>
+      <CustomMainView>
         <CustomStatusBar />
         <CustomMainView>
           <ImageBackground source={gradientSignupPng} style={styles.image}>
@@ -174,6 +174,7 @@ class Signin extends React.Component<Props, SigninState> {
                 value={this.state.email}
                 onChangeText={text => this.handleOnChange(text, 'email')}
                 errorMessage={this.state.error.email}
+                testID="txtInputEmail"
               />
               <CustomTextInput
                 placeholder={translate('auth.passwordPlaceholder')}
@@ -182,6 +183,7 @@ class Signin extends React.Component<Props, SigninState> {
                 errorMessage={this.state.error.password}
                 shouldShowTogglePassword={true}
                 secureTextEntry={true}
+                testID="textInputPassword"
               />
             </View>
             {loading ? (
@@ -191,11 +193,13 @@ class Signin extends React.Component<Props, SigninState> {
                 tittle={translate('auth.login')}
                 style={styles.buttonView1}
                 onPress={this.handleLogin}
+                testID="btnAuthLogin"
                 disabled={loading || !this.state.email || !this.state.password}
               />
             )}
             <TouchableOpacity
               disabled={loading}
+              testID="btnForgotPass"
               onPress={() => this.navigateToForgotPassword()}
             >
               <Text style={styles.textIhave}>
@@ -209,6 +213,7 @@ class Signin extends React.Component<Props, SigninState> {
               <Text
                 style={styles.textIhave}
                 disabled={loading}
+                testID="btnJoinUs"
                 onPress={() => this.navigateToSignup()}
               >
                 Join us
@@ -216,7 +221,7 @@ class Signin extends React.Component<Props, SigninState> {
             </View>
           </ImageBackground>
         </CustomMainView>
-      </>
+      </CustomMainView>
     );
   }
 }

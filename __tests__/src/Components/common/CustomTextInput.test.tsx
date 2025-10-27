@@ -80,6 +80,37 @@ describe('CustomTextInput', () => {
     expect(queryByText('Test error')).toBeNull();
   });
 
+  it('toggles password visibility when icon pressed', () => {
+    const { getByPlaceholderText, getByLabelText } = render(
+      <CustomTextInput
+        placeholder="Password"
+        secureTextEntry
+        shouldShowTogglePassword
+      />,
+    );
+
+    const input = getByPlaceholderText('Password');
+    expect(input.props.secureTextEntry).toBe(true);
+
+    const toggle = getByLabelText('Show password');
+    fireEvent.press(toggle);
+
+    expect(getByLabelText('Hide password')).toBeTruthy();
+    expect(input.props.secureTextEntry).toBe(false);
+  });
+
+  it('respects shouldShowTogglePassword override', () => {
+    const { queryByLabelText } = render(
+      <CustomTextInput
+        placeholder="Hidden toggle"
+        secureTextEntry
+        shouldShowTogglePassword={false}
+      />,
+    );
+
+    expect(queryByLabelText('Show password')).toBeNull();
+  });
+
   it('passes additional props to TextInput', () => {
     const { getByPlaceholderText } = render(
       <CustomTextInput placeholder="Test input" maxLength={10} />
