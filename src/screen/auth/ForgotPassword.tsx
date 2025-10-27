@@ -27,7 +27,11 @@ import { Navigation } from '../../global/types';
 import { AUTH } from '../../Constants/Navigator';
 import { translate } from '../../helper/i18';
 import { navigateTo, checkEmailValidation } from '../../helper/utilities';
-import { LogoSvg, StarSvg, gradientSignupPng } from '../../assets/assets';
+import {
+  LogoSvg as LogoImage,
+  StarSvg as StarImage,
+  gradientSignupPng,
+} from '../../assets/assets';
 import { connect } from 'react-redux';
 import { forgotPasswordAction } from '../../redux/reducers/auth';
 import { RootState } from '../../redux/store';
@@ -112,29 +116,29 @@ class ForgotPassword extends React.Component<Props, ForgotPasswordState> {
         <CustomStatusBar />
         <KeyboardAvoidingView
           enabled
-          style={styles.keyboardAvoid}
           behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+          style={styles.keyboardAvoid}
         >
           <ScrollView
             bounces={false}
-            contentContainerStyle={styles.scrollContainer}
             showsVerticalScrollIndicator={false}
+            contentContainerStyle={styles.scrollContainer}
           >
             <ImageBackground
-              source={gradientSignupPng}
               style={styles.background}
+              source={gradientSignupPng}
             >
               <SafeAreaView style={styles.safeArea}>
                 <CustomHeader
                   navigation={this.props.navigation}
-                  heading={translate('auth.forgotPasswordHeading')}
                   isIcon={false}
                   isShowSearchIcon={false}
+                  heading={translate('auth.forgotPasswordHeading')}
                   isShowNotificationIcon={false}
                 />
-                <StarSvg style={styles.decorationOne} />
-                <StarSvg style={commonStyles.decorationTwo} />
-                <LogoSvg
+                <StarImage style={styles.decorationOne} />
+                <StarImage style={commonStyles.decorationTwo} />
+                <LogoImage
                   width={responsiveScreenWidth(65)}
                   height={responsiveHeight(14)}
                   style={commonStyles.logo}
