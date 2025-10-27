@@ -71,9 +71,29 @@ describe('utilities helper', () => {
     expect(stored).toEqual(value);
   });
 
+  it('returns decrypted string when parseToJson is false', async () => {
+    const value = { foo: 'bar' };
+    await setStorageData('raw', value);
+    const [, encrypted] = (AsyncStorage.setItem as jest.Mock).mock.calls[0];
+    (AsyncStorage.getItem as jest.Mock).mockResolvedValueOnce(
+      encrypted as string,
+    );
+
+    const stored = await getStorageData('raw');
+    expect(stored).toBe(JSON.stringify(value));
+  });
+
   it('removes stored data', async () => {
     await removeStorageData('key');
     expect(AsyncStorage.removeItem).toHaveBeenCalledWith('key');
+  });
+
+  it('skips storage operations when key is missing', async () => {
+    await setStorageData('', { foo: 'bar' });
+    expect(AsyncStorage.setItem).not.toHaveBeenCalled();
+
+    await removeStorageData('');
+    expect(AsyncStorage.removeItem).not.toHaveBeenCalled();
   });
 
   it('navigates and replaces routes safely', () => {
@@ -105,6 +125,15 @@ describe('utilities helper', () => {
     });
   });
 
+  it('handles missing navigation references gracefully', () => {
+    expect(() => navigateTo(undefined, 'Screen')).not.toThrow();
+    expect(() => replaceTo(undefined, 'Screen')).not.toThrow();
+    expect(() => closeDrawer(undefined)).not.toThrow();
+    expect(() =>
+      nestedNavigateTo(undefined, ['Child'], 'Parent', {}),
+    ).not.toThrow();
+  });
+
   it('returns null when getStorageData has no key stored', async () => {
     (AsyncStorage.getItem as jest.Mock).mockResolvedValueOnce(null);
     await expect(getStorageData('missing')).resolves.toBeNull();
@@ -117,5 +146,12 @@ describe('utilities helper', () => {
     await expect(setStorageData('auth', { foo: 'bar' })).rejects.toThrow(
       'failed',
     );
+  });
+
+  it('handleScroll respects the threshold boundary', () => {
+    const event = {
+      nativeEvent: { contentOffset: { y: 5 } },
+    } as any;
+    expect(handleScroll(event)).toBe(false);
   });
 });
