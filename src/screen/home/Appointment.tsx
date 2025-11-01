@@ -30,15 +30,22 @@ interface AppointPageProps {
   navigation?: Navigation;
 }
 
+const paymentMethods = [
+  'Wallet',
+  'Credit Card',
+  'Pay to doctor directly',
+  'UPI',
+];
+
 interface AppointPageState {
-  selectedPayment: number;
+  selectedPayment: string;
 }
 
 class AppointPage extends React.Component<AppointPageProps, AppointPageState> {
   constructor(props: AppointPageProps) {
     super(props);
     this.state = {
-      selectedPayment: 0,
+      selectedPayment: paymentMethods[0],
     };
   }
 
@@ -175,36 +182,27 @@ class AppointPage extends React.Component<AppointPageProps, AppointPageState> {
                 </Text>
 
                 <View style={styles.paymentOptions}>
-                  {[
-                    'Wallet',
-                    'Credit Card',
-                    'Pay to doctor directly',
-                    'UPI',
-                  ].map((method, index) => (
-                    <View key={index} style={styles.paymentOptionRow}>
-                      <TouchableOpacity
-                        key={index}
-                        style={styles.paymentOptionRow}
-                        onPress={() =>
-                          this.setState({ selectedPayment: index })
+                  {paymentMethods.map(method => (
+                    <TouchableOpacity
+                      key={method}
+                      style={styles.paymentOptionRow}
+                      onPress={() => this.setState({ selectedPayment: method })}
+                    >
+                      <CustomIcons
+                        name={
+                          this.state.selectedPayment === method
+                            ? 'check-circle'
+                            : 'circle'
                         }
-                      >
-                        <CustomIcons
-                          name={
-                            this.state.selectedPayment === index
-                              ? 'check-circle'
-                              : 'circle'
-                          }
-                          size={20}
-                          color={
-                            this.state.selectedPayment === index
-                              ? COLORS.green
-                              : COLORS.greyBlack
-                          }
-                        />
-                        <Text style={styles.paymentText}>{method}</Text>
-                      </TouchableOpacity>
-                    </View>
+                        size={20}
+                        color={
+                          this.state.selectedPayment === method
+                            ? COLORS.green
+                            : COLORS.greyBlack
+                        }
+                      />
+                      <Text style={styles.paymentText}>{method}</Text>
+                    </TouchableOpacity>
                   ))}
                 </View>
               </View>

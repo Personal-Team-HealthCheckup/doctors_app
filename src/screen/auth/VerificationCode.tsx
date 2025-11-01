@@ -21,7 +21,7 @@ import {
 import { moderateScale } from '../../helper/Scale';
 import CustomGButton from '../../Components/common/CustomGButton';
 import { AUTH } from '../../Constants/Navigator';
-import { RootState } from '../../redux/store';
+import { AppDispatch, RootState } from '../../redux/store';
 import { connect } from 'react-redux';
 import { Navigation } from '../../global/types';
 import { navigateTo } from '../../helper/utilities';
@@ -44,8 +44,8 @@ interface VerificationCodeState {
 
 interface ReduxProps {
   verifyOTPData: RootState['Auth'];
-  verifyOtpApi: (data: { otp: string }) => void;
-  resendOtpApi: (data: { email: string }) => void;
+  verifyOtpApi: (data: { otp: string }) => Promise<unknown>;
+  resendOtpApi: (data: { email: string }) => Promise<unknown>;
 }
 
 type Props = VerificationCodeProps & ReduxProps;
@@ -75,7 +75,11 @@ class VerificationCode extends React.Component<Props, VerificationCodeState> {
           this.props.verifyOTPData.message || 'OTP not Verified',
         );
       }
-    } catch (error) {}
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : 'An unexpected error occurred';
+      Alert.alert('Error', errorMessage);
+    }
   };
 
   handleVerification = async () => {
@@ -122,9 +126,9 @@ class VerificationCode extends React.Component<Props, VerificationCodeState> {
       this.setState({ isForgotPasswordFlow: true });
     }
     this.timer = setInterval(() => {
-      if (this.state.timer > 0) {
-        this.setState({ timer: this.state.timer - 1 });
-      }
+      this.setState(prevState =>
+        prevState.timer > 0 ? { timer: prevState.timer - 1 } : null,
+      );
     }, 1000);
   }
 
@@ -230,10 +234,10 @@ const mapStateToProps = (state: RootState) => ({
   verifyOTPData: state.Auth,
 });
 
-const mapDispatchToProps = {
-  verifyOtpApi: (data: { otp: string }) => verifyOtpAction(data),
-  resendOtpApi: (data: { email: string }) => resendOtpAction(data),
-};
+const mapDispatchToProps = (dispatch: AppDispatch) => ({
+  verifyOtpApi: (data: { otp: string }) => dispatch(verifyOtpAction(data)),
+  resendOtpApi: (data: { email: string }) => dispatch(resendOtpAction(data)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(VerificationCode);
 

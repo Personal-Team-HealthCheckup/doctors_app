@@ -29,7 +29,7 @@ import { translate } from '../../helper/i18';
 import { navigateTo, replaceTo } from '../../helper/utilities';
 import { LogoSvg, StarSvg, gradientSignupPng } from '../../assets/assets';
 import { connect } from 'react-redux';
-import { RootState } from '../../redux/store';
+import { AppDispatch, RootState } from '../../redux/store';
 import { resetPasswordAction } from '../../redux/reducers/auth';
 import { commonStyles } from './CommonStyles';
 
@@ -44,7 +44,7 @@ interface ReduxProps {
     email: string;
     otp: string;
     password: string;
-  }) => void;
+  }) => Promise<unknown>;
 }
 
 type Props = ResetPasswordProps & ReduxProps;
@@ -263,10 +263,10 @@ const mapStateToProps = (state: RootState) => ({
   authData: state.Auth,
 });
 
-const mapDispatchToProps = {
+const mapDispatchToProps = (dispatch: AppDispatch) => ({
   resetPasswordApi: (data: { email: string; otp: string; password: string }) =>
-    resetPasswordAction(data),
-};
+    dispatch(resetPasswordAction(data)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ResetPassword);
 

@@ -24,7 +24,7 @@ export const handleOnChange = (state: any, value: string, field: any) => {
 };
 
 export const checkNameValidation = (name: string) => {
-  const regEx = /^(?:[a-zA-Z]+(?:[ ][a-zA-Z]+)*)+$/;
+  const regEx = /^(?:[a-zA-Z]+(?: [a-zA-Z]+)*)+$/;
   return regEx.test(String(name).toLowerCase().trim());
 };
 
@@ -80,9 +80,7 @@ export const navigateTo = (
   screenName: string = '',
   params?: object,
 ) => {
-  if (navigation && navigation.navigate) {
-    navigation.navigate(screenName, params);
-  }
+  navigation?.navigate?.(screenName, params);
 };
 
 // replace to single screen
@@ -91,15 +89,11 @@ export const replaceTo = (
   screenName: string = '',
   params?: object,
 ) => {
-  if (navigation && navigation.replace) {
-    navigation.replace(screenName, params);
-  }
+  navigation?.replace?.(screenName, params);
 };
 // replace to single screen
 export const closeDrawer = (navigation?: Navigation) => {
-  if (navigation && navigation.closeDrawer) {
-    navigation.closeDrawer();
-  }
+  navigation?.closeDrawer?.();
 };
 
 // navigate to single screen with nested routes
@@ -109,11 +103,12 @@ export const nestedNavigateTo = (
   parentRouteName: string = '',
   params?: object,
 ) => {
-  if (navigation && navigation.navigate) {
-    let nestedParams = { ...params };
-    for (let i = screenName.length - 1; i >= 0; i--) {
-      nestedParams = { screen: screenName[i], params: nestedParams };
-    }
-    navigation.navigate(parentRouteName, nestedParams);
+  if (!navigation?.navigate) {
+    return;
   }
+  let nestedParams = { ...params };
+  for (let i = screenName.length - 1; i >= 0; i--) {
+    nestedParams = { screen: screenName[i], params: nestedParams };
+  }
+  navigation.navigate(parentRouteName, nestedParams);
 };

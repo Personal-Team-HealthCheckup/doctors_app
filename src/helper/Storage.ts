@@ -72,7 +72,7 @@ const decryption = (encoded: string) => {
   }
 
   return bytes
-    .map(hex => parseInt(hex, 16))
+    .map(hex => Number.parseInt(hex, 16))
     .map(applySaltToChar)
     .map(charCode => String.fromCharCode(charCode))
     .join('');

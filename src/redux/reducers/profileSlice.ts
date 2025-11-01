@@ -3,7 +3,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { endpoints } from '../../helper/config';
 import networkCall from '../../helper/networkCall';
-import { storeAuthToken } from '../../helper/authKeychain';
 
 interface IUser {
   _id: string;

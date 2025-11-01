@@ -1,4 +1,8 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import {
+  combineReducers,
+  configureStore,
+  StoreEnhancer,
+} from '@reduxjs/toolkit';
 import StorageProvider from '../helper/Storage';
 import {
   FLUSH,
@@ -55,7 +59,10 @@ export const store = configureStore({
       },
     }),
   enhancers: getDefaultEnhancers => {
-    const reactotronEnhancer = __DEV__ ? [Reactotron.createEnhancer!()] : [];
+    const reactotronEnhancer: StoreEnhancer[] =
+      __DEV__ && typeof Reactotron.createEnhancer === 'function'
+        ? [Reactotron.createEnhancer()]
+        : [];
     return getDefaultEnhancers().concat(reactotronEnhancer);
   },
 });
