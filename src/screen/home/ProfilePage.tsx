@@ -84,8 +84,12 @@ class ProfilePage extends React.Component<Props, ProfilePageState> {
     };
   }
 
-  async componentDidMount() {
+  loadProfile = async () => {
     await this.props.getProfileApi();
+  };
+
+  componentDidMount() {
+    this.loadProfile();
   }
 
   componentDidUpdate(prevProps: Props) {
