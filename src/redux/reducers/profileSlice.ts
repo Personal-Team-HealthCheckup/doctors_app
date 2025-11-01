@@ -5,12 +5,14 @@ import { endpoints } from '../../helper/config';
 import networkCall from '../../helper/networkCall';
 
 interface IUser {
-  _id: string;
+  _id?: string;
+  id?: string;
   fullName: string;
   email: string;
   role: string;
   acceptedTerms: boolean;
   phoneNumber?: string;
+  userName?: string;
 }
 export interface AuthDataType {
   message: string | null;
@@ -40,6 +42,26 @@ export const getProfileAction = createAsyncThunk(
   },
 );
 
+export const updateProfileAction = createAsyncThunk(
+  'updateProfileAction',
+  async (
+    payload: Partial<Omit<IUser, '_id'>>,
+    { rejectWithValue, fulfillWithValue },
+  ) => {
+    const { response, error, errorResponse } = await networkCall(
+      endpoints.PROFILE,
+      'PUT',
+      JSON.stringify(payload),
+    );
+
+    if (response) {
+      return fulfillWithValue(response);
+    }
+
+    return rejectWithValue({ message: error, ...errorResponse });
+  },
+);
+
 export const AuthSlice = createSlice({
   name: 'authlice',
   initialState,
@@ -56,6 +78,21 @@ export const AuthSlice = createSlice({
         state.message = action.payload.message;
       })
       .addCase(getProfileAction.rejected, (state, action) => {
+        state.loading = false;
+        state.message = action.payload
+          ? (action.payload as any).message
+          : action.error.message || null;
+      })
+      .addCase(updateProfileAction.pending, state => {
+        state.loading = true;
+        state.message = null;
+      })
+      .addCase(updateProfileAction.fulfilled, (state, action) => {
+        state.loading = false;
+        state.data = action.payload.user;
+        state.message = action.payload.message;
+      })
+      .addCase(updateProfileAction.rejected, (state, action) => {
         state.loading = false;
         state.message = action.payload
           ? (action.payload as any).message
