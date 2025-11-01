@@ -30,7 +30,7 @@ import CustomTextInput from '../../Components/common/CustomTextInput';
 import CustomIcons from 'react-native-vector-icons/FontAwesome5';
 import CustomGButton from '../../Components/common/CustomGButton';
 import { AUTH } from '../../Constants/Navigator';
-import { RootState } from '../../redux/store';
+import { AppDispatch, RootState } from '../../redux/store';
 import { connect } from 'react-redux';
 import { signupAction } from '../../redux/reducers/auth';
 import CustomLoader from '../../Components/CustomLoader';
@@ -69,7 +69,7 @@ interface ReduxProps {
     fullName: string;
     role: 'user';
     acceptedTerms: boolean;
-  }) => void;
+  }) => Promise<unknown>;
 }
 
 type Props = SignupProps & ReduxProps;
@@ -304,15 +304,15 @@ const mapStateToProps = (state: RootState) => ({
   signupData: state.Auth,
 });
 
-const mapDispatchToProps = {
+const mapDispatchToProps = (dispatch: AppDispatch) => ({
   signup: (data: {
     email: string;
     password: string;
     fullName: string;
     role: 'user';
     acceptedTerms: boolean;
-  }) => signupAction(data),
-};
+  }) => dispatch(signupAction(data)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signup);
 const styles = StyleSheet.create({

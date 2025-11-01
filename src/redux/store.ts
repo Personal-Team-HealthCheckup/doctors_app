@@ -1,4 +1,8 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import {
+  combineReducers,
+  configureStore,
+  StoreEnhancer,
+} from '@reduxjs/toolkit';
 import StorageProvider from '../helper/Storage';
 import {
   FLUSH,
@@ -11,6 +15,7 @@ import {
   persistStore,
 } from 'redux-persist';
 import Auth from './reducers/auth';
+import Profile from './reducers/profileSlice';
 import Reactotron from '../config/reactotron.config';
 
 type ReactotronConsole = {
@@ -37,6 +42,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   Auth,
+  Profile,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -53,7 +59,10 @@ export const store = configureStore({
       },
     }),
   enhancers: getDefaultEnhancers => {
-    const reactotronEnhancer = __DEV__ ? [Reactotron.createEnhancer!()] : [];
+    const reactotronEnhancer: StoreEnhancer[] =
+      __DEV__ && typeof Reactotron.createEnhancer === 'function'
+        ? [Reactotron.createEnhancer()]
+        : [];
     return getDefaultEnhancers().concat(reactotronEnhancer);
   },
 });

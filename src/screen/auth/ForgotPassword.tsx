@@ -34,7 +34,7 @@ import {
 } from '../../assets/assets';
 import { connect } from 'react-redux';
 import { forgotPasswordAction } from '../../redux/reducers/auth';
-import { RootState } from '../../redux/store';
+import { AppDispatch, RootState } from '../../redux/store';
 import { commonStyles } from './CommonStyles';
 
 interface ForgotPasswordProps {
@@ -43,7 +43,7 @@ interface ForgotPasswordProps {
 
 interface ReduxProps {
   forgotPassData: RootState['Auth'];
-  forgotPasswordApi: (data: { email: string }) => void;
+  forgotPasswordApi: (data: { email: string }) => Promise<unknown>;
 }
 
 type Props = ForgotPasswordProps & ReduxProps;
@@ -194,9 +194,10 @@ const mapStateToProps = (state: RootState) => ({
   forgotPassData: state.Auth,
 });
 
-const mapDispatchToProps = {
-  forgotPasswordApi: (data: { email: string }) => forgotPasswordAction(data),
-};
+const mapDispatchToProps = (dispatch: AppDispatch) => ({
+  forgotPasswordApi: (data: { email: string }) =>
+    dispatch(forgotPasswordAction(data)),
+});
 export default connect(mapStateToProps, mapDispatchToProps)(ForgotPassword);
 
 const styles = StyleSheet.create({

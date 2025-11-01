@@ -1,5 +1,8 @@
 import React from 'react';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import {
+  createDrawerNavigator,
+  DrawerContentComponentProps,
+} from '@react-navigation/drawer';
 import BottomTabStackNavigator from './BottomTabNavigation';
 import { HOME } from '../Constants/Navigator';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
@@ -15,10 +18,14 @@ const DrawerTabScreen = (props: {}) => (
   </DrawerGestureWrapper>
 );
 
+const DrawerContent = (props: DrawerContentComponentProps) => (
+  <DrawerComponent {...props} />
+);
+
 function DrawerTabNavigation() {
   return (
     <DrawerTab.Navigator
-      drawerContent={props => <DrawerComponent {...props} />}
+      drawerContent={DrawerContent}
       screenOptions={{
         drawerType: 'slide',
         headerShown: false,

@@ -7,13 +7,13 @@ import {
   ViewStyle,
 } from 'react-native';
 import React from 'react';
-import {responsiveScreenWidth} from 'react-native-responsive-dimensions';
+import { responsiveScreenWidth } from 'react-native-responsive-dimensions';
 import {
   horizontalScale,
   moderateScale,
   verticalScale,
 } from '../../helper/Scale';
-import {COLORS, FONTS} from '../../global/theme';
+import { COLORS, FONTS } from '../../global/theme';
 interface ButtonProps {
   title: string;
   onPress?: () => void;
