@@ -32,6 +32,7 @@ import CustomGButton from '../../Components/common/CustomGButton';
 import { closeKeyBoard } from '../../helper/utilities';
 import { Navigation } from '../../global/types';
 import { connect } from 'react-redux';
+import ImagePicker, { ImageOrVideo } from 'react-native-image-crop-picker';
 import {
   getProfileAction,
   updateProfileAction,
@@ -45,6 +46,7 @@ interface ProfilePageState {
   isEditMode: boolean;
   formValues: ProfileFormValues;
   localMessage: string | null;
+  selectedImage: SelectedImage | null;
 }
 
 interface ReduxProps {
@@ -52,7 +54,7 @@ interface ReduxProps {
   loading: RootState['Profile']['loading'];
   message: RootState['Profile']['message'];
   getProfileApi: () => Promise<unknown>;
-  updateProfileApi: (payload: Partial<ProfileFormValues>) => Promise<unknown>;
+  updateProfileApi: (payload: FormData) => Promise<unknown>;
 }
 
 type Props = ProfilePageProps & ReduxProps;
@@ -62,7 +64,14 @@ interface ProfileFormValues {
   phoneNumber: string;
   userName: string;
   email: string;
+  profileImageUrl: string | null;
 }
+
+type SelectedImage = {
+  uri: string;
+  type: string;
+  name: string;
+};
 
 class ProfilePage extends React.Component<Props, ProfilePageState> {
   constructor(props: Props) {
@@ -71,6 +80,7 @@ class ProfilePage extends React.Component<Props, ProfilePageState> {
       isEditMode: false,
       formValues: this.buildFormValues(props.data),
       localMessage: null,
+      selectedImage: null,
     };
   }
 
@@ -86,6 +96,7 @@ class ProfilePage extends React.Component<Props, ProfilePageState> {
     ) {
       this.setState({
         formValues: this.buildFormValues(this.props.data),
+        selectedImage: null,
       });
     }
   }
@@ -96,6 +107,7 @@ class ProfilePage extends React.Component<Props, ProfilePageState> {
       phoneNumber: data?.phoneNumber ?? '',
       userName: data?.userName ?? '',
       email: data?.email ?? '',
+      profileImageUrl: data?.profileImage?.imageUrl ?? null,
     };
   }
 
@@ -117,6 +129,7 @@ class ProfilePage extends React.Component<Props, ProfilePageState> {
       isEditMode: true,
       formValues: this.buildFormValues(this.props.data),
       localMessage: null,
+      selectedImage: null,
     });
   };
 
@@ -125,12 +138,45 @@ class ProfilePage extends React.Component<Props, ProfilePageState> {
       isEditMode: false,
       formValues: this.buildFormValues(this.props.data),
       localMessage: null,
+      selectedImage: null,
     });
+  };
+
+  private handlePickImage = async () => {
+    try {
+      const result: ImageOrVideo = await ImagePicker.openPicker({
+        cropping: true,
+        compressImageQuality: 0.8,
+        mediaType: 'photo',
+        cropperCircleOverlay: true,
+        multiple: false,
+      });
+      console.log('----result', result);
+
+      const selected: SelectedImage = {
+        uri: result.path,
+        type: result.mime || 'image/jpeg',
+        name:
+          result.filename ||
+          result.path?.split('/')?.pop() ||
+          `profile_${Date.now()}.jpg`,
+      };
+
+      this.setState({ selectedImage: selected, localMessage: null });
+    } catch (error: any) {
+      if (error?.code === 'E_PICKER_CANCELLED') {
+        return;
+      }
+      console.warn('Image picker error', error);
+      this.setState({
+        localMessage: 'Unable to pick image. Please try again.',
+      });
+    }
   };
 
   private handleSave = async () => {
     const { updateProfileApi, data } = this.props;
-    const { formValues } = this.state;
+    const { formValues, selectedImage } = this.state;
 
     closeKeyBoard();
 
@@ -153,29 +199,53 @@ class ProfilePage extends React.Component<Props, ProfilePageState> {
       return;
     }
 
-    const payload: Partial<ProfileFormValues> = {};
+    const hasNameChange = trimmedName !== (data?.fullName ?? '');
+    const hasPhoneChange = trimmedPhone !== (data?.phoneNumber ?? '');
+    const hasImageChange = Boolean(selectedImage);
 
-    if (trimmedName !== (data?.fullName ?? '')) {
-      payload.fullName = trimmedName;
-    }
-
-    if (trimmedPhone !== (data?.phoneNumber ?? '')) {
-      payload.phoneNumber = trimmedPhone;
-    }
-
-    if (Object.keys(payload).length === 0) {
+    if (!hasNameChange && !hasPhoneChange && !hasImageChange) {
       this.setState({
         localMessage: 'No changes detected.',
       });
       return;
     }
 
+    const formData = new FormData();
+
+    if (hasNameChange) {
+      formData.append('fullName', trimmedName);
+    }
+
+    if (hasPhoneChange) {
+      formData.append('phoneNumber', trimmedPhone);
+    }
+
+    if (hasImageChange && selectedImage) {
+      formData.append('profileImage', {
+        uri: selectedImage.uri,
+        type: selectedImage.type,
+        name: selectedImage.name,
+      } as any);
+    }
+
+    const selectedImageRef = selectedImage;
+
     try {
-      await updateProfileApi(payload);
-      this.setState({
+      await updateProfileApi(formData);
+      this.setState(prevState => ({
         isEditMode: false,
         localMessage: null,
-      });
+        selectedImage: null,
+        formValues: {
+          ...prevState.formValues,
+          fullName: hasNameChange ? trimmedName : prevState.formValues.fullName,
+          phoneNumber: hasPhoneChange
+            ? trimmedPhone
+            : prevState.formValues.phoneNumber,
+          profileImageUrl:
+            selectedImageRef?.uri ?? prevState.formValues.profileImageUrl,
+        },
+      }));
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : 'Failed to update profile.';
@@ -185,11 +255,16 @@ class ProfilePage extends React.Component<Props, ProfilePageState> {
 
   render() {
     const { data, loading, message } = this.props;
-    const { isEditMode, formValues, localMessage } = this.state;
+    const { isEditMode, formValues, localMessage, selectedImage } = this.state;
     const displayMessage =
       localMessage ||
       (message && message !== 'User retrieved successfully' ? message : null);
     const isInitialLoading = loading && !data;
+    const profileImageSource = data?.profileImage
+      ? { uri: data.profileImage.imageUrl }
+      : formValues.profileImageUrl
+        ? { uri: formValues.profileImageUrl }
+        : imageProfile1;
 
     return (
       <View style={styles.mainContainer}>
@@ -249,14 +324,22 @@ class ProfilePage extends React.Component<Props, ProfilePageState> {
                     end={{ x: 1.0, y: 0.5 }}
                     style={styles.imageView}
                   >
-                    <TouchableOpacity style={styles.cameraView}>
+                    <TouchableOpacity
+                      style={[
+                        styles.cameraView,
+                        !isEditMode && styles.cameraViewDisabled,
+                      ]}
+                      onPress={this.handlePickImage}
+                      // activeOpacity={0.7}
+                      // disabled={!isEditMode}
+                    >
                       <VectorIcon
                         name="camera"
                         color={COLORS.white}
                         size={20}
                       />
                     </TouchableOpacity>
-                    <Image source={imageProfile1} style={styles.image1} />
+                    <Image source={profileImageSource} style={styles.image1} />
                   </LinearGradient>
 
                   <View style={styles.mainView1}>
@@ -329,7 +412,7 @@ const mapStateToProps = (state: RootState) => ({
 
 const mapDispatchToProps = (dispatch: AppDispatch) => ({
   getProfileApi: () => dispatch(getProfileAction()),
-  updateProfileApi: (payload: Partial<ProfileFormValues>) =>
+  updateProfileApi: (payload: FormData) =>
     dispatch(updateProfileAction(payload)).unwrap(),
 });
 
@@ -400,6 +483,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: responsiveHeight(5) / 2,
     zIndex: 10,
+  },
+  cameraViewDisabled: {
+    opacity: 0.6,
   },
   mainView1: {
     // marginTop: responsiveHeight(3),

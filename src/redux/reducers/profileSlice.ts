@@ -13,6 +13,10 @@ interface IUser {
   acceptedTerms: boolean;
   phoneNumber?: string;
   userName?: string;
+  profileImage?: {
+    fileId?: string;
+    imageUrl?: string;
+  } | null;
 }
 export interface AuthDataType {
   message: string | null;
@@ -42,16 +46,20 @@ export const getProfileAction = createAsyncThunk(
   },
 );
 
+type UpdateProfilePayload = FormData | Partial<Omit<IUser, '_id'>>;
+
 export const updateProfileAction = createAsyncThunk(
   'updateProfileAction',
   async (
-    payload: Partial<Omit<IUser, '_id'>>,
+    payload: UpdateProfilePayload,
     { rejectWithValue, fulfillWithValue },
   ) => {
+    const requestBody = payload as any;
+
     const { response, error, errorResponse } = await networkCall(
       endpoints.PROFILE,
-      'PUT',
-      JSON.stringify(payload),
+      'PATCH',
+      requestBody,
     );
 
     if (response) {
