@@ -111,10 +111,7 @@ class ProfilePage extends React.Component<Props, ProfilePageState> {
     };
   }
 
-  private handleInputChange = (
-    field: keyof ProfileFormValues,
-    value: string,
-  ) => {
+  handleInputChange = (field: keyof ProfileFormValues, value: string) => {
     this.setState(prevState => ({
       formValues: {
         ...prevState.formValues,
@@ -124,7 +121,7 @@ class ProfilePage extends React.Component<Props, ProfilePageState> {
     }));
   };
 
-  private enableEdit = () => {
+  enableEdit = () => {
     this.setState({
       isEditMode: true,
       formValues: this.buildFormValues(this.props.data),
@@ -133,7 +130,7 @@ class ProfilePage extends React.Component<Props, ProfilePageState> {
     });
   };
 
-  private handleCancelEdit = () => {
+  handleCancelEdit = () => {
     this.setState({
       isEditMode: false,
       formValues: this.buildFormValues(this.props.data),
@@ -142,7 +139,7 @@ class ProfilePage extends React.Component<Props, ProfilePageState> {
     });
   };
 
-  private handlePickImage = async () => {
+  handlePickImage = async () => {
     try {
       const result: ImageOrVideo = await ImagePicker.openPicker({
         cropping: true,
@@ -151,7 +148,6 @@ class ProfilePage extends React.Component<Props, ProfilePageState> {
         cropperCircleOverlay: true,
         multiple: false,
       });
-      console.log('----result', result);
 
       const selected: SelectedImage = {
         uri: result.path,
@@ -174,8 +170,8 @@ class ProfilePage extends React.Component<Props, ProfilePageState> {
     }
   };
 
-  private handleSave = async () => {
-    const { updateProfileApi, data } = this.props;
+  handleSave = async () => {
+    const { updateProfileApi, data, getProfileApi } = this.props;
     const { formValues, selectedImage } = this.state;
 
     closeKeyBoard();
@@ -232,6 +228,7 @@ class ProfilePage extends React.Component<Props, ProfilePageState> {
 
     try {
       await updateProfileApi(formData);
+
       this.setState(prevState => ({
         isEditMode: false,
         localMessage: null,
@@ -246,6 +243,7 @@ class ProfilePage extends React.Component<Props, ProfilePageState> {
             selectedImageRef?.uri ?? prevState.formValues.profileImageUrl,
         },
       }));
+      await getProfileApi();
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : 'Failed to update profile.';

@@ -53,7 +53,7 @@ interface HomeScreenProps {
 interface HomeScreenReduxProps {
   authData: RootState['Auth'];
   userData: RootState['Profile'];
-  getProfileApi: () => Promise<void>;
+  getProfileApi: () => Promise<unknown>;
 }
 
 type Props = HomeScreenProps & HomeScreenReduxProps;
@@ -76,8 +76,11 @@ class HomeScreen extends React.Component<Props, HomeScreenState> {
     };
   }
 
-  async componentDidMount() {
+  async loadProfile() {
     await this.props.getProfileApi();
+  }
+  async componentDidMount() {
+    this.loadProfile();
     this.timer = Number(
       setTimeout(() => {
         this.setState({ isLinearGradient: false });
