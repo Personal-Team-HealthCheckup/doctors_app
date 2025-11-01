@@ -18,7 +18,7 @@ interface CustomHeaderProps {
   isShowSearchIcon?: boolean;
   isShowNotificationIcon?: boolean;
   navigation?: Navigation;
-  RigthView?: React.JSX;
+  RigthView?: any;
 }
 
 interface CustomHeaderState {}
@@ -87,7 +87,7 @@ class CustomHeader extends React.Component<
             </TouchableOpacity>
           )}
 
-          {RigthView}
+          {RigthView ? RigthView : null}
         </View>
       </SafeAreaView>
     );

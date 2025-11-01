@@ -61,20 +61,9 @@ class SearchPage extends React.Component<SearchPageProps, SearchPageState> {
   render() {
     return (
       <View style={styles.mainView}>
-        <CustomStatusBar
-          isScrollEnabled={this.state.isScrollEnabled}
-          backgroundColor={
-            this.state.isScrollEnabled ? COLORS.white : COLORS.transparent
-          }
-        />
+        <CustomStatusBar />
 
-        <ScrollView
-          scrollEnabled={false}
-          onScroll={event => this.handleScroll1(event)}
-          scrollEventThrottle={16}
-          bounces={false}
-          style={styles.container}
-        >
+        <View style={styles.container}>
           <ImageBackground source={HomeScreenPng} style={styles.imageView}>
             <CustomHeader
               navigation={this.props.navigation}
@@ -93,7 +82,7 @@ class SearchPage extends React.Component<SearchPageProps, SearchPageState> {
               />
             </View>
           </ImageBackground>
-        </ScrollView>
+        </View>
       </View>
     );
   }

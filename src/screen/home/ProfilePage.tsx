@@ -260,11 +260,13 @@ class ProfilePage extends React.Component<Props, ProfilePageState> {
       localMessage ||
       (message && message !== 'User retrieved successfully' ? message : null);
     const isInitialLoading = loading && !data;
-    const profileImageSource = data?.profileImage
-      ? { uri: data.profileImage.imageUrl }
-      : formValues.profileImageUrl
-        ? { uri: formValues.profileImageUrl }
-        : imageProfile1;
+    const profileImageSource = selectedImage
+      ? { uri: selectedImage.uri }
+      : data?.profileImage
+        ? { uri: data.profileImage.imageUrl }
+        : formValues.profileImageUrl
+          ? { uri: formValues.profileImageUrl }
+          : imageProfile1;
 
     return (
       <View style={styles.mainContainer}>
@@ -330,8 +332,8 @@ class ProfilePage extends React.Component<Props, ProfilePageState> {
                         !isEditMode && styles.cameraViewDisabled,
                       ]}
                       onPress={this.handlePickImage}
-                      // activeOpacity={0.7}
-                      // disabled={!isEditMode}
+                      activeOpacity={0.7}
+                      disabled={!isEditMode}
                     >
                       <VectorIcon
                         name="camera"
@@ -509,7 +511,7 @@ const styles = StyleSheet.create({
   },
   statusMessage: {
     width: '100%',
-    color: COLORS.lightYellow,
+    color: COLORS.green,
     fontFamily: FONTS.rubik.regular,
     fontSize: responsiveFontSize(1.8),
     marginTop: responsiveHeight(1),
