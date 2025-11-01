@@ -3,8 +3,6 @@ import {
   Image,
   ImageBackground,
   KeyboardAvoidingView,
-  NativeScrollEvent,
-  NativeSyntheticEvent,
   Platform,
   ScrollView,
   StyleSheet,
@@ -29,11 +27,11 @@ import LinearGradient from 'react-native-linear-gradient';
 import VectorIcon from 'react-native-vector-icons/FontAwesome5';
 import CustomTextInput from '../../Components/common/CustomTextInput';
 import CustomGButton from '../../Components/common/CustomGButton';
-import { closeKeyBoard, handleScroll } from '../../helper/utilities';
+import { closeKeyBoard } from '../../helper/utilities';
 import { Navigation } from '../../global/types';
 import { connect } from 'react-redux';
 import { getProfileAction } from '../../redux/reducers/profileSlice';
-import { RootState } from '../../redux/store';
+import { AppDispatch, RootState } from '../../redux/store';
 interface ProfilePageProps {
   navigation?: Navigation;
 }
@@ -46,7 +44,7 @@ interface ReduxProps {
   data: RootState['Profile']['data'];
   loading: RootState['Profile']['loading'];
   message: RootState['Profile']['message'];
-  getProfileApi: () => void;
+  getProfileApi: () => Promise<unknown>;
 }
 
 type Props = ProfilePageProps & ReduxProps;
@@ -136,9 +134,9 @@ const mapStateToProps = (state: RootState) => ({
   message: state.Profile.message,
 });
 
-const mapDispatchToProps = {
-  getProfileApi: getProfileAction,
-};
+const mapDispatchToProps = (dispatch: AppDispatch) => ({
+  getProfileApi: () => dispatch(getProfileAction()),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);
 

@@ -13,7 +13,7 @@ interface IUser {
   acceptedTerms: boolean;
   phoneNumber?: string;
 }
-export interface authDataType {
+export interface AuthDataType {
   message: string | null;
   loading: boolean;
   token: string | null;
@@ -23,7 +23,7 @@ export interface authDataType {
   type: string;
 }
 
-const initialState: authDataType = {
+const initialState: AuthDataType = {
   message: null,
   loading: false,
   token: null, // Auth token null when not logged in getStoredAuthToken
