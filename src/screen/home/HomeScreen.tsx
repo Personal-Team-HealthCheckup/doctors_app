@@ -65,7 +65,7 @@ interface HomeScreenState {
 }
 const time = 2000;
 class HomeScreen extends React.Component<Props, HomeScreenState> {
-  timer: number = 0;
+  timer?: ReturnType<typeof setTimeout>;
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -79,17 +79,17 @@ class HomeScreen extends React.Component<Props, HomeScreenState> {
   async loadProfile() {
     await this.props.getProfileApi();
   }
-  async componentDidMount() {
-    this.loadProfile();
-    this.timer = Number(
-      setTimeout(() => {
-        this.setState({ isLinearGradient: false });
-      }, time),
-    );
+  componentDidMount(): void {
+    void this.loadProfile();
+    this.timer = setTimeout(() => {
+      this.setState({ isLinearGradient: false });
+    }, time);
   }
 
   componentWillUnmount(): void {
-    clearTimeout(this.timer);
+    if (this.timer) {
+      clearTimeout(this.timer);
+    }
   }
 
   toggleFaverite = (appID: number) => {

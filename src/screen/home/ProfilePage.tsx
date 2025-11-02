@@ -174,29 +174,24 @@ class ProfilePage extends React.Component<Props, ProfilePageState> {
     }
   };
 
-  handleSave = async () => {
-    const { updateProfileApi, data, getProfileApi } = this.props;
+  validateAndBuildPayload() {
+    const { data } = this.props;
     const { formValues, selectedImage } = this.state;
-
-    closeKeyBoard();
 
     const trimmedName = formValues.fullName.trim();
     const trimmedPhone = formValues.phoneNumber.trim();
     const trimmedEmail = formValues.email.trim();
 
     if (!trimmedName) {
-      this.setState({ localMessage: 'Full name is required.' });
-      return;
+      return { error: 'Full name is required.' };
     }
 
     if (!trimmedEmail) {
-      this.setState({ localMessage: 'Email cannot be empty.' });
-      return;
+      return { error: 'Email cannot be empty.' };
     }
 
     if (!trimmedPhone) {
-      this.setState({ localMessage: 'Phone number cannot be empty.' });
-      return;
+      return { error: 'Phone number cannot be empty.' };
     }
 
     const hasNameChange = trimmedName !== (data?.fullName ?? '');
@@ -204,10 +199,7 @@ class ProfilePage extends React.Component<Props, ProfilePageState> {
     const hasImageChange = Boolean(selectedImage);
 
     if (!hasNameChange && !hasPhoneChange && !hasImageChange) {
-      this.setState({
-        localMessage: 'No changes detected.',
-      });
-      return;
+      return { error: 'No changes detected.' };
     }
 
     const formData = new FormData();
@@ -228,7 +220,35 @@ class ProfilePage extends React.Component<Props, ProfilePageState> {
       } as any);
     }
 
-    const selectedImageRef = selectedImage;
+    return {
+      formData,
+      hasNameChange,
+      hasPhoneChange,
+      trimmedName,
+      trimmedPhone,
+      selectedImageRef: selectedImage,
+    };
+  }
+
+  handleSave = async () => {
+    const { updateProfileApi, getProfileApi } = this.props;
+    const validation = this.validateAndBuildPayload();
+
+    closeKeyBoard();
+
+    if ('error' in validation) {
+      this.setState({ localMessage: validation.error });
+      return;
+    }
+
+    const {
+      formData,
+      hasNameChange,
+      hasPhoneChange,
+      trimmedName,
+      trimmedPhone,
+      selectedImageRef,
+    } = validation;
 
     try {
       await updateProfileApi(formData);
@@ -271,6 +291,38 @@ class ProfilePage extends React.Component<Props, ProfilePageState> {
       ? { uri: profileImageUri }
       : imageProfile1;
 
+    const renderLoader = () =>
+      isInitialLoading ? (
+        <ActivityIndicator
+          style={styles.initialLoader}
+          size="large"
+          color={COLORS.white}
+        />
+      ) : null;
+
+    const renderStatusMessage = () =>
+      displayMessage ? (
+        <Text style={styles.statusMessage}>{displayMessage}</Text>
+      ) : null;
+
+    const renderEditActions = () =>
+      isEditMode ? (
+        <View style={styles.actionRow}>
+          <CustomGButton
+            tittle={loading ? 'Saving...' : 'Save changes'}
+            onPress={this.handleSave}
+            disabled={loading}
+          />
+          {loading ? (
+            <ActivityIndicator
+              style={styles.loader}
+              size="small"
+              color={COLORS.white}
+            />
+          ) : null}
+        </View>
+      ) : null;
+
     return (
       <View style={styles.mainContainer}>
         <CustomStatusBar />
@@ -310,13 +362,7 @@ class ProfilePage extends React.Component<Props, ProfilePageState> {
                 style={{ flex: 1 }}
               >
                 <View style={styles.mainView}>
-                  {isInitialLoading ? (
-                    <ActivityIndicator
-                      style={styles.initialLoader}
-                      size="large"
-                      color={COLORS.white}
-                    />
-                  ) : null}
+                  {renderLoader()}
                   <Text style={styles.title}>Set up your profile</Text>
                   <Text style={styles.subtitle}>
                     Update your profile to connect your doctor with better
@@ -379,25 +425,8 @@ class ProfilePage extends React.Component<Props, ProfilePageState> {
                       placeholder="Email"
                       keyboardType="email-address"
                     />
-                    {displayMessage ? (
-                      <Text style={styles.statusMessage}>{displayMessage}</Text>
-                    ) : null}
-                    {isEditMode ? (
-                      <View style={styles.actionRow}>
-                        <CustomGButton
-                          tittle={loading ? 'Saving...' : 'Save changes'}
-                          onPress={this.handleSave}
-                          disabled={loading}
-                        />
-                        {loading ? (
-                          <ActivityIndicator
-                            style={styles.loader}
-                            size="small"
-                            color={COLORS.white}
-                          />
-                        ) : null}
-                      </View>
-                    ) : null}
+                    {renderStatusMessage()}
+                    {renderEditActions()}
                   </View>
                 </View>
               </KeyboardAvoidingView>

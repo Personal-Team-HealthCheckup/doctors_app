@@ -2,12 +2,15 @@ import React from 'react';
 import HomeScreenConnected from '../../../../src/screen/home/HomeScreen';
 import { DASHBOARD } from '../../../../src/Constants/Navigator';
 import { navigateTo } from '../../../../src/helper/utilities';
+import renderer, { act } from 'react-test-renderer';
+import { Text, Image, ImageBackground } from 'react-native';
 import {
   commonDeseaseData,
   medicalStoreData,
   qualifiedDoctorData,
   yourAppointmentsData,
 } from '../../../../src/global/data';
+import { imageProfile2 } from '../../../../src/assets/assets';
 
 jest.mock('../../../../src/helper/utilities', () => ({
   navigateTo: jest.fn(),
@@ -415,6 +418,107 @@ describe('HomeScreen logic', () => {
       expect(instance.state.yourAppointmentsData.length).toBeGreaterThan(0);
       expect(instance.state.medicalPharmacy.length).toBeGreaterThan(0);
       expect(instance.state.qualifiedDoctor.length).toBeGreaterThan(0);
+    });
+  });
+
+  describe('UI rendering coverage', () => {
+    const extractText = (node: any) =>
+      React.Children.toArray(node.props.children)
+        .map(child => (typeof child === 'string' ? child : ''))
+        .join('');
+
+    const collectElements = (node: any): React.ReactElement[] => {
+      if (!React.isValidElement(node)) {
+        return [];
+      }
+      return React.Children.toArray(node.props.children).reduce(
+        (acc: React.ReactElement[], child) => {
+          if (React.isValidElement(child)) {
+            acc.push(child, ...collectElements(child));
+          }
+          return acc;
+        },
+        [],
+      );
+    };
+
+    const findImageBackgroundChild = (element: any) => {
+      const children = React.Children.toArray(element.props.children);
+      return children.find(
+        child => React.isValidElement(child) && child.type === ImageBackground,
+      ) as React.ReactElement | undefined;
+    };
+
+    it('renders linear gradient greeting with profile data', () => {
+      const { instance } = createInstance();
+      const element = instance.render();
+      const imageBackground = findImageBackgroundChild(element);
+      expect(imageBackground).toBeDefined();
+
+      const imageChildren = React.Children.toArray(
+        imageBackground?.props.children ?? [],
+      );
+      expect(
+        React.isValidElement(imageChildren[0]) &&
+          (imageChildren[0] as any).type === 'LinearGradient',
+      ).toBe(true);
+
+      const descendants = imageChildren
+        .filter(child => React.isValidElement(child))
+        .flatMap(child => collectElements(child as React.ReactElement));
+      const greeting = descendants
+        .filter(node => node.type === Text)
+        .map(extractText)
+        .find(text => text.startsWith('Hi '));
+      expect(greeting).toBe('Hi Dr. John Doe');
+    });
+
+    it('hides linear gradient when disabled in state', () => {
+      const { instance } = createInstance();
+      instance.setState({ isLinearGradient: false });
+      const element = instance.render();
+      const imageBackground = findImageBackgroundChild(element);
+      expect(imageBackground).toBeDefined();
+
+      const imageChildren = React.Children.toArray(
+        imageBackground?.props.children ?? [],
+      );
+      expect(
+        React.isValidElement(imageChildren[0]) &&
+          (imageChildren[0] as any).type === 'LinearGradient',
+      ).toBe(false);
+    });
+
+    it('falls back to auth data name and default profile image when user profile missing', () => {
+      const { instance } = createInstance({
+        userData: { data: null, loading: false, message: null },
+      });
+      const element = instance.render();
+      const imageBackground = findImageBackgroundChild(element);
+      expect(imageBackground).toBeDefined();
+
+      const imageChildren = React.Children.toArray(
+        imageBackground?.props.children ?? [],
+      );
+      const gradientElement = React.isValidElement(imageChildren[0])
+        ? (imageChildren[0] as React.ReactElement)
+        : undefined;
+
+      expect(gradientElement?.type).toBe('LinearGradient');
+
+      const descendants = gradientElement
+        ? collectElements(gradientElement)
+        : [];
+      const greeting = descendants
+        .filter(node => node.type === Text)
+        .map(extractText)
+        .find(text => text.startsWith('Hi '));
+      expect(greeting).toBe('Hi Dr. Jane Smith');
+
+      const imageSources = descendants
+        .filter(node => node.type === Image)
+        .map(node => node.props.source);
+      expect(imageSources).toContain(imageProfile2);
     });
   });
 

@@ -87,7 +87,7 @@ class CustomHeader extends React.Component<
             </TouchableOpacity>
           )}
 
-          {RigthView ? RigthView : null}
+          {RigthView}
         </View>
       </SafeAreaView>
     );
