@@ -28,7 +28,7 @@ import { COLORS, FONTS } from '../../global/theme';
 import { moderateScale, verticalScale } from '../../helper/Scale';
 import { AUTH, MAINSTACK } from '../../Constants/Navigator';
 import CustomMainView from '../../Components/common/CustomMainView';
-import { RootState } from '../../redux/store';
+import { AppDispatch, RootState } from '../../redux/store';
 import { loginAction } from '../../redux/reducers/auth';
 import { connect } from 'react-redux';
 import { Navigation } from '../../global/types';
@@ -57,7 +57,7 @@ interface SigninState {
 
 interface ReduxProps {
   loginData: RootState['Auth'];
-  loginApi: (data: { email: string; password: string }) => void;
+  loginApi: (data: { email: string; password: string }) => Promise<unknown>;
 }
 
 type Props = SigninProps & ReduxProps;
@@ -230,9 +230,10 @@ const mapStateToProps = (state: RootState) => ({
   loginData: state.Auth,
 });
 
-const mapDispatchToProps = {
-  loginApi: (data: { email: string; password: string }) => loginAction(data),
-};
+const mapDispatchToProps = (dispatch: AppDispatch) => ({
+  loginApi: (data: { email: string; password: string }) =>
+    dispatch(loginAction(data)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signin);
 

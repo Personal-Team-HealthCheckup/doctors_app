@@ -93,6 +93,17 @@ describe('ResetPassword screen logic', () => {
       'auth.resetSessionMissing',
       expect.any(Array),
     );
+    const [, , buttons] = alertSpy.mock.calls.pop()!;
+    const okPress = buttons?.find(btn => btn.text === 'OK')?.onPress;
+    okPress?.();
+    expect(navigateTo).toHaveBeenCalledWith(props.navigation, AUTH.FORGOTPASSWORD);
+  });
+
+  it('does not alert on mount when otp is present', () => {
+    const component = new ResetPassword(createProps() as any);
+    setStateSync(component);
+    component.componentDidMount();
+    expect(alertSpy).not.toHaveBeenCalled();
   });
 
   it('handles successful password reset', async () => {
@@ -114,6 +125,12 @@ describe('ResetPassword screen logic', () => {
       'Password reset success',
       expect.any(Array),
     );
+    const [, , buttons] = alertSpy.mock.calls.pop()!;
+    const okPress = buttons?.find(btn => btn.text === 'OK')?.onPress;
+    okPress?.();
+    expect(replaceTo).toHaveBeenCalledWith(props.navigation, AUTH.SIGNIN);
+    expect(component.state.password).toBe('');
+    expect(component.state.confirmPassword).toBe('');
   });
 
   it('alerts when email or otp missing', async () => {
@@ -154,6 +171,21 @@ describe('ResetPassword screen logic', () => {
     expect(alertSpy).toHaveBeenCalledWith('Error', 'server down');
   });
 
+  it('alerts with fallback message when api throws non-error', async () => {
+    const props = createProps();
+    props.resetPasswordApi.mockRejectedValueOnce('fail');
+    const component = new ResetPassword(props as any);
+    setStateSync(component);
+    component.setState({ password: '654321', confirmPassword: '654321' });
+
+    await component.handleResetPress();
+
+    expect(alertSpy).toHaveBeenCalledWith(
+      'Error',
+      'An unexpected error occurred',
+    );
+  });
+
   it('navigates back to login explicitly', () => {
     const props = createProps();
     const component = new ResetPassword(props as any);
@@ -175,5 +207,39 @@ describe('ResetPassword screen logic', () => {
 
     component.handleConfirmPasswordChange('newPass');
     expect(component.state.error.confirmPassword).toBeUndefined();
+  });
+
+  it('validates missing fields when both empty', () => {
+    const component = new ResetPassword(createProps() as any);
+    setStateSync(component);
+    component.setState({ password: '', confirmPassword: '' });
+
+    const result = component.validateForm();
+    expect(result).toBe(false);
+    expect(component.state.error.password).toBe('auth.passwordRequired');
+    expect(component.state.error.confirmPassword).toBe('auth.passwordRequired');
+  });
+
+  it('validates when confirm password missing only', () => {
+    const component = new ResetPassword(createProps() as any);
+    setStateSync(component);
+    component.setState({ password: '123456', confirmPassword: '' });
+
+    const result = component.validateForm();
+    expect(result).toBe(false);
+    expect(component.state.error.confirmPassword).toBe('auth.passwordRequired');
+  });
+
+  it('skips api call when validation fails inside submit handler', async () => {
+    const props = createProps();
+    const component = new ResetPassword(props as any);
+    setStateSync(component);
+    component.setState({ password: '', confirmPassword: '' });
+    const validateSpy = jest.spyOn(component, 'validateForm');
+
+    await component.handleResetPress();
+
+    expect(validateSpy).toHaveBeenCalled();
+    expect(props.resetPasswordApi).not.toHaveBeenCalled();
   });
 });

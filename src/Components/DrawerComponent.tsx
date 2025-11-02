@@ -29,7 +29,7 @@ import { closeDrawer } from '../helper/utilities';
 import { COLORS, FONTS } from '../global/theme';
 import { moderateScale } from '../helper/Scale';
 import { useDrawerStatus } from '@react-navigation/drawer';
-import { RootState } from '../redux/store';
+import type { RootState } from '../redux/store';
 
 interface DrawerComponentProps {
   navigation?: Navigation;
@@ -97,6 +97,9 @@ const DrawerComponent: React.FC<DrawerComponentProps> = ({ navigation }) => {
   const dispatch = useDispatch();
   const isOpen = useDrawerStatus() === 'open';
   const { user } = useSelector((state: RootState) => state.Auth);
+  const { data: userProfileDetails } = useSelector(
+    (state: RootState) => state.Profile,
+  );
 
   const performLogout = React.useCallback(async () => {
     try {
@@ -165,6 +168,10 @@ const DrawerComponent: React.FC<DrawerComponentProps> = ({ navigation }) => {
     );
   };
 
+  const profileImageSource = userProfileDetails?.profileImage
+    ? { uri: userProfileDetails.profileImage.imageUrl }
+    : imageProfile2;
+
   return (
     <LinearGradient
       colors={[COLORS.black, COLORS.black]}
@@ -173,10 +180,17 @@ const DrawerComponent: React.FC<DrawerComponentProps> = ({ navigation }) => {
       <SafeAreaView style={{ flex: 1 }}>
         {/* Profile Section */}
         <View style={styles.profileSection}>
-          <Image source={imageProfile2} style={styles.avatar} />
+          <Image source={profileImageSource} style={styles.avatar} />
           <View>
-            <Text style={styles.name}>{user?.fullName}</Text>
-            <Text style={styles.phone}>{user?.phoneNumber ?? user?.email}</Text>
+            <Text style={styles.name}>
+              {userProfileDetails?.fullName ?? user?.fullName}
+            </Text>
+            <Text style={styles.phone}>
+              {userProfileDetails?.phoneNumber ??
+                userProfileDetails?.email ??
+                user?.phoneNumber ??
+                user?.email}
+            </Text>
           </View>
 
           {isOpen && (

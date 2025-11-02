@@ -64,16 +64,18 @@ class SplashScreens extends React.Component<
     }, 3000);
   }
   componentWillUnmount(): void {
-    this.timers.forEach(timer => clearTimeout(timer));
+    for (const timer of this.timers) {
+      clearTimeout(timer);
+    }
     this.timers = [];
   }
 
-  private registerTimeout = (callback: () => void, delay: number) => {
+  private readonly registerTimeout = (callback: () => void, delay: number) => {
     const timer = setTimeout(callback, delay);
     this.timers.push(timer);
   };
 
-  private handleNavigation = async () => {
+  private readonly handleNavigation = async () => {
     const token = await getStoredAuthToken();
     if (token) {
       this.props.navigation?.replace(MAINSTACK.HOMENAVIGATION);

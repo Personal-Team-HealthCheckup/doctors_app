@@ -21,7 +21,7 @@ import {
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import { COLORS, FONTS } from '../../global/theme';
 import CustomStatusBar from '../../Components/common/CustomStatusBar';
-import { HomeScreenPng, OnBoarding1Svg } from '../../assets/assets';
+import { HomeScreenPng, imageProfile2 } from '../../assets/assets';
 import { moderateScale } from '../../helper/Scale';
 import {
   commonDeseaseData,
@@ -43,7 +43,8 @@ import CustomAppointmentCard from '../../Components/common/CustomAppointmentCard
 import { DASHBOARD } from '../../Constants/Navigator';
 import { navigateTo } from '../../helper/utilities';
 import { connect } from 'react-redux';
-import { RootState } from '../../redux/store';
+import { AppDispatch, RootState } from '../../redux/store';
+import { getProfileAction } from '../../redux/reducers/profileSlice';
 
 interface HomeScreenProps {
   navigation?: Navigation;
@@ -51,6 +52,8 @@ interface HomeScreenProps {
 
 interface HomeScreenReduxProps {
   authData: RootState['Auth'];
+  userData: RootState['Profile'];
+  getProfileApi: () => Promise<unknown>;
 }
 
 type Props = HomeScreenProps & HomeScreenReduxProps;
@@ -62,7 +65,7 @@ interface HomeScreenState {
 }
 const time = 2000;
 class HomeScreen extends React.Component<Props, HomeScreenState> {
-  timer: number = 0;
+  timer?: ReturnType<typeof setTimeout>;
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -73,16 +76,20 @@ class HomeScreen extends React.Component<Props, HomeScreenState> {
     };
   }
 
+  async loadProfile() {
+    await this.props.getProfileApi();
+  }
   componentDidMount(): void {
-    this.timer = Number(
-      setTimeout(() => {
-        this.setState({ isLinearGradient: false });
-      }, time),
-    );
+    void this.loadProfile();
+    this.timer = setTimeout(() => {
+      this.setState({ isLinearGradient: false });
+    }, time);
   }
 
   componentWillUnmount(): void {
-    clearTimeout(this.timer);
+    if (this.timer) {
+      clearTimeout(this.timer);
+    }
   }
 
   toggleFaverite = (appID: number) => {
@@ -226,6 +233,11 @@ class HomeScreen extends React.Component<Props, HomeScreenState> {
   };
   render() {
     const { user } = this.props.authData;
+    const { data: userProfileData } = this.props.userData;
+    const profileImageSource = userProfileData?.profileImage
+      ? { uri: userProfileData.profileImage.imageUrl }
+      : imageProfile2;
+
     return (
       <View style={styles.mainView}>
         <CustomStatusBar />
@@ -238,14 +250,12 @@ class HomeScreen extends React.Component<Props, HomeScreenState> {
               style={[styles.linearGradient]}
             >
               <View style={styles.viewText}>
-                <Text style={styles.profilename}>Hi {user?.fullName}</Text>
+                <Text style={styles.profilename}>
+                  Hi {userProfileData?.fullName ?? user?.fullName}
+                </Text>
                 <Text style={styles.welText}>Welcome To VHA</Text>
               </View>
-              <OnBoarding1Svg
-                width={responsiveScreenWidth(20)}
-                height={responsiveScreenWidth(20)}
-                style={styles.image}
-              />
+              <Image source={profileImageSource} style={styles.image} />
             </LinearGradient>
           )}
 
@@ -323,9 +333,12 @@ class HomeScreen extends React.Component<Props, HomeScreenState> {
 
 const mapStateToProps = (state: RootState) => ({
   authData: state.Auth,
+  userData: state.Profile,
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = (dispatch: AppDispatch) => ({
+  getProfileApi: () => dispatch(getProfileAction()),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
 
@@ -378,6 +391,8 @@ const styles = StyleSheet.create({
   },
   image: {
     borderRadius: responsiveScreenWidth(10),
+    width: responsiveScreenWidth(18),
+    height: responsiveScreenWidth(18),
   },
   viewText: {
     flex: 1,

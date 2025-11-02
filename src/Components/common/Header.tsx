@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import React from 'react';
 import {
@@ -6,19 +6,27 @@ import {
   responsiveScreenWidth,
 } from 'react-native-responsive-dimensions';
 import {
-  OnBoarding1Svg,
   LightSvg,
   SearchSvg,
   NotificationBellSvg,
+  imageProfile2,
 } from '../../assets/assets';
 import { COLORS, FONTS } from '../../global/theme';
 import { moderateScale } from '../../helper/Scale';
 import { DASHBOARD } from '../../Constants/Navigator';
+import { useSelector } from 'react-redux';
+import type { RootState } from '../../redux/store';
 interface Iprops {
   navigateTo: (text: string) => void;
   toggleDrawer?: () => void;
 }
 const Header: React.FC<Iprops> = props => {
+  const { data: userProfileData } = useSelector(
+    (state: RootState) => state.Profile,
+  );
+  const profileImageSource = userProfileData?.profileImage
+    ? { uri: userProfileData.profileImage.imageUrl }
+    : imageProfile2;
   return (
     <SafeAreaView>
       <View style={styles.mainView}>
@@ -27,11 +35,7 @@ const Header: React.FC<Iprops> = props => {
           testID="header-drawer-button"
           style={styles.icon}
         >
-          <OnBoarding1Svg
-            width={responsiveScreenWidth(18)}
-            height={responsiveScreenWidth(18)}
-            style={styles.image}
-          />
+          <Image source={profileImageSource} style={styles.image} />
         </TouchableOpacity>
         <View style={styles.iconView}>
           <TouchableOpacity
@@ -105,5 +109,7 @@ const styles = StyleSheet.create({
   },
   image: {
     borderRadius: responsiveScreenWidth(10),
+    width: responsiveScreenWidth(18),
+    height: responsiveScreenWidth(18),
   },
 });

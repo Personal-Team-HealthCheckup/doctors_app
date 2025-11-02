@@ -6,7 +6,7 @@ type IResponseType = 'json' | 'text' | 'blob';
 type IResolve<T = any> = {
   response: T | null;
   error: string | null;
-  errorResponse: any | null;
+  errorResponse: any;
 };
 type IMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
@@ -42,6 +42,7 @@ const networkCall = async <T = any>(
     const tokenStored = await getStoredAuthToken();
     const AuthData = store.getState()?.Auth;
     const token = AuthData?.token ?? tokenStored;
+    console.log('-----token ', token);
 
     const defaultHeaders = {
       'Content-Type':

@@ -1,15 +1,6 @@
 import React from 'react';
-import {
-  ImageBackground,
-  NativeScrollEvent,
-  NativeSyntheticEvent,
-  ScrollView,
-  FlatList,
-  View,
-} from 'react-native';
+import { ImageBackground, FlatList, View } from 'react-native';
 import CustomStatusBar from '../../Components/common/CustomStatusBar';
-import { COLORS } from '../../global/theme';
-import { handleScroll } from '../../helper/utilities';
 import { HomeScreenPng } from '../../assets/assets';
 import CustomHeader from '../../Components/common/CustomHeader';
 import CustomTextInput from '../../Components/common/CustomTextInput';
@@ -25,7 +16,6 @@ interface SearchPageProps {
 }
 
 interface SearchPageState {
-  isScrollEnabled: boolean;
   doctorDetailsData: YourAppointmentsData[];
 }
 
@@ -33,13 +23,9 @@ class SearchPage extends React.Component<SearchPageProps, SearchPageState> {
   constructor(props: SearchPageProps) {
     super(props);
     this.state = {
-      isScrollEnabled: false,
       doctorDetailsData: yourAppointmentsData,
     };
   }
-  handleScroll1 = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    this.setState({ isScrollEnabled: handleScroll(event) });
-  };
   _renderDoctors = ({
     item,
     index,
@@ -61,20 +47,9 @@ class SearchPage extends React.Component<SearchPageProps, SearchPageState> {
   render() {
     return (
       <View style={styles.mainView}>
-        <CustomStatusBar
-          isScrollEnabled={this.state.isScrollEnabled}
-          backgroundColor={
-            this.state.isScrollEnabled ? COLORS.white : COLORS.transparent
-          }
-        />
+        <CustomStatusBar />
 
-        <ScrollView
-          scrollEnabled={false}
-          onScroll={event => this.handleScroll1(event)}
-          scrollEventThrottle={16}
-          bounces={false}
-          style={styles.container}
-        >
+        <View style={styles.container}>
           <ImageBackground source={HomeScreenPng} style={styles.imageView}>
             <CustomHeader
               navigation={this.props.navigation}
@@ -93,7 +68,7 @@ class SearchPage extends React.Component<SearchPageProps, SearchPageState> {
               />
             </View>
           </ImageBackground>
-        </ScrollView>
+        </View>
       </View>
     );
   }

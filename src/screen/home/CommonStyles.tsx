@@ -17,14 +17,13 @@ export const CommonStyles = StyleSheet.create({
   imageView: {
     width: responsiveWidth(100),
     height: responsiveHeight(100),
-    alignItems: 'center',
     resizeMode: 'cover',
     paddingVertical: responsiveHeight(3),
     position: 'relative',
     paddingHorizontal: responsiveScreenWidth(5),
     flex: 1,
   },
-  textInput: { marginTop: responsiveHeight(4) },
+  textInput: {},
   stylesFlatlist: {
     marginVertical: '5%',
   },
