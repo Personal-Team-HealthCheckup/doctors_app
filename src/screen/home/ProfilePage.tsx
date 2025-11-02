@@ -37,7 +37,7 @@ import {
   getProfileAction,
   updateProfileAction,
 } from '../../redux/reducers/profileSlice';
-import { AppDispatch, RootState } from '../../redux/store';
+import type { AppDispatch, RootState } from '../../redux/store';
 interface ProfilePageProps {
   navigation?: Navigation;
 }
@@ -262,13 +262,14 @@ class ProfilePage extends React.Component<Props, ProfilePageState> {
       localMessage ||
       (message && message !== 'User retrieved successfully' ? message : null);
     const isInitialLoading = loading && !data;
-    const profileImageSource = selectedImage
-      ? { uri: selectedImage.uri }
-      : data?.profileImage
-        ? { uri: data.profileImage.imageUrl }
-        : formValues.profileImageUrl
-          ? { uri: formValues.profileImageUrl }
-          : imageProfile1;
+    const profileImageUri =
+      selectedImage?.uri ??
+      data?.profileImage?.imageUrl ??
+      formValues.profileImageUrl;
+
+    const profileImageSource = profileImageUri
+      ? { uri: profileImageUri }
+      : imageProfile1;
 
     return (
       <View style={styles.mainContainer}>

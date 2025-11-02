@@ -49,16 +49,28 @@ jest.mock('@react-native-async-storage/async-storage', () => ({
   clear: jest.fn(),
 }));
 
-const getMockState = () =>
-  global.__TEST_REDUX_STATE__ ?? {
-    Auth: {},
-  };
+const defaultReduxState = {
+  Auth: {},
+  Profile: {
+    data: null,
+    loading: false,
+    message: null,
+  },
+};
+
+const getMockState = () => ({
+  ...defaultReduxState,
+  ...(global.__TEST_REDUX_STATE__ ?? {}),
+});
 
 const mockDispatch = jest.fn();
 
 jest.mock('react-redux', () => {
   const setMockState = (state: unknown) => {
-    global.__TEST_REDUX_STATE__ = state;
+    global.__TEST_REDUX_STATE__ = {
+      ...defaultReduxState,
+      ...(state as Record<string, unknown>),
+    };
     mockDispatch.mockClear();
   };
 
@@ -103,7 +115,10 @@ jest.mock('react-redux', () => {
 });
 
 (global as any).__setMockReduxState = (state: unknown) => {
-  global.__TEST_REDUX_STATE__ = state;
+  global.__TEST_REDUX_STATE__ = {
+    ...defaultReduxState,
+    ...(state as Record<string, unknown>),
+  };
   mockDispatch.mockClear();
 };
 

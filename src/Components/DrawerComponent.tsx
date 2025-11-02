@@ -29,7 +29,7 @@ import { closeDrawer } from '../helper/utilities';
 import { COLORS, FONTS } from '../global/theme';
 import { moderateScale } from '../helper/Scale';
 import { useDrawerStatus } from '@react-navigation/drawer';
-import { RootState } from '../redux/store';
+import type { RootState } from '../redux/store';
 
 interface DrawerComponentProps {
   navigation?: Navigation;

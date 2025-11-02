@@ -15,7 +15,7 @@ import { COLORS, FONTS } from '../../global/theme';
 import { moderateScale } from '../../helper/Scale';
 import { DASHBOARD } from '../../Constants/Navigator';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
+import type { RootState } from '../../redux/store';
 interface Iprops {
   navigateTo: (text: string) => void;
   toggleDrawer?: () => void;
