@@ -45,7 +45,7 @@ interface ProfilePageProps {
 interface ProfilePageState {
   isEditMode: boolean;
   formValues: ProfileFormValues;
-  localMessage: string | null;
+  localMessage?: string | null;
   selectedImage: SelectedImage | null;
 }
 
@@ -312,6 +312,7 @@ class ProfilePage extends React.Component<Props, ProfilePageState> {
             tittle={loading ? 'Saving...' : 'Save changes'}
             onPress={this.handleSave}
             disabled={loading}
+            testID="btnSaveChange"
           />
           {loading ? (
             <ActivityIndicator
@@ -354,6 +355,7 @@ class ProfilePage extends React.Component<Props, ProfilePageState> {
           >
             <TouchableWithoutFeedback
               style={{ flex: 1 }}
+              testID="btnCloseKeyboard"
               onPress={() => closeKeyBoard()}
             >
               <KeyboardAvoidingView
@@ -382,6 +384,7 @@ class ProfilePage extends React.Component<Props, ProfilePageState> {
                       ]}
                       onPress={this.handlePickImage}
                       activeOpacity={0.7}
+                      testID="txtInputPickImage"
                       disabled={!isEditMode}
                     >
                       <VectorIcon
@@ -399,6 +402,7 @@ class ProfilePage extends React.Component<Props, ProfilePageState> {
                     </Text>
                     <CustomTextInput
                       editable={isEditMode}
+                      testID="txtInputFullName"
                       value={formValues.fullName}
                       placeholder="Enter your full name"
                       onChangeText={text =>
@@ -407,6 +411,7 @@ class ProfilePage extends React.Component<Props, ProfilePageState> {
                     />
                     <CustomTextInput
                       editable={isEditMode}
+                      testID="txtInputPhoneNumber"
                       value={formValues.phoneNumber}
                       placeholder="Enter your phone number"
                       keyboardType="phone-pad"
@@ -423,6 +428,7 @@ class ProfilePage extends React.Component<Props, ProfilePageState> {
                       editable={false}
                       value={formValues.email}
                       placeholder="Email"
+                      testID="txtInputEmail"
                       keyboardType="email-address"
                     />
                     {renderStatusMessage()}

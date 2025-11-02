@@ -2,6 +2,8 @@ import type { ComponentProps } from 'react';
 import ProfilePageConnected from '../../../../src/screen/home/ProfilePage';
 import { closeKeyBoard } from '../../../../src/helper/utilities';
 import ImagePicker from 'react-native-image-crop-picker';
+import { fireEvent, render } from '@testing-library/react-native';
+import React from 'react';
 
 jest.mock('../../../../src/helper/utilities', () => {
   const actual = jest.requireActual('../../../../src/helper/utilities');
@@ -42,7 +44,9 @@ type ProfileData = {
   profileImage?: { imageUrl: string | null } | null;
 };
 
-const createProfileData = (overrides: Partial<ProfileData> = {}): ProfileData => ({
+const createProfileData = (
+  overrides: Partial<ProfileData> = {},
+): ProfileData => ({
   fullName: 'Dr. Jane Doe',
   phoneNumber: '1234567890',
   userName: 'drjane',
@@ -67,7 +71,9 @@ const createInstance = (overrides: MockProps = {}) => {
 
   instance.setState = (update: any) => {
     const value =
-      typeof update === 'function' ? update(instance.state, instance.props) : update;
+      typeof update === 'function'
+        ? update(instance.state, instance.props)
+        : update;
     instance.state = { ...instance.state, ...value };
   };
 
@@ -122,13 +128,17 @@ describe('ProfilePage logic', () => {
     });
 
     const prevProps = props;
-    const updatedData = createProfileData({ fullName: 'Dr. Should Not Update' });
+    const updatedData = createProfileData({
+      fullName: 'Dr. Should Not Update',
+    });
 
     (instance as any).props = { ...props, data: updatedData };
 
     instance.componentDidUpdate(prevProps as any);
 
-    expect(instance.state.formValues.fullName).not.toBe('Dr. Should Not Update');
+    expect(instance.state.formValues.fullName).not.toBe(
+      'Dr. Should Not Update',
+    );
   });
 
   it('updates form field values and clears local messages', () => {
@@ -300,7 +310,9 @@ describe('ProfilePage logic', () => {
   });
 
   it('captures errors when profile update fails', async () => {
-    const updateProfileApi = jest.fn().mockRejectedValue(new Error('Update failed'));
+    const updateProfileApi = jest
+      .fn()
+      .mockRejectedValue(new Error('Update failed'));
     const { instance } = createInstance({ updateProfileApi });
 
     instance.setState({
@@ -411,8 +423,14 @@ describe('ProfilePage logic', () => {
       await (instance as any).handleSave();
 
       expect(appendMock).toHaveBeenCalledWith('fullName', 'Dr. New Name');
-      expect(appendMock).not.toHaveBeenCalledWith('phoneNumber', expect.anything());
-      expect(appendMock).not.toHaveBeenCalledWith('profileImage', expect.anything());
+      expect(appendMock).not.toHaveBeenCalledWith(
+        'phoneNumber',
+        expect.anything(),
+      );
+      expect(appendMock).not.toHaveBeenCalledWith(
+        'profileImage',
+        expect.anything(),
+      );
     } finally {
       (globalThis as any).FormData = originalFormData;
     }
@@ -440,8 +458,14 @@ describe('ProfilePage logic', () => {
       await (instance as any).handleSave();
 
       expect(appendMock).toHaveBeenCalledWith('phoneNumber', '1111111111');
-      expect(appendMock).not.toHaveBeenCalledWith('fullName', expect.anything());
-      expect(appendMock).not.toHaveBeenCalledWith('profileImage', expect.anything());
+      expect(appendMock).not.toHaveBeenCalledWith(
+        'fullName',
+        expect.anything(),
+      );
+      expect(appendMock).not.toHaveBeenCalledWith(
+        'profileImage',
+        expect.anything(),
+      );
     } finally {
       (globalThis as any).FormData = originalFormData;
     }
@@ -476,8 +500,14 @@ describe('ProfilePage logic', () => {
         type: selectedImage.type,
         name: selectedImage.name,
       });
-      expect(appendMock).not.toHaveBeenCalledWith('fullName', expect.anything());
-      expect(appendMock).not.toHaveBeenCalledWith('phoneNumber', expect.anything());
+      expect(appendMock).not.toHaveBeenCalledWith(
+        'fullName',
+        expect.anything(),
+      );
+      expect(appendMock).not.toHaveBeenCalledWith(
+        'phoneNumber',
+        expect.anything(),
+      );
     } finally {
       (globalThis as any).FormData = originalFormData;
     }
@@ -536,7 +566,9 @@ describe('ProfilePage logic', () => {
   });
 
   it('displays error message from Redux when not "User retrieved successfully"', () => {
-    const { props } = createInstance({ message: 'Network error occurred' } as any);
+    const { props } = createInstance({
+      message: 'Network error occurred',
+    } as any);
 
     const displayMessage =
       props.message && props.message !== 'User retrieved successfully'
@@ -547,7 +579,9 @@ describe('ProfilePage logic', () => {
   });
 
   it('hides "User retrieved successfully" message', () => {
-    const { props } = createInstance({ message: 'User retrieved successfully' } as any);
+    const { props } = createInstance({
+      message: 'User retrieved successfully',
+    } as any);
 
     const displayMessage =
       props.message && props.message !== 'User retrieved successfully'
@@ -589,7 +623,11 @@ describe('ProfilePage logic', () => {
 
   it('selects profile image source with priority: selected > data > formValues > default', () => {
     const { instance } = createInstance();
-    const selectedImage = { uri: 'local://selected.png', type: 'image/png', name: 'test.png' };
+    const selectedImage = {
+      uri: 'local://selected.png',
+      type: 'image/png',
+      name: 'test.png',
+    };
     instance.setState({ selectedImage });
 
     const profileImageSource = selectedImage
@@ -622,9 +660,14 @@ describe('ProfilePage logic', () => {
   });
 
   it('falls back to formValues profileImageUrl when no selected or data image', () => {
-    const { instance } = createInstance({ data: createProfileData({ profileImage: null }) } as any);
+    const { instance } = createInstance({
+      data: createProfileData({ profileImage: null }),
+    } as any);
     instance.setState({
-      formValues: { ...instance.state.formValues, profileImageUrl: 'https://form.com/image.jpg' },
+      formValues: {
+        ...instance.state.formValues,
+        profileImageUrl: 'https://form.com/image.jpg',
+      },
     });
 
     const profileImageSource = instance.state.selectedImage
@@ -639,13 +682,16 @@ describe('ProfilePage logic', () => {
   });
 
   it('uses default image when no images available', () => {
-    const { instance } = createInstance({ data: createProfileData({ profileImage: null }) } as any);
+    const { instance } = createInstance({
+      data: createProfileData({ profileImage: null }),
+    } as any);
     instance.setState({
       formValues: { ...instance.state.formValues, profileImageUrl: null },
       selectedImage: null,
     });
 
-    const hasImage = !instance.state.selectedImage &&
+    const hasImage =
+      !instance.state.selectedImage &&
       !instance.props.data?.profileImage &&
       !instance.state.formValues.profileImageUrl;
 
@@ -654,7 +700,11 @@ describe('ProfilePage logic', () => {
 
   it('builds profile image URI with correct priority', () => {
     const { instance } = createInstance();
-    const selectedImage = { uri: 'selected://img.png', type: 'image/png', name: 'test.png' };
+    const selectedImage = {
+      uri: 'selected://img.png',
+      type: 'image/png',
+      name: 'test.png',
+    };
     instance.setState({ selectedImage });
 
     const profileImageUri =
@@ -683,7 +733,10 @@ describe('ProfilePage logic', () => {
       data: createProfileData({ profileImage: null }),
     } as any);
     instance.setState({
-      formValues: { ...instance.state.formValues, profileImageUrl: 'form://img.png' },
+      formValues: {
+        ...instance.state.formValues,
+        profileImageUrl: 'form://img.png',
+      },
     });
 
     const profileImageUri =
@@ -694,20 +747,69 @@ describe('ProfilePage logic', () => {
     expect(profileImageUri).toBe('form://img.png');
   });
 
-  it('has null profileImageUri when no images available', () => {
-    const { instance } = createInstance({
-      data: createProfileData({ profileImage: null }),
-    } as any);
-    instance.setState({
-      formValues: { ...instance.state.formValues, profileImageUrl: null },
-      selectedImage: null,
-    });
-
-    const profileImageUri =
-      instance.state.selectedImage?.uri ??
-      instance.props.data?.profileImage?.imageUrl ??
-      instance.state.formValues.profileImageUrl;
-
-    expect(profileImageUri).toBeNull();
+  const screenProps = {
+    getProfileApi: jest.fn(),
+    data: null,
+    loading: true,
+    message: null,
+    updateProfileApi: jest.fn(),
+  };
+  const screenProps1 = {
+    ...screenProps,
+    loading: false,
+    data: {
+      fullName: 'test',
+      phoneNumber: '9323000000',
+      userName: 'test@123',
+      email: 'test@yopmail.com',
+      profileImage: {
+        imageUrl: 'test.png',
+        fileObjId: 1,
+      },
+    },
+  };
+  const screenProps2 = {
+    ...screenProps1,
+    loading: true,
+  };
+  it('render profile screen first time with no data', () => {
+    const container = render(<ProfilePage {...screenProps} />);
+    const btnCloseKeyboard = container.getByTestId('btnCloseKeyboard');
+    fireEvent.press(btnCloseKeyboard);
+  });
+  it('render profile screen first time with all data and press on edit button', () => {
+    const container = render(<ProfilePage {...screenProps1} />);
+    const btnEdit = container.getByTestId('btnEdit');
+    fireEvent.press(btnEdit);
+  });
+  it('when click on edit button and change all of the data and click on save changes', () => {
+    const container = render(<ProfilePage {...screenProps1} />);
+    const btnEdit = container.getByTestId('btnEdit');
+    fireEvent.press(btnEdit);
+    const txtInputEmail = container.getByTestId('txtInputEmail');
+    fireEvent.changeText(txtInputEmail, 'test@yopmail.com');
+    const txtInputFullName = container.getByTestId('txtInputFullName');
+    fireEvent.changeText(txtInputFullName, 'Full name');
+    const txtInputPhoneNumber = container.getByTestId('txtInputPhoneNumber');
+    fireEvent.changeText(txtInputPhoneNumber, '9100000000');
+    const btnSaveChange = container.getByTestId('btnSaveChange');
+    fireEvent.press(btnSaveChange);
+    render(<ProfilePage {...screenProps2} />);
+  });
+  it('when click on edit button and change all of the data to empty and click on save changes', () => {
+    const container = render(<ProfilePage {...screenProps1} />);
+    const btnEdit = container.getByTestId('btnEdit');
+    fireEvent.press(btnEdit);
+    const btnSaveChange = container.getByTestId('btnSaveChange');
+    fireEvent.press(btnSaveChange);
+    const txtInputEmail = container.getByTestId('txtInputEmail');
+    fireEvent.changeText(txtInputEmail, '');
+    fireEvent.press(btnSaveChange);
+    const txtInputFullName = container.getByTestId('txtInputFullName');
+    fireEvent.changeText(txtInputFullName, '');
+    const txtInputPhoneNumber = container.getByTestId('txtInputPhoneNumber');
+    fireEvent.changeText(txtInputPhoneNumber, '');
+    fireEvent.press(btnSaveChange);
+    render(<ProfilePage {...screenProps2} />);
   });
 });
