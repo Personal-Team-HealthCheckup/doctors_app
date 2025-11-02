@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import { persistor, store } from './src/redux/store';
 import { Linking, Platform } from 'react-native';
 import ReactNativeBiometrics from 'react-native-biometrics';
+import SplashScreen from 'react-native-splash-screen';
 
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -64,6 +65,7 @@ class App extends React.Component<AppProps, AppState> {
   };
 
   async componentDidMount() {
+    SplashScreen.hide();
     //     if(await this.handleBiometrics()){
     // // login
     //     }else{
