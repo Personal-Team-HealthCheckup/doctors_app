@@ -24,7 +24,6 @@ import { HeartImg, HeartRedImg } from '../../assets/assets';
 
 interface CustomAppointmentCardProps {
   item: YourAppointmentsData;
-  index: number;
   yourAppointmentsData: YourAppointmentsData[];
   navigateTo?: () => void;
 }
@@ -50,26 +49,29 @@ class CustomAppointmentCard extends React.Component<
   }
 
   toggleFaverite = (appID: number) => {
-    this.setState(preState => ({
-      yourAppointmentsData: preState.yourAppointmentsData.map(element => {
-        if (element.id === appID) {
-          !element.isFaveritiated &&
-            Animated.spring(this.state.animation, {
-              toValue: 1.2,
-              friction: 1.5,
-              useNativeDriver: true,
-            }).start(() => {
-              Animated.spring(this.state.animation, {
-                toValue: 1,
-                friction: 2,
+    this.setState(prevState => {
+      const { animation } = prevState;
+      return {
+        yourAppointmentsData: prevState.yourAppointmentsData.map(element => {
+          if (element.id === appID) {
+            !element.isFaveritiated &&
+              Animated.spring(animation, {
+                toValue: 1.2,
+                friction: 1.5,
                 useNativeDriver: true,
-              }).start();
-            });
-          element.isFaveritiated = !element.isFaveritiated;
-        }
-        return element;
-      }),
-    }));
+              }).start(() => {
+                Animated.spring(animation, {
+                  toValue: 1,
+                  friction: 2,
+                  useNativeDriver: true,
+                }).start();
+              });
+            element.isFaveritiated = !element.isFaveritiated;
+          }
+          return element;
+        }),
+      };
+    });
   };
 
   render() {
@@ -131,7 +133,7 @@ class CustomAppointmentCard extends React.Component<
               style={styles.button}
               testID="custom-appointment-card-button"
               textStyle={styles.buttonText}
-              onPress={() => this.props?.navigateTo && this.props?.navigateTo()}
+              onPress={() => this.props.navigateTo?.()}
             />
           </View>
         </View>

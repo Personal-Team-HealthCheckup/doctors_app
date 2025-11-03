@@ -46,26 +46,20 @@ const StorageProvider = {
 
 export default StorageProvider;
 
-const encryption = (decodeText: string) => {
-  const textToChars = (text: string) =>
-    text.split('').map(c => c.charCodeAt(0));
-  const byteHex = (n: string) => ('0' + Number(n).toString(16)).substr(-2);
-  const applySaltToChar = (code: any) =>
-    textToChars(salt).reduce((a, b) => a ^ b, code);
+const textToCodePoints = (text: string): number[] =>
+  Array.from(text, char => char.codePointAt(0) ?? 0);
 
-  return decodeText
-    .split('')
-    .map(textToChars)
-    .map(applySaltToChar)
-    .map(byteHex)
-    .join('');
-};
+const saltCodePoints = textToCodePoints(salt);
+
+const byteHex = (n: number) => n.toString(16).padStart(2, '0');
+
+const applySaltToChar = (code: number) =>
+  saltCodePoints.reduce((acc, saltCode) => acc ^ saltCode, code);
+
+const encryption = (decodeText: string) =>
+  textToCodePoints(decodeText).map(applySaltToChar).map(byteHex).join('');
 
 const decryption = (encoded: string) => {
-  const textToChars = (text: string) =>
-    text.split('').map(c => c.charCodeAt(0));
-  const applySaltToChar = (code: any) =>
-    textToChars(salt).reduce((a, b) => a ^ b, code);
   const bytes = encoded.match(/.{1,2}/g);
   if (!bytes) {
     return null;
@@ -74,6 +68,6 @@ const decryption = (encoded: string) => {
   return bytes
     .map(hex => Number.parseInt(hex, 16))
     .map(applySaltToChar)
-    .map(charCode => String.fromCharCode(charCode))
+    .map(charCode => String.fromCodePoint(charCode))
     .join('');
 };

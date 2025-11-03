@@ -104,8 +104,7 @@ class HomeScreen extends React.Component<Props, HomeScreenState> {
   };
 
   navigateToAppointments = () => {
-    this.props.navigation?.navigate &&
-      this.props.navigation?.navigate(DASHBOARD.SELECTTIME);
+    navigateTo(this.props.navigation, DASHBOARD.SELECTTIME);
   };
 
   _renderCommnDesease = ({ item }: { item: CommonDeseaseData }) => {
@@ -135,7 +134,6 @@ class HomeScreen extends React.Component<Props, HomeScreenState> {
         ]}
       >
         <CustomAppointmentCard
-          index={index}
           item={item}
           navigateTo={() => this.navigateToAppointments()}
           yourAppointmentsData={this.state.yourAppointmentsData}
@@ -226,10 +224,10 @@ class HomeScreen extends React.Component<Props, HomeScreenState> {
   };
 
   handleNavigation = (text: string) => {
-    this.props.navigation?.navigate && this.props.navigation.navigate(text);
+    navigateTo(this.props.navigation, text);
   };
   toggleDrawer = () => {
-    this.props.navigation?.openDrawer && this.props.navigation?.openDrawer();
+    this.props.navigation?.openDrawer?.();
   };
   render() {
     const { user } = this.props.authData;
@@ -313,7 +311,9 @@ class HomeScreen extends React.Component<Props, HomeScreenState> {
               <CustomHeading
                 isIcon
                 title="Qualified Doctor"
-                onPressSeeAll={() => this.handleNavigation(DASHBOARD.DOCTORS)}
+                onPressSeeAll={() =>
+                  navigateTo(this.props.navigation, DASHBOARD.DOCTORS)
+                }
               />
               <FlatList
                 horizontal

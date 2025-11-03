@@ -39,6 +39,7 @@ const CustomFooter: React.FC<BottomTabBarProps> = ({
 
         return (
           <TouchableOpacity
+            key={route.key}
             accessibilityRole="button"
             accessibilityState={isFocused ? {selected: true} : {}}
             accessibilityLabel={options.tabBarAccessibilityLabel}

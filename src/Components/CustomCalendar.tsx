@@ -52,7 +52,7 @@ class CustomCalendar extends React.Component<
   // Handler for date press
   _onPress = (item: number) => {
     this.setState(prevState => {
-      if (!isNaN(item) && item !== -1) {
+      if (!Number.isNaN(item) && item !== -1) {
         // Clone the active date and set the new day
         const newDate = new Date(prevState.activeDate);
         newDate.setDate(item);
@@ -68,15 +68,6 @@ class CustomCalendar extends React.Component<
       // Clone the active date and set the new month
       const newDate = new Date(prevState.activeDate);
       newDate.setMonth(newDate.getMonth() + n);
-      return {activeDate: newDate};
-    });
-  };
-
-  // Handler for changing the year
-  changeYear = (year: number) => {
-    this.setState(prevState => {
-      const newDate = new Date(prevState.activeDate);
-      newDate.setFullYear(year);
       return {activeDate: newDate};
     });
   };
@@ -106,12 +97,12 @@ class CustomCalendar extends React.Component<
       matrix[row] = [];
       for (let col = 0; col < 7; col++) {
         matrix[row][col] = -1;
-        if (row === 1 && col >= firstDay) {
+        if (
+          (row === 1 && col >= firstDay) ||
+          (row > 1 && counter <= maxDays)
+        ) {
           // Fill in rows only after the first day of the month
-          matrix[row][col] = counter++;
-        } else if (row > 1 && counter <= maxDays) {
-          // Fill in rows only if the counter's not greater than
-          // the number of days in the month
+          // and while the date counter is within the month range
           matrix[row][col] = counter++;
         }
       }

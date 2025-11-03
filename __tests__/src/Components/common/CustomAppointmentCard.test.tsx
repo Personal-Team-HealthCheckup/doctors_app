@@ -6,7 +6,6 @@ import { AllDoctorsData } from '../../../../src/global/data';
 import { HeartImg, HeartRedImg } from '../../../../src/assets/assets';
 const screenProps = {
   item: AllDoctorsData[0],
-  index: 0,
   yourAppointmentsData: [],
   navigateTo: jest.fn(),
 };

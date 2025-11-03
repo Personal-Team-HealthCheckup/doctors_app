@@ -33,7 +33,7 @@ class CustomHeader extends React.Component<
   }
 
   handleGoBack = () => {
-    this.props.navigation?.goBack && this.props.navigation.goBack();
+    this.props.navigation?.goBack();
   };
   handleNavigateTo = (text: string) => {
     this.props.navigation?.navigate && this.props.navigation.navigate(text);

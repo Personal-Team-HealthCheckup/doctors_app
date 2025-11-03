@@ -273,7 +273,7 @@ export const qualifiedDoctorData: QualifiedDoctorData[] = [
     available: '10AM tomorrow',
     image: imageProfile4,
     isFaveritiated: false,
-    fees: 25.0,
+    fees: 25,
   },
   {
     id: 2,
@@ -285,7 +285,7 @@ export const qualifiedDoctorData: QualifiedDoctorData[] = [
     rating: 3.0,
     views: 3475,
     isFaveritiated: true,
-    fees: 22.0,
+    fees: 22,
   },
   {
     id: 3,
@@ -297,7 +297,7 @@ export const qualifiedDoctorData: QualifiedDoctorData[] = [
     rating: 2.9,
     views: 4475,
     isFaveritiated: false,
-    fees: 29.0,
+    fees: 29,
   },
   {
     id: 4,
@@ -309,7 +309,7 @@ export const qualifiedDoctorData: QualifiedDoctorData[] = [
     rating: 4.3,
     views: 1475,
     isFaveritiated: true,
-    fees: 20.0,
+    fees: 20,
   },
   {
     id: 5,
@@ -321,7 +321,7 @@ export const qualifiedDoctorData: QualifiedDoctorData[] = [
     rating: 3.3,
     views: 475,
     isFaveritiated: false,
-    fees: 27.0,
+    fees: 27,
   },
 ];
 

@@ -67,9 +67,7 @@ const CustomTextInput: React.FC<TextInputProps> = ({
             style,
             errorMessage && styles.errorStylesTextInput,
           ]}
-          placeholderTextColor={
-            placeholderTextColor ? placeholderTextColor : COLORS.white2gray
-          }
+          placeholderTextColor={placeholderTextColor ?? COLORS.white2gray}
           onChangeText={onChangeText}
           secureTextEntry={shouldShowToggle ? isPasswordHidden : secureTextEntry}
           editable={editable}

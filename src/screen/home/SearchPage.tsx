@@ -37,7 +37,6 @@ class SearchPage extends React.Component<SearchPageProps, SearchPageState> {
       <View style={styles.doctorList}>
         <CustomAppointmentCard
           item={item}
-          index={index}
           yourAppointmentsData={this.state.doctorDetailsData}
           navigateTo={undefined}
         />

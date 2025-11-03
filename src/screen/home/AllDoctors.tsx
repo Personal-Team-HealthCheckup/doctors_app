@@ -48,7 +48,6 @@ class AllDoctors extends React.Component<AllDoctorsProps, AllDoctorsState> {
       >
         <CustomAppointmentCard
           item={item}
-          index={index}
           yourAppointmentsData={this.state.doctorDetailsData}
           navigateTo={undefined}
         />
