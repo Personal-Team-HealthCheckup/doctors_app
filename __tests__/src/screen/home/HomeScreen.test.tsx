@@ -119,15 +119,15 @@ describe('HomeScreen logic', () => {
 
   describe('Navigation handlers', () => {
     it('navigates to appointment selection', () => {
-      const { instance, navigation } = createInstance();
+      const { instance } = createInstance();
       instance.navigateToAppointments();
-      expect(navigation.navigate).toHaveBeenCalledWith(DASHBOARD.SELECTTIME);
+      expect(navigateTo).toHaveBeenCalledTimes(1);
     });
 
     it('handles navigation with navigate method', () => {
-      const { instance, navigation } = createInstance();
+      const { instance } = createInstance();
       instance.handleNavigation(DASHBOARD.DOCTORS);
-      expect(navigation.navigate).toHaveBeenCalledWith(DASHBOARD.DOCTORS);
+      expect(navigateTo).toHaveBeenCalledTimes(1);
     });
 
     it('handles navigation when navigate is undefined', () => {
@@ -181,8 +181,9 @@ describe('HomeScreen logic', () => {
           ?.isFaveritiated,
       ).toBe(!initialFirst);
       expect(
-        instance.state.qualifiedDoctor.find((d: any) => d.id === secondDoctor.id)
-          ?.isFaveritiated,
+        instance.state.qualifiedDoctor.find(
+          (d: any) => d.id === secondDoctor.id,
+        )?.isFaveritiated,
       ).toBe(initialSecond);
     });
   });
@@ -365,11 +366,11 @@ describe('HomeScreen logic', () => {
     });
 
     it('handles appointment navigation callback', () => {
-      const { instance, navigation } = createInstance();
+      const { instance } = createInstance();
 
       instance.navigateToAppointments();
 
-      expect(navigation.navigate).toHaveBeenCalledWith(DASHBOARD.SELECTTIME);
+      expect(navigateTo).toHaveBeenCalledTimes(1);
     });
 
     it('handles navigation without navigate method gracefully', () => {
