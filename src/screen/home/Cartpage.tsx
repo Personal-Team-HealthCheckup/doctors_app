@@ -1,17 +1,20 @@
 import React from 'react';
-import { ImageBackground, StyleSheet, Text } from 'react-native';
+import { ImageBackground, StyleSheet } from 'react-native';
 import { HomeScreenPng } from '../../assets/assets';
 import CustomStatusBar from '../../Components/common/CustomStatusBar';
 import CustomHeader from '../../Components/common/CustomHeader';
-import { responsiveHeight, responsiveScreenWidth } from 'react-native-responsive-dimensions';
+import {
+  responsiveHeight,
+  responsiveScreenWidth,
+} from 'react-native-responsive-dimensions';
 import { COLORS } from '../../global/theme';
 import { Navigation } from '../../global/types';
 
 interface CartPageProps {
-  navigation?:Navigation;
- }
+  navigation?: Navigation;
+}
 
-interface CartPageState { }
+interface CartPageState {}
 
 class CartPage extends React.Component<CartPageProps, CartPageState> {
   constructor(props: CartPageProps) {
@@ -21,12 +24,14 @@ class CartPage extends React.Component<CartPageProps, CartPageState> {
   render() {
     return (
       <ImageBackground source={HomeScreenPng} style={styles.image}>
-        <CustomStatusBar
+        <CustomStatusBar />
+        <CustomHeader
+          heading="Cart"
+          isIcon
+          navigation={this.props.navigation}
         />
-        <CustomHeader heading='Cart' isIcon navigation={this.props.navigation} />
-
       </ImageBackground>
-    )
+    );
   }
 }
 
@@ -39,6 +44,6 @@ const styles = StyleSheet.create({
     position: 'relative',
     paddingHorizontal: responsiveScreenWidth(5),
     flex: 1,
-    backgroundColor: COLORS.black
+    backgroundColor: COLORS.black,
   },
-})
+});

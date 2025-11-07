@@ -9,8 +9,10 @@ import { moderateScale } from '../helper/Scale';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import CustomRating from './CustomRating';
 import { imageProfile3 } from '../assets/assets';
-
-function CustomDoctoDetailCard() {
+interface CustomDoctoDetailCardProps {
+  isLiked?: boolean;
+}
+function CustomDoctoDetailCard({ isLiked = true }: CustomDoctoDetailCardProps) {
   return (
     <View style={styles.cardDoctor}>
       <View style={styles.imageView1}>
@@ -28,8 +30,8 @@ function CustomDoctoDetailCard() {
           </View>
           <TouchableOpacity style={styles.likeButton}>
             <FontAwesomeIcon
-              name={true ? 'heart' : 'heart-o'}
-              color={true ? COLORS.red1 : COLORS.lightBlack2}
+              name={isLiked ? 'heart' : 'heart-o'}
+              color={isLiked ? COLORS.red1 : COLORS.lightBlack2}
               size={20}
             />
           </TouchableOpacity>

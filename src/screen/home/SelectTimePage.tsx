@@ -1,8 +1,6 @@
 import React from 'react';
 import {
   ImageBackground,
-  NativeScrollEvent,
-  NativeSyntheticEvent,
   ScrollView,
   StyleSheet,
   View,
@@ -20,7 +18,6 @@ import {
   SlotsAvailableChangeData,
   SlotsDateTimes,
 } from '../../global/types';
-import { handleScroll } from '../../helper/utilities';
 import { COLORS, FONTS } from '../../global/theme';
 import {
   responsiveHeight,
@@ -97,56 +94,53 @@ class SelectTimePage extends React.Component<
     }));
   };
   componentDidMount(): void {
-    const slotItem = this.state.slotsDateTimes.find(slot => slot.isSelected);
-    const slotsAvailable1 = this.state.slotsAvailable.map(slot => {
-      const x = slot.slots.map(item => {
-        return {
-          slots: item,
-          isSelected: false,
-        };
-      }) as unknown as string[];
+    this.setState(prevState => {
+      const slotItem = prevState.slotsDateTimes.find(slot => slot.isSelected);
+      const slotsAvailable = prevState.slotsAvailable.map(slot => {
+        const normalizedSlots = slot.slots.map(item => {
+          if (typeof item === 'string') {
+            return { slots: item, isSelected: false };
+          }
+          return { ...item, isSelected: false };
+        });
+        return { ...slot, slots: normalizedSlots };
+      });
 
-      return { ...slot, slots: x };
+      return {
+        slotItem,
+        slotsAvailable,
+      };
     });
-    this.setState({ slotsAvailable: slotsAvailable1 });
-    this.setState({ slotItem: slotItem });
   }
   selectTheSlot = (item: SlotsDateTimes) => {
-    this.setState(
-      {
-        slotsDateTimes: this.state.slotsDateTimes.map(slot => {
-          if (item.id === slot.id) {
-            slot.isSelected = true;
-          } else {
-            slot.isSelected = false;
-          }
-          return slot;
-        }),
-      },
-      () => {
-        const slotItem = this.state.slotsDateTimes.find(
-          slot => slot.isSelected,
-        );
-        this.setState({ slotItem: slotItem });
-      },
-    );
+    this.setState(prevState => {
+      const slotsDateTimes = prevState.slotsDateTimes.map(slot =>
+        slot.id === item.id
+          ? { ...slot, isSelected: true }
+          : { ...slot, isSelected: false },
+      );
+
+      const slotItem = slotsDateTimes.find(slot => slot.isSelected);
+      return {
+        slotsDateTimes,
+        slotItem,
+      };
+    });
   };
 
   toggleSlotTimeAvail = (slots: string) => {
-    const slotsAvailable1 = this.state.slotsAvailable.map(slot => {
-      const x = slot.slots.map(item => {
-        const items = item as Slots;
-        if (items.slots === slots) {
-          items.isSelected = true;
-        } else {
-          items.isSelected = false;
-        }
-        return items;
-      }) as unknown as string[];
-
-      return { ...slot, slots: x };
+    this.setState(prevState => {
+      const slotsAvailable = prevState.slotsAvailable.map(slot => {
+        const normalizedSlots = slot.slots.map(item => {
+          if (typeof item === 'string') {
+            return { slots: item, isSelected: item === slots };
+          }
+          return { ...item, isSelected: item.slots === slots };
+        });
+        return { ...slot, slots: normalizedSlots };
+      });
+      return { slotsAvailable };
     });
-    this.setState({ slotsAvailable: slotsAvailable1 });
   };
 
   _renderTime = ({ item }: { item: Slots | string }) => {

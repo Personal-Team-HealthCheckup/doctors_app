@@ -43,11 +43,13 @@ class OnBoarding extends React.Component<OnBoardingProps, OnBoardingState> {
   };
 
   handleGetStarted = () => {
-    if (data.length - 1 > this.state.index) {
-      this.setState({index: this.state.index + 1});
-    } else {
+    this.setState(prevState => {
+      if (data.length - 1 > prevState.index) {
+        return {index: prevState.index + 1};
+      }
       this.handleSkip();
-    }
+      return null;
+    });
   };
   render() {
     const {Svg, isBgOn1Png, description, title} = data[this.state.index];

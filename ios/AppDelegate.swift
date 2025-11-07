@@ -3,6 +3,9 @@ import React
 import React_RCTAppDelegate
 import ReactAppDependencyProvider
 import GoogleMaps // ✅ Add this for Maps
+#if canImport(RNSplashScreen)
+import RNSplashScreen
+#endif
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -34,6 +37,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       launchOptions: launchOptions
     )
 
+#if canImport(RNSplashScreen)
+    RNSplashScreen.show()
+#endif
     return true
   }
 

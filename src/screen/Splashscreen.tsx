@@ -30,9 +30,10 @@ interface SplashScreensProps {
   };
 }
 
+type SplashStateStatus = 'loading' | 'Check' | 'splashScreen';
+
 interface SplashScreensState {
-  time: number;
-  firstTime?: 'loading' | 'Check' | 'splashScreen';
+  firstTime: SplashStateStatus;
 }
 
 interface SplashScreensSS {}
@@ -46,7 +47,6 @@ class SplashScreens extends React.Component<
   constructor(props: SplashScreensProps) {
     super(props);
     this.state = {
-      time: 2000,
       firstTime: 'splashScreen',
     };
   }

@@ -3,7 +3,12 @@ import { render, fireEvent } from '@testing-library/react-native';
 import CustomDoctoDetailCard from '../../../src/Components/CustomDoctoDetailCard';
 
 describe('CustomDoctoDetailCard', () => {
-  const mockProps = {};
+  const mockProps = {
+    isLiked: true,
+  };
+  const mockProps2 = {
+    isLiked: false,
+  };
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -15,7 +20,7 @@ describe('CustomDoctoDetailCard', () => {
   });
 
   it('handles press event', () => {
-    const component = render(<CustomDoctoDetailCard {...mockProps} />);
+    const component = render(<CustomDoctoDetailCard {...mockProps2} />);
     expect(component).toBeTruthy();
   });
 });

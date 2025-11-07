@@ -373,8 +373,8 @@ class ProfilePage extends React.Component<Props, ProfilePageState> {
 
                   <LinearGradient
                     colors={[COLORS.lightCyan, COLORS.lightYellow]}
-                    start={{ x: 0.0, y: 0.5 }}
-                    end={{ x: 1.0, y: 0.5 }}
+                    start={{ x: 0, y: 0.5 }}
+                    end={{ x: 1, y: 0.5 }}
                     style={styles.imageView}
                   >
                     <TouchableOpacity

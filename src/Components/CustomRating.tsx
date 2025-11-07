@@ -19,14 +19,14 @@ const CustomRating: React.FC<CustomRatingProps> = ({
   isDisable = false,
   iconSize = 30,
   initialValue,
-  onChange = () => {},
+  onChange,
   testID = 'custom-rating',
   starViewStyle,
 }) => {
   const [rating, setRating] = useState(initialValue);
   const handleRatingChange = (newRating: number) => {
     setRating(newRating);
-    onChange && onChange(newRating);
+    onChange?.(newRating);
   };
 
   const stars = [];

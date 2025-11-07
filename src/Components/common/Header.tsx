@@ -31,7 +31,7 @@ const Header: React.FC<Iprops> = props => {
     <SafeAreaView>
       <View style={styles.mainView}>
         <TouchableOpacity
-          onPress={() => props.toggleDrawer && props.toggleDrawer()}
+          onPress={() => props.toggleDrawer?.()}
           testID="header-drawer-button"
           style={styles.icon}
         >

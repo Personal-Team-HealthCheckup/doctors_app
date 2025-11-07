@@ -10,9 +10,6 @@ export const endpoints = {
   FORGOT_PASSWORD: 'forgot-pass' + 'word',
   RESET_PASSWORD: 'reset-pass' + 'word',
   PROFILE: 'profile',
-  GET_PRODUCTS: 'products',
-  SINGLE_PRODUCTS: 'products/:productId',
-  GET_CATEGORIES: 'products/get-categories',
 };
 
 export const salt = 'doctor_app_salt'; // add the salt here from env

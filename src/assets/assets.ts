@@ -1,119 +1,54 @@
 // @ts-nocheck
-// export const Gradient = require('./images/gradient.svg');
-import Gradient from './images/gradient.svg';
-import LogoSvg from './images/logo.svg';
-import gradientPng from './images/bg.png';
-import HexagonSvg from './images/hexagon.svg';
-import BinanceLogoSvg from './images/binanceLogo.svg';
-import gradientSignupPng from './images/gradientSignup.png';
-import StarSvg from './images/Star.svg';
-import GoogleSvg from './images/google.svg';
-import FacebookSvg from './images/facebook.svg';
-import StarBlueSvg from './images/StarBlue.svg';
-// onboarding
-import bgOn1Png from './images/bgOn1.png';
-import bgOn2Png from './images/bgOn2.png';
-import OnBoarding1Svg from './images/OnBoarding1.svg';
-import OnBoarding2Svg from './images/OnBoarding2.svg';
-import OnBoarding3Svg from './images/OnBoarding3.svg';
-import Doctor1Svg from './images/doctor1.svg';
-import DrStrainSvg from './images/DrStarin.svg';
-import GradientnearBy from './images/GradientnearBy.png';
-import MapSvg from './images/Map.svg';
-import HomeScreenPng from './images/homeScreen.png';
-import HomeScreenPng2 from './images/bgHome2.png';
-import LightSvg from './images/Light.svg';
-import NotificationBellSvg from './images/NotificationBell.svg';
-import SearchSvg from './images/Search.svg';
-import SvgRightArrowSvg from './images/SvgRightArrow.svg';
-import gradient1Png from './images/Gradient1.png';
-import gradient2Png from './images/gradient2.png';
-import gradient3Png from './images/gradient3.png';
-import gradient4Png from './images/gradient3.png';
-import DentalSvg from './images/Dental.svg';
-import HeartSvg from './images/Heart.svg';
-import EyeSvg from './images/Eyes.svg';
-import BodySvg from './images/Body.svg';
-
-// png images
-import imageProfile1 from './images/imageProfile1.jpeg';
-import imageProfile2 from './images/imageProfile2.jpeg';
-import imageProfile3 from './images/imageProfile3.jpeg';
-import imageProfile4 from './images/imageProfile4.jpeg';
-import imageProfile5 from './images/imageProfile5.jpeg';
-import imageProfile6 from './images/imageProfile6.jpeg';
-import starImage from './images/start.png';
-
-// bottom tab icon images
-import homeIcon from './images/homeIcon.png';
-import MapIcon from './images/MapIcon.png';
-import cartIcon from './images/cartIcon.png';
-import offerIcon from './images/offerIcon.png';
-import profileIcon from './images/profileIcon.png';
-
-// pharmacy images
-import pharmcy1 from './images/pharmacy1.png';
-import pharmcy2 from './images/pharmacy2.png';
-
-// loader images
-import LoaderImg from './images/loaderImage.png';
-
-import HeartImg from './images/heart.png';
-import HeartRedImg from './images/heart-red.png';
-import CheckImg from './images/check.png';
-
+export { default as Gradient } from './images/gradient.svg';
+export { default as LogoSvg } from './images/logo.svg';
+export { default as gradientPng } from './images/bg.png';
+export { default as HexagonSvg } from './images/hexagon.svg';
+export { default as BinanceLogoSvg } from './images/binanceLogo.svg';
+export { default as gradientSignupPng } from './images/gradientSignup.png';
+export { default as StarSvg } from './images/Star.svg';
+export { default as GoogleSvg } from './images/google.svg';
+export { default as FacebookSvg } from './images/facebook.svg';
+export { default as StarBlueSvg } from './images/StarBlue.svg';
+export { default as bgOn1Png } from './images/bgOn1.png';
+export { default as bgOn2Png } from './images/bgOn2.png';
+export { default as OnBoarding1Svg } from './images/OnBoarding1.svg';
+export { default as OnBoarding2Svg } from './images/OnBoarding2.svg';
+export { default as OnBoarding3Svg } from './images/OnBoarding3.svg';
+export { default as Doctor1Svg } from './images/doctor1.svg';
+export { default as DrStrainSvg } from './images/DrStarin.svg';
+export { default as GradientnearBy } from './images/GradientnearBy.png';
+export { default as MapSvg } from './images/Map.svg';
+export { default as HomeScreenPng } from './images/homeScreen.png';
+export { default as HomeScreenPng2 } from './images/bgHome2.png';
+export { default as LightSvg } from './images/Light.svg';
+export { default as NotificationBellSvg } from './images/NotificationBell.svg';
+export { default as SearchSvg } from './images/Search.svg';
+export { default as SvgRightArrowSvg } from './images/SvgRightArrow.svg';
+export { default as gradient1Png } from './images/Gradient1.png';
+export { default as gradient2Png } from './images/gradient2.png';
+export { default as gradient3Png } from './images/gradient3.png';
+export { default as gradient4Png } from './images/gradient4.png';
+export { default as DentalSvg } from './images/Dental.svg';
+export { default as HeartSvg } from './images/Heart.svg';
+export { default as EyeSvg } from './images/Eyes.svg';
+export { default as BodySvg } from './images/Body.svg';
+export { default as imageProfile1 } from './images/imageProfile1.jpeg';
+export { default as imageProfile2 } from './images/imageProfile2.jpeg';
+export { default as imageProfile3 } from './images/imageProfile3.jpeg';
+export { default as imageProfile4 } from './images/imageProfile4.jpeg';
+export { default as imageProfile5 } from './images/imageProfile5.jpeg';
+export { default as imageProfile6 } from './images/imageProfile6.jpeg';
+export { default as starImage } from './images/start.png';
+export { default as homeIcon } from './images/homeIcon.png';
+export { default as MapIcon } from './images/MapIcon.png';
+export { default as cartIcon } from './images/cartIcon.png';
+export { default as offerIcon } from './images/offerIcon.png';
+export { default as profileIcon } from './images/profileIcon.png';
+export { default as pharmcy1 } from './images/pharmacy1.png';
+export { default as pharmcy2 } from './images/pharmacy2.png';
+export { default as LoaderImg } from './images/loaderImage.png';
+export { default as HeartImg } from './images/heart.png';
+export { default as HeartRedImg } from './images/heart-red.png';
+export { default as CheckImg } from './images/check.png';
 export { default as bgTokenImg } from './images/bgtoken.png';
 export { default as PlusIconImage } from './images/plusIcon.svg';
-export {
-  homeIcon,
-  MapIcon,
-  cartIcon,
-  CheckImg,
-  offerIcon,
-  Gradient,
-  gradientPng,
-  profileIcon,
-  LogoSvg,
-  HexagonSvg,
-  BinanceLogoSvg,
-  gradientSignupPng,
-  StarSvg,
-  GoogleSvg,
-  FacebookSvg,
-  StarBlueSvg,
-  bgOn1Png,
-  bgOn2Png,
-  OnBoarding1Svg,
-  OnBoarding2Svg,
-  OnBoarding3Svg,
-  Doctor1Svg,
-  DrStrainSvg,
-  GradientnearBy,
-  MapSvg,
-  HomeScreenPng,
-  HomeScreenPng2,
-  LightSvg,
-  SearchSvg,
-  NotificationBellSvg,
-  SvgRightArrowSvg,
-  gradient1Png,
-  gradient2Png,
-  gradient3Png,
-  gradient4Png,
-  DentalSvg,
-  EyeSvg,
-  BodySvg,
-  HeartSvg,
-  imageProfile1,
-  imageProfile2,
-  imageProfile3,
-  imageProfile4,
-  imageProfile5,
-  imageProfile6,
-  starImage,
-  pharmcy1,
-  pharmcy2,
-  LoaderImg,
-  HeartImg,
-  HeartRedImg,
-};
