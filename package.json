@@ -7,7 +7,7 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
-    "test": "jest",
+    "test": "jest --coverage",
     "ios:build": "react-native run-ios --configuration Release",
     "android:build": "react-native run-android --variant=release",
     "quality": "yarn lint && tsc --noEmit"
