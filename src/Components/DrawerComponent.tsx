@@ -72,7 +72,7 @@ const drawerData: DrawerData[] = [
   {
     id: 5,
     title: 'Test Bookings',
-    link: '',
+    link: HOME.TESTBOOKING,
     Icon: <AntDesign name="calendar" size={20} color="#fff" />,
   },
   {
@@ -90,7 +90,7 @@ const drawerData: DrawerData[] = [
   {
     id: 8,
     title: 'Settings',
-    link: '',
+    link: HOME.SETTINGS,
     Icon: <AntDesign name="setting" size={20} color="#fff" />,
   },
 ];

@@ -13,6 +13,8 @@ import DrawerGestureWrapper from '../Components/DrawerGetureWrapper';
 import HelpCenter from '../screen/home/HelpCenter';
 import MedicalRecordPage from '../screen/home/MedicalRecordPage';
 import AllDoctors from '../screen/home/AllDoctors';
+import SettingsPage from '../screen/home/SettingsPage';
+import TestBooking from '../screen/home/TestBooking';
 const DrawerTab = createDrawerNavigator();
 
 const DrawerTabScreen = (props: {}) => (
@@ -50,6 +52,8 @@ function DrawerTabNavigation() {
         name={HOME.MEDICALRECORDS}
         component={MedicalRecordPage}
       />
+      <DrawerTab.Screen name={HOME.SETTINGS} component={SettingsPage} />
+      <DrawerTab.Screen name={HOME.TESTBOOKING} component={TestBooking} />
     </DrawerTab.Navigator>
   );
 }
