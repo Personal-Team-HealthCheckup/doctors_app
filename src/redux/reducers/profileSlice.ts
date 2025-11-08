@@ -34,7 +34,6 @@ const initialState: AuthDataType = {
 export const getProfileAction = createAsyncThunk(
   'getProfileAction',
   async (_, { getState, rejectWithValue, fulfillWithValue }) => {
-    console.log('getProfileAction called');
     const { response, error, errorResponse } = await networkCall(
       endpoints.PROFILE,
     );

@@ -42,7 +42,6 @@ const networkCall = async <T = any>(
     const tokenStored = await getStoredAuthToken();
     const AuthData = store.getState()?.Auth;
     const token = AuthData?.token ?? tokenStored;
-    console.log('-----token ', token);
 
     const defaultHeaders = {
       'Content-Type':
