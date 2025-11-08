@@ -52,3 +52,4 @@ export { default as HeartRedImg } from './images/heart-red.png';
 export { default as CheckImg } from './images/check.png';
 export { default as bgTokenImg } from './images/bgtoken.png';
 export { default as PlusIconImage } from './images/plusIcon.svg';
+export { default as MedicalRecordImage } from './images/medicalRecord.svg';

@@ -12,6 +12,7 @@ import { LightSvg, NotificationBellSvg, SearchSvg } from '../../assets/assets';
 import { Navigation } from '../../global/types';
 import { DASHBOARD } from '../../Constants/Navigator';
 import { moderateScale } from '../../helper/Scale';
+import { goBack, navigateTo } from '../../helper/utilities';
 interface CustomHeaderProps {
   heading?: string;
   isIcon?: boolean;
@@ -33,10 +34,11 @@ class CustomHeader extends React.Component<
   }
 
   handleGoBack = () => {
-    this.props.navigation?.goBack();
+    goBack(this.props.navigation);
   };
+
   handleNavigateTo = (text: string) => {
-    this.props.navigation?.navigate && this.props.navigation.navigate(text);
+    navigateTo(this.props.navigation, text);
   };
 
   render() {

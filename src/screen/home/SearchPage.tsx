@@ -4,15 +4,13 @@ import CustomStatusBar from '../../Components/common/CustomStatusBar';
 import { HomeScreenPng } from '../../assets/assets';
 import CustomHeader from '../../Components/common/CustomHeader';
 import CustomTextInput from '../../Components/common/CustomTextInput';
-import { YourAppointmentsData } from '../../global/types';
+import { Navigation, YourAppointmentsData } from '../../global/types';
 import { yourAppointmentsData } from '../../global/data';
 import CustomAppointmentCard from '../../Components/common/CustomAppointmentCard';
 import { CommonStyles as styles } from './CommonStyles';
 
 interface SearchPageProps {
-  navigation?: {
-    goBack: () => void;
-  };
+  navigation?: Navigation;
 }
 
 interface SearchPageState {

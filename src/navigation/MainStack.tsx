@@ -8,12 +8,11 @@ import SplashScreens from '../screen/Splashscreen';
 import { AUTH, DASHBOARD, HOME, MAINSTACK } from '../Constants/Navigator';
 import OnBoarding from '../screen/auth/OnBoarding';
 import DrawerTabNavigation from './DrawerTabNavigation';
-import SearchPage from '../screen/home/SearchPage';
 import SelectTimePage from '../screen/home/SelectTimePage';
-
 import AllDoctors from '../screen/home/AllDoctors';
 import DoctorDetailsPage from '../screen/home/DoctorDetailsScreen';
 import VerificationCode from '../screen/auth/VerificationCode';
+import MedicalRecordPage from '../screen/home/MedicalRecordPage';
 
 const MainStack = createNativeStackNavigator();
 const AuthStack = createNativeStackNavigator();
@@ -39,7 +38,6 @@ const HomeNavigation = () => {
   return (
     <HomeStack.Navigator screenOptions={{ headerShown: false }}>
       <HomeStack.Screen name={HOME.DASHBOARD} component={DrawerTabNavigation} />
-      <HomeStack.Screen name={DASHBOARD.SEARCHPAGE} component={SearchPage} />
       <HomeStack.Screen name={DASHBOARD.DOCTORS} component={AllDoctors} />
       <HomeStack.Screen
         name={DASHBOARD.DOCTORDETAILS}
@@ -48,6 +46,10 @@ const HomeNavigation = () => {
       <HomeStack.Screen
         name={DASHBOARD.SELECTTIME}
         component={SelectTimePage}
+      />
+      <HomeStack.Screen
+        name={DASHBOARD.MEDICALRECORDS}
+        component={MedicalRecordPage}
       />
     </HomeStack.Navigator>
   );

@@ -4,11 +4,7 @@ import {
   NativeScrollEvent,
   NativeSyntheticEvent,
 } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import CryptoJS from 'crypto-js';
 import { Navigation } from '../global/types';
-
-const secretKey = 'secret-strong-key'; // Use a strong key from environment variables in production
 
 export const formateDate = (date: string | Date) => {
   return moment(date).format('DD-MM-YYYY');
@@ -39,41 +35,6 @@ export const handleScroll = (
   return y > 10;
 };
 
-export async function setStorageData(key: string, data: any) {
-  if (key && data) {
-    const encryptedData = CryptoJS.AES.encrypt(
-      JSON.stringify(data),
-      secretKey,
-    ).toString();
-    await AsyncStorage.setItem(key, encryptedData);
-  }
-}
-
-export async function getStorageData(
-  key: string,
-  parseToJson: boolean = false,
-) {
-  if (key) {
-    const encryptedData = (await AsyncStorage.getItem(key)) || null;
-    if (encryptedData) {
-      const bytes = CryptoJS.AES.decrypt(encryptedData, secretKey);
-      const decryptedData = bytes.toString(CryptoJS.enc.Utf8);
-      if (parseToJson && decryptedData) {
-        return JSON.parse(decryptedData);
-      } else {
-        return decryptedData;
-      }
-    }
-  }
-  return null;
-}
-
-export async function removeStorageData(key: string) {
-  if (key) {
-    await AsyncStorage.removeItem(key);
-  }
-}
-
 // navigate to single screen
 export const navigateTo = (
   navigation?: Navigation,
@@ -81,6 +42,12 @@ export const navigateTo = (
   params?: object,
 ) => {
   navigation?.navigate?.(screenName, params);
+};
+
+// go back to previous screen
+export const goBack = (navigation?: Navigation) => {
+  navigation?.goBack?.();
+  closeDrawer(navigation);
 };
 
 // replace to single screen
@@ -91,7 +58,8 @@ export const replaceTo = (
 ) => {
   navigation?.replace?.(screenName, params);
 };
-// replace to single screen
+
+// close to drawer screen
 export const closeDrawer = (navigation?: Navigation) => {
   navigation?.closeDrawer?.();
 };
