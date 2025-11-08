@@ -117,7 +117,11 @@ function HelpCenter({ navigation }: HelpCenterProps) {
   };
 
   const renderItem = ({ item }: { item: HelpTopicsType }) => (
-    <TouchableOpacity activeOpacity={0.8} onPress={() => handleClick(item)}>
+    <TouchableOpacity
+      testID="btnClickItem"
+      activeOpacity={0.8}
+      onPress={() => handleClick(item)}
+    >
       <View style={styles.listRow}>
         <Text style={styles.rowText}>{item.title}</Text>
         <SvgRightArrowSvg
@@ -127,7 +131,7 @@ function HelpCenter({ navigation }: HelpCenterProps) {
         />
       </View>
       {item.isSelected && (
-        <View style={styles.descriptionWrapper}>
+        <View style={styles.descriptionWrapper} testID="viewDesc">
           <Text style={styles.descriptionText}>{item.description}</Text>
         </View>
       )}
@@ -144,6 +148,7 @@ function HelpCenter({ navigation }: HelpCenterProps) {
         </View>
         <FlatList
           data={helpCenterData}
+          testID="listHelpCenter"
           renderItem={renderItem}
           keyExtractor={item => item.id.toString()}
           contentContainerStyle={styles.listContent}

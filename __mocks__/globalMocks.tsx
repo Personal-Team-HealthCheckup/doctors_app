@@ -33,6 +33,8 @@ jest.mock('../src/assets/assets', () => ({
   HomeScreenPng: (props: {}) => <MockView {...props} />,
   HomeScreenPng2: (props: {}) => <MockView {...props} />,
   starImage: (props: {}) => <MockView {...props} />,
+  bgTokenImg: (props: {}) => <MockView {...props} />,
+  SvgRightArrowSvg: (props: {}) => <MockView {...props} />,
 }));
 
 jest.mock('../src/helper/Scale', () => ({
