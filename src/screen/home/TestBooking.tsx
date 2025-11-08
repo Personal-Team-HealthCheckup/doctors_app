@@ -13,8 +13,7 @@ import { COLORS, FONTS } from '../../global/theme';
 import { bgTokenImg, MedicalRecordImage } from '../../assets/assets';
 import CustomGButton from '../../Components/common/CustomGButton';
 import { HOME } from '../../Constants/Navigator';
-import LinearGradient from 'react-native-linear-gradient';
-import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+import { navigateTo } from '../../helper/utilities';
 
 interface TestBookingProps {
   navigation?: Navigation;
@@ -22,7 +21,7 @@ interface TestBookingProps {
 
 function TestBooking({ navigation }: TestBookingProps) {
   const handleGoHome = () => {
-    navigation?.navigate?.(HOME.BOTTOMTABS as never);
+    navigateTo(navigation, HOME.BOTTOMTABS);
   };
 
   return (
@@ -44,6 +43,7 @@ function TestBooking({ navigation }: TestBookingProps) {
           <Text style={styles.title}>No test booked yet</Text>
           <Text style={styles.subtitle}>This feature is coming soon</Text>
           <CustomGButton
+            testID="btnGoBack"
             tittle="Go Back Home"
             style={styles.ctaButton}
             onPress={handleGoHome}
