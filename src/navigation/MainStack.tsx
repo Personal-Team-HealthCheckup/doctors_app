@@ -12,7 +12,6 @@ import SelectTimePage from '../screen/home/SelectTimePage';
 import AllDoctors from '../screen/home/AllDoctors';
 import DoctorDetailsPage from '../screen/home/DoctorDetailsScreen';
 import VerificationCode from '../screen/auth/VerificationCode';
-import MedicalRecordPage from '../screen/home/MedicalRecordPage';
 
 const MainStack = createNativeStackNavigator();
 const AuthStack = createNativeStackNavigator();
@@ -46,10 +45,6 @@ const HomeNavigation = () => {
       <HomeStack.Screen
         name={DASHBOARD.SELECTTIME}
         component={SelectTimePage}
-      />
-      <HomeStack.Screen
-        name={DASHBOARD.MEDICALRECORDS}
-        component={MedicalRecordPage}
       />
     </HomeStack.Navigator>
   );

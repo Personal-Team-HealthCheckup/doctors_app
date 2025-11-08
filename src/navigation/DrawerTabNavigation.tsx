@@ -10,6 +10,9 @@ import AppointPage from '../screen/home/Appointment';
 import DrawerComponent from '../Components/DrawerComponent';
 import { COLORS } from '../global/theme';
 import DrawerGestureWrapper from '../Components/DrawerGetureWrapper';
+import HelpCenter from '../screen/home/HelpCenter';
+import MedicalRecordPage from '../screen/home/MedicalRecordPage';
+import AllDoctors from '../screen/home/AllDoctors';
 const DrawerTab = createDrawerNavigator();
 
 const DrawerTabScreen = (props: {}) => (
@@ -41,6 +44,12 @@ function DrawerTabNavigation() {
     >
       <DrawerTab.Screen name={HOME.BOTTOMTABS} component={DrawerTabScreen} />
       <DrawerTab.Screen name={HOME.APPOINTMENTPAGE} component={AppointPage} />
+      <DrawerTab.Screen name={HOME.HELPCENTER} component={HelpCenter} />
+      <DrawerTab.Screen name={HOME.DOCTORS} component={AllDoctors} />
+      <DrawerTab.Screen
+        name={HOME.MEDICALRECORDS}
+        component={MedicalRecordPage}
+      />
     </DrawerTab.Navigator>
   );
 }

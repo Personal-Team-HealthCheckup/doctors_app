@@ -54,7 +54,7 @@ const drawerData: DrawerData[] = [
   {
     id: 2,
     title: 'Medical Records',
-    link: DASHBOARD.MEDICALRECORDS,
+    link: HOME.MEDICALRECORDS,
     Icon: <AntDesign name="folder1" size={20} color="#fff" />,
   },
   {
@@ -78,13 +78,13 @@ const drawerData: DrawerData[] = [
   {
     id: 6,
     title: 'Favorite Doctors',
-    link: DASHBOARD.DOCTORS,
+    link: HOME.DOCTORS,
     Icon: <AntDesign name="hearto" size={20} color="#fff" />,
   },
   {
     id: 7,
     title: 'Help Center',
-    link: '',
+    link: HOME.HELPCENTER,
     Icon: <AntDesign name="questioncircleo" size={20} color="#fff" />,
   },
   {
