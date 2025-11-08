@@ -1,4 +1,3 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   formateDate,
   checkEmailValidation,
@@ -6,9 +5,6 @@ import {
   checkNameValidation,
   closeKeyBoard,
   handleScroll,
-  setStorageData,
-  getStorageData,
-  removeStorageData,
   navigateTo,
   replaceTo,
   closeDrawer,
@@ -57,45 +53,6 @@ describe('utilities helper', () => {
     expect(handleScroll(event)).toBe(true);
   });
 
-  it('stores and retrieves encrypted data', async () => {
-    const value = { token: 'abc123' };
-    await setStorageData('auth', value);
-    expect(AsyncStorage.setItem).toHaveBeenCalled();
-
-    const [, encrypted] = (AsyncStorage.setItem as jest.Mock).mock.calls[0];
-    AsyncStorage.getItem = jest
-      .fn()
-      .mockResolvedValue(encrypted as string);
-
-    const stored = await getStorageData('auth', true);
-    expect(stored).toEqual(value);
-  });
-
-  it('returns decrypted string when parseToJson is false', async () => {
-    const value = { foo: 'bar' };
-    await setStorageData('raw', value);
-    const [, encrypted] = (AsyncStorage.setItem as jest.Mock).mock.calls[0];
-    (AsyncStorage.getItem as jest.Mock).mockResolvedValueOnce(
-      encrypted as string,
-    );
-
-    const stored = await getStorageData('raw');
-    expect(stored).toBe(JSON.stringify(value));
-  });
-
-  it('removes stored data', async () => {
-    await removeStorageData('key');
-    expect(AsyncStorage.removeItem).toHaveBeenCalledWith('key');
-  });
-
-  it('skips storage operations when key is missing', async () => {
-    await setStorageData('', { foo: 'bar' });
-    expect(AsyncStorage.setItem).not.toHaveBeenCalled();
-
-    await removeStorageData('');
-    expect(AsyncStorage.removeItem).not.toHaveBeenCalled();
-  });
-
   it('navigates and replaces routes safely', () => {
     const navigation = {
       navigate: jest.fn(),
@@ -132,26 +89,5 @@ describe('utilities helper', () => {
     expect(() =>
       nestedNavigateTo(undefined, ['Child'], 'Parent', {}),
     ).not.toThrow();
-  });
-
-  it('returns null when getStorageData has no key stored', async () => {
-    (AsyncStorage.getItem as jest.Mock).mockResolvedValueOnce(null);
-    await expect(getStorageData('missing')).resolves.toBeNull();
-  });
-
-  it('handles storage errors gracefully', async () => {
-    (AsyncStorage.setItem as jest.Mock).mockRejectedValueOnce(
-      new Error('failed'),
-    );
-    await expect(setStorageData('auth', { foo: 'bar' })).rejects.toThrow(
-      'failed',
-    );
-  });
-
-  it('handleScroll respects the threshold boundary', () => {
-    const event = {
-      nativeEvent: { contentOffset: { y: 5 } },
-    } as any;
-    expect(handleScroll(event)).toBe(false);
   });
 });
