@@ -56,10 +56,9 @@ class App extends React.Component<AppProps, AppState> {
       const result = await this.rnBiometrics.simplePrompt({
         promptMessage: 'Confirm fingerprint',
       });
-      console.log('Fingerprint verified', result);
+
       return true;
     } catch (error) {
-      console.log('Biometrics failed', error);
       return false;
     }
   };
@@ -73,7 +72,6 @@ class App extends React.Component<AppProps, AppState> {
     //     };
     const initialUrl = await Linking.getInitialURL();
     if (initialUrl) {
-      console.log('Initial URL:', initialUrl);
     }
   }
 
