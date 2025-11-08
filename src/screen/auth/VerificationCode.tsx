@@ -196,6 +196,7 @@ class VerificationCode extends React.Component<Props, VerificationCodeState> {
                 </Text>
                 <OTPTextInput
                   testID="otp-text-input"
+                  data-testID="txtInputOtp"
                   value={this.state.code}
                   onChangeOTP={(otp: string) => this.handleOTPChange(otp)}
                 />
@@ -220,7 +221,7 @@ class VerificationCode extends React.Component<Props, VerificationCodeState> {
                 tittle={translate('auth.verify')}
                 disabled={this.state.code.length < 4 || verifyOTPData.loading}
                 style={styles.verifyButtonContainer}
-                onPress={() => this.handleVerification()}
+                onPress={this.handleVerification}
               />
             </ImageBackground>
           </ScrollView>
