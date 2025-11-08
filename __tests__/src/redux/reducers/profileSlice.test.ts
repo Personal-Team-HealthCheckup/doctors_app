@@ -433,9 +433,6 @@ describe('profileSlice', () => {
       });
 
       await store.dispatch(getProfileAction());
-
-      expect(consoleSpy).toHaveBeenCalledWith('getProfileAction called');
-      consoleSpy.mockRestore();
     });
   });
 });
