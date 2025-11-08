@@ -35,7 +35,6 @@ class AllDoctors extends React.Component<AllDoctorsProps, AllDoctorsState> {
 
   _renderDoctors = ({
     item,
-    index,
   }: {
     item: YourAppointmentsData;
     index: number;

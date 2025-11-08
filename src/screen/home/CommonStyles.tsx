@@ -28,5 +28,5 @@ export const CommonStyles = StyleSheet.create({
     marginVertical: '5%',
   },
   doctorList: { marginVertical: 4 },
-  contentContainer: { paddingBottom: responsiveHeight(15) },
+  contentContainer: { paddingBottom: responsiveHeight(20) },
 });

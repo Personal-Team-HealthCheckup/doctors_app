@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React, { useCallback } from 'react';
 import HomeScreen from '../screen/home/HomeScreen';
-import { HOME } from '../Constants/Navigator';
+import { DASHBOARD, HOME } from '../Constants/Navigator';
 import DoctorNearYou from '../screen/home/DoctorNearYou';
 import {
   Image,
@@ -26,8 +26,23 @@ import ProfilePage from '../screen/home/ProfilePage';
 import TokenOffer from '../screen/home/TokenOffer';
 import LinearGradient from 'react-native-linear-gradient';
 import AppointPage from '../screen/home/Appointment';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import SearchPage from '../screen/home/SearchPage';
 const BottomTab = createBottomTabNavigator();
+const HomeStack = createNativeStackNavigator();
 
+const HomeNavigation = () => {
+  return (
+    <HomeStack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <HomeStack.Screen name="HomeMain" component={HomeScreen} />
+      <HomeStack.Screen name={DASHBOARD.SEARCHPAGE} component={SearchPage} />
+    </HomeStack.Navigator>
+  );
+};
 const BottomTabStackNavigator = () => {
   const callback = ({
     color,
@@ -78,7 +93,7 @@ const BottomTabStackNavigator = () => {
     >
       <BottomTab.Screen
         name={HOME.HOME}
-        component={HomeScreen}
+        component={HomeNavigation}
         options={{
           tabBarLabel: HOME.HOME,
           tabBarIcon: BottomTabIcon,

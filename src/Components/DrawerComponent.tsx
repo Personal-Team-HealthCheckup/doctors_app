@@ -23,9 +23,9 @@ import { Navigation } from '../global/types';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearStoredAuthToken } from '../helper/authKeychain';
 import { actionLogout } from '../redux/reducers/auth';
-import { AUTH, MAINSTACK } from '../Constants/Navigator';
+import { AUTH, DASHBOARD, HOME, MAINSTACK } from '../Constants/Navigator';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { closeDrawer } from '../helper/utilities';
+import { closeDrawer, navigateTo, nestedNavigateTo } from '../helper/utilities';
 import { COLORS, FONTS } from '../global/theme';
 import { moderateScale } from '../helper/Scale';
 import { useDrawerStatus } from '@react-navigation/drawer';
@@ -38,21 +38,23 @@ interface DrawerComponentProps {
 interface DrawerData {
   id: number;
   title: string;
-  link: string;
+  link: string | string[];
   Icon: React.JSX.Element;
+  parentLink?: string;
 }
 
 const drawerData: DrawerData[] = [
   {
     id: 1,
     title: 'My Doctors',
-    link: '',
+    link: [HOME.BOTTOMTABS, HOME.HOME, DASHBOARD.SEARCHPAGE],
+    parentLink: HOME.DASHBOARD,
     Icon: <AntDesign name="user" size={20} color="#fff" />,
   },
   {
     id: 2,
     title: 'Medical Records',
-    link: '',
+    link: HOME.MEDICALRECORDS,
     Icon: <AntDesign name="folder1" size={20} color="#fff" />,
   },
   {
@@ -70,25 +72,25 @@ const drawerData: DrawerData[] = [
   {
     id: 5,
     title: 'Test Bookings',
-    link: '',
+    link: HOME.TESTBOOKING,
     Icon: <AntDesign name="calendar" size={20} color="#fff" />,
   },
   {
     id: 6,
     title: 'Favorite Doctors',
-    link: '',
+    link: HOME.DOCTORS,
     Icon: <AntDesign name="hearto" size={20} color="#fff" />,
   },
   {
     id: 7,
     title: 'Help Center',
-    link: '',
+    link: HOME.HELPCENTER,
     Icon: <AntDesign name="questioncircleo" size={20} color="#fff" />,
   },
   {
     id: 8,
     title: 'Settings',
-    link: '',
+    link: HOME.SETTINGS,
     Icon: <AntDesign name="setting" size={20} color="#fff" />,
   },
 ];
@@ -155,10 +157,23 @@ const DrawerComponent: React.FC<DrawerComponentProps> = ({ navigation }) => {
     ]);
   };
 
-  const _renderDrawerContent = ({ item }: { item: any }) => {
+  const handleNavigationLink = (item: DrawerData) => {
+    const { link, parentLink } = item;
+    if (Array.isArray(link) && link.length > 0) {
+      nestedNavigateTo(navigation, link, parentLink);
+    } else if (typeof link === 'string') {
+      navigateTo(navigation, link);
+    }
+  };
+
+  const _renderDrawerContent = ({ item }: { item: DrawerData }) => {
     const { Icon } = item;
     return (
-      <TouchableOpacity style={styles.drawerItem} activeOpacity={0.7}>
+      <TouchableOpacity
+        style={styles.drawerItem}
+        activeOpacity={0.7}
+        onPress={() => handleNavigationLink(item)}
+      >
         <View style={styles.row}>
           {Icon}
           <Text style={styles.drawerLabel}>{item.title}</Text>
